@@ -35,10 +35,10 @@ it('renders a table header cell with text Destination', () => {
     expect(headerText).toBe('Destination');
 });
 
-it('renders a table header cell with text Next', () => {
+it('renders a table header cell with text Distance', () => {
     const $ = dom.load(renderToString(<DeparturesTable />));
     const headerText = $('thead th:nth-child(4)').text();
-    expect(headerText).toBe('Next');
+    expect(headerText).toBe('Distance');
 });
 
 it('renders an empty table body when departures list is empty', () => {
@@ -48,10 +48,7 @@ it('renders an empty table body when departures list is empty', () => {
 });
 
 it('renders as many table body rows as there are departures', () => {
-    const departures = [
-        { scheduledDeparture: '9 min' },
-        { scheduledDeparture: '12 min' }
-    ];
+    const departures = [{}, {}];
     const $ = dom.load(renderToString(<DeparturesTable departures={departures}/>));
     const rows = $('tbody tr');
     expect(rows.length).toBe(departures.length);
