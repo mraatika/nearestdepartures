@@ -30,7 +30,7 @@ describe('DepartureRow', () => {
         const distance = 100;
         const $ = dom.load(renderToString(<DepartureRow distance={distance}/>));
         const output = $('td:nth-child(4)').text();
-        expect(output).toEqual(`${distance}m`);
+        expect(output).toEqual(`${distance} m`);
     });
 
     describe('displaying departure time', () => {

@@ -33,7 +33,7 @@ export default Inferno =>
             </td>
             <td>{ routeName }</td>
             <td>{ destination }</td>
-            <td>{ distance }m</td>
+            <td>{ distance } m</td>
         </tr>
     );
 };
