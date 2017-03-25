@@ -1,18 +1,27 @@
-import { version } from 'inferno';
+import Inferno from 'inferno';
 import Component from 'inferno-component';
-import Logo from './logo';
+import createDeparturesList from './departureslist/departureslist';
+import fetchDepartures from './services/departuresservice';
 import './App.css';
 
+const DeparturesList = createDeparturesList(Inferno);
+
 class App extends Component {
+    componentDidMount() {
+        fetchDepartures()
+            .then(departures => this.setState({ departures }))
+            .catch(err => console.error(err));
+    }
+
     render() {
         return (
             <div className="App">
                 <div className="App-header">
-                    <Logo width="80" height="80" />
-                    <h2>{`Welcome to Inferno ${version}`}</h2>
+                    <h2>{`Nearest Departures ${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`}</h2>
                 </div>
+
                 <p className="App-intro">
-                    To get started, edit <code>src/App.js</code> and save to reload.
+                    <DeparturesList departures={this.state.departures} />
                 </p>
             </div>
         );
