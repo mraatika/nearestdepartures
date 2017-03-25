@@ -21,6 +21,7 @@ export default ({ lat, lon, time, distance = 500 }) => {
                                 realtimeDeparture
                                 realtimeState
                                 realtime
+                                headsign
                                 stop {
                                     code
                                     platformCode

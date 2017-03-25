@@ -11,23 +11,28 @@ export default Inferno =>
 /**
  * @param {string} scheduledDeparture
  * @param {string} routeName
- * @param {string} routeDestination
+ * @param {string} destination
  * @param {string} nextScheduledDeparture
  * @returns {Inferno.Component}
  */
 ({
     scheduledDeparture,
+    realtime,
+    realtimeDeparture,
     routeName,
-    routeDestination,
-    nextScheduledDeparture,
     distance,
+    destination,
 }) => {
     const Time = createTime(Inferno);
+    const departureTime = realtime ? realtimeDeparture : scheduledDeparture;
+
     return (
         <tr>
-            <td><Time time={ scheduledDeparture } /></td>
+            <td className={ realtime ? 'realtime' : '' }>
+                <Time time={ departureTime } />
+            </td>
             <td>{ routeName }</td>
-            <td>{ routeDestination }</td>
+            <td>{ destination }</td>
             <td>{ distance }m</td>
         </tr>
     );
