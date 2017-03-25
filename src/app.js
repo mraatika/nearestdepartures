@@ -2,7 +2,7 @@ import Inferno from 'inferno';
 import Component from 'inferno-component';
 import createDeparturesList from './departureslist/departureslist';
 import fetchDepartures from './services/departuresservice';
-import './App.css';
+import './app.css';
 
 const DeparturesList = createDeparturesList(Inferno);
 
