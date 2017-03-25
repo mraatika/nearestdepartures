@@ -1,5 +1,5 @@
 import { render } from 'inferno';
-import App from './App';
+import App from './app';
 import fetchDepartures from './services/departuresservice';
 
 jest.mock('./services/departuresservice', () => () => new Promise(res => res()));

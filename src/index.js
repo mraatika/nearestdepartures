@@ -1,5 +1,5 @@
 import { render } from 'inferno';
-import App from './App';
+import App from './app';
 import 'whatwg-fetch';
 import './index.css';
 
