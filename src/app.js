@@ -15,8 +15,8 @@ class App extends Component {
 
     render() {
         return (
-            <div className="App">
-                <div className="App-header">
+            <div className="app">
+                <div className="app-header text-center">
                     <h2>{`Nearest Departures ${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`}</h2>
                 </div>
 
