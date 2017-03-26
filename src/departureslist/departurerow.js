@@ -1,4 +1,5 @@
 import createTime from './time';
+import createRouteIdentifier from './routeidentifier';
 
 /**
  * Factory for DepartureRow component. Displays a single
@@ -22,8 +23,10 @@ export default Inferno =>
     routeName,
     distance,
     destination,
-}) => {
+    vehicleType,
+} = {}) => {
     const Time = createTime(Inferno);
+    const RouteIdentifier = createRouteIdentifier(Inferno);
     const departureTime = realtime ? realtimeDeparture : scheduledDeparture;
 
     return (
@@ -31,7 +34,9 @@ export default Inferno =>
             <td className={ realtime ? 'realtime' : '' }>
                 <Time time={ departureTime } />
             </td>
-            <td>{ routeName }</td>
+            <td>
+                <RouteIdentifier vehicleType={vehicleType} routeName={routeName} />
+            </td>
             <td>{ destination }</td>
             <td>{ distance } m</td>
         </tr>
