@@ -1,10 +1,24 @@
-import Inferno from 'inferno';
 import Component from 'inferno-component';
+import filter from 'lodash/fp/filter';
+import without from 'lodash/fp/without';
 import DeparturesList from './departureslist/departureslist';
+import DepartureFilter from './departurefilter/departurefilter';
 import fetchDepartures from './services/departuresservice';
 import findGPSLocation from './services/locationservice';
 import sortDepartures from './utils/departuresorter';
 import './app.css';
+
+/**
+ * All possible filters
+ */
+const allFilters = ['BUS', 'TRAM', 'RAIL', 'SUBWAY', 'FERRY'];
+
+/**
+ * Function for filtering departures by type
+ * @param {string[]} filters
+ * @return {Function}
+ */
+const filterDepartures = filters => filter(d => filters.indexOf(d.vehicleType) > -1);
 
 /**
  * @class App
@@ -22,7 +36,8 @@ class App extends Component {
         this.state = {
             // sort default by departure time
             sortProp: 'time',
-            sortDir: -1,
+            sortDir: 1,
+            filters: allFilters,
         };
     }
 
@@ -34,7 +49,10 @@ class App extends Component {
         findGPSLocation()
             // finde departures based on location
             .then(fetchDepartures)
-            .then(departures => this.sortDeparturesToState('time', departures))
+            .then((departures) => {
+                this.setState({ initialDepartures: departures }, () => this.sortStateDepartures());
+                return departures;
+            })
             .catch(err => console.error(err));
     }
 
@@ -43,13 +61,53 @@ class App extends Component {
      * @param {string} propName Name of the prop to sort by
      * @param {Object[]} [list] List of departures to sort, defaults to state.departures
      */
-    sortDeparturesToState(propName, list) {
+    updateSortPropsAndDepartures(propName, list) {
         // if sorted with same prop as before then switch sort mode asc <--> desc
-        const sortDir = this.state.sortProp === propName ? this.state.sortDir * -1 : 1;
-        let sorted = sortDepartures(propName)(list || this.state.departures);
+        const sortDir = this.state.sortProp === propName ? (this.state.sortDir * -1 ): 1;
+        // set sort props to state and then sort departures
+        this.setState({ sortProp: propName, sortDir }, () => this.sortStateDepartures());
+    }
+
+    /**
+     * Sort departures and update state
+     */
+    sortStateDepartures() {
+        const { sortProp, sortDir, departures, initialDepartures } = this.state;
+        let sorted = sortDepartures(sortProp)(departures || initialDepartures);
         // if sort dir is descending then reverse the array
         if (sortDir === -1) sorted.reverse();
-        this.setState({ departures: sorted, sortProp: propName, sortDir });
+        this.setState({ departures: sorted });
+    }
+
+    /**
+     * Callback for filter button. Toggles filter state.
+     * @param {string} type
+     * @param {boolean} multiselect
+     */
+    onFilterToggle(type, multiselect) {
+        const current = this.state.filters;
+        const currentToggled = current.indexOf(type) > -1;
+        const multipleToggled = current.length > 1;
+        let updatedFilters = [];
+
+        if (multiselect) {
+            updatedFilters = currentToggled ? without([type], current) : [].concat(current, type);
+        } else {
+            updatedFilters = (multipleToggled || !currentToggled) ? [type] : allFilters.slice(0);
+        }
+
+        // update filter props on state and then filter departures
+        this.setState({ filters: updatedFilters }, () => this.filterStateDepartures());
+    }
+
+    /**
+     * Filter departures based on filters set on state
+     */
+    filterStateDepartures() {
+        const { initialDepartures, filters } = this.state;
+        const filtered = filterDepartures(filters)(initialDepartures);
+        // filter departures and then sort
+        this.setState({ departures: filtered }, () => this.sortStateDepartures());
     }
 
     /**
@@ -58,13 +116,19 @@ class App extends Component {
     render() {
         return (
             <div className="app">
-                <div className="app-header text-center">
+                <header>
                     <h2>{`Nearest Departures ${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`}</h2>
-                </div>
+                </header>
 
-                <p className="App-intro">
-                    <DeparturesList departures={this.state.departures} sort={this.sortDeparturesToState.bind(this)}/>
-                </p>
+                <main>
+                    <DepartureFilter
+                        filters={allFilters}
+                        onFilterToggle={this.onFilterToggle.bind(this)}
+                        activeFilters={this.state.filters} />
+                    <DeparturesList
+                        departures={this.state.departures}
+                        sort={this.updateSortPropsAndDepartures.bind(this) }/>
+                </main>
             </div>
         );
     }

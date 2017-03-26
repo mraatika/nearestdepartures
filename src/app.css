@@ -1,11 +1,13 @@
-.app-header {
+header {
     background-color: #f8f8f8;
     padding: 20px;
     color: #3d464d;
+    text-align: center;
 }
 
-.full-width {
-    width: 100%;
+main {
+    width: 80%;
+    margin: 0 auto;
 }
 
 .text-center {
@@ -34,4 +36,24 @@
 
 .ferry {
     color: #00b9e4;
+}
+
+.tram.bg {
+    background-color: #00985f;
+}
+
+.bus.bg {
+    background-color: #007ac9;
+}
+
+.subway.bg {
+    background-color: #ff6319;
+}
+
+.rail.bg {
+    background-color: #8c4799;
+}
+
+.ferry.bg {
+    background-color: #00b9e4;
 }
