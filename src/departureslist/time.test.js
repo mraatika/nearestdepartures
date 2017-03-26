@@ -52,10 +52,9 @@ it('renders zero pad minutes', () => {
 });
 
 it('displays time if interval is 10 minutes', () => {
-    const now = Date.now();
-    const nowPlusNineMinutes = now + (10 * 60 * 1000);
-    const date = new Date(nowPlusNineMinutes);
-    const time = nowPlusNineMinutes / 1000;
+    const datePlusNineMinutes = new Date(2017, 0, 1, 12, 10).getTime() + (10 * 60 * 1000);
+    const date = new Date(datePlusNineMinutes);
+    const time = datePlusNineMinutes / 1000;
     const $ = dom.load(renderToString(<Time time={time}/>));
     const result = $('span').text();
     expect(result).toBe(`${date.getHours()}:${date.getMinutes()}`);
