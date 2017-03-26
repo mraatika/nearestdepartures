@@ -7,6 +7,7 @@
 .departures-list th {
     text-align: left;
     padding-bottom: 8px;
+    cursor: pointer;
 }
 
 .departures-list td {
