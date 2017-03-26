@@ -15,3 +15,23 @@
 .realtime {
     color: #46b32a;
 }
+
+.tram {
+    color: #00985f;
+}
+
+.bus {
+    color: #007ac9;
+}
+
+.subway {
+    color: #ff6319;
+}
+
+.rail {
+    color: #8c4799;
+}
+
+.ferry {
+    color: #00b9e4;
+}
