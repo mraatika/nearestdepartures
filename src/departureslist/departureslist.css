@@ -1,0 +1,32 @@
+.departures-list {
+    width: 80%;
+    margin: 0 auto;
+    border-spacing: 0;
+}
+
+.departures-list th {
+    text-align: left;
+    padding-bottom: 8px;
+}
+
+.departures-list td {
+    background: #fff;
+    line-height: 1.8;
+    margin: 0;
+    padding-left: 0;
+    font-weight: 400;
+    letter-spacing: 0;
+    font-size: 1rem;
+
+    border-bottom: 1px solid #ddd;
+}
+
+.departures-list svg.icon {
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+}
+
+.departures-list .route-identifier {
+    padding: 0 5px;
+}
