@@ -1,0 +1,37 @@
+.departure-filter {
+    margin-bottom: 20px;
+}
+
+.departure-filter button {
+    width: 20%;
+    padding: .4em 0;
+
+    border-right: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    border-left: 0;
+
+    color: #fff;
+
+    outline: none;
+    cursor: pointer;
+}
+
+.departure-filter button:not(.toggled) {
+    background: #fff !important;
+    color: #ccc;
+}
+
+.departure-filter button:first-child {
+    border-radius: 6px 0 0 6px;
+    border-left: 1px solid #ddd;
+}
+
+.departure-filter button:last-child {
+    border-radius: 0 6px 6px 0;
+}
+
+.departure-filter .icon {
+    width: 24px;
+    height: 24px;
+}
