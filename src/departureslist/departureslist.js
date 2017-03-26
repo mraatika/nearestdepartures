@@ -1,7 +1,19 @@
 import createDepartureRow from './departurerow';
 import './departureslist.css';
 
-export default Inferno => ({
+/**
+ * Factory function for DeparturesList
+ * @param {Object} Inferno
+ * @returns {Function}
+ */
+export default Inferno =>
+/**
+ * @constructs DeparturesList
+ * @param {Object[]} [departures] List of departure objects
+ * @param {Function} [sort] Callback for sorting
+ * @returns {DeparturesList}
+ */
+({
     departures = [],
     sort = () => {},
 }) => {
