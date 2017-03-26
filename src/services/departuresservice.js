@@ -12,13 +12,15 @@ function getNowInSeconds() {
 /**
  * Fetch nearest departures from digitransit's public api
  * @async
+ * @param {Object} location
+ * @param {number} location.latitude
+ * @param {number} location.longitude
  * @returns {Promise}
  */
-export default async function fetchDepartures() {
-    const lat = 60.189425;
-    const lon = 24.951884;
+export default async function fetchDepartures(location = {}) {
+    const { latitude = 60.189425, longitude = 24.951884 } = location;
     const time = getNowInSeconds();
-    const reqBody = formRequestBody({ lat, lon, time, distance: 200 });
+    const reqBody = formRequestBody({ latitude, longitude, time, distance: 200 });
     let data;
 
     const response = await fetch('https://api.digitransit.fi/routing/v1/routers/hsl/index/graphql', {

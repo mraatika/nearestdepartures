@@ -2,6 +2,7 @@ import Inferno from 'inferno';
 import Component from 'inferno-component';
 import createDeparturesList from './departureslist/departureslist';
 import fetchDepartures from './services/departuresservice';
+import findGPSLocation from './services/locationservice';
 import sortDepartures from './utils/departuresorter';
 import './app.css';
 
@@ -31,7 +32,10 @@ class App extends Component {
      * Fetches departures when componen has mounted
      */
     componentDidMount() {
-        fetchDepartures()
+        // find location
+        findGPSLocation()
+            // finde departures based on location
+            .then(fetchDepartures)
             .then(departures => this.sortDeparturesToState('time', departures))
             .catch(err => console.error(err));
     }
