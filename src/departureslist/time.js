@@ -13,19 +13,13 @@ const padNumber = num => (('' + num).length < 2 ? '0' + num : num);
 const getTimeAsText = date => `${padNumber(date.getHours())}:${padNumber(date.getMinutes())}`;
 
 /**
- * Factory function for Time component
- * @param {Object} Inferno
- * @returns {Function}
- */
-export default Inferno =>
-/**
  * Component for displaying time in human readable form
  * @constructs Time
  * @param {Object} props
  * @param {number} props.time Time in seconds
  * @return {Time}
  */
-({ time }) => {
+export default ({ time }) => {
     const now = Date.now();
     const date = new Date(time * 1000);
     const timeLeftInMins = Math.floor(((date - now) / 1000) / 60);

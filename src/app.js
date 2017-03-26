@@ -1,12 +1,10 @@
 import Inferno from 'inferno';
 import Component from 'inferno-component';
-import createDeparturesList from './departureslist/departureslist';
+import DeparturesList from './departureslist/departureslist';
 import fetchDepartures from './services/departuresservice';
 import findGPSLocation from './services/locationservice';
 import sortDepartures from './utils/departuresorter';
 import './app.css';
-
-const DeparturesList = createDeparturesList(Inferno);
 
 /**
  * @class App

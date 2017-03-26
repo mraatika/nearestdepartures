@@ -1,9 +1,7 @@
 import Inferno from 'inferno';
 import { renderToString } from 'inferno-server';
 import dom from 'cheerio';
-import createTime from './time';
-
-const Time = createTime(Inferno);
+import Time from './time';
 
 it('renders a span element', () => {
     const $ = dom.load(renderToString(<Time />));

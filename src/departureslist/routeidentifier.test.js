@@ -1,9 +1,7 @@
 import Inferno from 'inferno';
 import { renderToString } from 'inferno-server';
 import dom from 'cheerio';
-import createRouteIdentifier from './routeidentifier';
-
-const RouteIdentifier = createRouteIdentifier(Inferno);
+import RouteIdentifier from './routeidentifier';
 
 it('renders a div element', () => {
     const $ = dom.load(renderToString(<RouteIdentifier />));

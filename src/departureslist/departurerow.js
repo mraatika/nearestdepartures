@@ -1,22 +1,16 @@
-import createTime from './time';
-import createRouteIdentifier from './routeidentifier';
+import Time from './time';
+import RouteIdentifier from './routeidentifier';
 
 /**
- * Factory for DepartureRow component. Displays a single
- * departure in the departures table
+ * Displays a single departure in the departures table
  * @constructs DepartureRow
- * @extends {Inferno.Component}
- * @param {Inferno} Inferno
- */
-export default Inferno =>
-/**
  * @param {string} scheduledDeparture
  * @param {string} routeName
  * @param {string} destination
  * @param {string} nextScheduledDeparture
  * @returns {Inferno.Component}
  */
-({
+export default ({
     scheduledDeparture,
     realtime,
     realtimeDeparture,
@@ -25,8 +19,6 @@ export default Inferno =>
     destination,
     vehicleType,
 } = {}) => {
-    const Time = createTime(Inferno);
-    const RouteIdentifier = createRouteIdentifier(Inferno);
     const departureTime = realtime ? realtimeDeparture : scheduledDeparture;
 
     return (

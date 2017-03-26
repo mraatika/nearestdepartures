@@ -1,9 +1,7 @@
 import Inferno from 'inferno';
 import { renderToString } from 'inferno-server';
-import createDepartureRow from './departurerow';
 import dom from 'cheerio';
-
-const DepartureRow = createDepartureRow(Inferno);
+import DepartureRow from './departurerow';
 
 describe('DepartureRow', () => {
     it('renders a table row', () => {
