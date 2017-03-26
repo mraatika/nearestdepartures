@@ -48,7 +48,7 @@ it('renders an empty table body when departures list is empty', () => {
 });
 
 it('renders as many table body rows as there are departures', () => {
-    const departures = [{}, {}];
+    const departures = [{ id: '1' }, { id: '2' }];
     const $ = dom.load(renderToString(<DeparturesTable departures={departures}/>));
     const rows = $('tbody tr');
     expect(rows.length).toBe(departures.length);

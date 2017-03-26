@@ -1,15 +1,21 @@
 import createDepartureRow from './departurerow';
+import { getDepartureTime } from '../utils/utils';
+import './departureslist.css';
+
+const sortByRealDeparture = (a, b) => {
+    const departureA = getDepartureTime(a);
+    const departureB = getDepartureTime(b);
+    return new Date(departureA).getTime() - new Date(departureB).getTime();
+};
 
 export default Inferno => ({
     departures = []
 }) => {
     const DepartureRow = createDepartureRow(Inferno);
-    const sorted = departures.sort((a, b) =>
-        new Date(a.scheduledDeparture).getTime() - new Date(b.scheduledDeparture).getTime()
-    );
+    const sorted = departures.sort(sortByRealDeparture);
 
     return (
-        <table>
+        <table className="departures-list">
             <thead>
                 <tr>
                     <th>Departure</th>
@@ -19,7 +25,7 @@ export default Inferno => ({
                 </tr>
             </thead>
             <tbody>
-                { sorted.map(departure => <DepartureRow key={ departure.id } {...departure} />) }
+                { sorted.map(departure => <DepartureRow key={ JSON.stringify(departure) } {...departure} />) }
             </tbody>
         </table>
     );
