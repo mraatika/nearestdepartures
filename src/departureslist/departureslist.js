@@ -1,5 +1,20 @@
 import DepartureRow from './departurerow';
 import './departureslist.css';
+
+/**
+ * Generate a row for each departure
+ * @private
+ * @param {Object[]} departures
+ * @returns {Function[]}
+ */
+const generateDepartureRows = departures => departures.map(departure => <DepartureRow key={ JSON.stringify(departure) } {...departure} />);
+/**
+ * Generate a placeholder row
+ * @private
+ * @returns {Function}
+ */
+const generateEmptyRow = () => <tr class="no-results"><td colspan="4">No departures found with current filters</td></tr>;
+
 /**
  * A component for displaying a list of departures
  * @constructs DeparturesList
@@ -11,14 +26,9 @@ export default ({
     departures = [],
     sort = () => {},
 }) => {
-    let rows;
-
     // show rows or a placeholder row when there are no departures to display
-    if (departures.length) {
-        rows = departures.map(departure => <DepartureRow key={ JSON.stringify(departure) } {...departure} />);
-    } else {
-        rows = <tr class="no-results"><td colspan="4">No departures found with current filters</td></tr>;
-    }
+    let rows = departures.length ? generateDepartureRows(departures) : generateEmptyRow();
+
     return (
         <table className="departures-list">
             <thead>
