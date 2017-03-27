@@ -38,6 +38,7 @@ class App extends Component {
             sortProp: 'time',
             sortDir: 1,
             filters: allFilters,
+            error: null,
         };
     }
 
@@ -48,12 +49,19 @@ class App extends Component {
         // find location
         findGPSLocation()
             // finde departures based on location
-            .then(fetchDepartures)
+            .then(fetchDepartures, err => this.showError(`Location unavailable (${err})!`))
             .then((departures) => {
                 this.setState({ initialDepartures: departures }, () => this.sortStateDepartures());
                 return departures;
-            })
-            .catch(err => console.error(err));
+            }, err => this.showError(`Fetching depatures failed (${err})!`));
+    }
+
+    /**
+     * Adds error to the state
+     * @param {string} error Error message
+     */
+    showError(error) {
+        this.setState({ error });
     }
 
     /**
@@ -114,6 +122,8 @@ class App extends Component {
      * Renders App
      */
     render() {
+        const { departures, filters, error } = this.state;
+
         return (
             <div className="app">
                 <header>
@@ -121,12 +131,13 @@ class App extends Component {
                 </header>
 
                 <main>
+                    <div class="alert" style={{ display: error ? 'block' : 'none' }}>{ error }</div>
                     <DepartureFilter
                         filters={allFilters}
                         onFilterToggle={this.onFilterToggle.bind(this)}
-                        activeFilters={this.state.filters} />
+                        activeFilters={filters} />
                     <DeparturesList
-                        departures={this.state.departures}
+                        departures={departures}
                         sort={this.updateSortPropsAndDepartures.bind(this) }/>
                 </main>
             </div>
