@@ -5,7 +5,6 @@ import DeparturesList from './departureslist/departureslist';
 import DepartureFilter from './departurefilter/departurefilter';
 import fetchDepartures from './services/departuresservice';
 import findGPSLocation from './services/locationservice';
-import sortDepartures from './utils/departuresorter';
 import './app.css';
 
 /**
@@ -31,15 +30,7 @@ class App extends Component {
      */
     constructor() {
         super();
-
-        // default state
-        this.state = {
-            // sort default by departure time
-            sortProp: 'time',
-            sortDir: 1,
-            filters: allFilters,
-            error: null,
-        };
+        this.state = { filters: allFilters, error: null };
     }
 
     /**
@@ -50,10 +41,10 @@ class App extends Component {
         findGPSLocation()
             // finde departures based on location
             .then(fetchDepartures, err => this.showError(`Location unavailable (${err})!`))
-            .then((departures) => {
-                this.setState({ initialDepartures: departures }, () => this.sortStateDepartures());
-                return departures;
-            }, err => this.showError(`Fetching depatures failed (${err})!`));
+            .then(
+                departures => this.setState({ initialDepartures: departures, departures }),
+                err => this.showError(`Fetching depatures failed (${err})!`)
+            );
     }
 
     /**
@@ -62,29 +53,6 @@ class App extends Component {
      */
     showError(error) {
         this.setState({ error });
-    }
-
-    /**
-     * Sorts departures by prop and set to state
-     * @param {string} propName Name of the prop to sort by
-     * @param {Object[]} [list] List of departures to sort, defaults to state.departures
-     */
-    updateSortPropsAndDepartures(propName, list) {
-        // if sorted with same prop as before then switch sort mode asc <--> desc
-        const sortDir = this.state.sortProp === propName ? (this.state.sortDir * -1 ): 1;
-        // set sort props to state and then sort departures
-        this.setState({ sortProp: propName, sortDir }, () => this.sortStateDepartures());
-    }
-
-    /**
-     * Sort departures and update state
-     */
-    sortStateDepartures() {
-        const { sortProp, sortDir, departures, initialDepartures } = this.state;
-        let sorted = sortDepartures(sortProp)(departures || initialDepartures);
-        // if sort dir is descending then reverse the array
-        if (sortDir === -1) sorted.reverse();
-        this.setState({ departures: sorted });
     }
 
     /**
@@ -115,7 +83,7 @@ class App extends Component {
         const { initialDepartures, filters } = this.state;
         const filtered = filterDepartures(filters)(initialDepartures);
         // filter departures and then sort
-        this.setState({ departures: filtered }, () => this.sortStateDepartures());
+        this.setState({ departures: filtered });
     }
 
     /**
@@ -136,9 +104,7 @@ class App extends Component {
                         filters={allFilters}
                         onFilterToggle={this.onFilterToggle.bind(this)}
                         activeFilters={filters} />
-                    <DeparturesList
-                        departures={departures}
-                        sort={this.updateSortPropsAndDepartures.bind(this) }/>
+                    <DeparturesList departures={departures} />
                 </main>
             </div>
         );

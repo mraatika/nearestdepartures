@@ -7,7 +7,8 @@ import { getDepartureTime } from '../utils/utils';
  * @param {string} propName Property to sort by
  * @returns {Object[]} Sorted departures
  */
-export default function sort(propName) {
+export default function sort(list, propName, sortDir) {
     const iteratee = propName === 'time' ? getDepartureTime : prop(propName);
-    return sortBy(iteratee);
+    const sorted = sortBy(iteratee)(list);
+    return sortDir === -1 ? sorted.reverse() : sorted;
 }

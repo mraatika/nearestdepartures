@@ -6,7 +6,7 @@ it('returns list in same order as before if prop is missing', () => {
         { routeName: 'ABC' },
         { routeName: 'XYZ' },
     ];
-    const result = sort()(departures);
+    const result = sort(departures);
     expect(result).toEqual(departures);
 });
 
@@ -22,7 +22,24 @@ it('sorts departures descending by route name', () => {
         { routeName: 'XYZ' },
     ];
 
-    const result = sort('routeName')(departures);
+    const result = sort(departures, 'routeName');
+
+    expect(result).toEqual(sorted);
+});
+
+it('reverses sort array when sortDir is -1', () => {
+    const departures = [
+        { routeName: 'DEF' },
+        { routeName: 'ABC' },
+        { routeName: 'XYZ' },
+    ];
+     const sorted = [
+        { routeName: 'XYZ' },
+        { routeName: 'DEF' },
+        { routeName: 'ABC' },
+    ];
+
+    const result = sort(departures, 'routeName', -1);
 
     expect(result).toEqual(sorted);
 });
@@ -34,7 +51,7 @@ it('does not modify the original list', () => {
         { destination: 'XYZ' },
     ];
 
-    const result = sort('destination')(departures);
+    const result = sort(departures, 'destination');
 
     expect(result).not.toBe(departures);
 });
@@ -51,7 +68,7 @@ it('sorts departures descending by destination', () => {
         { destination: 'XYZ' },
     ];
 
-    const result = sort('destination')(departures);
+    const result = sort(departures, 'destination');
 
     expect(result).toEqual(sorted);
 });
@@ -68,7 +85,7 @@ it('sorts departures descending by distance', () => {
         { distance: 600 },
     ];
 
-    const result = sort('distance')(departures);
+    const result = sort(departures, 'distance');
 
     expect(result).toEqual(sorted);
 });
@@ -85,7 +102,7 @@ it('sorts departures descending by scheduled departure', () => {
         { scheduledDeparture: 600, serviceDay: 100 },
     ];
 
-    const result = sort('time')(departures);
+    const result = sort(departures, 'time');
 
     expect(result).toEqual(sorted);
 });
@@ -102,7 +119,7 @@ it('sorts departures descending by realtime departure', () => {
         { realtimeDeparture: 600, serviceDay: 100, realtime: true },
     ];
 
-    const result = sort('time')(departures);
+    const result = sort(departures, 'time');
 
     expect(result).toEqual(sorted);
 });
@@ -123,7 +140,7 @@ it('sorts departures descending by realtime departure if available otherwise by 
         { scheduledDeparture: 800, serviceDay: 100 },
     ];
 
-    const result = sort('time')(departures);
+    const result = sort(departures, 'time');
 
     expect(result).toEqual(sorted);
 });
