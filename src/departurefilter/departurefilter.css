@@ -2,6 +2,8 @@
     margin-bottom: 20px;
 }
 
+/* FILTER BUTTONS */
+
 .departure-filter button {
     width: 20%;
     padding: .4em 0;
@@ -13,7 +15,6 @@
 
     color: #fff;
 
-    outline: none;
     cursor: pointer;
 }
 
@@ -34,4 +35,43 @@
 .departure-filter .icon {
     width: 24px;
     height: 24px;
+}
+
+/* RANGE FILTER */
+
+.departure-filter fieldset {
+    border: 0;
+    padding: 10px 0;
+}
+
+.departure-filter input[type=range] {
+    width: 92%;
+    -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+    background: transparent; /* Otherwise white in Chrome */
+    padding: 0;
+    margin: 0;
+}
+
+.departure-filter output {
+    width: 8%;
+    display: inline-block;
+    text-align: right;
+}
+
+.departure-filter input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 10px;
+    cursor: pointer;
+    background: #00b9e4;
+    border-radius: 2px;
+}
+
+.departure-filter input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 24px;
+    width: 24px;
+    border-radius: 50%;
+    background: #007ac9;
+    cursor: pointer;
+    margin-top: -7px;
 }

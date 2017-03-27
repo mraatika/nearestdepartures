@@ -17,10 +17,10 @@ function getNowInSeconds() {
  * @param {number} location.longitude
  * @returns {Promise}
  */
-export default async function fetchDepartures(location = {}) {
+export default async function fetchDepartures(location = {}, range) {
     const { latitude = 60.189425, longitude = 24.951884 } = location;
     const time = getNowInSeconds();
-    const reqBody = formRequestBody({ latitude, longitude, time, distance: 200 });
+    const reqBody = formRequestBody({ latitude, longitude, time, distance: range });
     let data;
 
     const response = await fetch('https://api.digitransit.fi/routing/v1/routers/hsl/index/graphql', {

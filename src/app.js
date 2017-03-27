@@ -12,6 +12,8 @@ import './app.css';
  */
 const allFilters = ['BUS', 'TRAM', 'RAIL', 'SUBWAY', 'FERRY'];
 
+const DEFAULT_RANGE = 200;
+
 /**
  * Function for filtering departures by type
  * @param {string[]} filters
@@ -30,7 +32,7 @@ class App extends Component {
      */
     constructor() {
         super();
-        this.state = { filters: allFilters, error: null };
+        this.state = { filters: allFilters, error: null, departureRange: DEFAULT_RANGE };
     }
 
     /**
@@ -39,12 +41,18 @@ class App extends Component {
     componentDidMount() {
         // find location
         findGPSLocation()
-            // finde departures based on location
-            .then(fetchDepartures, err => this.showError(`Location unavailable (${err})!`))
             .then(
-                departures => this.setState({ initialDepartures: departures, departures }),
-                err => this.showError(`Fetching depatures failed (${err})!`)
-            );
+                location => this.setState({ location }),
+                err => this.showError(`Location unavailable (${err})!`)
+            )
+            // finde departures based on location
+            .then(location => this.fetchDeparturesToState(location, DEFAULT_RANGE));
+    }
+
+    fetchDeparturesToState(location, range) {
+        fetchDepartures(location, range)
+            .then(departures => this.setState({ initialDepartures: departures, departures }))
+            .catch(err => this.showError(`Fetching depatures failed (${err})!`));
     }
 
     /**
@@ -87,6 +95,15 @@ class App extends Component {
     }
 
     /**
+     * Callback for range filter change
+     * @param {number} range
+     */
+    onRangeChange(range) {
+        this.setState({ departureRange: range });
+        this.fetchDeparturesToState(this.state.location, range);
+    }
+
+    /**
      * Renders App
      */
     render() {
@@ -103,6 +120,8 @@ class App extends Component {
                     <DepartureFilter
                         filters={allFilters}
                         onFilterToggle={this.onFilterToggle.bind(this)}
+                        range={this.state.departureRange}
+                        onRangeChange={this.onRangeChange.bind(this)}
                         activeFilters={filters} />
                     <DeparturesList departures={departures} />
                 </main>
