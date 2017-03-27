@@ -32,3 +32,8 @@
 .departures-list .route-identifier {
     padding: 0 5px;
 }
+
+.no-results {
+    font-style: italic;
+    text-align: center;
+}

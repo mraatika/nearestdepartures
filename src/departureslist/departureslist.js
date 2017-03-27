@@ -10,18 +10,26 @@ import './departureslist.css';
 export default ({
     departures = [],
     sort = () => {},
-}) => (
-    <table className="departures-list">
-        <thead>
-            <tr>
-                <th onClick={() => sort('time')}>Departure</th>
-                <th onClick={() => sort('routeName')}>Route</th>
-                <th onClick={() => sort('destination')}>Destination</th>
-                <th onClick={() => sort('distance')}>Distance</th>
-            </tr>
-        </thead>
-        <tbody>
-            { departures.map(departure => <DepartureRow key={ JSON.stringify(departure) } {...departure} />) }
-        </tbody>
-    </table>
-);
+}) => {
+    let rows;
+
+    // show rows or a placeholder row when there are no departures to display
+    if (departures.length) {
+        rows = departures.map(departure => <DepartureRow key={ JSON.stringify(departure) } {...departure} />);
+    } else {
+        rows = <tr class="no-results"><td colspan="4">No departures found with current filters</td></tr>;
+    }
+    return (
+        <table className="departures-list">
+            <thead>
+                <tr>
+                    <th onClick={() => sort('time')}>Departure</th>
+                    <th onClick={() => sort('routeName')}>Route</th>
+                    <th onClick={() => sort('destination')}>Destination</th>
+                    <th onClick={() => sort('distance')}>Distance</th>
+                </tr>
+            </thead>
+            <tbody>{ rows }</tbody>
+        </table>
+    );
+};

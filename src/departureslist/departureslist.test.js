@@ -39,10 +39,11 @@ it('renders a table header cell with text Distance', () => {
     expect(headerText).toBe('Distance');
 });
 
-it('renders an empty table body when departures list is empty', () => {
+it('renders a placeholder row when departures list is empty', () => {
     const $ = dom.load(renderToString(<DeparturesList departures={[]}/>));
-    const tbodyContent = $('tbody').html();
-    expect(tbodyContent).toBe('');
+    const row = $('tbody tr');
+    expect(row.length).toBe(1);
+    expect(row.hasClass('no-results')).toBe(true);
 });
 
 it('renders as many table body rows as there are departures', () => {
