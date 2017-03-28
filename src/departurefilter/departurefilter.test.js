@@ -5,7 +5,7 @@ import DepartureFilter from './departurefilter';
 
 it('renders a div', () => {
     const $ = dom.load(renderToString(<DepartureFilter />));
-    const div = $('div');
+    const div = $('div.departure-filter');
     expect(div.length).toBe(1);
 });
 

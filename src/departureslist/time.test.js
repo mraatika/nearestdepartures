@@ -1,4 +1,3 @@
-import Inferno from 'inferno';
 import { renderToString } from 'inferno-server';
 import dom from 'cheerio';
 import Time from './time';
@@ -60,7 +59,7 @@ it('displays time if interval is 10 minutes', () => {
 
 it('displays time in minutes to time if interval is less than 10 minutes', () => {
     const now = Date.now();
-    const nowPlusNineMinutes = now + (9 * 60 * 1000);
+    const nowPlusNineMinutes = now + (9 * 60 * 1000) + (15 * 1000);
     const time = nowPlusNineMinutes / 1000;
     const $ = dom.load(renderToString(<Time time={time}/>));
     const result = $('span').text();
