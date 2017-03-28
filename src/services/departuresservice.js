@@ -24,15 +24,13 @@ const MAX_RESULTS = 20;
  * @param {number} props.latitude
  * @param {number} props.longitude
  * @param {number} props.startTime
- * @param {number} props.range
  * @param {string[]} props.vehicleTypes
  * @returns {Object}
  */
-function formRequestBody({ latitude, longitude, startTime, range, vehicleTypes } = {}) {
+function formRequestBody({ latitude, longitude, startTime, vehicleTypes } = {}) {
     return {
         query: query,
         variables: {
-            range,
             latitude,
             longitude,
             startTime,
@@ -54,9 +52,9 @@ function formRequestBody({ latitude, longitude, startTime, range, vehicleTypes }
  */
 export default async function fetchDepartures(location = {}, filters = {}) {
     const { latitude = 60.189425, longitude = 24.951884 } = location;
-    const { range, vehicleTypes } = filters;
+    const { vehicleTypes } = filters;
     const startTime = getNowInSeconds();
-    const reqBody = formRequestBody({ latitude, longitude, startTime, range, vehicleTypes });
+    const reqBody = formRequestBody({ latitude, longitude, startTime, vehicleTypes });
     let data;
 
     const response = await fetch('https://api.digitransit.fi/routing/v1/routers/hsl/index/graphql', {
