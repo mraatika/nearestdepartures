@@ -9,7 +9,7 @@ import './departureslist.css';
  * @param {Object[]} departures
  * @returns {Function[]}
  */
-const generateDepartureRows = departures => departures.map(departure => <DepartureRow key={ JSON.stringify(departure) } {...departure} />);
+const generateDepartureRows = departures => departures.map(departure => <DepartureRow key={departure.id} {...departure} />);
 /**
  * Generate a placeholder row
  * @private
