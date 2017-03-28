@@ -88,12 +88,8 @@ class App extends Component {
      * @param {number} range
      */
     onRangeChange(range) {
-        const { vehicleTypes, range: prevRange } = this.state.filters;
-        this.setState({ filters: { vehicleTypes, range } });
-
-        if (range > prevRange) {
-            this.fetchDeparturesToState();
-        }
+        const { vehicleTypes } = this.state.filters;
+        this.setState({ filters: { vehicleTypes, range } }, () => this.filterDeparturesToState());
     }
 
     /**
