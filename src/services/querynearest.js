@@ -1,18 +1,10 @@
 /**
- * Limit results by time (2h in seconds)
+ * Graphql query for nearest departures
+ * @type {string}
  */
-const TIME_RANGE = 3 * 60 * 60;
-
-/**
- * Form a graphql query for nearest departures
- * @param {number} lat Latitude of current position
- * @param {number} lon Longitude of current position
- * @param {number} time Current time in seconds
- * @param {number} distance Maximum distance
- */
-export default ({ latitude, longitude, time, distance = 500 }) => {
-    return `{
-        nearest(lat: ${latitude}, lon: ${longitude}, maxResults: 1000, maxDistance: ${distance}, filterByPlaceTypes: DEPARTURE_ROW) {
+export default `
+    query Nearest($latitude: Float!, $longitude: Float!, $range: Int!, $maxResults: Int, $startTime:Long, $timeRange:Int, $departuresCount:Int, $vehicleTypes:[Mode]!) {
+        nearest(lat: $latitude, lon: $longitude, maxResults: $maxResults, maxDistance: $range, filterByPlaceTypes: DEPARTURE_ROW, filterByModes: $vehicleTypes) {
             edges {
                 node {
                     id
@@ -20,7 +12,7 @@ export default ({ latitude, longitude, time, distance = 500 }) => {
                     place {
                         id
                         ... on DepartureRow {
-                            stoptimes(startTime: ${time}, timeRange: ${TIME_RANGE} numberOfDepartures: 2) {
+                            stoptimes(startTime: $startTime, timeRange: $timeRange, numberOfDepartures: $departuresCount) {
                                 serviceDay
                                 scheduledDeparture
                                 realtimeDeparture
@@ -52,5 +44,5 @@ export default ({ latitude, longitude, time, distance = 500 }) => {
                 }
             }
         }
-    }`;
-};
+    }
+}`;
