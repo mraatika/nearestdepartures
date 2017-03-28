@@ -7,7 +7,7 @@ const MIN_RANGE = 100;
  * Maximum range value
  * @type {number}
  */
-const MAX_RANGE = 3500;
+const MAX_RANGE = 2000;
 /**
  * Range change step
  * @type {number}

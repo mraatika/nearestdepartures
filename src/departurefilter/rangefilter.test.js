@@ -28,10 +28,10 @@ it('has minimum of 100', () => {
     expect(inputValue).toBe('100');
 });
 
-it('has minimum of maximum of 5000', () => {
+it('has minimum of maximum of 2000', () => {
     const $ = dom.load(renderToString(<RangeFilter />));
     const inputValue = $('input').attr('max');
-    expect(inputValue).toBe('3500');
+    expect(inputValue).toBe('2000');
 });
 
 it('has step of 10', () => {
