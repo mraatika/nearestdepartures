@@ -25,14 +25,16 @@ const sumWith = curry((a, b) => a + b);
  */
 const getStoptimeData = (stoptime) => {
     const { scheduledDeparture, headsign, realtime, realtimeDeparture, serviceDay } = stoptime;
+    const { id } = stoptime.trip;
     // times are seconds from midnight and serviceday is current day
     const sumWithServiceDay = sumWith(serviceDay);
 
     return {
+        id,
+        realtime,
         scheduledDeparture: sumWithServiceDay(scheduledDeparture),
         realtimeDeparture: sumWithServiceDay(realtimeDeparture),
         destination: headsign,
-        realtime,
     };
 };
 

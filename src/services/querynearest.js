@@ -3,8 +3,8 @@
  * @type {string}
  */
 export default `
-    query Nearest($latitude: Float!, $longitude: Float!, $range: Int!, $maxResults: Int, $startTime:Long, $timeRange:Int, $departuresCount:Int, $vehicleTypes:[Mode]!) {
-        nearest(lat: $latitude, lon: $longitude, maxResults: $maxResults, maxDistance: $range, filterByPlaceTypes: DEPARTURE_ROW, filterByModes: $vehicleTypes) {
+    query Nearest($latitude: Float!, $longitude: Float!, $maxResults: Int, $startTime:Long, $timeRange:Int, $departuresCount:Int, $vehicleTypes:[Mode]!) {
+        nearest(lat: $latitude, lon: $longitude, maxResults: $maxResults, filterByPlaceTypes: DEPARTURE_ROW, filterByModes: $vehicleTypes) {
             edges {
                 node {
                     id
@@ -19,9 +19,7 @@ export default `
                                 realtimeState
                                 realtime
                                 headsign
-                                stop {
-                                    code
-                                    platformCode
+                                trip {
                                     id
                                 }
                             }
@@ -33,11 +31,9 @@ export default `
                                     mode
                                     color
                                     agency {
-                                        id
                                         name
                                     }
                                 }
-                                code
                             }
                         }
                     }
