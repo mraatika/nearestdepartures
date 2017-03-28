@@ -1,6 +1,7 @@
 import Component from 'inferno-component';
 import filter from 'lodash/fp/filter';
 import without from 'lodash/fp/without';
+import { getNowInSeconds } from './utils/utils';
 import DeparturesList from './departureslist/departureslist';
 import DepartureFilter from './departurefilter/departurefilter';
 import fetchDepartures from './utils/departurefetchmerge';
@@ -19,7 +20,11 @@ const DEFAULT_RANGE = 400;
  * @param {string[]} filters
  * @return {Function}
  */
-const filterDepartures = filters => filter(d => filters.vehicleTypes.indexOf(d.vehicleType) > -1 && d.distance < filters.range);
+const filterDepartures = filters => filter((d) => {
+    return filters.vehicleTypes.indexOf(d.vehicleType) > -1 &&
+        d.distance < filters.range &&
+        d.realtimeDeparture >= getNowInSeconds()
+});
 
 /**
  * @class App
