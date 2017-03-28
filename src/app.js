@@ -3,7 +3,7 @@ import filter from 'lodash/fp/filter';
 import without from 'lodash/fp/without';
 import DeparturesList from './departureslist/departureslist';
 import DepartureFilter from './departurefilter/departurefilter';
-import fetchDepartures from './services/departuresservice';
+import fetchDepartures from './utils/departurefetchmerge';
 import findGPSLocation from './services/locationservice';
 import './app.css';
 
@@ -12,14 +12,14 @@ import './app.css';
  */
 const allFilters = ['BUS', 'TRAM', 'RAIL', 'SUBWAY', 'FERRY'];
 
-const DEFAULT_RANGE = 200;
+const DEFAULT_RANGE = 400;
 
 /**
  * Function for filtering departures by type
  * @param {string[]} filters
  * @return {Function}
  */
-const filterDepartures = filters => filter(d => filters.indexOf(d.vehicleType) > -1);
+const filterDepartures = filters => filter(d => filters.vehicleTypes.indexOf(d.vehicleType) > -1 && d.distance < filters.range);
 
 /**
  * @class App
@@ -32,11 +32,11 @@ class App extends Component {
      */
     constructor() {
         super();
-        this.state = { filters: allFilters, error: null, departureRange: DEFAULT_RANGE };
+        this.state = { filters: { vehicleTypes: allFilters, range: DEFAULT_RANGE }, error: null };
     }
 
     /**
-     * Fetches departures when componen has mounted
+     * Find location and fetch departures when component has mounted
      */
     componentDidMount() {
         // find location
@@ -46,21 +46,20 @@ class App extends Component {
                 err => this.showError(`Location unavailable (${err})!`)
             )
             // finde departures based on location
-            .then(location => this.fetchDeparturesToState(location, DEFAULT_RANGE));
-    }
-
-    fetchDeparturesToState(location, range) {
-        fetchDepartures(location, range)
-            .then(departures => this.setState({ initialDepartures: departures, departures }))
-            .catch(err => this.showError(`Fetching depatures failed (${err})!`));
+            .then(location => this.fetchDeparturesToState(location));
     }
 
     /**
-     * Adds error to the state
-     * @param {string} error Error message
+     * Fetch departures and add them to state. Apply filters and also set filtered result to state.
      */
-    showError(error) {
-        this.setState({ error });
+    fetchDeparturesToState() {
+        const { location, departures, filters } = this.state;
+
+        fetchDepartures(location, filters.vehicleTypes, departures)
+            .then((allDepartures) => {
+                this.setState({ departures: allDepartures, filtered: filterDepartures(filters)(allDepartures) });
+            })
+            .catch(err => this.showError(`Departure fetching failed (${err})`));
     }
 
     /**
@@ -69,7 +68,7 @@ class App extends Component {
      * @param {boolean} multiselect
      */
     onFilterToggle(type, multiselect) {
-        const current = this.state.filters;
+        const { range, vehicleTypes: current } = this.state.filters;
         const currentToggled = current.indexOf(type) > -1;
         const multipleToggled = current.length > 1;
         let updatedFilters = [];
@@ -81,17 +80,7 @@ class App extends Component {
         }
 
         // update filter props on state and then filter departures
-        this.setState({ filters: updatedFilters }, () => this.filterStateDepartures());
-    }
-
-    /**
-     * Filter departures based on filters set on state
-     */
-    filterStateDepartures() {
-        const { initialDepartures, filters } = this.state;
-        const filtered = filterDepartures(filters)(initialDepartures);
-        // filter departures and then sort
-        this.setState({ departures: filtered });
+        this.setState({ filters: { vehicleTypes: updatedFilters, range } }, () => this.filterDeparturesToState());
     }
 
     /**
@@ -99,15 +88,37 @@ class App extends Component {
      * @param {number} range
      */
     onRangeChange(range) {
-        this.setState({ departureRange: range });
-        this.fetchDeparturesToState(this.state.location, range);
+        const { vehicleTypes, range: prevRange } = this.state.filters;
+        this.setState({ filters: { vehicleTypes, range } });
+
+        if (range > prevRange) {
+            this.fetchDeparturesToState();
+        }
+    }
+
+    /**
+     * Filter departures based on filters set on state
+     */
+    filterDeparturesToState() {
+        const { departures, filters } = this.state;
+        const filtered = filterDepartures(filters)(departures);
+        // filter departures and then sort
+        this.setState({ filtered });
+    }
+
+    /**
+     * Adds error to the state
+     * @param {string} error Error message
+     */
+    showError(error) {
+        this.setState({ error });
     }
 
     /**
      * Renders App
      */
     render() {
-        const { departures, filters, error } = this.state;
+        const { filtered, filters, error } = this.state;
 
         return (
             <div className="app">
@@ -119,11 +130,11 @@ class App extends Component {
                     <div class="alert" style={{ display: error ? 'block' : 'none' }}>{ error }</div>
                     <DepartureFilter
                         filters={allFilters}
+                        activeFilters={filters.vehicleTypes}
+                        range={filters.range}
                         onFilterToggle={this.onFilterToggle.bind(this)}
-                        range={this.state.departureRange}
-                        onRangeChange={this.onRangeChange.bind(this)}
-                        activeFilters={filters} />
-                    <DeparturesList departures={departures} />
+                        onRangeChange={this.onRangeChange.bind(this)} />
+                    <DeparturesList departures={filtered} />
                 </main>
             </div>
         );
