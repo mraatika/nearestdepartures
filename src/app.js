@@ -4,16 +4,35 @@ import without from 'lodash/fp/without';
 import { getNowInSeconds } from './utils/utils';
 import DeparturesList from './departureslist/departureslist';
 import DepartureFilter from './departurefilter/departurefilter';
+import AddressSearch from './addresssearch/addresssearch';
 import fetchDepartures from './utils/departurefetchmerge';
 import findGPSLocation from './services/locationservice';
+import { lookupAddress, searchAddress } from './services/addresssearchservice';
 import './app.css';
 
 /**
  * All possible filters
  */
-const allFilters = ['BUS', 'TRAM', 'RAIL', 'SUBWAY', 'FERRY'];
+const allVehicleTypes = ['BUS', 'TRAM', 'RAIL', 'SUBWAY', 'FERRY'];
 
+/**
+ * Default range filter value
+ * @type {number}
+ */
 const DEFAULT_RANGE = 400;
+
+/**
+ * Default app state
+ * @type {Object}
+ */
+const DEFAULT_STATE = {
+    addressSearchTerm: '',
+    error: null,
+    filters: {
+        range: DEFAULT_RANGE,
+        vehicleTypes: allVehicleTypes,
+    }
+};
 
 /**
  * Function for filtering departures by type
@@ -37,7 +56,7 @@ class App extends Component {
      */
     constructor() {
         super();
-        this.state = { filters: { vehicleTypes: allFilters, range: DEFAULT_RANGE }, error: null };
+        this.state = Object.assign({}, DEFAULT_STATE);
     }
 
     /**
@@ -46,23 +65,32 @@ class App extends Component {
     componentDidMount() {
         // find location
         findGPSLocation()
-            .then(
-                location => this.setState({ location }),
-                err => this.showError(`Location unavailable (${err})!`)
-            )
-            // finde departures based on location
-            .then(location => this.fetchDeparturesToState(location));
+            .then((location) => {
+                lookupAddress(location)
+                    .then((address) => {
+                        this.setState({ location, addressSearchTerm: address });
+                        this.fetchDeparturesToState(location);
+                    })
+                    .catch(err => this.showError(`Address lookup failed (${err})!`));
+            })
+            .catch(err => this.showError(`Location unavailable (${err})!`));
     }
 
     /**
      * Fetch departures and add them to state. Apply filters and also set filtered result to state.
+     * @param {Object} location
+     * @param {number} location.latitude
+     * @param {number} location.longitude
      */
-    fetchDeparturesToState() {
-        const { location, departures, filters } = this.state;
+    fetchDeparturesToState(location) {
+        const { filters } = this.state;
 
-        fetchDepartures(location, filters.vehicleTypes, departures)
+        fetchDepartures(location, filters.vehicleTypes)
             .then((allDepartures) => {
-                this.setState({ departures: allDepartures, filtered: filterDepartures(filters)(allDepartures) });
+                this.setState({
+                    departures: allDepartures,
+                    filtered: filterDepartures(filters)(allDepartures)
+                });
             })
             .catch(err => this.showError(`Departure fetching failed (${err})`));
     }
@@ -81,7 +109,7 @@ class App extends Component {
         if (multiselect) {
             updatedFilters = currentToggled ? without([type], current) : [].concat(current, type);
         } else {
-            updatedFilters = (multipleToggled || !currentToggled) ? [type] : allFilters.slice(0);
+            updatedFilters = (multipleToggled || !currentToggled) ? [type] : allVehicleTypes.slice(0);
         }
 
         // update filter props on state and then filter departures
@@ -108,6 +136,25 @@ class App extends Component {
     }
 
     /**
+     * Search coordinates for given address/poi/etc.
+     * @param {string} address
+     */
+    searchForAddress(address) {
+       searchAddress(address)
+        .then((result) => {
+            if (result) {
+                const { location, label } = result;
+                this.setState({ addressSearchTerm: label, location: location });
+                this.fetchDeparturesToState(location);
+            } else {
+                this.showError('Address or location not found!');
+            }
+
+        })
+        .catch(err => this.showError(`Address lookup failed: ${err}`));
+    }
+
+    /**
      * Adds error to the state
      * @param {string} error Error message
      */
@@ -116,10 +163,19 @@ class App extends Component {
     }
 
     /**
+     * Hides the error message
+     * @param {string} error Error message
+     */
+    hideError() {
+        this.showError(null);
+    }
+
+    /**
      * Renders App
+     * @returns {string} markup
      */
     render() {
-        const { filtered, filters, error } = this.state;
+        const { filtered, filters, error, addressSearchTerm } = this.state;
 
         return (
             <div className="content">
@@ -128,9 +184,12 @@ class App extends Component {
                 </header>
 
                 <main>
-                    <div class="alert" style={{ display: error ? 'block' : 'none' }}>{ error }</div>
+                    <div class="alert" style={{ display: error ? 'block' : 'none' }} onClick={this.hideError.bind(this)}>{ error }</div>
+                    <AddressSearch
+                        address={addressSearchTerm}
+                        onSearch={this.searchForAddress.bind(this)} />
                     <DepartureFilter
-                        filters={allFilters}
+                        filters={allVehicleTypes}
                         activeFilters={filters.vehicleTypes}
                         range={filters.range}
                         onFilterToggle={this.onFilterToggle.bind(this)}

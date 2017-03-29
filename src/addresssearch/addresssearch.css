@@ -1,0 +1,39 @@
+.address-search {
+    width: 100%;
+    position: relative;
+}
+
+.address-search:before,
+.address-search:after {
+    content: '';
+    display: table;
+}
+
+.address-search:after {
+    clear: both;
+}
+
+.address-search input {
+    width: 98%;
+    border: 1px solid #eee;
+    padding: 10px 5px;
+    float: left;
+    outline: none;
+}
+
+.address-search button {
+    height: 100%;
+    width: 80px;
+    position: absolute;
+    right: 0;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    background: #007ac9;
+    color: #fff;
+    font-weight: 600;
+}
+
+.address-search button:active {
+    background: #0065a7;
+}
