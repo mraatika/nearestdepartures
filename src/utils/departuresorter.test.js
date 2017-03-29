@@ -90,24 +90,7 @@ it('sorts departures descending by distance', () => {
     expect(result).toEqual(sorted);
 });
 
-it('sorts departures descending by scheduled departure', () => {
-    const departures = [
-        { scheduledDeparture: 100, serviceDay: 100 },
-        { scheduledDeparture: 50, serviceDay: 100 },
-        { scheduledDeparture: 600, serviceDay: 100 },
-    ];
-     const sorted = [
-        { scheduledDeparture: 50, serviceDay: 100 },
-        { scheduledDeparture: 100, serviceDay: 100 },
-        { scheduledDeparture: 600, serviceDay: 100 },
-    ];
-
-    const result = sort(departures, 'time');
-
-    expect(result).toEqual(sorted);
-});
-
-it('sorts departures descending by realtime departure', () => {
+it('sorts departures descending by departure time', () => {
     const departures = [
         { realtimeDeparture: 100, serviceDay: 100, realtime: true },
         { realtimeDeparture: 50, serviceDay: 100, realtime: true },
@@ -117,27 +100,6 @@ it('sorts departures descending by realtime departure', () => {
         { realtimeDeparture: 50, serviceDay: 100, realtime: true },
         { realtimeDeparture: 100, serviceDay: 100, realtime: true },
         { realtimeDeparture: 600, serviceDay: 100, realtime: true },
-    ];
-
-    const result = sort(departures, 'time');
-
-    expect(result).toEqual(sorted);
-});
-
-it('sorts departures descending by realtime departure if available otherwise by scheduled', () => {
-    const departures = [
-        { realtimeDeparture: 100, serviceDay: 100, realtime: true },
-        { scheduledDeparture: 20, serviceDay: 100 },
-        { realtimeDeparture: 50, serviceDay: 100, realtime: true },
-        { scheduledDeparture: 800, serviceDay: 100 },
-        { realtimeDeparture: 600, serviceDay: 100, realtime: true },
-    ];
-     const sorted = [
-        { scheduledDeparture: 20, serviceDay: 100 },
-        { realtimeDeparture: 50, serviceDay: 100, realtime: true },
-        { realtimeDeparture: 100, serviceDay: 100, realtime: true },
-        { realtimeDeparture: 600, serviceDay: 100, realtime: true },
-        { scheduledDeparture: 800, serviceDay: 100 },
     ];
 
     const result = sort(departures, 'time');

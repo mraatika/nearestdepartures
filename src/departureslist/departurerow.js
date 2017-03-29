@@ -5,33 +5,33 @@ import Distance from './distance';
 /**
  * Displays a single departure in the departures table
  * @constructs DepartureRow
- * @param {string} scheduledDeparture
- * @param {string} routeName
- * @param {string} destination
- * @param {string} nextScheduledDeparture
- * @returns {Inferno.Component}
+ * @param {Object} props
+ * @param {boolean} props.realtime
+ * @param {number} props.realtimeDeparture
+ * @param {string} props.routeName
+ * @param {number} props.distance
+ * @param {string} props.destination
+ * @param {string} props.vehicleType
+ * @returns {DepartureRow}
  */
 export default ({
-    scheduledDeparture,
     realtime,
     realtimeDeparture,
     routeName,
     distance,
     destination,
     vehicleType,
-} = {}) => {
-    const departureTime = realtime ? realtimeDeparture : scheduledDeparture;
-
-    return (
-        <tr>
-            <td className={ realtime ? 'realtime' : '' }>
-                <Time time={ departureTime } />
-            </td>
-            <td>
-                <RouteIdentifier vehicleType={vehicleType} routeName={routeName} />
-            </td>
-            <td>{ destination }</td>
-            <td><Distance distance={distance} /></td>
-        </tr>
-    );
-};
+} = {}) => (
+    <tr>
+        <td className={ realtime ? 'realtime' : '' }>
+            <Time time={ realtimeDeparture } />
+        </td>
+        <td>
+            <RouteIdentifier vehicleType={vehicleType} routeName={routeName} />
+        </td>
+        <td>{ destination }</td>
+        <td>
+            <Distance distance={distance} />
+        </td>
+    </tr>
+);

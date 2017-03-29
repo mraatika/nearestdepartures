@@ -31,21 +31,28 @@ it('renders distance', () => {
 });
 
 describe('displaying departure time', () => {
-    it('renders scheduled departure time', () => {
+    it('displays departure time', () => {
         const time = new Date(2017, 0, 1, 12, 12).getTime() / 1000;
-        const $ = dom.load(renderToString(<DepartureRow scheduledDeparture={time}/>));
+        const $ = dom.load(renderToString(<DepartureRow realtimeDeparture={time} realtime={false} />));
         const output = $('td:first-child').text();
         expect(output).toEqual('12:12');
     });
 
-    it('displays estimated departure times when available', () => {
+    it('does not add realtime class to cell when realtime is false ', () => {
+        const time = new Date(2017, 0, 1, 12, 12).getTime() / 1000;
+        const $ = dom.load(renderToString(<DepartureRow realtimeDeparture={time} realtime={false} />));
+        const result = $('td:first-child').is('.realtime');
+        expect(result).toEqual(false);
+    });
+
+    it('displays estimated departure time when available', () => {
         const time = new Date(2017, 0, 1, 12, 12).getTime() / 1000;
         const $ = dom.load(renderToString(<DepartureRow realtimeDeparture={time} realtime={true} />));
         const output = $('td:first-child').text();
         expect(output).toEqual('12:12');
     });
 
-    it('displays realtimes with green color', () => {
+    it('adds realtime class to cell when realtime is true', () => {
         const time = new Date(2017, 0, 1, 12, 12).getTime() / 1000;
         const $ = dom.load(renderToString(<DepartureRow realtimeDeparture={time} realtime={true} />));
         const result = $('td:first-child').is('.realtime');
