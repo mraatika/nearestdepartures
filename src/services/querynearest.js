@@ -3,7 +3,7 @@
  * @type {string}
  */
 export default `
-    query Nearest($latitude: Float!, $longitude: Float!, $maxResults: Int, $startTime:Long, $timeRange:Int, $departuresCount:Int, $vehicleTypes:[Mode]!) {
+    query Nearest($latitude: Float!, $longitude: Float!, $maxResults: Int, $timeRange:Int, $departuresCount:Int, $vehicleTypes:[Mode]!) {
         nearest(lat: $latitude, lon: $longitude, maxResults: $maxResults, filterByPlaceTypes: DEPARTURE_ROW, filterByModes: $vehicleTypes) {
             edges {
                 node {
@@ -12,7 +12,7 @@ export default `
                     place {
                         id
                         ... on DepartureRow {
-                            stoptimes(startTime: $startTime, timeRange: $timeRange, numberOfDepartures: $departuresCount) {
+                            stoptimes(timeRange: $timeRange, numberOfDepartures: $departuresCount) {
                                 serviceDay
                                 scheduledDeparture
                                 realtimeDeparture

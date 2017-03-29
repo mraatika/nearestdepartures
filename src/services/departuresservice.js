@@ -33,7 +33,6 @@ function formRequestBody({ latitude, longitude, startTime, vehicleTypes } = {}) 
         variables: {
             latitude,
             longitude,
-            startTime,
             vehicleTypes,
             timeRange: TIME_RANGE,
             departuresCount: NUMBER_OF_DEPARTURES_PER_ROUTE,
@@ -53,9 +52,7 @@ function formRequestBody({ latitude, longitude, startTime, vehicleTypes } = {}) 
 export default async function fetchDepartures(location = {}, filters = {}) {
     const { latitude = 60.189425, longitude = 24.951884 } = location;
     const { vehicleTypes } = filters;
-    const startTime = getNowInSeconds();
-    const reqBody = formRequestBody({ latitude, longitude, startTime, vehicleTypes });
-    let data;
+    const reqBody = formRequestBody({ latitude, longitude, vehicleTypes });
 
     const response = await fetch('https://api.digitransit.fi/routing/v1/routers/hsl/index/graphql', {
         method: 'POST',
@@ -63,7 +60,7 @@ export default async function fetchDepartures(location = {}, filters = {}) {
         body: JSON.stringify(reqBody),
     });
 
-    data = await response.json();
+    const data = await response.json();
 
     return parseResponse(data);
 }
