@@ -1,6 +1,5 @@
 import parseResponse from '../utils/graphqlresponseparser';
 import query from './querynearest';
-import { getNowInSeconds } from '../utils/utils';
 
 /**
  * Limit results by time (2h in seconds)
