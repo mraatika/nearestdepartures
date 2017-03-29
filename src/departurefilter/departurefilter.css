@@ -28,12 +28,7 @@
 }
 
 .departure-filter button:first-child {
-    border-radius: 6px 0 0 6px;
     border-left: 1px solid #ddd;
-}
-
-.departure-filter button:last-child {
-    border-radius: 0 6px 6px 0;
 }
 
 .departure-filter .icon {
