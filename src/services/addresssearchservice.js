@@ -6,7 +6,7 @@
  */
 export async function searchAddress(searchTerm) {
     const encoded = encodeURIComponent(searchTerm);
-    const result = await fetch(`http://api.digitransit.fi/geocoding/v1/search?text=${encoded}&size=1&lang=fi`);
+    const result = await fetch(`https://api.digitransit.fi/geocoding/v1/search?text=${encoded}&size=1&lang=fi`);
     const data = await result.json();
 
     if (data && data.features.length) {
@@ -28,7 +28,7 @@ export async function searchAddress(searchTerm) {
  */
 export async function lookupAddress({ latitude, longitude }) {
     const queryParams = `point.lat=${encodeURIComponent(latitude)}&point.lon=${encodeURIComponent(longitude)}&size=1`;
-    const result = await fetch(`http://api.digitransit.fi/geocoding/v1/reverse?${queryParams}`);
+    const result = await fetch(`https://api.digitransit.fi/geocoding/v1/reverse?${queryParams}`);
     const data = await result.json();
 
      if (data && data.features.length) {
