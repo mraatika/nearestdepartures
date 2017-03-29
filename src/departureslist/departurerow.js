@@ -1,5 +1,6 @@
 import Time from './time';
 import RouteIdentifier from './routeidentifier';
+import Distance from './distance';
 
 /**
  * Displays a single departure in the departures table
@@ -30,7 +31,7 @@ export default ({
                 <RouteIdentifier vehicleType={vehicleType} routeName={routeName} />
             </td>
             <td>{ destination }</td>
-            <td>{ distance } m</td>
+            <td><Distance distance={distance} /></td>
         </tr>
     );
 };
