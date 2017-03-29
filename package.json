@@ -18,9 +18,10 @@
   "bugs": {
     "url": "https://github.com/mraatika/nearestdepartures/issues"
   },
-  "homepage": "https://github.com/mraatika/nearestdepartures",
+  "homepage": "https://mraatika.github.io/nearestdepartures",
   "devDependencies": {
     "cheerio": "^0.22.0",
+    "gh-pages": "^0.12.0",
     "inferno-scripts": "1.0.0",
     "inferno-server": "~1.4.2"
   },
@@ -35,6 +36,8 @@
     "start": "inferno-scripts start",
     "build": "inferno-scripts build",
     "test": "inferno-scripts test --env=jsdom",
-    "eject": "inferno-scripts eject"
+    "eject": "inferno-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   }
 }
