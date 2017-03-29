@@ -45,16 +45,16 @@
 }
 
 .departure-filter input[type=range] {
-    width: 92%;
+    display: block;
+    width: 100%;
     -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
     background: transparent; /* Otherwise white in Chrome */
     padding: 0;
-    margin: 0;
+    margin: 0.4em 0;
 }
 
 .departure-filter output {
-    width: 8%;
-    display: inline-block;
+    display: block;
     text-align: right;
 }
 

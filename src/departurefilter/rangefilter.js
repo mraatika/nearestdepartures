@@ -26,6 +26,7 @@ export default ({
     onChange,
 }) => (
     <fieldset>
+        <output>{range}m</output>
         <input
             type="range"
             name="range"
@@ -36,6 +37,5 @@ export default ({
             step={STEP}
             defaultValue={range}
             onInput={e => onChange(e.target.value)} />
-        <output>{range}m</output>
     </fieldset>
 );
