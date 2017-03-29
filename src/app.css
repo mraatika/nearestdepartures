@@ -6,7 +6,7 @@ header {
 }
 
 main {
-    width: 80%;
+    width: 94%;
     margin: 0 auto;
 }
 
@@ -66,4 +66,10 @@ main {
     background-color: #f2dede;
     color: #a94442;
     text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+    main {
+        width: 80%;
+    }
 }

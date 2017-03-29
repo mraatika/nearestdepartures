@@ -54,17 +54,15 @@ export default class DeparturesList extends Component {
         let rows = sorted.length ? generateDepartureRows(sorted) : generateEmptyRow();
 
         return (
-            <table className="departures-list">
-                <thead>
-                    <tr>
-                        <th onClick={() => this.updateSortProps('time')}>Departure</th>
-                        <th onClick={() => this.updateSortProps('routeName')}>Route</th>
-                        <th onClick={() => this.updateSortProps('destination')}>Destination</th>
-                        <th onClick={() => this.updateSortProps('distance')}>Distance</th>
-                    </tr>
-                </thead>
-                <tbody>{ rows }</tbody>
-            </table>
+            <div className="departures-list">
+                <div className="departures-list-header">
+                    <span className="time-header" onClick={() => this.updateSortProps('time')}>Leaves</span>
+                    <span className="route-header" onClick={() => this.updateSortProps('routeName')}>Route</span>
+                    <span className="destination-header" onClick={() => this.updateSortProps('destination')}>Destination</span>
+                    <span className="distance-header" onClick={() => this.updateSortProps('distance')}>Distance</span>
+                </div>
+                <div className="departures-list-body">{ rows }</div>
+            </div>
         );
     }
 };

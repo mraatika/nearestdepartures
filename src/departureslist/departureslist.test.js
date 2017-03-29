@@ -3,53 +3,53 @@ import { renderToString } from 'inferno-server';
 import dom from 'cheerio';
 import DeparturesList from './departureslist';
 
-it('renders a table', () => {
+it('renders a list div', () => {
     const $ = dom.load(renderToString(<DeparturesList />));
-    const table = $('table');
-    expect(table.length).toBe(1);
+    const list = $('div.departures-list');
+    expect(list.length).toBe(1);
 });
 
 it('renders a table header', () => {
     const $ = dom.load(renderToString(<DeparturesList />));
-    const thead = $('table thead');
-    expect(thead.length).toBe(1);
+    const listHeader = $('div.departures-list-header');
+    expect(listHeader.length).toBe(1);
 });
 
-it('renders a table header cell with text Departure', () => {
+it('renders a header with text Departure', () => {
     const $ = dom.load(renderToString(<DeparturesList />));
-    const headerText = $('thead th:first-child').text();
-    expect(headerText).toBe('Departure');
+    const headerText = $('.time-header').text();
+    expect(headerText).toBe('Leaves');
 });
 
-it('renders a table header cell with text Route', () => {
+it('renders a header with text Route', () => {
     const $ = dom.load(renderToString(<DeparturesList />));
-    const headerText = $('thead th:nth-child(2)').text();
+    const headerText = $('.route-header').text();
     expect(headerText).toBe('Route');
 });
 
-it('renders a table header cell with text Destination', () => {
+it('renders a header with text Destination', () => {
     const $ = dom.load(renderToString(<DeparturesList />));
-    const headerText = $('thead th:nth-child(3)').text();
+    const headerText = $('.destination-header').text();
     expect(headerText).toBe('Destination');
 });
 
-it('renders a table header cell with text Distance', () => {
+it('renders a header with text Distance', () => {
     const $ = dom.load(renderToString(<DeparturesList />));
-    const headerText = $('thead th:nth-child(4)').text();
+    const headerText = $('.distance-header').text();
     expect(headerText).toBe('Distance');
 });
 
 it('renders a placeholder row when departures list is empty', () => {
     const $ = dom.load(renderToString(<DeparturesList departures={[]}/>));
-    const row = $('tbody tr');
-    expect(row.length).toBe(1);
-    expect(row.hasClass('no-results')).toBe(true);
+    const rows = $('.departures-list-body').children();
+    expect(rows.length).toBe(1);
+    expect(rows.eq(0).hasClass('no-results')).toBe(true);
 });
 
 it('renders as many table body rows as there are departures', () => {
     const departures = [{ id: '1' }, { id: '2' }];
     const $ = dom.load(renderToString(<DeparturesList departures={departures}/>));
-    const rows = $('tbody tr');
+    const rows = $('.departures-list-body').children();
     expect(rows.length).toBe(departures.length);
 });
 

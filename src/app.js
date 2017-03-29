@@ -122,7 +122,7 @@ class App extends Component {
         const { filtered, filters, error } = this.state;
 
         return (
-            <div className="app">
+            <div className="content">
                 <header>
                     <h2>{`Nearest Departures ${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`}</h2>
                 </header>

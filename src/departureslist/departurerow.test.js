@@ -3,30 +3,30 @@ import { renderToString } from 'inferno-server';
 import dom from 'cheerio';
 import DepartureRow from './departurerow';
 
-it('renders a table row', () => {
+it('renders row div', () => {
     const $ = dom.load(renderToString(<DepartureRow />));
-    const tableRow = $('tr');
+    const tableRow = $('div.departures-list-row');
     expect(tableRow.length).toBe(1);
 });
 
 it('renders route name', () => {
     const routeName = '58B';
     const $ = dom.load(renderToString(<DepartureRow routeName={routeName}/>));
-    const output = $('td:nth-child(2)').text();
+    const output = $('.route').text();
     expect(output).toEqual(routeName);
 });
 
 it('renders route destination', () => {
     const destination = 'Katajanokka';
     const $ = dom.load(renderToString(<DepartureRow destination={destination}/>));
-    const output = $('td:nth-child(3)').text();
+    const output = $('.destination').text();
     expect(output).toEqual(destination);
 });
 
 it('renders distance', () => {
     const distance = 100;
     const $ = dom.load(renderToString(<DepartureRow distance={distance}/>));
-    const output = $('td:nth-child(4)').text();
+    const output = $('.distance').text();
     expect(output).toEqual(`${distance} m`);
 });
 
@@ -34,28 +34,28 @@ describe('displaying departure time', () => {
     it('displays departure time', () => {
         const time = new Date(2017, 0, 1, 12, 12).getTime() / 1000;
         const $ = dom.load(renderToString(<DepartureRow realtimeDeparture={time} realtime={false} />));
-        const output = $('td:first-child').text();
+        const output = $('.time').text();
         expect(output).toEqual('12:12');
     });
 
     it('does not add realtime class to cell when realtime is false ', () => {
         const time = new Date(2017, 0, 1, 12, 12).getTime() / 1000;
         const $ = dom.load(renderToString(<DepartureRow realtimeDeparture={time} realtime={false} />));
-        const result = $('td:first-child').is('.realtime');
+        const result = $('.time').is('.realtime');
         expect(result).toEqual(false);
     });
 
     it('displays estimated departure time when available', () => {
         const time = new Date(2017, 0, 1, 12, 12).getTime() / 1000;
         const $ = dom.load(renderToString(<DepartureRow realtimeDeparture={time} realtime={true} />));
-        const output = $('td:first-child').text();
+        const output = $('.time').text();
         expect(output).toEqual('12:12');
     });
 
     it('adds realtime class to cell when realtime is true', () => {
         const time = new Date(2017, 0, 1, 12, 12).getTime() / 1000;
         const $ = dom.load(renderToString(<DepartureRow realtimeDeparture={time} realtime={true} />));
-        const result = $('td:first-child').is('.realtime');
+        const result = $('.time').is('.realtime');
         expect(result).toEqual(true);
     });
 });

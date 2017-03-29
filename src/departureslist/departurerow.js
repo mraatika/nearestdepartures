@@ -22,16 +22,16 @@ export default ({
     destination,
     vehicleType,
 } = {}) => (
-    <tr>
-        <td className={ realtime ? 'realtime' : '' }>
+    <div className="departures-list-row">
+        <span className={`time${realtime ? ' realtime' : ''}`}>
             <Time time={ realtimeDeparture } />
-        </td>
-        <td>
+        </span>
+        <span className="route">
             <RouteIdentifier vehicleType={vehicleType} routeName={routeName} />
-        </td>
-        <td>{ destination }</td>
-        <td>
+        </span>
+        <span className="destination">{ destination }</span>
+        <span className="distance">
             <Distance distance={distance} />
-        </td>
-    </tr>
+        </span>
+    </div>
 );
