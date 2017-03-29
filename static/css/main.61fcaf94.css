@@ -1,0 +1,338 @@
+.departures-list {
+    width: 100%;
+    margin: 0 auto;
+    border-spacing: 0;
+}
+
+.departures-list-header {
+    margin-bottom: 6px;
+    white-space: nowrap;
+}
+
+.departures-list-header span {
+    display: inline-block;
+    margin-right: .5em;
+
+    font-size: .9rem;
+    font-weight: 600;
+    color: #333;
+
+    cursor: pointer;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+}
+
+.departures-list .time-header,
+.departures-list .time {
+    width: 3.25em;
+    padding-right: .5em;
+    margin-left: .4em;
+}
+
+.departures-list .route-header,
+.departures-list .route {
+    width: 3.5em;
+}
+
+.departures-list .route-header {
+    margin-left: .4em;
+}
+
+.departures-list .destination-header {
+    width: calc(100% - 14em);
+    padding-left: .5em;
+}
+
+.departures-list .distance-header {
+    margin-left: -0.4em;
+}
+
+.departures-list .time {
+    display: inline-block;
+    text-align: left;
+}
+
+.departures-list .route {
+    display: inline-block;
+    padding-left: .25em;
+    margin-bottom: -2px;
+    overflow: hidden;
+    vertical-align: middle;
+    font-weight: 600;
+}
+
+.departures-list .destination {
+    width: calc(100% - 12em);
+    padding-left: .5em;
+    vertical-align: bottom;
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
+}
+
+.departures-list .distance {
+    width: 3.25em;
+    color: #444;
+    text-align: right;
+    margin-right: .5em;
+    font-size: .92rem;
+    display: inline-block;
+}
+
+.departures-list-row {
+    position: relative;
+    overflow-y: visible;
+    white-space: nowrap;
+    background: #fff;
+    line-height: 1.8;
+    margin: 0;
+    padding-left: 0;
+    letter-spacing: 0;
+    font-size: 1rem;
+    padding: .4em 0;
+
+    border-bottom: 1px solid #ddd;
+}
+
+.departures-list svg.icon {
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+}
+
+.departures-list .route-identifier {
+    padding: 0 5px;
+}
+
+.no-results {
+    font-style: italic;
+    text-align: center;
+}.departure-filter {
+    margin-bottom: 20px;
+}
+
+.departure-filter fieldset {
+    padding: 1em 0;
+}
+
+/* FILTER BUTTONS */
+
+.departure-filter button {
+    width: 20%;
+    padding: .4em 0;
+
+    border-right: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    border-left: 0;
+
+    color: #fff;
+
+    cursor: pointer;
+}
+
+.departure-filter button:not(.toggled) {
+    background: #fff !important;
+    color: #ccc;
+}
+
+.departure-filter button:first-child {
+    border-left: 1px solid #ddd;
+}
+
+.departure-filter .icon {
+    width: 24px;
+    height: 24px;
+}
+
+/* RANGE FILTER */
+
+.departure-filter input[type=range] {
+    display: block;
+    width: 100%;
+    -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+    background: transparent; /* Otherwise white in Chrome */
+    padding: 0;
+    margin: 0.4em 0;
+}
+
+.departure-filter output {
+    display: block;
+    text-align: right;
+}
+
+.departure-filter input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 10px;
+    cursor: pointer;
+    background: #00b9e4;
+}
+
+.departure-filter input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 10px;
+  cursor: pointer;
+  background: #00b9e4;
+}
+
+.departure-filter input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 24px;
+    width: 24px;
+    border: 0;
+    border-radius: 50%;
+    background: #007ac9;
+    cursor: pointer;
+    margin-top: -7px;
+}
+
+.departure-filter input[type=range]::-moz-range-thumb {
+    height: 24px;
+    width: 24px;
+    border-radius: 50%;
+    border: 0;
+    background: #007ac9;
+    cursor: pointer;
+    margin-top: 0;
+}.address-search {
+    width: 100%;
+    position: relative;
+}
+
+.address-search:before,
+.address-search:after {
+    content: '';
+    display: table;
+}
+
+.address-search:after {
+    clear: both;
+}
+
+.address-search input {
+    width: 98%;
+    border: 1px solid #eee;
+    padding: 10px 5px;
+    float: left;
+    outline: none;
+}
+
+.address-search button {
+    height: 100%;
+    width: 80px;
+    position: absolute;
+    right: 0;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    background: #007ac9;
+    color: #fff;
+    font-weight: 600;
+}
+
+.address-search button:active {
+    background: #0065a7;
+}header {
+    background-color: #f8f8f8;
+    padding: 20px;
+    color: #3d464d;
+    text-align: center;
+}
+
+main {
+    width: 94%;
+    margin: 0 auto;
+}
+
+fieldset {
+    border: 0;
+    padding: 0;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.realtime {
+    color: #46b32a;
+}
+
+.tram {
+    color: #00985f;
+}
+
+.bus {
+    color: #007ac9;
+}
+
+.subway {
+    color: #ff6319;
+}
+
+.rail {
+    color: #8c4799;
+}
+
+.ferry {
+    color: #00b9e4;
+}
+
+.tram.bg {
+    background-color: #00985f;
+}
+
+.bus.bg {
+    background-color: #007ac9;
+}
+
+.subway.bg {
+    background-color: #ff6319;
+}
+
+.rail.bg {
+    background-color: #8c4799;
+}
+
+.ferry.bg {
+    background-color: #00b9e4;
+}
+
+.alert {
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ebccd1;
+    border-radius: 4px;
+    background-color: #f2dede;
+    color: #a94442;
+    text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+    main {
+        width: 80%;
+    }
+}html {
+    font-size: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Open Sans", "lucida grande", "Segoe UI", arial, verdana, "lucida sans unicode", tahoma, sans-serif;
+}
+
+@media screen and (min-width: 320px) {
+    html {
+        font-size: calc(14px + 7 * (100vw - 320px) / 500) !important;
+    }
+}
+
+@media screen and (min-width: 900px) {
+    html {
+        font-size: 16px !important;
+    }
+}
+
+/*# sourceMappingURL=main.61fcaf94.css.map*/
