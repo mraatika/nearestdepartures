@@ -4,8 +4,8 @@ export default ({
     routeName = '',
     vehicleType = '',
 } = {}) => (
-    <div className={ vehicleType.toLowerCase() }>
+    <span className={ vehicleType.toLowerCase() }>
         <VehicleIcon iconName={vehicleType.toLocaleLowerCase()} />
         <span className="route-identifier">{ routeName }</span>
-    </div>
+    </span>
 );
