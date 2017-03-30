@@ -1,4 +1,5 @@
 .departures-list {
+    position: relative;
     width: 100%;
     margin: 0 auto;
     border-spacing: 0;
@@ -33,7 +34,7 @@
 
 .departures-list .route-header,
 .departures-list .route {
-    width: 3.5em;
+    width: 4em;
 }
 
 .departures-list .route-header {
@@ -46,7 +47,8 @@
 }
 
 .departures-list .distance-header {
-    margin-left: -0.4em;
+    margin-left: -0.5em;
+    margin-right: 0;
 }
 
 .departures-list .time {
@@ -212,11 +214,12 @@
 }
 
 .address-search input {
-    width: 98%;
+    width: 100%;
     border: 1px solid #eee;
-    padding: 10px 5px;
+    padding: 10px 82px 10px 5px;
     float: left;
     outline: none;
+    box-sizing: border-box;
 }
 
 .address-search button {
@@ -300,6 +303,7 @@ fieldset {
 }
 
 .alert {
+    position: relative;
     padding: 15px;
     margin-bottom: 15px;
     border: 1px solid #ebccd1;
@@ -307,6 +311,33 @@ fieldset {
     background-color: #f2dede;
     color: #a94442;
     text-align: center;
+}
+
+.alert .close-button {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    font-weight: bold;
+    color: inherit;
+    font-size: 0.8em;
+}
+
+.loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.5);
+    z-index: 99;
+    text-align: center;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
 }
 
 @media screen and (min-width: 768px) {
@@ -335,4 +366,4 @@ body {
     }
 }
 
-/*# sourceMappingURL=main.61fcaf94.css.map*/
+/*# sourceMappingURL=main.29bd4fb1.css.map*/
