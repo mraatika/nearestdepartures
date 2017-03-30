@@ -6,8 +6,12 @@
  */
 export async function searchAddress(searchTerm) {
     const encoded = encodeURIComponent(searchTerm);
-    const result = await fetch(`https://api.digitransit.fi/geocoding/v1/search?text=${encoded}&size=1&lang=fi`);
-    const data = await result.json();
+    const response = await fetch(`https://api.digitransit.fi/geocoding/v1/search?text=${encoded}&size=1&lang=fi`);
+
+    if (!response.ok) throw new Error('Service responded with no ok');
+
+    const data = await response.json();
+    if (!data || !data.features.length) throw new Error(`Location not found for ${searchTerm}`);
 
     if (data && data.features.length) {
         const { geometry, properties } = data.features[0];
@@ -28,11 +32,17 @@ export async function searchAddress(searchTerm) {
  */
 export async function lookupAddress({ latitude, longitude }) {
     const queryParams = `point.lat=${encodeURIComponent(latitude)}&point.lon=${encodeURIComponent(longitude)}&size=1`;
-    const result = await fetch(`https://api.digitransit.fi/geocoding/v1/reverse?${queryParams}`);
-    const data = await result.json();
+    const response = await fetch(`https://api.digitransit.fi/geocoding/v1/reverse?${queryParams}`);
 
-     if (data && data.features.length) {
+    if (!response.ok) throw new Error('Service responded with no ok');
+
+    const data = await response.json();
+    if (!data || !data.features.length) throw new Error('Address or location not found');
+
+    if (data && data.features.length) {
         const { properties } = data.features[0];
         return properties.label;
     }
+
+    return null;
 }

@@ -4,10 +4,12 @@ import without from 'lodash/fp/without';
 import { getNowInSeconds } from './utils/utils';
 import DeparturesList from './departureslist/departureslist';
 import DepartureFilter from './departurefilter/departurefilter';
+import ErrorMessage from './errormessage';
 import AddressSearch from './addresssearch/addresssearch';
 import fetchDepartures from './utils/departurefetchmerge';
 import findGPSLocation from './services/locationservice';
 import { lookupAddress, searchAddress } from './services/addresssearchservice';
+import formatError, { POSITION_ERROR } from './utils/formaterror';
 import './app.css';
 
 /**
@@ -71,9 +73,11 @@ class App extends Component {
                         this.setState({ location, addressSearchTerm: address });
                         this.fetchDeparturesToState(location);
                     })
-                    .catch(err => this.showError(`Address lookup failed (${err})!`));
+                    .catch(err => {
+                        this.showError(`Address lookup failed: ${err.message}!`);
+                    });
             })
-            .catch(err => this.showError(`Location unavailable (${err})!`));
+            .catch(err =>  this.showError(formatError(POSITION_ERROR, err)));
     }
 
     /**
@@ -92,7 +96,7 @@ class App extends Component {
                     filtered: filterDepartures(filters)(allDepartures)
                 });
             })
-            .catch(err => this.showError(`Departure fetching failed (${err})`));
+            .catch(err => this.showError(`Departure fetching failed: ${err.message}!`));
     }
 
     /**
@@ -142,16 +146,11 @@ class App extends Component {
     searchForAddress(address) {
        searchAddress(address)
         .then((result) => {
-            if (result) {
-                const { location, label } = result;
-                this.setState({ addressSearchTerm: label, location: location });
-                this.fetchDeparturesToState(location);
-            } else {
-                this.showError('Address or location not found!');
-            }
-
+            const { location, label } = result;
+            this.setState({ addressSearchTerm: label, location: location });
+            this.fetchDeparturesToState(location);
         })
-        .catch(err => this.showError(`Address lookup failed: ${err}`));
+        .catch(err => this.showError(`Address search failed: ${err.message}!`));
     }
 
     /**
@@ -184,7 +183,7 @@ class App extends Component {
                 </header>
 
                 <main>
-                    <div class="alert" style={{ display: error ? 'block' : 'none' }} onClick={this.hideError.bind(this)}>{ error }</div>
+                    <ErrorMessage message={error} onClick={this.hideError.bind(this)} />
                     <AddressSearch
                         address={addressSearchTerm}
                         onSearch={this.searchForAddress.bind(this)} />

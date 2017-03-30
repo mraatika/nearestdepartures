@@ -64,6 +64,7 @@ fieldset {
 }
 
 .alert {
+    position: relative;
     padding: 15px;
     margin-bottom: 15px;
     border: 1px solid #ebccd1;
@@ -71,6 +72,18 @@ fieldset {
     background-color: #f2dede;
     color: #a94442;
     text-align: center;
+}
+
+.alert .close-button {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    font-weight: bold;
+    color: inherit;
+    font-size: 0.8em;
 }
 
 @media screen and (min-width: 768px) {
