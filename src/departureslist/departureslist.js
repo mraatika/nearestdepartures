@@ -1,5 +1,6 @@
 import Component from 'inferno-component';
 import DepartureRow from './departurerow';
+import LoadingOverlay from '../loadingoverlay';
 import sortDepartures from '../utils/departuresorter';
 import './departureslist.css';
 
@@ -55,6 +56,7 @@ export default class DeparturesList extends Component {
 
         return (
             <div className="departures-list">
+                <LoadingOverlay show={this.props.isLoading} />
                 <div className="departures-list-header">
                     <span className="time-header" onClick={() => this.updateSortProps('time')}>Leaves</span>
                     <span className="route-header" onClick={() => this.updateSortProps('routeName')}>Route</span>

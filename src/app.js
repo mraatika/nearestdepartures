@@ -28,6 +28,7 @@ const DEFAULT_RANGE = 400;
  * @type {Object}
  */
 const DEFAULT_STATE = {
+    loading: true,
     addressSearchTerm: '',
     error: null,
     filters: {
@@ -92,6 +93,7 @@ class App extends Component {
         fetchDepartures(location, filters.vehicleTypes)
             .then((allDepartures) => {
                 this.setState({
+                    loading: false,
                     departures: allDepartures,
                     filtered: filterDepartures(filters)(allDepartures)
                 });
@@ -144,13 +146,15 @@ class App extends Component {
      * @param {string} address
      */
     searchForAddress(address) {
-       searchAddress(address)
-        .then((result) => {
-            const { location, label } = result;
-            this.setState({ addressSearchTerm: label, location: location });
-            this.fetchDeparturesToState(location);
-        })
-        .catch(err => this.showError(`Address search failed: ${err.message}!`));
+        this.setState({ loading: true });
+
+        searchAddress(address)
+            .then((result) => {
+                const { location, label } = result;
+                this.setState({ addressSearchTerm: label, location: location });
+                this.fetchDeparturesToState(location);
+            })
+            .catch(err => this.showError(`Address search failed: ${err.message}!`));
     }
 
     /**
@@ -158,7 +162,7 @@ class App extends Component {
      * @param {string} error Error message
      */
     showError(error) {
-        this.setState({ error });
+        this.setState({ error, loading: false });
     }
 
     /**
@@ -174,7 +178,7 @@ class App extends Component {
      * @returns {string} markup
      */
     render() {
-        const { filtered, filters, error, addressSearchTerm } = this.state;
+        const { filtered, filters, error, addressSearchTerm, loading } = this.state;
 
         return (
             <div className="content">
@@ -193,7 +197,9 @@ class App extends Component {
                         range={filters.range}
                         onFilterToggle={this.onFilterToggle.bind(this)}
                         onRangeChange={this.onRangeChange.bind(this)} />
-                    <DeparturesList departures={filtered} />
+                    <DeparturesList
+                        isLoading={loading}
+                        departures={filtered} />
                 </main>
             </div>
         );
