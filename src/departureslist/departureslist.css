@@ -44,7 +44,8 @@
 }
 
 .departures-list .distance-header {
-    margin-left: -0.4em;
+    margin-left: -0.5em;
+    margin-right: 0;
 }
 
 .departures-list .time {
