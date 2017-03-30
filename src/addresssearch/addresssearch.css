@@ -14,11 +14,12 @@
 }
 
 .address-search input {
-    width: 98%;
+    width: 100%;
     border: 1px solid #eee;
-    padding: 10px 5px;
+    padding: 10px 82px 10px 5px;
     float: left;
     outline: none;
+    box-sizing: border-box;
 }
 
 .address-search button {
