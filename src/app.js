@@ -1,10 +1,12 @@
 import Component from 'inferno-component';
 import filter from 'lodash/fp/filter';
 import without from 'lodash/fp/without';
+import packageJSON from '../package.json';
 import { getNowInSeconds } from './utils/utils';
 import DeparturesList from './departureslist/departureslist';
 import DepartureFilter from './departurefilter/departurefilter';
 import ErrorMessage from './errormessage';
+import VehicleIcon from './vehicleicon';
 import AddressSearch from './addresssearch/addresssearch';
 import fetchDepartures from './utils/departurefetchmerge';
 import findGPSLocation from './services/locationservice';
@@ -183,7 +185,10 @@ class App extends Component {
         return (
             <div className="content">
                 <header>
-                    <h2>{`Nearest Departures ${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`}</h2>
+                    <h1>
+                        <VehicleIcon iconName="bus" />
+                        NearestDepartures
+                    </h1>
                 </header>
 
                 <main>
@@ -201,6 +206,10 @@ class App extends Component {
                         isLoading={loading}
                         departures={filtered} />
                 </main>
+
+                <footer>
+                    <div className="footer-content">{`NearestDepartures v${packageJSON.version}`}</div>
+                </footer>
             </div>
         );
     }

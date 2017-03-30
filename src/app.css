@@ -1,18 +1,56 @@
 header {
     background-color: #f8f8f8;
-    padding: 20px;
+    padding: 5px 10px;
     color: #3d464d;
     text-align: center;
+    margin-bottom: 20px;
+}
+
+header .icon {
+    width: 40px;
+    height: 40px;
+    margin-right: .4em;
+    vertical-align: middle;
+}
+
+main,
+.footer-content {
+    box-sizing: border-box;
+    max-width: 768px;
+    margin: 0 auto;
 }
 
 main {
-    width: 94%;
-    margin: 0 auto;
+    width: 100%;
+    padding: 0 1em;
+}
+
+footer {
+    width: 100%;
+    margin-top: 1em;
+
+    background-color: #e4e4e4;
+
+    text-align: right;
+    color: #666;
+    font-size: .8em;
+    font-style: italic;
+}
+
+.footer-content {
+    text-align: right;
+    padding: 2em 1em;
+}
+
+h1 {
+    margin: 10px 0;
+    font-size: 1.5em;
 }
 
 fieldset {
     border: 0;
     padding: 0;
+    margin: 0;
 }
 
 .text-center {
@@ -99,7 +137,7 @@ fieldset {
 }
 
 @media screen and (min-width: 768px) {
-    main {
-        width: 80%;
+    header {
+        padding: 10px 20px;
     }
 }

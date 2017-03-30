@@ -26,12 +26,11 @@
 .departures-list .time {
     width: 3.25em;
     padding-right: .5em;
-    margin-left: .4em;
 }
 
 .departures-list .route-header,
 .departures-list .route {
-    width: 4em;
+    width: 5em;
 }
 
 .departures-list .route-header {
@@ -39,7 +38,7 @@
 }
 
 .departures-list .destination-header {
-    width: calc(100% - 14em);
+    width: calc(100% - 14.8em);
     padding-left: .5em;
 }
 
@@ -63,7 +62,7 @@
 }
 
 .departures-list .destination {
-    width: calc(100% - 12em);
+    width: calc(100% - 12.6em);
     padding-left: .5em;
     vertical-align: bottom;
     overflow: hidden;
@@ -93,6 +92,10 @@
     padding: .4em 0;
 
     border-bottom: 1px solid #ddd;
+}
+
+.departures-list-row:last-child {
+    border: 0;
 }
 
 .departures-list svg.icon {
