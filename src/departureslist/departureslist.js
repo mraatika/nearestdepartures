@@ -15,7 +15,7 @@ const generateDepartureRows = departures => departures.map(departure => <Departu
  * @private
  * @returns {Function}
  */
-const generateEmptyRow = () => <tr class="no-results"><td colspan="4">No departures found with current filters</td></tr>;
+const generateEmptyRow = () => <div class="departures-list-row no-results">No departures found with current filters</div>;
 
 
 /**
