@@ -29,12 +29,11 @@
 .departures-list .time {
     width: 3.25em;
     padding-right: .5em;
-    margin-left: .4em;
 }
 
 .departures-list .route-header,
 .departures-list .route {
-    width: 4em;
+    width: 5em;
 }
 
 .departures-list .route-header {
@@ -42,7 +41,7 @@
 }
 
 .departures-list .destination-header {
-    width: calc(100% - 14em);
+    width: calc(100% - 14.8em);
     padding-left: .5em;
 }
 
@@ -66,7 +65,7 @@
 }
 
 .departures-list .destination {
-    width: calc(100% - 12em);
+    width: calc(100% - 12.6em);
     padding-left: .5em;
     vertical-align: bottom;
     overflow: hidden;
@@ -98,6 +97,10 @@
     border-bottom: 1px solid #ddd;
 }
 
+.departures-list-row:last-child {
+    border: 0;
+}
+
 .departures-list svg.icon {
     width: 1em;
     height: 1em;
@@ -113,6 +116,7 @@
     text-align: center;
 }.departure-filter {
     margin-bottom: 20px;
+    text-align: center;
 }
 
 .departure-filter fieldset {
@@ -239,19 +243,57 @@
     background: #0065a7;
 }header {
     background-color: #f8f8f8;
-    padding: 20px;
+    padding: 5px 10px;
     color: #3d464d;
     text-align: center;
+    margin-bottom: 20px;
+}
+
+header .icon {
+    width: 40px;
+    height: 40px;
+    margin-right: .4em;
+    vertical-align: middle;
+}
+
+main,
+.footer-content {
+    box-sizing: border-box;
+    max-width: 768px;
+    margin: 0 auto;
 }
 
 main {
-    width: 94%;
-    margin: 0 auto;
+    width: 100%;
+    padding: 0 1em;
+}
+
+footer {
+    width: 100%;
+    margin-top: 1em;
+
+    background-color: #e4e4e4;
+
+    text-align: right;
+    color: #666;
+    font-size: .8em;
+    font-style: italic;
+}
+
+.footer-content {
+    text-align: right;
+    padding: 2em 1em;
+}
+
+h1 {
+    margin: 10px 0;
+    font-size: 1.5em;
 }
 
 fieldset {
     border: 0;
     padding: 0;
+    margin: 0;
 }
 
 .text-center {
@@ -341,10 +383,11 @@ fieldset {
 }
 
 @media screen and (min-width: 768px) {
-    main {
-        width: 80%;
+    header {
+        padding: 10px 20px;
     }
-}html {
+}
+html {
     font-size: 100%;
 }
 
@@ -366,4 +409,4 @@ body {
     }
 }
 
-/*# sourceMappingURL=main.29bd4fb1.css.map*/
+/*# sourceMappingURL=main.c78190c5.css.map*/
