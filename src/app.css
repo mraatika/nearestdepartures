@@ -30,7 +30,7 @@ main,
 main {
     width: 100%;
     padding: 0 1em;
-    flex: 1;
+    flex-grow: 1;
 }
 
 footer {
