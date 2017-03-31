@@ -6,10 +6,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const InterpolateHtmlPlugin = require('inferno-dev-utils/InterpolateHtmlPlugin');
+const OfflinePlugin = require('offline-plugin');
 const paths = require('./paths');
 const getClientEnvironment = require('./env');
-
-
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // It requires a trailing slash, or the file assets will get an incorrect path.
@@ -81,7 +80,7 @@ module.exports = {
     // https://github.com/infernojs/create-inferno-app/issues/290
     extensions: ['.js', '.json', '.jsx'],
   },
-  
+
   module: {
     rules: [
       // Disable require.ensure as it's not a standard language feature.
@@ -93,7 +92,7 @@ module.exports = {
         enforce: 'pre',
         use: [
           {
-            
+
             loader: 'eslint-loader',
           },
         ],
@@ -137,8 +136,7 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         include: paths.appSrc,
-        loader: 'babel-loader',
-        
+        loader: 'babel-loader'
       },
       // The notation here is somewhat confusing.
       // "postcss" loader applies autoprefixer to our CSS.
@@ -246,6 +244,8 @@ module.exports = {
     new ManifestPlugin({
       fileName: 'asset-manifest.json',
     }),
+    // offline plugin for generating cache service worker
+    new OfflinePlugin()
   ],
   // Some libraries import Node modules but don't use them in the browser.
   // Tell Webpack to provide empty mocks for them so importing them works.
