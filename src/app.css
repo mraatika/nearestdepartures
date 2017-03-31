@@ -1,3 +1,10 @@
+.app-content {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
 header {
     background-color: #f8f8f8;
     padding: 5px 10px;
@@ -16,13 +23,14 @@ header .icon {
 main,
 .footer-content {
     box-sizing: border-box;
-    max-width: 768px;
+    max-width: 1024px;
     margin: 0 auto;
 }
 
 main {
     width: 100%;
     padding: 0 1em;
+    flex: 1;
 }
 
 footer {

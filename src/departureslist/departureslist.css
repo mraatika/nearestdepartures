@@ -22,6 +22,25 @@
     user-select: none;
 }
 
+.departures-list-row {
+    position: relative;
+    overflow-y: visible;
+    white-space: nowrap;
+    background: #fff;
+    line-height: 1.8;
+    margin: 0;
+    padding-left: 0;
+    letter-spacing: 0;
+    font-size: 1rem;
+    padding: .4em 0;
+
+    border-bottom: 1px solid #ddd;
+}
+
+.departures-list-row:last-child {
+    border: 0;
+}
+
 .departures-list .time-header,
 .departures-list .time {
     width: 3.25em;
@@ -79,25 +98,6 @@
     display: inline-block;
 }
 
-.departures-list-row {
-    position: relative;
-    overflow-y: visible;
-    white-space: nowrap;
-    background: #fff;
-    line-height: 1.8;
-    margin: 0;
-    padding-left: 0;
-    letter-spacing: 0;
-    font-size: 1rem;
-    padding: .4em 0;
-
-    border-bottom: 1px solid #ddd;
-}
-
-.departures-list-row:last-child {
-    border: 0;
-}
-
 .departures-list svg.icon {
     width: 1em;
     height: 1em;
@@ -111,4 +111,5 @@
 .no-results {
     font-style: italic;
     text-align: center;
+    padding: 20px 0;
 }

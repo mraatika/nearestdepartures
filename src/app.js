@@ -183,7 +183,7 @@ class App extends Component {
         const { filtered, filters, error, addressSearchTerm, loading } = this.state;
 
         return (
-            <div className="content">
+            <div className="app-content">
                 <header>
                     <h1>
                         <VehicleIcon iconName="bus" />
