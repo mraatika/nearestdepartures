@@ -77,10 +77,10 @@ class App extends Component {
                         this.fetchDeparturesToState(location);
                     })
                     .catch(err => {
-                        this.showError(`Address lookup failed: ${err.message}!`);
+                        this.onError(`Address lookup failed: ${err.message}!`);
                     });
             })
-            .catch(err =>  this.showError(formatError(POSITION_ERROR, err)));
+            .catch(err =>  this.onError(formatError(POSITION_ERROR, err)));
     }
 
     /**
@@ -100,7 +100,7 @@ class App extends Component {
                     filtered: filterDepartures(filters)(allDepartures)
                 });
             })
-            .catch(err => this.showError(`Departure fetching failed: ${err.message}!`));
+            .catch(err => this.onError(`Departure fetching failed: ${err.message}!`));
     }
 
     /**
@@ -148,7 +148,7 @@ class App extends Component {
      * @param {string} address
      */
     searchForAddress(address) {
-        this.setState({ loading: true });
+        this.setState({ loading: true, addressSearchTerm: address });
 
         searchAddress(address)
             .then((result) => {
@@ -156,15 +156,20 @@ class App extends Component {
                 this.setState({ addressSearchTerm: label, location: location });
                 this.fetchDeparturesToState(location);
             })
-            .catch(err => this.showError(`Address search failed: ${err.message}!`));
+            .catch(err => this.onError(`Address search failed: ${err.message}!`));
     }
 
     /**
-     * Adds error to the state
+     * Adds error to the state and clears departures
      * @param {string} error Error message
      */
-    showError(error) {
-        this.setState({ error, loading: false });
+    onError(error) {
+        this.setState({
+            error,
+            loading: false,
+            departures: [],
+            filtered: [],
+        });
     }
 
     /**
@@ -172,7 +177,7 @@ class App extends Component {
      * @param {string} error Error message
      */
     hideError() {
-        this.showError(null);
+        this.setState({ error: null });
     }
 
     /**
