@@ -44,6 +44,13 @@ it('departure has id', () => {
     expect(result[0].id).toBe(id);
 });
 
+it('departure has url', () => {
+    const routeCode = 'abc';
+    const stopCode = 'def';
+    const response = { data: { nearest: { edges: [{ node: { place: { pattern: { code: stopCode, route: { gtfsId: routeCode } }, stoptimes: [{ trip: {} }]}, pattern: { route: {} } } }] } } };
+    const result = parseResponse(response);
+    expect(result[0].url).toBe(`https://www.reittiopas.fi/linjat/${routeCode}/pysakit/${stopCode}`);
+});
 
 it('departure has distance', () => {
     const distance = 100;

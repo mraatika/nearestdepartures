@@ -29,11 +29,8 @@ export default `
                                     shortName
                                     longName
                                     mode
-                                    color
-                                    agency {
-                                        name
-                                    }
                                 }
+                                code
                             }
                         }
                     }

@@ -60,12 +60,13 @@ const combineRouteInfoWithStoptimes = (route) => {
  * @returns {Object}
  */
 const getRouteInfo = (node) => {
-    const { route } = node.place.pattern;
+    const { route, code } = node.place.pattern;
     return {
         distance: node.distance,
         vehicleType: route.mode,
         routeName: route.shortName,
         stoptimes: node.place.stoptimes,
+        url: `https://www.reittiopas.fi/linjat/${route.gtfsId}/pysakit/${code}`
     };
 }
 

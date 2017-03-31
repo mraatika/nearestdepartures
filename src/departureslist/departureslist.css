@@ -5,6 +5,11 @@
     border-spacing: 0;
 }
 
+.departures-list a {
+    color: inherit;
+    text-decoration: none;
+}
+
 .departures-list-header {
     margin-bottom: 6px;
     white-space: nowrap;
