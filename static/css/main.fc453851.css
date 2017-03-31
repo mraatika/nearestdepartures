@@ -25,6 +25,25 @@
             user-select: none;
 }
 
+.departures-list-row {
+    position: relative;
+    overflow-y: visible;
+    white-space: nowrap;
+    background: #fff;
+    line-height: 1.8;
+    margin: 0;
+    padding-left: 0;
+    letter-spacing: 0;
+    font-size: 1rem;
+    padding: .4em 0;
+
+    border-bottom: 1px solid #ddd;
+}
+
+.departures-list-row:last-child {
+    border: 0;
+}
+
 .departures-list .time-header,
 .departures-list .time {
     width: 3.25em;
@@ -82,25 +101,6 @@
     display: inline-block;
 }
 
-.departures-list-row {
-    position: relative;
-    overflow-y: visible;
-    white-space: nowrap;
-    background: #fff;
-    line-height: 1.8;
-    margin: 0;
-    padding-left: 0;
-    letter-spacing: 0;
-    font-size: 1rem;
-    padding: .4em 0;
-
-    border-bottom: 1px solid #ddd;
-}
-
-.departures-list-row:last-child {
-    border: 0;
-}
-
 .departures-list svg.icon {
     width: 1em;
     height: 1em;
@@ -114,6 +114,7 @@
 .no-results {
     font-style: italic;
     text-align: center;
+    padding: 20px 0;
 }.departure-filter {
     margin-bottom: 20px;
     text-align: center;
@@ -241,7 +242,21 @@
 
 .address-search button:active {
     background: #0065a7;
-}header {
+}.app-content {
+    height: 100vh;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: stretch;
+        -ms-flex-align: stretch;
+            align-items: stretch;
+}
+
+header {
     background-color: #f8f8f8;
     padding: 5px 10px;
     color: #3d464d;
@@ -259,13 +274,16 @@ header .icon {
 main,
 .footer-content {
     box-sizing: border-box;
-    max-width: 768px;
+    max-width: 1024px;
     margin: 0 auto;
 }
 
 main {
     width: 100%;
     padding: 0 1em;
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
 }
 
 footer {
@@ -409,4 +427,4 @@ body {
     }
 }
 
-/*# sourceMappingURL=main.c78190c5.css.map*/
+/*# sourceMappingURL=main.fc453851.css.map*/
