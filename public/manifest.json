@@ -1,6 +1,6 @@
 {
     "short_name": "NearestDepartures",
-    "name": "An app for checking nearest public transport departures in Helsinki region, Finland",
+    "name": "Nearest public transportation departures",
     "start_url": "index.html?launcher=true",
     "theme_color": "#007ac9",
     "background_color": "#007ac9",
