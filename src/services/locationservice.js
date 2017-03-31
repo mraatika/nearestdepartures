@@ -1,6 +1,17 @@
 /** @module LocationService */
 
 /**
+ * Options for getCurrentPosition
+ * @type {Object}
+ */
+const POSITION_OPTIONS = {
+    // use gps
+    enableHighAccuracy: true,
+    // time out in one minute
+    timeout: 1 * 60 * 1000
+};
+
+/**
  * Promise wrapper for geolocation.getCurrentPosition
  * @private
  * @async
@@ -8,7 +19,7 @@
  */
 async function getCurrentPosition() {
     return new Promise((resolve, reject) => {
-        navigator.geolocation.getCurrentPosition(resolve, reject);
+        navigator.geolocation.getCurrentPosition(resolve, reject, POSITION_OPTIONS);
     });
 }
 
