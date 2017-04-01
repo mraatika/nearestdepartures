@@ -58,10 +58,10 @@ export default class DeparturesList extends Component {
             <div className="departures-list">
                 <LoadingOverlay show={this.props.isLoading} />
                 <div className="departures-list-header">
-                    <span className="time-header" onClick={() => this.updateSortProps('time')}>Leaves</span>
-                    <span className="route-header" onClick={() => this.updateSortProps('routeName')}>Route</span>
-                    <span className="destination-header" onClick={() => this.updateSortProps('destination')}>Destination</span>
-                    <span className="distance-header" onClick={() => this.updateSortProps('distance')}>Distance</span>
+                    <span className="time-header" onClick={() => this.updateSortProps('time')}>Lähtee</span>
+                    <span className="route-header" onClick={() => this.updateSortProps('routeName')}>Linja</span>
+                    <span className="destination-header" onClick={() => this.updateSortProps('destination')}>Määränpää</span>
+                    <span className="distance-header" onClick={() => this.updateSortProps('distance')}>Pysäkille</span>
                 </div>
                 <div className="departures-list-body">{ rows }</div>
             </div>

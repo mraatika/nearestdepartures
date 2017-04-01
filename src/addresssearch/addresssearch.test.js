@@ -25,7 +25,7 @@ it('text input takes a default value', () => {
 it('text input has placeholder', () => {
     const $ = dom.load(renderToString(<AddressSearch />));
     const labelText = $('input').attr('placeholder');
-    expect(labelText).toEqual('Search for address or location...');
+    expect(labelText).toEqual('Hae osoitteella tai paikannimellä...');
 });
 
 it('renders a button', () => {
@@ -34,15 +34,9 @@ it('renders a button', () => {
     expect(button.length).toEqual(1);
 });
 
-it('renders a button with title', () => {
-    const $ = dom.load(renderToString(<AddressSearch />));
-    const buttonTitle = $('button').attr('title');
-    expect(buttonTitle).toEqual('Search');
-});
-
 it('renders a button with text', () => {
     const $ = dom.load(renderToString(<AddressSearch />));
     const buttonText = $('button').text();
-    expect(buttonText).toEqual('Search');
+    expect(buttonText).toEqual('Hae');
 });
 

@@ -54,11 +54,11 @@ export default class AddressSearch extends Component {
                         <input
                             id="address"
                             type="text"
-                            aria-label="Address/location"
-                            placeholder="Search for address or location..."
+                            aria-label="Osoite/sijainti"
+                            placeholder="Hae osoitteella tai paikannimellä..."
                             onInput={e => this.onChange(e)}
                             value={this.state.searchTerm} />
-                        <button title="Search" type="submit">Search</button>
+                        <button type="submit">Hae</button>
                     </div>
                 </fieldset>
             </form>

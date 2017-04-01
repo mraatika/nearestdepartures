@@ -6,7 +6,7 @@
  */
 export default ({ message, onClick }) => (
     <div class="alert" style={{ display: message ? 'block' : 'none' }} onClick={onClick}>
-        <button class="close-button" aria-label="Close">x</button>
+        <button class="close-button" aria-label="Sulje">x</button>
         { message }
     </div>
 );

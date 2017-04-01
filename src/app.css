@@ -6,11 +6,30 @@
 }
 
 header {
-    background-color: #f8f8f8;
+    background-color: #8c4799;
     padding: 5px 10px;
-    color: #3d464d;
+    color: #fff;
     text-align: center;
     margin-bottom: 20px;
+}
+
+header .description:before,
+header .description:after {
+    content: "~";
+}
+
+header .description:before {
+    margin-right: 2px;
+}
+
+header .description:after {
+    margin-left: 2px;
+}
+
+header .description {
+    font-size: 12px;
+    font-style: italic;
+    line-height: 1;
 }
 
 header .icon {
@@ -46,13 +65,14 @@ footer {
 }
 
 .footer-content {
+    overflow: auto;
     text-align: right;
     padding: 2em 1em;
 }
 
 h1 {
     margin: 10px 0;
-    font-size: 1.5em;
+    font: normal 2em Georgia, 'Times New Roman', Times, serif;
 }
 
 fieldset {
@@ -61,8 +81,16 @@ fieldset {
     margin: 0;
 }
 
-.text-center {
-    text-align: center;
+.app-name {
+    text-transform: lowercase;
+}
+
+.pull-left {
+    float: left;
+}
+
+.pull-right {
+    float: right;
 }
 
 .realtime {

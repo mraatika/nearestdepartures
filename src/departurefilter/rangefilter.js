@@ -30,8 +30,8 @@ export default ({
         <input
             type="range"
             name="range"
-            aria-label="range"
-            title="Maximum distance to route stop"
+            aria-label="etäisyys"
+            title="Maksimi etäisyys pysäkille"
             min={MIN_RANGE}
             max={MAX_RANGE}
             step={STEP}

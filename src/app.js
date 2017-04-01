@@ -2,7 +2,7 @@ import Component from 'inferno-component';
 import filter from 'lodash/fp/filter';
 import without from 'lodash/fp/without';
 import packageJSON from '../package.json';
-import { getNowInSeconds } from './utils/utils';
+import { getNowInSeconds, toTimeString } from './utils/utils';
 import DeparturesList from './departureslist/departureslist';
 import DepartureFilter from './departurefilter/departurefilter';
 import ErrorMessage from './errormessage';
@@ -97,7 +97,8 @@ class App extends Component {
                 this.setState({
                     loading: false,
                     departures: allDepartures,
-                    filtered: filterDepartures(filters)(allDepartures)
+                    filtered: filterDepartures(filters)(allDepartures),
+                    departureUpdateTime: new Date(),
                 });
             })
             .catch(err => this.onError(`Departure fetching failed: ${err.message}!`));
@@ -188,15 +189,16 @@ class App extends Component {
      * @returns {string} markup
      */
     render() {
-        const { filtered, filters, error, addressSearchTerm, loading } = this.state;
+        const { filtered, filters, error, addressSearchTerm, loading, departureUpdateTime } = this.state;
 
         return (
             <div className="app-content">
                 <header>
                     <h1>
                         <VehicleIcon iconName="bus" />
-                        NearestDepartures
+                        <span class="app-name">julkisilla.info</span>
                     </h1>
+                    <p class="description">löydä lähimmät julkisen liikenteen lähdöt helposti</p>
                 </header>
 
                 <main>
@@ -216,7 +218,10 @@ class App extends Component {
                 </main>
 
                 <footer>
-                    <div className="footer-content">{`NearestDepartures v${packageJSON.version}`}</div>
+                    <div className="footer-content">
+                        <div class="pull-left">{`Lähdöt päivitetty ${departureUpdateTime ? toTimeString(departureUpdateTime) : '-'}`}</div>
+                        <div class="pull-right">{`julkisilla v${packageJSON.version}`}</div>
+                    </div>
                 </footer>
             </div>
         );

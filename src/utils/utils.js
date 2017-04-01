@@ -27,3 +27,10 @@ export const findFrom = (list = [], prop) => {
         return list.find(comparator(subjectValue));
     }
 }
+
+/**
+ * Format date to time string
+ * @param {Date} time
+ * @returns {String}
+ */
+export const toTimeString = (time = new Date()) => `${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}`;

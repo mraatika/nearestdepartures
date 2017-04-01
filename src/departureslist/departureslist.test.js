@@ -15,28 +15,28 @@ it('renders a table header', () => {
     expect(listHeader.length).toBe(1);
 });
 
-it('renders a header with text Departure', () => {
+it('renders a header with text Lähtee', () => {
     const $ = dom.load(renderToString(<DeparturesList />));
     const headerText = $('.time-header').text();
-    expect(headerText).toBe('Leaves');
+    expect(headerText).toBe('Lähtee');
 });
 
-it('renders a header with text Route', () => {
+it('renders a header with text Linja', () => {
     const $ = dom.load(renderToString(<DeparturesList />));
     const headerText = $('.route-header').text();
-    expect(headerText).toBe('Route');
+    expect(headerText).toBe('Linja');
 });
 
-it('renders a header with text Destination', () => {
+it('renders a header with text Määränpää', () => {
     const $ = dom.load(renderToString(<DeparturesList />));
     const headerText = $('.destination-header').text();
-    expect(headerText).toBe('Destination');
+    expect(headerText).toBe('Määränpää');
 });
 
-it('renders a header with text Distance', () => {
+it('renders a header with text Pysäkille', () => {
     const $ = dom.load(renderToString(<DeparturesList />));
     const headerText = $('.distance-header').text();
-    expect(headerText).toBe('Distance');
+    expect(headerText).toBe('Pysäkille');
 });
 
 it('renders a placeholder row when departures list is empty', () => {
