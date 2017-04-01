@@ -1,6 +1,6 @@
 {
-    "short_name": "NearestDepartures",
-    "name": "Nearest public transportation departures",
+    "short_name": "Julkisilla",
+    "name": "Lähimmät julkisen liikenteen lähdöt",
     "start_url": "index.html?launcher=true",
     "theme_color": "#007ac9",
     "background_color": "#007ac9",
