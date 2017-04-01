@@ -3,7 +3,7 @@
     "name": "Lähimmät julkisen liikenteen lähdöt",
     "start_url": "index.html?launcher=true",
     "theme_color": "#007ac9",
-    "background_color": "#007ac9",
+    "background_color": "#8c4799",
     "display": "fullscreen",
     "icons": [
         {
