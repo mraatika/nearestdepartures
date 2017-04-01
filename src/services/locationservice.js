@@ -2,6 +2,7 @@
 
 /**
  * Options for getCurrentPosition
+ * @private
  * @type {Object}
  */
 const POSITION_OPTIONS = {
@@ -12,6 +13,30 @@ const POSITION_OPTIONS = {
 };
 
 /**
+ * Current watcher's id
+ * @private
+ * @type {number}
+ */
+let watcherId = null;
+
+/**
+ * Create callback for watchPosition success
+ * @param {Function} resolve
+ * @returns {Function}
+ */
+function onLocationResult(resolve) {
+    /**
+     * Callback for watchPosition success resolves if
+     * acquired location is precise enough
+     * @param {Object} position object
+     */
+    return (position) => {
+        stopLocating(watcherId);
+        resolve(position);
+    };
+};
+
+/**
  * Promise wrapper for geolocation.getCurrentPosition
  * @private
  * @async
@@ -19,7 +44,7 @@ const POSITION_OPTIONS = {
  */
 async function getCurrentPosition() {
     return new Promise((resolve, reject) => {
-        navigator.geolocation.getCurrentPosition(resolve, reject, POSITION_OPTIONS);
+        watcherId = navigator.geolocation.watchPosition(onLocationResult(resolve), reject, POSITION_OPTIONS);
     });
 }
 
@@ -28,8 +53,21 @@ async function getCurrentPosition() {
  * @async
  * @returns {Promise}
  */
-export default async function findGPSLocation() {
+export async function findGPSLocation() {
     if (!navigator.geolocation) throw new Error('Geolocation is not supported!');
-    const position = await getCurrentPosition();
-    return position.coords;
+
+    if (!watcherId) {
+        const position = await getCurrentPosition();
+        return position.coords;
+    }
+}
+
+/**
+ * Cancel location search
+ */
+export function stopLocating() {
+    if (watcherId) {
+        navigator.geolocation.clearWatch(watcherId);
+        watcherId = null;
+    }
 }

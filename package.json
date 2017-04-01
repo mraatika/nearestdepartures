@@ -55,6 +55,7 @@
     "inferno-dev-utils": "^1.0.0",
     "inferno-server": "~1.4.2",
     "jest": "19.0.2",
+    "mock-geolocation": "^1.0.11",
     "object-assign": "4.1.1",
     "offline-plugin": "^4.6.2",
     "postcss-loader": "1.3.3",

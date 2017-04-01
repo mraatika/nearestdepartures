@@ -9,7 +9,7 @@ import ErrorMessage from './errormessage';
 import VehicleIcon from './vehicleicon';
 import AddressSearch from './addresssearch/addresssearch';
 import fetchDepartures from './utils/departurefetchmerge';
-import findGPSLocation from './services/locationservice';
+import { findGPSLocation, stopLocating } from './services/locationservice';
 import { lookupAddress, searchAddress } from './services/addresssearchservice';
 import formatError, { POSITION_ERROR } from './utils/formaterror';
 import './app.css';
@@ -149,6 +149,9 @@ class App extends Component {
      */
     searchForAddress(address) {
         this.setState({ loading: true, addressSearchTerm: address });
+
+        // stop location search if still running
+        stopLocating();
 
         searchAddress(address)
             .then((result) => {
