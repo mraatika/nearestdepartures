@@ -341,6 +341,7 @@ fieldset {
 
 .app-name {
     text-transform: lowercase;
+    text-shadow: 1px 1px 2px #222;
 }
 
 .pull-left {
@@ -460,4 +461,4 @@ body {
     }
 }
 
-/*# sourceMappingURL=main.9c84e13d.css.map*/
+/*# sourceMappingURL=main.b83d121e.css.map*/
