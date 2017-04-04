@@ -1,11 +1,10 @@
-import { render } from 'inferno';
 import { renderToString } from 'inferno-server';
 import dom from 'cheerio';
 import AddressSearch from './addresssearch';
 
-it('renders a fieldset', () => {
+it('renders a form', () => {
     const $ = dom.load(renderToString(<AddressSearch />));
-    const element = $('fieldset');
+    const element = $('form');
     expect(element.length).toEqual(1);
 });
 

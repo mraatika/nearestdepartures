@@ -25,17 +25,19 @@ export default ({
     range = MIN_RANGE,
     onChange,
 }) => (
-    <fieldset>
+    <div className="range-filter-wrapper">
         <output>{range}m</output>
-        <input
-            type="range"
-            name="range"
-            aria-label="etäisyys"
-            title="Maksimi etäisyys pysäkille"
-            min={MIN_RANGE}
-            max={MAX_RANGE}
-            step={STEP}
-            defaultValue={range}
-            onInput={e => onChange(e.target.value)} />
-    </fieldset>
+        <label>
+            <span className="accessibility-hidden">Maksimi etäisyys pysäkille</span>
+            <input
+                type="range"
+                name="range"
+                title="Maksimi etäisyys pysäkille"
+                min={MIN_RANGE}
+                max={MAX_RANGE}
+                step={STEP}
+                defaultValue={range}
+                onInput={e => onChange(e.target.value)} />
+        </label>
+    </div>
 );

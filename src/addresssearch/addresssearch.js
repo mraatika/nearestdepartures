@@ -49,18 +49,16 @@ export default class AddressSearch extends Component {
     render() {
         return (
             <form onSubmit={this.onSubmit.bind(this)}>
-                <fieldset class="address-wrapper">
-                    <div class="address-search">
-                        <input
-                            id="address"
-                            type="text"
-                            aria-label="Osoite/sijainti"
-                            placeholder="Hae paikannuksella, osoitteella tai paikannimellä..."
-                            onInput={e => this.onChange(e)}
-                            value={this.state.searchTerm} />
-                        <button type="submit">Hae</button>
-                    </div>
-                </fieldset>
+                <div class="address-search">
+                    <input
+                        id="address"
+                        type="text"
+                        aria-label="Osoite/sijainti"
+                        placeholder="Hae paikannuksella, osoitteella tai paikannimellä..."
+                        onInput={e => this.onChange(e)}
+                        value={this.state.searchTerm} />
+                    <button type="submit">Hae</button>
+                </div>
             </form>
         );
     }

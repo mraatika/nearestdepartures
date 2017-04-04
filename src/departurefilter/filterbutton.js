@@ -1,4 +1,5 @@
 import VehicleIcon from '../vehicleicon';
+import { VEHICLE_TYPE_TRANSLATIONS } from '../constants/constants';
 
 /**
  * Filter button component
@@ -17,8 +18,10 @@ export default ({
     return (
         <button
             className={className}
+            aria-label={`Suodatin ${ VEHICLE_TYPE_TRANSLATIONS[vehicleType]}`}
+            aria-pressed={isToggled}
             onClick={e => onFilterToggle(vehicleType, e.ctrlKey)}>
-            <VehicleIcon iconName={`${vehicleType.toLocaleLowerCase()}-withoutBox`} />
+            <VehicleIcon aria-hidden={true} iconName={`${vehicleType.toLocaleLowerCase()}-withoutBox`} />
         </button>
     );
 }
