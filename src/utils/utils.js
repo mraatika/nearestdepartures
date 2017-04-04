@@ -34,3 +34,10 @@ export const findFrom = (list = [], prop) => {
  * @returns {String}
  */
 export const toTimeString = (time = new Date()) => `${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}`;
+
+/**
+ * Get object values as an array
+ * @param {Object} subject
+ * @returns {Array}
+ */
+export const values = subject => Object.keys(subject).map((key) => subject[key]);

@@ -1,4 +1,5 @@
 import flatten from 'lodash/fp/flatten';
+import { VEHICLE_TYPE } from '../constants/constants';
 import fetchDepartures from '../services/departuresservice';
 import { findFrom } from '../utils/utils';
 
@@ -32,18 +33,20 @@ export default async function departureFetchMerge(location, vehicleTypes = [], e
     const promises = [];
 
     // fetch bus departures with separate call
-    if (findFromVehcileTypes('BUS')) {
-        promises.push(fetchDepartures(location, { vehicleTypes: ['BUS'] }));
+    if (findFromVehcileTypes(VEHICLE_TYPE.BUS)) {
+        promises.push(fetchDepartures(location, { vehicleTypes: [VEHICLE_TYPE.BUS] }));
     }
 
     // fetch tram departures with separate call
-    if (findFromVehcileTypes('TRAM')) {
-        promises.push(fetchDepartures(location, { vehicleTypes: ['TRAM'] }));
+    if (findFromVehcileTypes(VEHICLE_TYPE.TRAM)) {
+        promises.push(fetchDepartures(location, { vehicleTypes: [VEHICLE_TYPE.TRAM] }));
     }
 
     // fetch departures other types with one call
-    if (findFromVehcileTypes(['FERRY', 'RAIL', 'SUBWAY'])) {
-        promises.push(fetchDepartures(location, { vehicleTypes: ['FERRY', 'RAIL', 'SUBWAY'] }));
+    if (findFromVehcileTypes([VEHICLE_TYPE.FERRY, VEHICLE_TYPE.RAIL, VEHICLE_TYPE.SUBWAY])) {
+        promises.push(fetchDepartures(location, {
+            vehicleTypes: [VEHICLE_TYPE.FERRY, VEHICLE_TYPE.RAIL, VEHICLE_TYPE.SUBWAY],
+        }));
     }
 
     // wait for promises and flatten results (each fetch returns an array)

@@ -2,7 +2,7 @@ import Component from 'inferno-component';
 import filter from 'lodash/fp/filter';
 import without from 'lodash/fp/without';
 import packageJSON from '../package.json';
-import { getNowInSeconds, toTimeString } from './utils/utils';
+import { getNowInSeconds, toTimeString, values } from './utils/utils';
 import DeparturesList from './departureslist/departureslist';
 import DepartureFilter from './departurefilter/departurefilter';
 import ErrorMessage from './errormessage';
@@ -12,24 +12,13 @@ import fetchDepartures from './utils/departurefetchmerge';
 import { findGPSLocation, stopLocating } from './services/locationservice';
 import { lookupAddress, searchAddress } from './services/addresssearchservice';
 import formatError, { POSITION_ERROR } from './utils/formaterror';
+import { VEHICLE_TYPE, LOCATION_MAGIC_WORD, DEFAULT_RANGE } from './constants/constants';
 import './app.css';
 
 /**
  * All possible filters
  */
-const allVehicleTypes = ['BUS', 'TRAM', 'RAIL', 'SUBWAY', 'FERRY'];
-
-/**
- * Default range filter value
- * @type {number}
- */
-const DEFAULT_RANGE = 400;
-
-/**
- * If address is this word then search by location
- * @type {string}
- */
-const LOCATION_MAGIC_WORD = 'oma sijainti';
+const allVehicleTypes = values(VEHICLE_TYPE);
 
 /**
  * Default app state
@@ -77,6 +66,9 @@ class App extends Component {
         this.findDeparturesByLocation();
     }
 
+    /**
+     * Find location and then departures by location found
+     */
     findDeparturesByLocation() {
         // find location
         findGPSLocation()
