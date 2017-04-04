@@ -3,9 +3,9 @@
  * @type {Object}
  */
 const POSITION_ERROR_CODES = {
-    1: 'Permission not granted to use location',
-    2: 'Location provider service not available',
-    3: 'Locating took too long',
+    1: 'Oikeuksia sijainnin hakuun ei annettu tai sijainnin haku on kytketty pois',
+    2: 'Sijaintipalveluun ei saatu yhteyttä',
+    3: 'Sijainnin haku kesti liian kauan',
 };
 
 /**
@@ -21,6 +21,6 @@ export const POSITION_ERROR = 'POSITION_ERROR';
  */
 export default function formatError(type, error) {
     if (type === POSITION_ERROR) {
-        return `Location unavailable: ${POSITION_ERROR_CODES[error.code]}.`;
+        return `Sijainti ei ole saatavilla: ${POSITION_ERROR_CODES[error.code]}.`;
     }
 }

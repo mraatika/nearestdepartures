@@ -77,7 +77,7 @@ class App extends Component {
                         this.fetchDeparturesToState(location);
                     })
                     .catch(err => {
-                        this.onError(`Address lookup failed: ${err.message}!`);
+                        this.onError(`Osoitteen haku epäonnistui: ${err.message}!`);
                     });
             })
             .catch(err =>  this.onError(formatError(POSITION_ERROR, err)));
@@ -101,7 +101,7 @@ class App extends Component {
                     departureUpdateTime: new Date(),
                 });
             })
-            .catch(err => this.onError(`Departure fetching failed: ${err.message}!`));
+            .catch(err => this.onError(`Lähtöjen haku epäonnistui: ${err.message}!`));
     }
 
     /**
@@ -160,7 +160,7 @@ class App extends Component {
                 this.setState({ addressSearchTerm: label, location: location });
                 this.fetchDeparturesToState(location);
             })
-            .catch(err => this.onError(`Address search failed: ${err.message}!`));
+            .catch(err => this.onError(`Osoitteen haku epäonnistui: ${err.message}!`));
     }
 
     /**

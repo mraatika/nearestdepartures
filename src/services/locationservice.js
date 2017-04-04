@@ -54,7 +54,7 @@ async function getCurrentPosition() {
  * @returns {Promise}
  */
 export async function findGPSLocation() {
-    if (!navigator.geolocation) throw new Error('Geolocation is not supported!');
+    if (!navigator.geolocation) throw new Error('Selain ei tue paikannusta');
 
     if (!watcherId) {
         const position = await getCurrentPosition();

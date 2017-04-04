@@ -34,10 +34,10 @@ export async function lookupAddress({ latitude, longitude }) {
     const queryParams = `point.lat=${encodeURIComponent(latitude)}&point.lon=${encodeURIComponent(longitude)}&size=1`;
     const response = await fetch(`https://api.digitransit.fi/geocoding/v1/reverse?${queryParams}`);
 
-    if (!response.ok) throw new Error('Service responded with no ok');
+    if (!response.ok) throw new Error('Osoitepalvelu palautti virheen');
 
     const data = await response.json();
-    if (!data || !data.features.length) throw new Error('Address or location not found');
+    if (!data || !data.features.length) throw new Error('Osoitetta tai paikkaa ei löytynyt');
 
     if (data && data.features.length) {
         const { properties } = data.features[0];

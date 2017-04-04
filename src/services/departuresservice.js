@@ -59,7 +59,7 @@ export default async function fetchDepartures(location = {}, filters = {}) {
         body: JSON.stringify(reqBody),
     });
 
-    if (!response.ok) throw new Error('Service responded not ok');
+    if (!response.ok) throw new Error('Palvelu palautti virheen');
 
     const data = await response.json();
 
