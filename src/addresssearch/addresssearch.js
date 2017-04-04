@@ -55,7 +55,7 @@ export default class AddressSearch extends Component {
                             id="address"
                             type="text"
                             aria-label="Osoite/sijainti"
-                            placeholder="Hae osoitteella tai paikannimellä..."
+                            placeholder="Hae paikannuksella, osoitteella tai paikannimellä..."
                             onInput={e => this.onChange(e)}
                             value={this.state.searchTerm} />
                         <button type="submit">Hae</button>

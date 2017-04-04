@@ -25,7 +25,7 @@ it('text input takes a default value', () => {
 it('text input has placeholder', () => {
     const $ = dom.load(renderToString(<AddressSearch />));
     const labelText = $('input').attr('placeholder');
-    expect(labelText).toEqual('Hae osoitteella tai paikannimellä...');
+    expect(labelText).toEqual('Hae paikannuksella, osoitteella tai paikannimellä...');
 });
 
 it('renders a button', () => {

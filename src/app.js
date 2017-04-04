@@ -26,6 +26,12 @@ const allVehicleTypes = ['BUS', 'TRAM', 'RAIL', 'SUBWAY', 'FERRY'];
 const DEFAULT_RANGE = 400;
 
 /**
+ * If address is this word then search by location
+ * @type {string}
+ */
+const LOCATION_MAGIC_WORD = 'oma sijainti';
+
+/**
  * Default app state
  * @type {Object}
  */
@@ -68,12 +74,18 @@ class App extends Component {
      * Find location and fetch departures when component has mounted
      */
     componentDidMount() {
+        this.findDeparturesByLocation();
+    }
+
+    findDeparturesByLocation() {
         // find location
         findGPSLocation()
             .then((location) => {
+                // do a reverse geocoding
                 lookupAddress(location)
                     .then((address) => {
                         this.setState({ location, addressSearchTerm: address });
+                        // and finally fetch all departures
                         this.fetchDeparturesToState(location);
                     })
                     .catch(err => {
@@ -146,13 +158,20 @@ class App extends Component {
 
     /**
      * Search coordinates for given address/poi/etc.
-     * @param {string} address
+     * @param {string} [address]
      */
-    searchForAddress(address) {
+    searchForAddress(address = '') {
         this.setState({ loading: true, addressSearchTerm: address });
 
         // stop location search if still running
         stopLocating();
+
+        // if address is empty or equals magic locate string then do a search
+        // using current location
+        if (!address || address.toLocaleLowerCase() === LOCATION_MAGIC_WORD) {
+            this.findDeparturesByLocation();
+            return;
+        }
 
         searchAddress(address)
             .then((result) => {
