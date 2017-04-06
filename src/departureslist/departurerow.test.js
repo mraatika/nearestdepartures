@@ -30,6 +30,13 @@ it('renders distance', () => {
     expect(output).toEqual(`${distance} m`);
 });
 
+it('is a link to given url', () => {
+    const url ='http://reittiopas.fi/';
+    const $ = dom.load(renderToString(<DepartureRow url={url} />));
+    const aHref = $('a').eq(0).attr('href');
+    expect(aHref).toEqual(url);
+});
+
 describe('displaying departure time', () => {
     it('displays departure time', () => {
         const time = new Date(2017, 0, 1, 12, 12).getTime() / 1000;

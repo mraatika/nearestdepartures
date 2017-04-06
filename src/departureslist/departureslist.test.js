@@ -1,7 +1,8 @@
-import Inferno from 'inferno';
+import { renderIntoDocument, findRenderedVNodeWithType, findRenderedDOMElementWithClass } from 'inferno-test-utils';
 import { renderToString } from 'inferno-server';
 import dom from 'cheerio';
 import DeparturesList from './departureslist';
+import LoadingOverlay from '../loadingoverlay';
 
 it('renders a list div', () => {
     const $ = dom.load(renderToString(<DeparturesList />));
@@ -52,6 +53,20 @@ it('renders as many table body rows as there are departures', () => {
     const rows = $('.departures-list-body').children();
     expect(rows.length).toBe(departures.length);
 });
+
+it('renders a loading overlay', () => {
+    const tree = renderIntoDocument(<DeparturesList />);
+    const overlay = findRenderedVNodeWithType(tree, LoadingOverlay);
+    expect(overlay.type).toBe(LoadingOverlay);
+});
+
+it('pass loading state to overlay', () => {
+    const tree = renderIntoDocument(<DeparturesList isLoading={true}/>);
+    const overlay = findRenderedVNodeWithType(tree, LoadingOverlay);
+    expect(overlay.props.show).toBe(true);
+});
+
+
 
 
 

@@ -38,9 +38,9 @@ export default class DeparturesList extends Component {
     /**
      * Sorts departures by prop and set to state
      * @param {string} propName Name of the prop to sort by
-     * @param {Object[]} [list] List of departures to sort, defaults to state.departures
      */
-    updateSortProps(propName, list) {
+    updateSortProps(propName) {
+        console.log(propName);
         // if sorted with same prop as before then switch sort mode asc <--> desc
         const sortDir = this.state.sortProp === propName ? (this.state.sortDir * -1 ): 1;
         // set sort props to state and then sort departures
@@ -55,15 +55,15 @@ export default class DeparturesList extends Component {
         let rows = sorted.length ? generateDepartureRows(sorted) : generateEmptyRow();
 
         return (
-            <div className="departures-list">
+            <div class="departures-list">
                 <LoadingOverlay show={this.props.isLoading} />
-                <div className="departures-list-header">
-                    <span className="time-header" onClick={() => this.updateSortProps('time')}>Lähtee</span>
-                    <span className="route-header" onClick={() => this.updateSortProps('routeName')}>Linja</span>
-                    <span className="destination-header" onClick={() => this.updateSortProps('destination')}>Määränpää</span>
-                    <span className="distance-header" onClick={() => this.updateSortProps('distance')}>Pysäkille</span>
+                <div class="departures-list-header">
+                    <span class="time-header" onClick={() => this.updateSortProps('time')}>Lähtee</span>
+                    <span class="route-header" onClick={() => this.updateSortProps('routeName') && console.log('route')}>Linja</span>
+                    <span class="destination-header" onClick={() => this.updateSortProps('destination')}>Määränpää</span>
+                    <span class="distance-header" onClick={() => this.updateSortProps('distance')}>Pysäkille</span>
                 </div>
-                <div className="departures-list-body">{ rows }</div>
+                <div class="departures-list-body">{ rows }</div>
             </div>
         );
     }

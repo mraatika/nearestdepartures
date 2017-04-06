@@ -203,7 +203,7 @@ class App extends Component {
         const { filtered, filters, error, addressSearchTerm, loading, departureUpdateTime } = this.state;
 
         return (
-            <div className="app-content">
+            <div class="app-content">
                 <header>
                     <h1>
                         <VehicleIcon iconName="bus" />
@@ -229,7 +229,7 @@ class App extends Component {
                 </main>
 
                 <footer>
-                    <div className="footer-content">
+                    <div class="footer-content">
                         <div class="pull-left">{`Lähdöt päivitetty ${departureUpdateTime ? toTimeString(departureUpdateTime) : '-'}`}</div>
                         <div class="pull-right">{`julkisilla v${packageJSON.version}`}</div>
                     </div>

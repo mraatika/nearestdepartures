@@ -1,4 +1,4 @@
-import Inferno, { render } from 'inferno';
+import { renderIntoDocument, findRenderedVNodeWithType } from 'inferno-test-utils';
 import { renderToString } from 'inferno-server';
 import dom from 'cheerio';
 import RangeFilter from './rangefilter';
@@ -47,6 +47,29 @@ it('has displays value in an output element', () => {
     expect(outputValue).toBe('100m');
 });
 
+it('calls onChange when value changes', () => {
+    const spy = jest.fn();
+    const tree = renderIntoDocument(<RangeFilter onChange={spy}/>);
+    const input = findRenderedVNodeWithType(tree, 'input');
+
+    const event = new UIEvent('input');
+    input.dom.dispatchEvent(event);
+
+    expect(spy).toHaveBeenCalled();
+});
+
+it('calls onChange with current value', () => {
+    const spy = jest.fn();
+    const val = '200';
+    const tree = renderIntoDocument(<RangeFilter onChange={spy}/>);
+    const input = findRenderedVNodeWithType(tree, 'input');
+
+    input.dom.value = val;
+    const event = new UIEvent('input');
+    input.dom.dispatchEvent(event);
+
+    expect(spy).toHaveBeenCalledWith(val);
+});
 
 
 

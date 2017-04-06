@@ -16,11 +16,11 @@ export default ({
     onFilterToggle,
     onRangeChange
 }) => (
-    <div className="departure-filter">
+    <div class="departure-filter">
         <div>
             <RangeFilter range={range} onChange={onRangeChange} />
         </div>
-        <div className="vehicle-type-filters">
+        <div class="vehicle-type-filters">
         {
             filters.map(type =>
                 <FilterButton

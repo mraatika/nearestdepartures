@@ -25,10 +25,10 @@ export default ({
     range = MIN_RANGE,
     onChange,
 }) => (
-    <div className="range-filter-wrapper">
+    <div class="range-filter-wrapper">
         <output>{range}m</output>
         <label>
-            <span className="accessibility-hidden">Maksimi etäisyys pysäkille</span>
+            <span class="accessibility-hidden">Maksimi etäisyys pysäkille</span>
             <input
                 type="range"
                 name="range"

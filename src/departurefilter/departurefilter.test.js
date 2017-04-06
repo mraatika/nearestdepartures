@@ -1,4 +1,3 @@
-import Inferno from 'inferno';
 import { renderToString } from 'inferno-server';
 import dom from 'cheerio';
 import DepartureFilter from './departurefilter';

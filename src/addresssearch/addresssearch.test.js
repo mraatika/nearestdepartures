@@ -1,3 +1,4 @@
+import { renderIntoDocument, findRenderedVNodeWithType } from 'inferno-test-utils';
 import { renderToString } from 'inferno-server';
 import dom from 'cheerio';
 import AddressSearch from './addresssearch';
@@ -39,3 +40,63 @@ it('renders a button with text', () => {
     expect(buttonText).toEqual('Hae');
 });
 
+it('gets default value from props', () => {
+    const defaultValue = 'defaultValue';
+    const $ = dom.load(renderToString(<AddressSearch address={defaultValue}/>));
+    const inputValue = $('input').val();
+    expect(inputValue).toEqual(defaultValue);
+});
+
+it('sets input value to state onInput', () => {
+    const tree = <AddressSearch />;
+    const rendered = renderIntoDocument(tree);
+    const input = findRenderedVNodeWithType(rendered, 'input');
+    const val = 'searchterm';
+
+    input.dom.value = val;
+    const event = new UIEvent('input');
+    input.dom.dispatchEvent(event);
+
+    expect(tree.children.state.searchTerm).toEqual(val);
+});
+
+it('calls onSearch when submit button is pressed', () => {
+    const spy = jest.fn();
+    const rendered = renderIntoDocument(<AddressSearch onSearch={spy} />);
+    const button = findRenderedVNodeWithType(rendered, 'button');
+
+    const event = new MouseEvent('click');
+    button.dom.dispatchEvent(event);
+
+    expect(spy).toHaveBeenCalled();
+});
+
+it('calls onSearch when form is submitted', () => {
+    const spy = jest.fn();
+    const rendered = renderIntoDocument(<AddressSearch onSearch={spy} />);
+    const form = findRenderedVNodeWithType(rendered, 'form');
+
+    const event = new Event('submit', { bubbles: true });
+    form.dom.dispatchEvent(event);
+
+    expect(spy).toHaveBeenCalled();
+});
+
+it('calls onSearch with searchTerm', () => {
+    const spy = jest.fn();
+    const rendered = renderIntoDocument(<AddressSearch onSearch={spy} />);
+    const button = findRenderedVNodeWithType(rendered, 'button');
+    const input = findRenderedVNodeWithType(rendered, 'input');
+    const val = 'searchterm';
+
+    // trigger input event on search field
+    input.dom.value = val;
+    const inputEvent = new UIEvent('input');
+    input.dom.dispatchEvent(inputEvent);
+
+    // trigger click event
+    const clickEvent = new MouseEvent('click');
+    button.dom.dispatchEvent(clickEvent);
+
+    expect(spy).toHaveBeenCalledWith(val);
+});

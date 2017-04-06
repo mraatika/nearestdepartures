@@ -17,9 +17,9 @@ export default ({
 
     return (
         <button
-            className={className}
+            class={className}
             aria-label={`Suodatin ${ VEHICLE_TYPE_TRANSLATIONS[vehicleType]}`}
-            aria-pressed={isToggled}
+            aria-pressed={'' + isToggled}
             onClick={e => onFilterToggle(vehicleType, e.ctrlKey)}>
             <VehicleIcon aria-hidden={true} iconName={`${vehicleType.toLocaleLowerCase()}-withoutBox`} />
         </button>

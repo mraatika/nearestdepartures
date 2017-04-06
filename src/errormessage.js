@@ -5,7 +5,7 @@
  * @param {Function} props.onClick callback for element click event
  */
 export default ({ message, onClick }) => (
-    <div class="alert" style={{ display: message ? 'block' : 'none' }} onClick={onClick}>
+    <div class={'alert'} style={{ display: message ? 'block' : 'none' }} onClick={onClick}>
         <button class="close-button" aria-label="Sulje">x</button>
         { message }
     </div>

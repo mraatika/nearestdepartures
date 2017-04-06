@@ -49,7 +49,7 @@ export default class AddressSearch extends Component {
     render() {
         return (
             <form onSubmit={this.onSubmit.bind(this)}>
-                <div class="address-search">
+                <div class={'address-search'}>
                     <input
                         id="address"
                         type="text"
