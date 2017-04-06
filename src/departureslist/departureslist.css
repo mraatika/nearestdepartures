@@ -15,7 +15,11 @@
     white-space: nowrap;
 }
 
-.departures-list-header span {
+.departures-list-header .active {
+    text-decoration: underline;
+}
+
+.departures-list-header .header {
     display: inline-block;
     margin-right: .5em;
 
@@ -52,12 +56,12 @@
     padding-right: .5em;
 }
 
-.departures-list .route-header,
+.departures-list .routename-header,
 .departures-list .route {
     width: 5em;
 }
 
-.departures-list .route-header {
+.departures-list .routename-header {
     margin-left: .4em;
 }
 

@@ -1,6 +1,7 @@
 import Component from 'inferno-component';
 import DepartureRow from './departurerow';
 import LoadingOverlay from '../loadingoverlay';
+import DeparturesListSortHeader from './departureslistsortheader';
 import sortDepartures from '../utils/departuresorter';
 import './departureslist.css';
 
@@ -53,15 +54,17 @@ export default class DeparturesList extends Component {
         const sorted = sortDepartures(this.props.departures, sortProp, sortDir);
         // display rows or a placeholder row when there are no departures to display
         let rows = sorted.length ? generateDepartureRows(sorted) : generateEmptyRow();
+        // bound callback
+        const boundUpdateSortProps = this.updateSortProps.bind(this);
 
         return (
             <div class="departures-list">
                 <LoadingOverlay show={this.props.isLoading} />
                 <div class="departures-list-header">
-                    <span class="time-header" onClick={() => this.updateSortProps('time')}>Lähtee</span>
-                    <span class="route-header" onClick={() => this.updateSortProps('routeName') && console.log('route')}>Linja</span>
-                    <span class="destination-header" onClick={() => this.updateSortProps('destination')}>Määränpää</span>
-                    <span class="distance-header" onClick={() => this.updateSortProps('distance')}>Pysäkille</span>
+                    <DeparturesListSortHeader propName="time" active={sortProp === 'time'} onClick={boundUpdateSortProps} text="Lähtee" />
+                    <DeparturesListSortHeader propName="routeName" active={sortProp === 'routeName'} onClick={boundUpdateSortProps} text="Linja" />
+                    <DeparturesListSortHeader propName="destination" active={sortProp === 'destination'} onClick={boundUpdateSortProps} text="Määränpää" />
+                    <DeparturesListSortHeader propName="distance" active={sortProp === 'distance'} onClick={boundUpdateSortProps} text="Pysäkille" />
                 </div>
                 <div class="departures-list-body">{ rows }</div>
             </div>
