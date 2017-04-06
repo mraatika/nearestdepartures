@@ -23,6 +23,12 @@ it('has class related to given propName', () => {
     expect(element.hasClass(`${propName}-header`)).toEqual(true);
 });
 
+it('is tabbable', () => {
+    const $ = dom.load(renderToString(<DeparturesListSortHeader />));
+    const element = $('span.header');
+    expect(element.attr('tabindex')).toEqual('0');
+});
+
 it('calls onClick callback when clicked', () => {
     const spy = jest.fn();
     const propName = 'time';
@@ -33,6 +39,42 @@ it('calls onClick callback when clicked', () => {
     button.dom.dispatchEvent(event);
 
     expect(spy).toHaveBeenCalledWith(propName);
+});
+
+it('calls onClick callback on space press', () => {
+    const spy = jest.fn();
+    const propName = 'time';
+    const rendered = renderIntoDocument(<DeparturesListSortHeader propName={propName} onClick={spy} />);
+    const button = scryRenderedVNodesWithType(rendered, 'span')[0];
+
+    const event = new KeyboardEvent('keypress', { bubbles: true, keyCode: 32 });
+    button.dom.dispatchEvent(event);
+
+    expect(spy).toHaveBeenCalled();
+});
+
+it('calls onClick callback on enter press', () => {
+    const spy = jest.fn();
+    const propName = 'time';
+    const rendered = renderIntoDocument(<DeparturesListSortHeader propName={propName} onClick={spy} />);
+    const button = scryRenderedVNodesWithType(rendered, 'span')[0];
+
+    const event = new KeyboardEvent('keypress', { bubbles: true, keyCode: 13 });
+    button.dom.dispatchEvent(event);
+
+    expect(spy).toHaveBeenCalled();
+});
+
+it('does not call onClick callback on other key press', () => {
+    const spy = jest.fn();
+    const propName = 'time';
+    const rendered = renderIntoDocument(<DeparturesListSortHeader propName={propName} onClick={spy} />);
+    const button = scryRenderedVNodesWithType(rendered, 'span')[0];
+
+    const event = new KeyboardEvent('keypress', { bubbles: true, keyCode: 2 });
+    button.dom.dispatchEvent(event);
+
+    expect(spy).not.toHaveBeenCalled();
 });
 
 it('text span does not have classname active when props.active is false', () => {
