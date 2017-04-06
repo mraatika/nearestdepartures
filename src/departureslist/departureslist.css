@@ -16,7 +16,11 @@
 }
 
 .departures-list-header .active {
-    text-decoration: underline;
+    border-bottom: 2px solid #007ac9 !important;
+}
+
+.departures-list-header .header:focus > span {
+    border-bottom: 2px solid #83ceff;
 }
 
 .departures-list-header .header {
@@ -29,6 +33,7 @@
 
     cursor: pointer;
     user-select: none;
+    outline: none;
 }
 
 .departures-list-row {
