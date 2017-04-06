@@ -15,7 +15,11 @@
     white-space: nowrap;
 }
 
-.departures-list-header span {
+.departures-list-header .active {
+    text-decoration: underline;
+}
+
+.departures-list-header .header {
     display: inline-block;
     margin-right: .5em;
 
@@ -55,12 +59,12 @@
     padding-right: .5em;
 }
 
-.departures-list .route-header,
+.departures-list .routename-header,
 .departures-list .route {
     width: 5em;
 }
 
-.departures-list .route-header {
+.departures-list .routename-header {
     margin-left: .4em;
 }
 
@@ -77,12 +81,12 @@
 .departures-list .time {
     display: inline-block;
     text-align: left;
+    vertical-align: bottom;
 }
 
 .departures-list .route {
     display: inline-block;
     padding-left: .25em;
-    margin-bottom: -2px;
     overflow: hidden;
     vertical-align: middle;
     font-weight: 600;
@@ -101,9 +105,8 @@
     width: 3.25em;
     color: #444;
     text-align: right;
-    margin-right: .5em;
-    font-size: .92rem;
     display: inline-block;
+    vertical-align: bottom;
 }
 
 .departures-list svg.icon {
@@ -125,7 +128,7 @@
     text-align: center;
 }
 
-.departure-filter fieldset {
+.range-filter-wrapper {
     padding: 1em 0;
 }
 
@@ -333,12 +336,6 @@ h1 {
     font: normal 2em Georgia, 'Times New Roman', Times, serif;
 }
 
-fieldset {
-    border: 0;
-    padding: 0;
-    margin: 0;
-}
-
 .app-name {
     text-transform: lowercase;
     text-shadow: 1px 1px 2px #222;
@@ -350,6 +347,12 @@ fieldset {
 
 .pull-right {
     float: right;
+}
+
+.accessibility-hidden {
+    position: absolute;
+    left: -9999px;
+    top: -9999px;
 }
 
 .realtime {
@@ -461,4 +464,4 @@ body {
     }
 }
 
-/*# sourceMappingURL=main.b83d121e.css.map*/
+/*# sourceMappingURL=main.dc51094d.css.map*/
