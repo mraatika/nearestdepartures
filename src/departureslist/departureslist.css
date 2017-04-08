@@ -71,12 +71,11 @@
 }
 
 .departures-list .destination-header {
-    width: calc(100% - 14.8em);
+    width: calc(100% - 15.5em);
     padding-left: .5em;
 }
 
 .departures-list .distance-header {
-    margin-left: -0.5em;
     margin-right: 0;
 }
 
@@ -104,7 +103,7 @@
 }
 
 .departures-list .distance {
-    width: 3.25em;
+    width: 3em;
     color: #444;
     text-align: right;
     display: inline-block;
