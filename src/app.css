@@ -7,10 +7,10 @@
 
 header {
     background-color: #8c4799;
-    padding: 5px 10px;
     color: #fff;
     text-align: center;
     margin-bottom: 20px;
+    border-bottom: 10px solid #67386f;
 }
 
 header .description:before,
@@ -30,6 +30,7 @@ header .description {
     font-size: 12px;
     font-style: italic;
     line-height: 1;
+    margin-bottom: 5px;
 }
 
 header .icon {
@@ -56,12 +57,13 @@ footer {
     width: 100%;
     margin-top: 1em;
 
-    background-color: #e4e4e4;
+    background-color: #007ac9;
 
-    text-align: right;
-    color: #666;
+    color: #fff;
     font-size: .8em;
     font-style: italic;
+
+    border-top: 10px solid #005993;
 }
 
 .footer-content {
@@ -168,7 +170,7 @@ h1 {
     width: 100%;
     height: 100%;
     background: rgba(255, 255, 255, 0.5);
-    z-index: 99;
+    z-index: 88;
     text-align: center;
     user-select: none;
 }
