@@ -17,7 +17,7 @@ const generateDepartureRows = departures => departures.map(departure => <Departu
  * @private
  * @returns {Function}
  */
-const generateEmptyRow = () => <div class="departures-list-row no-results">No departures found with current filters</div>;
+const generateEmptyRow = () => <div class="departures-list-row no-results">Lähtöjä ei löytynyt annetuilla hakukriteereillä tai suodattimilla</div>;
 
 
 /**
