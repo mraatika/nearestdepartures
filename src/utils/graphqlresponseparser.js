@@ -28,14 +28,16 @@ const getStoptimeData = (stoptime) => {
     const { id } = stoptime.trip;
     // times are seconds from midnight and serviceday is current day
     const sumWithServiceDay = sumWith(serviceDay);
-
-    return {
+    const data = {
         id,
         realtime,
         scheduledDeparture: sumWithServiceDay(scheduledDeparture),
         realtimeDeparture: sumWithServiceDay(realtimeDeparture),
-        destination: headsign,
     };
+
+    if (headsign) data.destination = headsign;
+
+    return data;
 };
 
 /**
@@ -60,8 +62,9 @@ const combineRouteInfoWithStoptimes = (route) => {
  * @returns {Object}
  */
 const getRouteInfo = (node) => {
-    const { route, code } = node.place.pattern;
+    const { route, code, headsign } = node.place.pattern;
     return {
+        destination: headsign,
         distance: node.distance,
         vehicleType: route.mode,
         routeName: route.shortName,
