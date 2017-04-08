@@ -74,12 +74,11 @@
 }
 
 .departures-list .destination-header {
-    width: calc(100% - 14.8em);
+    width: calc(100% - 15.5em);
     padding-left: .5em;
 }
 
 .departures-list .distance-header {
-    margin-left: -0.5em;
     margin-right: 0;
 }
 
@@ -107,7 +106,7 @@
 }
 
 .departures-list .distance {
-    width: 3.25em;
+    width: 3em;
     color: #444;
     text-align: right;
     display: inline-block;
@@ -216,6 +215,51 @@
     background: #007ac9;
     cursor: pointer;
     margin-top: 0;
+}.suggestions ol {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    margin: 0;
+
+    list-style: none;
+    padding-left: 0;
+    z-index: 99;
+}
+
+.suggestions li {
+    line-height: 1.2;
+    padding: .4em 1em;
+    border-bottom: 1px solid #ddd;
+    background: #fff;
+    cursor: pointer;
+}
+
+.suggestions li:last-child {
+    border-width: 16px;
+}
+
+.suggestions li:hover {
+    background: #44b5ff;
+    color: white;
+}
+
+.suggestion-name {
+    margin-bottom: .2em;
+}
+
+.suggestion-locality {
+    color: #888;
+}
+
+.suggestions li.selected {
+    background: #089eff;
+    color: white;
+}
+
+.suggestions li:hover .suggestion-locality,
+li.selected .suggestion-locality {
+    color: #ddd;
 }.address-search {
     width: 100%;
     position: relative;
@@ -255,6 +299,10 @@
 
 .address-search button:active {
     background: #0065a7;
+}
+
+.suggestions {
+    position: relative;
 }.app-content {
     height: 100vh;
     display: -webkit-box;
@@ -271,10 +319,10 @@
 
 header {
     background-color: #8c4799;
-    padding: 5px 10px;
     color: #fff;
     text-align: center;
     margin-bottom: 20px;
+    border-bottom: 10px solid #67386f;
 }
 
 header .description:before,
@@ -294,6 +342,7 @@ header .description {
     font-size: 12px;
     font-style: italic;
     line-height: 1;
+    margin-bottom: 5px;
 }
 
 header .icon {
@@ -322,12 +371,13 @@ footer {
     width: 100%;
     margin-top: 1em;
 
-    background-color: #e4e4e4;
+    background-color: #007ac9;
 
-    text-align: right;
-    color: #666;
+    color: #fff;
     font-size: .8em;
     font-style: italic;
+
+    border-top: 10px solid #005993;
 }
 
 .footer-content {
@@ -434,7 +484,7 @@ h1 {
     width: 100%;
     height: 100%;
     background: rgba(255, 255, 255, 0.5);
-    z-index: 99;
+    z-index: 88;
     text-align: center;
     -webkit-user-select: none;
        -moz-user-select: none;
@@ -469,4 +519,4 @@ body {
     }
 }
 
-/*# sourceMappingURL=main.ac4e65f5.css.map*/
+/*# sourceMappingURL=main.2765cc3f.css.map*/
