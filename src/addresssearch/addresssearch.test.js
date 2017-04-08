@@ -3,6 +3,8 @@ import { renderToString } from 'inferno-server';
 import dom from 'cheerio';
 import AddressSearch from './addresssearch';
 
+jest.mock('../services/addresssearchservice');
+
 it('renders a form', () => {
     const $ = dom.load(renderToString(<AddressSearch />));
     const element = $('form');
@@ -71,32 +73,162 @@ it('calls onSearch when submit button is pressed', () => {
     expect(spy).toHaveBeenCalled();
 });
 
-it('calls onSearch when form is submitted', () => {
-    const spy = jest.fn();
-    const rendered = renderIntoDocument(<AddressSearch onSearch={spy} />);
-    const form = findRenderedVNodeWithType(rendered, 'form');
+describe('submitting', () => {
+    it('calls onSearch when form is submitted', () => {
+        const spy = jest.fn();
+        const rendered = renderIntoDocument(<AddressSearch onSearch={spy} />);
+        const form = findRenderedVNodeWithType(rendered, 'form');
 
-    const event = new Event('submit', { bubbles: true });
-    form.dom.dispatchEvent(event);
+        const event = new Event('submit', { bubbles: true });
+        form.dom.dispatchEvent(event);
 
-    expect(spy).toHaveBeenCalled();
+        expect(spy).toHaveBeenCalled();
+    });
+
+    it('calls onSearch when submit button is clicked', () => {
+        const spy = jest.fn();
+        const rendered = renderIntoDocument(<AddressSearch onSearch={spy} />);
+        const button = findRenderedVNodeWithType(rendered, 'button');
+
+        // trigger click event
+        const clickEvent = new MouseEvent('click');
+        button.dom.dispatchEvent(clickEvent);
+
+        expect(spy).toHaveBeenCalled();
+    });
+
+    it('calls onSearch with searchTerm if no suggestion is selected', () => {
+        const spy = jest.fn();
+        const rendered = renderIntoDocument(<AddressSearch onSearch={spy} />);
+        const component = findRenderedVNodeWithType(rendered, AddressSearch);
+        const input = findRenderedVNodeWithType(rendered, 'input');
+        const val = 'searchterm';
+
+        // trigger input event on search field
+        input.dom.value = val;
+        const inputEvent = new UIEvent('input');
+        input.dom.dispatchEvent(inputEvent);
+
+        const event = new Event('submit', { bubbles: true });
+        component.dom.dispatchEvent(event);
+
+        expect(spy).toHaveBeenCalledWith({ searchTerm: val });
+    });
+
+    it('calls onSearch with location if suggestion is selected', () => {
+        const spy = jest.fn();
+        const rendered = renderIntoDocument(<AddressSearch onSearch={spy} />);
+        const component = findRenderedVNodeWithType(rendered, AddressSearch);
+        const location = [1, 2];
+        const selectedSuggestion = { location };
+
+        component.children.state.selectedSuggestion = selectedSuggestion;
+
+        const event = new Event('submit', { bubbles: true });
+        component.dom.dispatchEvent(event);
+
+        expect(spy).toHaveBeenCalledWith({ location });
+    });
 });
 
-it('calls onSearch with searchTerm', () => {
-    const spy = jest.fn();
-    const rendered = renderIntoDocument(<AddressSearch onSearch={spy} />);
-    const button = findRenderedVNodeWithType(rendered, 'button');
-    const input = findRenderedVNodeWithType(rendered, 'input');
-    const val = 'searchterm';
 
-    // trigger input event on search field
-    input.dom.value = val;
-    const inputEvent = new UIEvent('input');
-    input.dom.dispatchEvent(inputEvent);
+describe('suggestions', () => {
+    it('clears suggestions when esc is pressed', () => {
+        const rendered = renderIntoDocument(<AddressSearch />);
+        const component = findRenderedVNodeWithType(rendered, AddressSearch);
 
-    // trigger click event
-    const clickEvent = new MouseEvent('click');
-    button.dom.dispatchEvent(clickEvent);
+        component.children.state.suggestions = [{}, {}];
 
-    expect(spy).toHaveBeenCalledWith(val);
+        const event = new KeyboardEvent('keyup', { bubbles: true, keyCode: 27 });
+        component.dom.dispatchEvent(event);
+
+        expect(component.children.state.suggestions).toEqual([]);
+    });
+
+    describe('selecting next', () => {
+        it('selects first suggestion when down is pressed and currently no suggestion is selected', () => {
+            const rendered = renderIntoDocument(<AddressSearch />);
+            const component = findRenderedVNodeWithType(rendered, AddressSearch);
+
+            const suggestions = [{ id: '1' }, { id: '2' }];
+            component.children.state.suggestions = suggestions;
+
+            const event = new KeyboardEvent('keyup', { bubbles: true, keyCode: 40 });
+            component.dom.dispatchEvent(event);
+
+            expect(component.children.state.selectedSuggestion).toBe(suggestions[0]);
+        });
+
+        it('selects next suggestion when down is pressed and a suggestion is selected', () => {
+            const rendered = renderIntoDocument(<AddressSearch />);
+            const component = findRenderedVNodeWithType(rendered, AddressSearch);
+
+            const suggestions = [{ id: '1' }, { id: '2' }];
+            component.children.state.suggestions = suggestions;
+            component.children.state.selectedSuggestion = suggestions[0];
+
+            const event = new KeyboardEvent('keyup', { bubbles: true, keyCode: 40 });
+            component.dom.dispatchEvent(event);
+
+            expect(component.children.state.selectedSuggestion).toBe(suggestions[1]);
+        });
+
+        it('selects the first suggestion when down is pressed and last suggestion is selected', () => {
+            const rendered = renderIntoDocument(<AddressSearch />);
+            const component = findRenderedVNodeWithType(rendered, AddressSearch);
+
+            const suggestions = [{ id: '1' }, { id: '2' }];
+            component.children.state.suggestions = suggestions;
+            component.children.state.selectedSuggestion = suggestions[1];
+
+            const event = new KeyboardEvent('keyup', { bubbles: true, keyCode: 40 });
+            component.dom.dispatchEvent(event);
+
+            expect(component.children.state.selectedSuggestion).toBe(suggestions[0]);
+        });
+    });
+
+    describe('selecting prev', () => {
+        it('selects last suggestion when up is pressed and currently no suggestion is selected', () => {
+            const rendered = renderIntoDocument(<AddressSearch />);
+            const component = findRenderedVNodeWithType(rendered, AddressSearch);
+
+            const suggestions = [{ id: '1' }, { id: '2' }];
+            component.children.state.suggestions = suggestions;
+
+            const event = new KeyboardEvent('keyup', { bubbles: true, keyCode: 38 });
+            component.dom.dispatchEvent(event);
+
+            expect(component.children.state.selectedSuggestion).toBe(suggestions[1]);
+        });
+
+        it('selects prev suggestion when up is pressed and a suggestion is selected', () => {
+            const rendered = renderIntoDocument(<AddressSearch />);
+            const component = findRenderedVNodeWithType(rendered, AddressSearch);
+
+            const suggestions = [{ id: '1' }, { id: '2' }];
+            component.children.state.suggestions = suggestions;
+            component.children.state.selectedSuggestion = suggestions[1];
+
+            const event = new KeyboardEvent('keyup', { bubbles: true, keyCode: 38 });
+            component.dom.dispatchEvent(event);
+
+            expect(component.children.state.selectedSuggestion).toBe(suggestions[0]);
+        });
+
+        it('selects the last suggestion when up is pressed and first suggestion is selected', () => {
+            const rendered = renderIntoDocument(<AddressSearch />);
+            const component = findRenderedVNodeWithType(rendered, AddressSearch);
+
+            const suggestions = [{ id: '1' }, { id: '2' }];
+            component.children.state.suggestions = suggestions;
+            component.children.state.selectedSuggestion = suggestions[0];
+
+            const event = new KeyboardEvent('keyup', { bubbles: true, keyCode: 38 });
+            component.dom.dispatchEvent(event);
+
+            expect(component.children.state.selectedSuggestion).toBe(suggestions[1]);
+        });
+    });
 });
+

@@ -63,13 +63,13 @@ class App extends Component {
      * Find location and fetch departures when component has mounted
      */
     componentDidMount() {
-        this.findDeparturesByLocation();
+        this.findDeparturesByCurrentLocation();
     }
 
     /**
      * Find location and then departures by location found
      */
-    findDeparturesByLocation() {
+    findDeparturesByCurrentLocation() {
         // find location
         findGPSLocation()
             .then((location) => {
@@ -152,26 +152,28 @@ class App extends Component {
      * Search coordinates for given address/poi/etc.
      * @param {string} [address]
      */
-    searchForAddress(address = '') {
-        this.setState({ loading: true, addressSearchTerm: address });
+    searchForAddress({ searchTerm = '', location = null }) {
+        this.setState({ loading: true, addressSearchTerm: searchTerm });
 
         // stop location search if still running
         stopLocating();
 
-        // if address is empty or equals magic locate string then do a search
-        // using current location
-        if (!address || address.toLocaleLowerCase() === LOCATION_MAGIC_WORD) {
-            this.findDeparturesByLocation();
-            return;
+        if (location) {
+            this.fetchDeparturesToState(location);
+        } else if (searchTerm && searchTerm.toLocaleLowerCase() !== LOCATION_MAGIC_WORD) {
+            // if location is not provided then search address first
+            searchAddress(searchTerm)
+                .then((result) => {
+                    const { location, label } = result[0];
+                    this.setState({ addressSearchTerm: label, location: location });
+                    this.fetchDeparturesToState(location);
+                })
+                .catch(err => this.onError(`Osoitteen haku epäonnistui: ${err.message}!`));
+        } else {
+            // if address is empty or equals magic locate string then do a search
+            // using current location
+            this.findDeparturesByCurrentLocation();
         }
-
-        searchAddress(address)
-            .then((result) => {
-                const { location, label } = result;
-                this.setState({ addressSearchTerm: label, location: location });
-                this.fetchDeparturesToState(location);
-            })
-            .catch(err => this.onError(`Osoitteen haku epäonnistui: ${err.message}!`));
     }
 
     /**

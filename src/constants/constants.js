@@ -33,3 +33,9 @@ export const LOCATION_MAGIC_WORD = 'oma sijainti';
  * @type {number}
  */
 export const DEFAULT_RANGE = 400;
+
+/**
+ * Max amount of address suggestions to display
+ * @type {number}
+ */
+export const MAX_ADDRESS_SUGGESTIONS = 10;

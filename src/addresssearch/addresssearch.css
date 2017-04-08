@@ -38,3 +38,7 @@
 .address-search button:active {
     background: #0065a7;
 }
+
+.suggestions {
+    position: relative;
+}
