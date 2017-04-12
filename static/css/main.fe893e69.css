@@ -123,10 +123,11 @@
     padding: 0 5px;
 }
 
-.no-results {
+.departures-list-row.no-results {
     font-style: italic;
     text-align: center;
     padding: 20px 0;
+    white-space: normal;
 }.departure-filter {
     margin-bottom: 20px;
     text-align: center;
@@ -342,7 +343,7 @@ header .description {
     font-size: 12px;
     font-style: italic;
     line-height: 1;
-    margin-bottom: 5px;
+    margin-bottom: 1.5em;
 }
 
 header .icon {
@@ -519,4 +520,4 @@ body {
     }
 }
 
-/*# sourceMappingURL=main.2765cc3f.css.map*/
+/*# sourceMappingURL=main.fe893e69.css.map*/
