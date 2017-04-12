@@ -120,8 +120,9 @@
     padding: 0 5px;
 }
 
-.no-results {
+.departures-list-row.no-results {
     font-style: italic;
     text-align: center;
     padding: 20px 0;
+    white-space: normal;
 }
