@@ -8,11 +8,11 @@ import DepartureFilter from './departurefilter/departurefilter';
 import ErrorMessage from './errormessage';
 import VehicleIcon from './vehicleicon';
 import AddressSearch from './addresssearch/addresssearch';
-import fetchDepartures from './utils/departurefetchmerge';
+import { fetchDepartures, batchDepartures } from './utils/departurefetchmerge';
 import { findGPSLocation, stopLocating } from './services/locationservice';
 import { lookupAddress, searchAddress } from './services/addresssearchservice';
 import formatError, { POSITION_ERROR } from './utils/formaterror';
-import { VEHICLE_TYPE, LOCATION_MAGIC_WORD, DEFAULT_RANGE } from './constants/constants';
+import { VEHICLE_TYPE, LOCATION_MAGIC_WORD, DEFAULT_RANGE, BATCH_INTERVAL } from './constants/constants';
 import './app.css';
 
 /**
@@ -64,6 +64,8 @@ class App extends Component {
      */
     componentDidMount() {
         this.findDeparturesByCurrentLocation();
+        // batch departures in every x seconds
+        setInterval(() => this.batchDeparturesToState(), BATCH_INTERVAL);
     }
 
     /**
@@ -97,15 +99,30 @@ class App extends Component {
         const { filters } = this.state;
 
         fetchDepartures(location, filters.vehicleTypes)
-            .then((allDepartures) => {
-                this.setState({
-                    loading: false,
-                    departures: allDepartures,
-                    filtered: filterDepartures(filters)(allDepartures),
-                    departureUpdateTime: new Date(),
-                });
-            })
+            .then(this.afterDeparturesFetched.bind(this))
             .catch(err => this.onError(`Lähtöjen haku epäonnistui: ${err.message}!`));
+    }
+
+    /**
+     * Batch departures and add them to state. Apply filters and also set filtered result to state.
+     */
+    batchDeparturesToState() {
+        batchDepartures(this.state.departures)
+            .then(this.afterDeparturesFetched.bind(this))
+            .catch(err => console.error(err));
+    }
+
+    /**
+     * Set state after departures has been fetched/batched
+     * @param {Object[]} departures
+     */
+    afterDeparturesFetched(departures) {
+        this.setState({
+            loading: false,
+            departures: departures,
+            filtered: filterDepartures(this.state.filters)(departures),
+            departureUpdateTime: new Date(),
+        });
     }
 
     /**

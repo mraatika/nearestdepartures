@@ -39,3 +39,5 @@ export const DEFAULT_RANGE = 400;
  * @type {number}
  */
 export const MAX_ADDRESS_SUGGESTIONS = 10;
+
+export const BATCH_INTERVAL = 30 * 1000;

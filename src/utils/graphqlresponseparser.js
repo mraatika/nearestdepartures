@@ -23,7 +23,7 @@ const sumWith = curry((a, b) => a + b);
  * Get relevant data from a stoptime object
  * @param {*} departure
  */
-const getStoptimeData = (stoptime) => {
+export const formStoptimeData = (stoptime) => {
     const { scheduledDeparture, headsign, realtime, realtimeDeparture, serviceDay } = stoptime;
     const { id } = stoptime.trip;
     // times are seconds from midnight and serviceday is current day
@@ -51,7 +51,7 @@ const combineRouteInfoWithStoptimes = (route) => {
         // combine with route info
         map(assign(route)),
         // get times etc. departure specific info
-        map(getStoptimeData),
+        map(formStoptimeData),
         prop('stoptimes'),
     )(route);
 };
@@ -64,6 +64,7 @@ const combineRouteInfoWithStoptimes = (route) => {
 const getRouteInfo = (node) => {
     const { route, code, headsign } = node.place.pattern;
     return {
+        nodeId: node.place.id,
         destination: headsign,
         distance: node.distance,
         vehicleType: route.mode,

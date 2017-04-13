@@ -1,6 +1,9 @@
 import flatten from 'lodash/fp/flatten';
+import filter from 'lodash/fp/filter'
+import uniqBy from 'lodash/fp/uniqBy'
+import compose from 'lodash/fp/compose'
 import { VEHICLE_TYPE } from '../constants/constants';
-import fetchDepartures from '../services/departuresservice';
+import * as departuresService from '../services/departuresservice';
 import { findFrom } from '../utils/utils';
 
 /**
@@ -25,7 +28,7 @@ const mergeDepartures = (fetched, existing) => {
  * @param {Object[]} [existing=[]]
  * @returns {Object[]}
  */
-export default async function departureFetchMerge(location, vehicleTypes = [], existing = []) {
+export async function fetchDepartures(location, vehicleTypes = [], existing = []) {
     // no need to fetch if vehicle types is empty
     if (!vehicleTypes.length) return existing;
 
@@ -34,17 +37,17 @@ export default async function departureFetchMerge(location, vehicleTypes = [], e
 
     // fetch bus departures with separate call
     if (findFromVehcileTypes(VEHICLE_TYPE.BUS)) {
-        promises.push(fetchDepartures(location, { vehicleTypes: [VEHICLE_TYPE.BUS] }));
+        promises.push(departuresService.fetchDepartures(location, { vehicleTypes: [VEHICLE_TYPE.BUS] }));
     }
 
     // fetch tram departures with separate call
     if (findFromVehcileTypes(VEHICLE_TYPE.TRAM)) {
-        promises.push(fetchDepartures(location, { vehicleTypes: [VEHICLE_TYPE.TRAM] }));
+        promises.push(departuresService.fetchDepartures(location, { vehicleTypes: [VEHICLE_TYPE.TRAM] }));
     }
 
     // fetch departures other types with one call
     if (findFromVehcileTypes([VEHICLE_TYPE.FERRY, VEHICLE_TYPE.RAIL, VEHICLE_TYPE.SUBWAY])) {
-        promises.push(fetchDepartures(location, {
+        promises.push(departuresService.fetchDepartures(location, {
             vehicleTypes: [VEHICLE_TYPE.FERRY, VEHICLE_TYPE.RAIL, VEHICLE_TYPE.SUBWAY],
         }));
     }
@@ -56,3 +59,36 @@ export default async function departureFetchMerge(location, vehicleTypes = [], e
 
     return mergeDepartures(departures, existing);
 };
+
+/**
+ * Merge batch data with existing departures
+ * @param {Object[]} existing
+ * @param {Object[]} batch
+ */
+const mergeBatchData = (existing, batch) => {
+    return existing.map((d) => {
+        const update = batch.find(b => b.nodeId === d.nodeId && b.id === d.id);
+        return Object.assign({}, d, update);
+    });
+};
+
+/**
+ * Select all realtime departures, one for each node
+ * @type {Function}
+ * @param {Object[]} departures
+ * @returns {Object[]}
+ */
+const filterUniqueRealtimeDepartures = compose(
+    uniqBy(d => d.nodeId),
+    filter(d => d.realtime)
+);
+
+export async function batchDepartures(departures = []) {
+    const realtimeDepartures = filterUniqueRealtimeDepartures(departures);
+
+    if (!realtimeDepartures.length) return departures;
+
+    const data = await departuresService.batchDepartures(realtimeDepartures);
+
+    return mergeBatchData(departures, data);
+}
