@@ -56,7 +56,7 @@ it('sets input value to state onInput', () => {
     const val = 'searchterm';
 
     input.dom.value = val;
-    const event = new UIEvent('input');
+    const event = new Event('input');
     input.dom.dispatchEvent(event);
 
     expect(tree.children.state.searchTerm).toEqual(val);
@@ -129,8 +129,34 @@ describe('submitting', () => {
 
         expect(spy).toHaveBeenCalledWith({ location });
     });
-});
 
+    it('hides suggestions after submit', () => {
+        const spy = jest.fn();
+        const rendered = renderIntoDocument(<AddressSearch onSearch={spy} />);
+        const component = findRenderedVNodeWithType(rendered, AddressSearch);
+
+        component.children.state.suggestions = [{}, {}];
+
+        const event = new Event('submit', { bubbles: true });
+        component.dom.dispatchEvent(event);
+
+        expect(component.children.state.suggestions).toEqual([]);
+    });
+
+    it('does not clear selected suggestion after submit', () => {
+        const spy = jest.fn();
+        const rendered = renderIntoDocument(<AddressSearch onSearch={spy} />);
+        const component = findRenderedVNodeWithType(rendered, AddressSearch);
+        const selectedSuggestion = {};
+
+        component.children.state.selectedSuggestion = selectedSuggestion;
+
+        const event = new Event('submit', { bubbles: true });
+        component.dom.dispatchEvent(event);
+
+        expect(component.children.state.selectedSuggestion).toBe(selectedSuggestion);
+    });
+});
 
 describe('suggestions', () => {
     it('clears suggestions when esc is pressed', () => {
@@ -143,6 +169,33 @@ describe('suggestions', () => {
         component.dom.dispatchEvent(event);
 
         expect(component.children.state.suggestions).toEqual([]);
+    });
+
+    it('does not clear selected suggestion when esc is pressed', () => {
+        const rendered = renderIntoDocument(<AddressSearch />);
+        const component = findRenderedVNodeWithType(rendered, AddressSearch);
+        const selectedSuggestion = {};
+
+        component.children.state.selectedSuggestion = selectedSuggestion;
+
+        const event = new KeyboardEvent('keyup', { bubbles: true, keyCode: 27 });
+        component.dom.dispatchEvent(event);
+
+        expect(component.children.state.selectedSuggestion).toEqual(selectedSuggestion);
+    });
+
+    it('clears selected suggestion when value in input is changed', () => {
+        const rendered = renderIntoDocument(<AddressSearch />);
+        const component = findRenderedVNodeWithType(rendered, AddressSearch);
+        const input = findRenderedVNodeWithType(rendered, 'input');
+
+        component.children.state.selectedSuggestion = {};
+
+        input.dom.value = 'abc';
+        const inputEvent = new Event('input');
+        input.dom.dispatchEvent(inputEvent);
+
+        expect(component.children.state.selectedSuggestion).toEqual(undefined);
     });
 
     describe('selecting next', () => {

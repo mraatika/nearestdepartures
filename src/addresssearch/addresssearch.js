@@ -97,7 +97,7 @@ export default class AddressSearch extends Component {
      * Hide suggestions list and clear selected suggestion from state
      */
     hideSuggestions() {
-        this.setState({ suggestions: [], selectedSuggestion: undefined });
+        this.setState({ suggestions: [] });
     }
 
      /**
@@ -127,7 +127,7 @@ export default class AddressSearch extends Component {
 
     /**
      * Callback for suggestion list item's click. Set clicked
-     * suggestion selected
+     * suggestion selected and submit form
      * @param {Object} suggestion
      */
     onSuggestionClick(suggestion) {
