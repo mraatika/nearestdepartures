@@ -1,3 +1,4 @@
+import debounce from 'lodash/debounce';
 import Component from 'inferno-component';
 import SuggestionsList from './suggestionslist';
 import { searchAddress } from '../services/addresssearchservice';
@@ -18,6 +19,7 @@ export default class AddressSearch extends Component {
     constructor(props) {
         super(props);
         this.state = { searchTerm: props.address, suggestions: [] };
+        this.debouncedFetchSuggestions = debounce(this.fetchSuggestions, 300);
     }
 
     /**
@@ -77,6 +79,17 @@ export default class AddressSearch extends Component {
     }
 
     /**
+     * Fetch suggestions from api
+     * @param {string} searchTerm
+     */
+    fetchSuggestions(searchTerm) {
+        searchAddress(searchTerm, MAX_ADDRESS_SUGGESTIONS)
+            .then(result => result.sort((a, b) => b.confidence - a.confidence))
+            .then(sorted => this.setState({ suggestions: sorted }))
+            .catch(e => console.log(e));
+    }
+
+    /**
      * Hide suggestions list and clear selected suggestion from state
      */
     hideSuggestions() {
@@ -105,10 +118,7 @@ export default class AddressSearch extends Component {
             return;
         }
 
-        searchAddress(term, MAX_ADDRESS_SUGGESTIONS)
-            .then(result => result.sort((a, b) => b.confidence - a.confidence))
-            .then(sorted => this.setState({ suggestions: sorted }))
-            .catch(e => console.log(e));
+        this.debouncedFetchSuggestions(term);
     }
 
     /**
