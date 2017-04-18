@@ -28,7 +28,11 @@ export default class AddressSearch extends Component {
      * @param {string} newProps.address
      */
     componentWillReceiveProps(newProps) {
-        this.setState({ searchTerm: newProps.address });
+        // only update when address actually changes so
+        // it won't override text written to the input
+        if (newProps.address !== this.props.address) {
+            this.setState({ searchTerm: newProps.address });
+        }
     }
 
     /**
