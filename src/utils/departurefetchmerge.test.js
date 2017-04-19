@@ -1,4 +1,4 @@
-import { fetchDepartures } from './departurefetchmerge';
+import { fetchDepartures, batchDepartures } from './departurefetchmerge';
 import * as departuresService from '../services/departuresservice';
 
 global.Promise = require.requireActual('promise');
@@ -7,6 +7,7 @@ jest.mock('../services/departuresservice');
 
 beforeEach(() => {
     departuresService.fetchDepartures.mockReset();
+    departuresService.batchDepartures.mockReset();
 });
 
 it('returns a Promise', () => {
@@ -138,5 +139,49 @@ describe('merging', () => {
         const result = await fetchDepartures(position, ['BUS', 'TRAM', 'RAIL', 'SUBWAY', 'FERRY']);
 
         expect(result.length).toBe(busDepartures.length + tramDepartures.length + restDepartures.length);
+    });
+});
+
+describe('batching', () => {
+    it('should return an empty array when there are no departures', async () => {
+        const result = await batchDepartures();
+        expect(result).toEqual([]);
+    });
+
+    it('should return departures unmodified when there are no realtime departures', async () => {
+        const departures = [{ realtime: false }, { realtime: false }];
+        const result = await batchDepartures(departures);
+        expect(result).toBe(departures);
+    });
+
+    it('calls departureservice\'s batchDepartures', async() => {
+        const departures = [{ realtime: true }];
+        departuresService.batchDepartures.mockReturnValueOnce([]);
+        await batchDepartures(departures);
+        expect(departuresService.batchDepartures).toHaveBeenCalled();
+    });
+
+    it('calls departureservice\'s batchDepartures with unique departure\'s', async() => {
+        const departures = [{ nodeId: '1', realtime: true }, { nodeId: '1', realtime: true }];
+        const expected = [departures[0]];
+        departuresService.batchDepartures.mockReturnValueOnce([]);
+        await batchDepartures(departures);
+        expect(departuresService.batchDepartures).toHaveBeenCalledWith(expected);
+    });
+
+    it('merges updates with existing departures', async () => {
+        const departures = [{ nodeId: '1', realtime: true, id: '1', realtimeArrival: 1234567 }];
+        const batch = [{ nodeId: '1', realtime: true, id: '1', realtimeArrival: 1234568 }];
+        departuresService.batchDepartures.mockReturnValueOnce(batch);
+        const result = await batchDepartures(departures);
+        expect(result[0].realtimeArrival).toBe(batch[0].realtimeArrival);
+    });
+
+    it('merges updates with existing departures including non realtime departures', async () => {
+        const departures = [{ nodeId: '1', realtime: true }, { nodeId: '2', realtime: false }];
+        const batch = [{ nodeId: '1', realtime: true, id: '1', realtimeArrival: 1234568 }];
+        departuresService.batchDepartures.mockReturnValueOnce(batch);
+        const result = await batchDepartures(departures);
+        expect(result.length).toBe(2);
     });
 });

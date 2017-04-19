@@ -1,8 +1,7 @@
 import Component from 'inferno-component';
-import filter from 'lodash/fp/filter';
-import without from 'lodash/fp/without';
+import fputils from './utils/fputils';
 import packageJSON from '../package.json';
-import { getNowInSeconds, toTimeString, values } from './utils/utils';
+import { getNowInSeconds, toTimeString } from './utils/utils';
 import DeparturesList from './departureslist/departureslist';
 import DepartureFilter from './departurefilter/departurefilter';
 import ErrorMessage from './errormessage';
@@ -18,7 +17,7 @@ import './app.css';
 /**
  * All possible filters
  */
-const allVehicleTypes = values(VEHICLE_TYPE);
+const allVehicleTypes = fputils.values(VEHICLE_TYPE);
 
 /**
  * Default app state
@@ -39,7 +38,7 @@ const DEFAULT_STATE = {
  * @param {string[]} filters
  * @return {Function}
  */
-const filterDepartures = filters => filter((d) => {
+const filterDepartures = filters => fputils.filter((d) => {
     return filters.vehicleTypes.indexOf(d.vehicleType) > -1 &&
         d.distance < filters.range &&
         d.realtimeDeparture >= getNowInSeconds()
@@ -100,7 +99,10 @@ class App extends Component {
 
         fetchDepartures(location, filters.vehicleTypes)
             .then(this.afterDeparturesFetched.bind(this))
-            .catch(err => this.onError(`Lähtöjen haku epäonnistui: ${err.message}!`));
+            .catch(err => {
+                console.error(err);
+                this.onError(`Lähtöjen haku epäonnistui: ${err.message}!`);
+            });
     }
 
     /**
@@ -135,9 +137,10 @@ class App extends Component {
         const currentToggled = current.indexOf(type) > -1;
         const multipleToggled = current.length > 1;
         let updatedFilters = [];
+        const withoutCurrent = fputils.filter(f => f !== type);
 
         if (multiselect) {
-            updatedFilters = currentToggled ? without([type], current) : [].concat(current, type);
+            updatedFilters = currentToggled ? withoutCurrent(current) : [].concat(current, type);
         } else {
             updatedFilters = (multipleToggled || !currentToggled) ? [type] : allVehicleTypes.slice(0);
         }

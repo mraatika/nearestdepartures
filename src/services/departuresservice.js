@@ -1,4 +1,4 @@
-import flatMap from 'lodash/fp/flatMap'
+import fputils from '../utils/fputils';
 import parseFetchResponse, { formStoptimeData } from '../utils/graphqlresponseparser';
 import query from './querynearest';
 import batchQuery from './querybatch';
@@ -93,7 +93,7 @@ function formBatchRequestBody({ id }) {
  * @param {Object[]} data
  * @returns {Function}
  */
-const parseBatchResponse = flatMap((data) => {
+const parseBatchResponse = fputils.flatMap((data) => {
     const { id: nodeId, stoptimes } = data.payload.data.node;
     if (!stoptimes) return [];
     return stoptimes.map((stoptime) => Object.assign({ nodeId }, formStoptimeData(stoptime)));

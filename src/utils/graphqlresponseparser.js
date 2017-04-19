@@ -1,12 +1,4 @@
-import assign from 'lodash/fp/assign';
-import compose from 'lodash/fp/compose';
-import curry from 'lodash/fp/curry';
-import filter from 'lodash/fp/filter';
-import map from 'lodash/fp/map';
-import flatMap from 'lodash/fp/flatMap';
-import pluck from 'lodash/fp/pluck';
-import prop from 'lodash/fp/prop';
-import first from 'lodash/fp/first';
+import fputils from './fputils';
 
 /** @module GraphQLResponseParser */
 
@@ -17,7 +9,7 @@ import first from 'lodash/fp/first';
  * @param {number} b
  * @return {number} sum
  */
-const sumWith = curry((a, b) => a + b);
+const sumWith = fputils.curry((a, b) => a + b);
 
 /**
  * Get relevant data from a stoptime object
@@ -47,13 +39,13 @@ export const formStoptimeData = (stoptime) => {
  * @returns {Object[]} stoptimes with route data
  */
 const combineRouteInfoWithStoptimes = (route) => {
-    return compose(
+    return fputils.composeAll([
         // combine with route info
-        map(assign(route)),
+        fputils.map(stoptime => Object.assign({}, route, stoptime)),
         // get times etc. departure specific info
-        map(formStoptimeData),
-        prop('stoptimes'),
-    )(route);
+        fputils.map(formStoptimeData),
+        fputils.property('stoptimes'),
+    ])(route);
 };
 
 /**
@@ -80,13 +72,13 @@ const getRouteInfo = (node) => {
  * @param {Object} data
  * @returns {Object[]} routes with at least one stoptime
  */
-const findRoutesFromData = compose(
-    filter(compose(first, prop('stoptimes'))),
-    map(getRouteInfo),
-    pluck('node'),
-    prop('edges'),
-    prop('nearest'),
-);
+const findRoutesFromData = fputils.composeAll([
+    fputils.filter(fputils.compose(fputils.head, fputils.property('stoptimes'))),
+    fputils.map(getRouteInfo),
+    fputils.map(val => val.node),
+    fputils.property('edges'),
+    fputils.property('nearest'),
+]);
 
 /**
  * Parse response from digitransit api
@@ -98,8 +90,8 @@ export default function parseResponse(result = {}) {
 
     if (!data) return [];
 
-    return compose(
-        flatMap(combineRouteInfoWithStoptimes),
+    return fputils.compose(
+        fputils.flatMap(combineRouteInfoWithStoptimes),
         findRoutesFromData
     )(data);
 }

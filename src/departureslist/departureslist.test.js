@@ -1,4 +1,4 @@
-import { renderIntoDocument, findRenderedVNodeWithType, findRenderedDOMElementWithClass } from 'inferno-test-utils';
+import { renderIntoDocument, findRenderedVNodeWithType } from 'inferno-test-utils';
 import { renderToString } from 'inferno-server';
 import dom from 'cheerio';
 import DeparturesList from './departureslist';
@@ -24,7 +24,7 @@ it('renders a header with text Lähtee', () => {
 
 it('renders a header with text Linja', () => {
     const $ = dom.load(renderToString(<DeparturesList />));
-    const headerText = $('.route-header').text();
+    const headerText = $('.routename-header').text();
     expect(headerText).toBe('Linja');
 });
 

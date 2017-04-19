@@ -44,6 +44,14 @@ it('departure has id', () => {
     expect(result[0].id).toBe(id);
 });
 
+it('takes id from trip, not from node', () => {
+    const id = 'abc';
+    const nodeId = '123';
+    const response = { data: { nearest: { edges: [{ node: { id: nodeId, place: { pattern: { route: {} }, stoptimes: [{ trip: { id } }]} } }] } } };
+    const result = parseResponse(response);
+    expect(result[0].id).not.toBe(nodeId);
+});
+
 it('departure has url', () => {
     const routeCode = 'abc';
     const stopCode = 'def';

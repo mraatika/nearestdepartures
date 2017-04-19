@@ -41,3 +41,41 @@ export const toTimeString = (time = new Date()) => `${time.getHours()}:${time.ge
  * @returns {Array}
  */
 export const values = subject => Object.keys(subject).map((key) => subject[key]);
+
+/**
+ * Select unique values from an array
+ * @param {Function} [fn]
+ * @returns {Function}
+ */
+export const uniq = (fn = val => val) =>
+/**
+ * @param {Array} list
+ * @returns {Array} Unique values
+ */
+(list = []) => {
+    const findFromUniques = (val, uniques) => uniques.find(u => fn(u) === val);
+
+    return list.reduce((uniques, val) => {
+        if (!findFromUniques(fn(val), uniques)) uniques.push(val);
+        return uniques;
+    }, []);
+};
+
+/**
+ * Sort list in ascending order by results of running each value thru iteratee fn
+ * @param {Function} iteratee
+ * @returns {Function}
+ */
+export const sortBy = (iteratee = val => val) =>
+/**
+ * @param {Array} list
+ * @returns {Array} Sorted list
+ */
+(list = []) => {
+    const copy = [...list];
+    return copy.sort((a, b) => {
+        if (iteratee(a) < iteratee(b)) return -1;
+        if (iteratee(a) > iteratee(b)) return 1;
+        return 0;
+    });
+}

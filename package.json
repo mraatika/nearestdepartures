@@ -70,6 +70,7 @@
     "whatwg-fetch": "2.0.3"
   },
   "dependencies": {
+    "1-liners": "^0.4.0",
     "inferno": "^1.6.2",
     "inferno-component": "^1.6.2",
     "lodash": "^4.17.4"

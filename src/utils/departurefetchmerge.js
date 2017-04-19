@@ -1,7 +1,5 @@
-import flatten from 'lodash/fp/flatten';
-import filter from 'lodash/fp/filter'
-import uniqBy from 'lodash/fp/uniqBy'
-import compose from 'lodash/fp/compose'
+import fputils from './fputils';
+import { uniq } from './utils';
 import { VEHICLE_TYPE } from '../constants/constants';
 import * as departuresService from '../services/departuresservice';
 import { findFrom } from '../utils/utils';
@@ -53,7 +51,7 @@ export async function fetchDepartures(location, vehicleTypes = [], existing = []
     }
 
     // wait for promises and flatten results (each fetch returns an array)
-    const departures = flatten(await Promise.all(promises));
+    const departures = fputils.flatMap(p => p)(await Promise.all(promises));
 
     if (!departures.length) return existing;
 
@@ -78,11 +76,16 @@ const mergeBatchData = (existing, batch) => {
  * @param {Object[]} departures
  * @returns {Object[]}
  */
-const filterUniqueRealtimeDepartures = compose(
-    uniqBy(d => d.nodeId),
-    filter(d => d.realtime)
+const filterUniqueRealtimeDepartures = fputils.compose(
+    uniq(d => d.nodeId),
+    fputils.filter(d => d.realtime)
 );
 
+/**
+ * Update given realtime departures by fetching a batch from api
+ * @param {Object[]} [departures=[]]
+ * @returns {Object[]}
+ */
 export async function batchDepartures(departures = []) {
     const realtimeDepartures = filterUniqueRealtimeDepartures(departures);
 
