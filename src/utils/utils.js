@@ -1,4 +1,39 @@
 /**
+ * Find polyfill
+ * @param {Function} fn Iteratee
+ * @return {Function}
+ */
+const findPolyfill = fn =>
+/**
+ * @param {Array} list
+ * @returns {*|undefined}
+ */
+(list) => {
+    for (let i = 0; i < list.length; i++) {
+        if (fn(list[i])) return list[i];
+    }
+
+    return undefined;
+};
+
+/**
+ * Curried native Array.prototype.find
+ * @param {Function} fn Iteratee
+ * @returns {Function}
+ */
+const nativeFind = (fn) =>
+/**
+ * @param {Array} list
+ * @returns {*|undefined}
+ */
+(list) => list.find(fn);
+
+/**
+ * Find element from array running values through an iteratee function
+ */
+export const find = typeof Array.prototype.find === 'function' ? nativeFind : findPolyfill;
+
+/**
  * Get current time in seconds
  * @returns {number}
  */
@@ -24,7 +59,7 @@ export const findFrom = (list = [], prop) => {
     return subject => {
         const subjectValue = getProp(subject);
         const comparator = Array.isArray(subject) ? compareArray : compareProp;
-        return list.find(comparator(subjectValue));
+        return find(comparator(subjectValue))(list);
     }
 }
 
@@ -46,7 +81,7 @@ export const uniq = (fn = val => val) =>
  * @returns {Array} Unique values
  */
 (list = []) => {
-    const findFromUniques = (val, uniques) => uniques.find(u => fn(u) === val);
+    const findFromUniques = (val, uniques) => find(u => fn(u) === val)(uniques);
 
     return list.reduce((uniques, val) => {
         if (!findFromUniques(fn(val), uniques)) uniques.push(val);

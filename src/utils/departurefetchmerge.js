@@ -1,5 +1,5 @@
 import fputils from './fputils';
-import { uniq } from './utils';
+import { find, uniq } from './utils';
 import { VEHICLE_TYPE } from '../constants/constants';
 import * as departuresService from '../services/departuresservice';
 import { findFrom } from '../utils/utils';
@@ -65,7 +65,7 @@ export async function fetchDepartures(location, vehicleTypes = [], existing = []
  */
 const mergeBatchData = (existing, batch) => {
     return existing.map((d) => {
-        const update = batch.find(b => b.nodeId === d.nodeId && b.id === d.id);
+        const update = find(b => b.nodeId === d.nodeId && b.id === d.id)(batch);
         return Object.assign({}, d, update);
     });
 };
