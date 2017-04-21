@@ -133,20 +133,35 @@ class App extends Component {
      * @param {boolean} multiselect
      */
     onFilterToggle(type, multiselect) {
-        const { range, vehicleTypes: current } = this.state.filters;
+        const { filters } = this.state;
+        const { vehicleTypes: current } = filters;
         const currentToggled = current.indexOf(type) > -1;
-        const multipleToggled = current.length > 1;
-        let updatedFilters = [];
-        const withoutCurrent = fputils.filter(f => f !== type);
 
-        if (multiselect) {
-            updatedFilters = currentToggled ? withoutCurrent(current) : [].concat(current, type);
-        } else {
-            updatedFilters = (multipleToggled || !currentToggled) ? [type] : allVehicleTypes.slice(0);
-        }
+        const activeFilters = fputils.ifThenElse(
+            () => !!multiselect,
+            // if pressed with ctrl key
+            fputils.ifThenElse(
+                () => currentToggled,
+                // remove filter from actives
+                fputils.filter(f => f !== type),
+                // add filter to actives
+                fputils.concat(type),
+            ),
+            // if pressed without ctrl key
+            fputils.ifThenElse(
+                () => current.length > 1 || !currentToggled,
+                // if filter is not toggled then select only that
+                () => [type],
+                // else select all filters
+                () => allVehicleTypes.slice(0),
+            )
+        )(current);
 
         // update filter props on state and then filter departures
-        this.setState({ filters: { vehicleTypes: updatedFilters, range } }, () => this.filterDeparturesToState());
+        this.setState(
+            { filters: Object.assign({}, filters, { vehicleTypes: activeFilters }) },
+            this.filterDeparturesToState.bind(this),
+        );
     }
 
     /**
@@ -154,8 +169,10 @@ class App extends Component {
      * @param {number} range
      */
     onRangeChange(range) {
-        const { vehicleTypes } = this.state.filters;
-        this.setState({ filters: { vehicleTypes, range } }, () => this.filterDeparturesToState());
+        this.setState(
+            { filters: Object.assign({}, this.state.filters, { range }) },
+            this.filterDeparturesToState.bind(this),
+        );
     }
 
     /**
@@ -178,22 +195,26 @@ class App extends Component {
         // stop location search if still running
         stopLocating();
 
-        if (location) {
-            this.fetchDeparturesToState(location);
-        } else if (searchTerm && searchTerm.toLocaleLowerCase() !== LOCATION_MAGIC_WORD) {
-            // if location is not provided then search address first
-            searchAddress(searchTerm)
-                .then((result) => {
-                    const { location, label } = result[0];
-                    this.setState({ addressSearchTerm: label, location: location });
-                    this.fetchDeparturesToState(location);
-                })
-                .catch(err => this.onError(`Osoitteen haku epäonnistui: ${err.message}!`));
-        } else {
-            // if address is empty or equals magic locate string then do a search
-            // using current location
-            this.findDeparturesByCurrentLocation();
-        }
+        fputils.ifThenElse(
+            fputils.isTruthy,
+            // if location is given then search departures by location
+            this.fetchDeparturesToState.bind(this),
+            fputils.ifThenElse(
+                () => searchTerm && searchTerm.toLocaleLowerCase() !== LOCATION_MAGIC_WORD,
+                // search address by search term
+                () => {
+                    searchAddress(searchTerm)
+                        .then((result) => {
+                            const { location, label } = result[0];
+                            this.setState({ addressSearchTerm: label, location: location });
+                            this.fetchDeparturesToState(location);
+                        })
+                        .catch(err => this.onError(`Osoitteen haku epäonnistui: ${err.message}!`));
+                },
+                // if location and search term is empty then search by client location
+                this.findDeparturesByCurrentLocation.bind(this),
+            )
+        )(location);
     }
 
     /**

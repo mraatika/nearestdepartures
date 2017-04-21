@@ -6,7 +6,8 @@ import * as oneliners from '1-liners';
  * All functions that should not be auto curried
  * @type {string[]}
  */
-const unCurried = ['curry', 'compose', 'composeAll', 'values'];
+const unCurried = ['curry', 'compose', 'composeAll', 'ifThenElse', 'pipe', 'pipeAll'];
+const rightCurried = ['assign', 'or'];
 
 /**
  * Proxy for 1-liners utility functions. Auto curries all functions except ones
@@ -21,8 +22,15 @@ export default new Proxy(oneliners, {
      * @returns {Function} Curried function
      */
     get(obj, prop) {
-        if (!obj[prop]) throw new Error(`IllegalArgumentException: No such function found ${prop}`);
-        if (unCurried.indexOf(prop) > -1) return obj[prop];
-        return oneliners.curry(obj[prop]);
+        const fn = obj[prop];
+        if (!fn) throw new Error(`IllegalArgumentException: No such function found ${prop}`);
+        if (unCurried.indexOf(prop) > -1) return fn;
+        // some fns should be curried right (such as assign)
+        if (rightCurried.indexOf(prop) > -1) return oneliners.curryRight(fn);
+        const arity = fn.length;
+        // do not curry if fn's arity is one or less
+        if (arity < 2) return fn;
+        const curry = oneliners.reduce(oneliners.compose, [new Array(arity).map(() => curry)]);
+        return oneliners.curry(fn);
     }
 });

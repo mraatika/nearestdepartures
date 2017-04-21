@@ -16,21 +16,33 @@ const sumWith = fputils.curry((a, b) => a + b);
  * @param {*} departure
  */
 export const formStoptimeData = (stoptime) => {
-    const { scheduledDeparture, headsign, realtime, realtimeDeparture, serviceDay } = stoptime;
-    const { id } = stoptime.trip;
+    const { scheduledDeparture, headsign, realtimeDeparture, serviceDay } = stoptime;
     // times are seconds from midnight and serviceday is current day
     const sumWithServiceDay = sumWith(serviceDay);
-    const data = {
-        id,
-        realtime,
-        scheduledDeparture: sumWithServiceDay(scheduledDeparture),
-        realtimeDeparture: sumWithServiceDay(realtimeDeparture),
-    };
 
-    if (headsign) data.destination = headsign;
-
-    return data;
+    return fputils.pipeAll([
+        fputils.pick(['realtime']),
+        fputils.assign({
+            id: stoptime.trip.id,
+            scheduledDeparture: sumWithServiceDay(scheduledDeparture),
+            realtimeDeparture: sumWithServiceDay(realtimeDeparture),
+            destination: headsign,
+        }),
+        fputils.ifThenElse(
+            fputils.property('destination'),
+            fputils.identity,
+            // if destination is falsy then delete that property
+            fputils.omit(['destination']),
+        )
+    ])(stoptime);
 };
+
+/**
+ * Combine object (stoptime) with route object
+ * @param {Object} route
+ * @returns {Function}
+ */
+const combineWithRoute = route => fputils.assign(fputils.shallowClone(route));
 
 /**
  * Get stoptimes from routes and creates an object of each one
@@ -41,7 +53,7 @@ export const formStoptimeData = (stoptime) => {
 const combineRouteInfoWithStoptimes = (route) => {
     return fputils.composeAll([
         // combine with route info
-        fputils.map(stoptime => Object.assign({}, route, stoptime)),
+        fputils.map(fputils.shave(1)(combineWithRoute(route))),
         // get times etc. departure specific info
         fputils.map(formStoptimeData),
         fputils.property('stoptimes'),
@@ -73,8 +85,11 @@ const getRouteInfo = (node) => {
  * @returns {Object[]} routes with at least one stoptime
  */
 const findRoutesFromData = fputils.composeAll([
+    // select all nodes with stoptimes
     fputils.filter(fputils.compose(fputils.head, fputils.property('stoptimes'))),
+    // get route info for each node
     fputils.map(getRouteInfo),
+    // pluck nodes
     fputils.map(val => val.node),
     fputils.property('edges'),
     fputils.property('nearest'),
@@ -85,13 +100,17 @@ const findRoutesFromData = fputils.composeAll([
  * @param {Object} [result={}]
  * @returns {Object[]}
  */
-export default function parseResponse(result = {}) {
-    const data = result.data;
-
-    if (!data) return [];
-
-    return fputils.compose(
-        fputils.flatMap(combineRouteInfoWithStoptimes),
-        findRoutesFromData
-    )(data);
-}
+export default fputils.pipe(
+    // default to an empty object
+    fputils.or({}),
+    fputils.ifThenElse(
+        fputils.property('data'),
+        fputils.pipeAll([
+            fputils.property('data'),
+            findRoutesFromData,
+            fputils.flatMap(combineRouteInfoWithStoptimes),
+        ]),
+        // if data is falsy then return an empty array
+        fputils.always([])
+    ),
+);
