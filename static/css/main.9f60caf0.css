@@ -326,6 +326,7 @@ header {
     text-align: center;
     margin-bottom: 20px;
     border-bottom: 10px solid #67386f;
+    overflow: auto;
 }
 
 header .description:before,
@@ -522,4 +523,4 @@ body {
     }
 }
 
-/*# sourceMappingURL=main.7a2f488d.css.map*/
+/*# sourceMappingURL=main.9f60caf0.css.map*/
