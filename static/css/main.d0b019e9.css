@@ -137,6 +137,11 @@
     padding: 1em 0;
 }
 
+.range-filter-wrapper label {
+    display: block;
+    margin: 6px 0;
+}
+
 /* FILTER BUTTONS */
 
 .departure-filter button {
@@ -178,6 +183,8 @@
     display: block;
     width: 100%;
     padding: 0;
+    margin: 0;
+    border: 0;
     -webkit-appearance: none;
     background: transparent; /* Otherwise white in Chrome */
 }
@@ -567,4 +574,4 @@ body {
     }
 }
 
-/*# sourceMappingURL=main.77e1ad4a.css.map*/
+/*# sourceMappingURL=main.d0b019e9.css.map*/
