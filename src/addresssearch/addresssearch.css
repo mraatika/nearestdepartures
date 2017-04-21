@@ -20,6 +20,8 @@
     float: left;
     outline: none;
     box-sizing: border-box;
+    border-radius: 0;
+    -webkit-appearance: none;
 }
 
 .address-search button {
