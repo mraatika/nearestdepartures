@@ -177,7 +177,6 @@
 .departure-filter input[type=range] {
     display: block;
     width: 100%;
-    height: 10px;
     padding: 0;
     -webkit-appearance: none;
     background: transparent; /* Otherwise white in Chrome */
@@ -568,4 +567,4 @@ body {
     }
 }
 
-/*# sourceMappingURL=main.4f016e5c.css.map*/
+/*# sourceMappingURL=main.47fbd295.css.map*/
