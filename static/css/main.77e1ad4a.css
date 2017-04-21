@@ -202,7 +202,7 @@
     cursor: pointer;
     background: #00b9e4;;
     color: transparent;
-    margin: 12px;
+    margin: 12px 0;
     border: 0;
 }
 
@@ -360,8 +360,8 @@ main {
             flex-grow: 1;
     -ms-flex-negative: 1;
         flex-shrink: 1;
-    -ms-flex-preferred-size: 0%;
-        flex-basis: 0%;
+    -ms-flex-preferred-size: auto;
+        flex-basis: auto;
 }
 
 header {
@@ -567,4 +567,4 @@ body {
     }
 }
 
-/*# sourceMappingURL=main.47fbd295.css.map*/
+/*# sourceMappingURL=main.77e1ad4a.css.map*/
