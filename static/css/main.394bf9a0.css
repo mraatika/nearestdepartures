@@ -197,6 +197,16 @@
   background: #00b9e4;
 }
 
+.departure-filter input[type=range]::-ms-track {
+    width: 100%;
+    cursor: pointer;
+
+    /* Hides the slider so custom styles can be added */
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+}
+
 .departure-filter input[type=range]::-webkit-slider-thumb {
     -webkit-appearance: none;
     height: 24px;
@@ -209,6 +219,16 @@
 }
 
 .departure-filter input[type=range]::-moz-range-thumb {
+    height: 24px;
+    width: 24px;
+    border-radius: 50%;
+    border: 0;
+    background: #007ac9;
+    cursor: pointer;
+    margin-top: 0;
+}
+
+.departure-filter input[type=range]::-ms-thumb {
     height: 24px;
     width: 24px;
     border-radius: 50%;
@@ -337,8 +357,12 @@ body,
 
 main {
     -webkit-box-flex: 1;
-        -ms-flex: 1;
-            flex: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
+    -ms-flex-negative: 0;
+        flex-shrink: 0;
+    -ms-flex-preferred-size: auto;
+        flex-basis: auto;
 }
 
 header {
@@ -544,4 +568,4 @@ body {
     }
 }
 
-/*# sourceMappingURL=main.af2f7229.css.map*/
+/*# sourceMappingURL=main.394bf9a0.css.map*/
