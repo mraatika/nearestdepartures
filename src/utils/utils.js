@@ -64,11 +64,18 @@ export const findFrom = (list = [], prop) => {
 }
 
 /**
+ * Pad number with leading zero if necessary
+ * @private
+ * @param {number} num
+ */
+export const padNumber = num => (('' + num).length < 2 ? '0' + num : num);
+
+/**
  * Format date to time string
  * @param {Date} time
  * @returns {String}
  */
-export const toTimeString = (time = new Date()) => `${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}`;
+export const toTimeString = (time = new Date()) => `${padNumber(time.getHours())}:${padNumber(time.getMinutes())}:${padNumber(time.getSeconds())}`;
 
 /**
  * Select unique values from an array

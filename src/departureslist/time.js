@@ -1,9 +1,4 @@
-/**
- * Pad number with leading zero if necessary
- * @private
- * @param {number} num
- */
-const padNumber = num => (('' + num).length < 2 ? '0' + num : num);
+import { padNumber } from '../utils/utils';
 /**
  * Get time as string containing hours and minutes separated by a colon
  * @private
