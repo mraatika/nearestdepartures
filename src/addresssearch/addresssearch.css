@@ -13,28 +13,37 @@
     clear: both;
 }
 
-.address-search input {
-    width: 100%;
-    border: 1px solid #eee;
-    padding: 10px 82px 10px 5px;
-    float: left;
-    outline: none;
-    box-sizing: border-box;
+.address-search input,
+.address-search button {
+    display: inline-block;
+    padding: 10px 0;
     border-radius: 0;
     -webkit-appearance: none;
 }
 
+.address-search input {
+    width: 100%;
+    border: 1px solid #eee;
+    padding-right: 82px;
+    padding-left: 5px;
+    outline: none;
+    box-sizing: border-box;
+}
+
 .address-search button {
-    height: 100%;
+    display: inline-block;
     width: 80px;
     position: absolute;
     right: 0;
-    border: 0;
-    padding: 0;
-    cursor: pointer;
+    border: 1px solid transparent;
     background: #007ac9;
     color: #fff;
     font-weight: 600;
+    cursor: pointer;
+}
+
+.address-search button::-moz-focus-inner {
+    border: 0;
 }
 
 .address-search button:active {
