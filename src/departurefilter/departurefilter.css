@@ -39,18 +39,17 @@
 
 /* RANGE FILTER */
 
-.departure-filter input[type=range] {
-    display: block;
-    width: 100%;
-    -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
-    background: transparent; /* Otherwise white in Chrome */
-    padding: 0;
-    margin: 0.4em 0;
-}
-
 .departure-filter output {
     display: block;
     text-align: right;
+}
+
+.departure-filter input[type=range] {
+    display: block;
+    width: 100%;
+    padding: 0;
+    -webkit-appearance: none;
+    background: transparent; /* Otherwise white in Chrome */
 }
 
 .departure-filter input[type=range]::-webkit-slider-runnable-track {
@@ -67,6 +66,16 @@
   background: #00b9e4;
 }
 
+.departure-filter input[type=range]::-ms-track {
+    width: 100%;
+    height: 10px;
+    cursor: pointer;
+    background: #00b9e4;;
+    color: transparent;
+    margin: 12px 0;
+    border: 0;
+}
+
 .departure-filter input[type=range]::-webkit-slider-thumb {
     -webkit-appearance: none;
     height: 24px;
@@ -79,6 +88,16 @@
 }
 
 .departure-filter input[type=range]::-moz-range-thumb {
+    height: 24px;
+    width: 24px;
+    border-radius: 50%;
+    border: 0;
+    background: #007ac9;
+    cursor: pointer;
+    margin-top: 0;
+}
+
+.departure-filter input[type=range]::-ms-thumb {
     height: 24px;
     width: 24px;
     border-radius: 50%;
