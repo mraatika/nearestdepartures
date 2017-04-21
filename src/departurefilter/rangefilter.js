@@ -37,6 +37,7 @@ export default ({
                 max={MAX_RANGE}
                 step={STEP}
                 defaultValue={range}
+                onChange={e => onChange(e.target.value)}
                 onInput={e => onChange(e.target.value)} />
         </label>
     </div>
