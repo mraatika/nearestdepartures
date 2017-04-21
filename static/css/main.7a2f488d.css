@@ -283,6 +283,8 @@ li.selected .suggestion-locality {
     float: left;
     outline: none;
     box-sizing: border-box;
+    border-radius: 0;
+    -webkit-appearance: none;
 }
 
 .address-search button {
@@ -520,4 +522,4 @@ body {
     }
 }
 
-/*# sourceMappingURL=main.fe893e69.css.map*/
+/*# sourceMappingURL=main.7a2f488d.css.map*/
