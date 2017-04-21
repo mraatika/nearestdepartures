@@ -1,6 +1,5 @@
 import Component from 'inferno-component';
 import fputils from './utils/fputils';
-import packageJSON from '../package.json';
 import { getNowInSeconds, toTimeString } from './utils/utils';
 import DeparturesList from './departureslist/departureslist';
 import DepartureFilter from './departurefilter/departurefilter';
@@ -274,7 +273,9 @@ class App extends Component {
                 <footer>
                     <div class="footer-content">
                         <div class="pull-left">{`Lähdöt päivitetty ${departureUpdateTime ? toTimeString(departureUpdateTime) : '-'}`}</div>
-                        <div class="pull-right">{`julkisilla v${packageJSON.version}`}</div>
+                        <div class="pull-right text-right">
+                            {`julkisilla v${process.env.VERSION} / built ${toTimeString(new Date(process.env.BUILD_TIME))}`}
+                        </div>
                     </div>
                 </footer>
             </div>
