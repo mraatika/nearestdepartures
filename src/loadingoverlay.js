@@ -2,7 +2,7 @@ import spinner from '../public/spinner.svg';
 
 /**
  * Overlay component with spinner image
- * @constructs {LoadingOverlay}
+ * @constructs LoadingOverlay
  * @param {Object} props
  * @param {boolean} props.show
  * @returns {LoadingOverlay}

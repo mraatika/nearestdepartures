@@ -3,7 +3,7 @@ import icons from '../public/icons.svg';
 /**
  * Vehicle type icon component
  * @constructs VehicleIcon
- * @param {string} vehicleType
+ * @param {string} iconName
  * @returns {VehicleIcon}
  */
 export default ({ iconName }) => (

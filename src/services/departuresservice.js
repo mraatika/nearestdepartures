@@ -4,24 +4,30 @@ import query from './querynearest';
 import batchQuery from './querybatch';
 import { getNowInSeconds } from '../utils/utils';
 
+/** @module DeparturesService */
+
 /**
  * Limit results by time (2h in seconds)
+ * @private
  * @type {number}
  */
 const TIME_RANGE = 3 * 60 * 60;
 /**
  * Number of stoptimes per route to fetch
+ * @private
  * @type {number}
  */
 const NUMBER_OF_DEPARTURES_PER_ROUTE = 2;
 /**
  * Max number of results to fetch
+ * @private
  * @type {number}
  */
 const MAX_RESULTS = 20;
 
 /**
  * Form graphql query for request body
+ * @private
  * @param {Object} props
  * @param {number} props.latitude
  * @param {number} props.longitude
@@ -71,6 +77,7 @@ export async function fetchDepartures(location = {}, filters = {}) {
 
 /**
  * Form body for batch request
+ * @private
  * @param {Object} props
  * @param {string} props.id
  * @returns {Object}
@@ -90,6 +97,7 @@ function formBatchRequestBody({ id }) {
 
 /**
  * Parse batch response data
+ * @private
  * @param {Object[]} data
  * @returns {Function}
  */

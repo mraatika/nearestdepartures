@@ -1,3 +1,5 @@
+/** @module QueryBatch */
+
 /**
  * Graphql query for nearest departures
  * @type {string}

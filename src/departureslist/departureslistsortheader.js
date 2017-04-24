@@ -1,5 +1,6 @@
 /**
  * Creates a callback for keypress event
+ * @private
  * @param {Function} callback
  * @param {string} propName
  * @return {Function}
@@ -15,12 +16,12 @@ const keyPressHandler = (callback, propName) => (e) => {
 
 /**
  * Departures list sorting header component
- * @constructs {DepartureListSortHeader}
+ * @constructs DepartureListSortHeader
  * @param {Object} props
- * @param {string} props.propName
- * @param {boolean} props.active
- * @param {string} props.text
  * @param {Function} props.onClick
+ * @param {string} [props.propName=""]
+ * @param {boolean} [props.active=false]
+ * @param {string} [props.text=""]
  * @returns {DepartureListSortHeader}
  */
 export default ({

@@ -1,5 +1,6 @@
 /**
  * Messages for position errors
+ * @private
  * @type {Object}
  */
 const POSITION_ERROR_CODES = {

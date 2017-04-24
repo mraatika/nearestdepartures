@@ -1,6 +1,16 @@
 import SuggestionsListItem from './suggestionslistitem';
 import './suggestionslist.css';
 
+/**
+ * List of suggestions fetched from api
+ * @constructs SuggestionList
+ * @param {Object} props
+ * @param {Function} props.onItemClick
+ * @param {Function} props.onClose
+ * @param {Object[]} [props.suggestions=[]]
+ * @param {Object} [props.selected={}]
+ * @returns {SuggestionList}
+ */
 export default ({ suggestions = [], selected = {}, onItemClick, onClose }) => (
     <ol
         id="suggestions-list"

@@ -21,6 +21,7 @@ let watcherId = null;
 
 /**
  * Create callback for watchPosition success
+ * @private
  * @param {Function} resolve
  * @returns {Function}
  */

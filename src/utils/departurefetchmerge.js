@@ -4,8 +4,11 @@ import { VEHICLE_TYPE } from '../constants/constants';
 import * as departuresService from '../services/departuresservice';
 import { findFrom } from '../utils/utils';
 
+/** @module DepartureFetchMerge */
+
 /**
  * Merge two departure arrays, discard doubles preferring fetched
+ * @private
  * @param {Object[]} fetched
  * @param {Object[]} existing
  * @returns {Object[]}
@@ -60,6 +63,7 @@ export async function fetchDepartures(location, vehicleTypes = [], existing = []
 
 /**
  * Merge batch data with existing departures
+ * @private
  * @param {Object[]} existing
  * @param {Object[]} batch
  */
@@ -72,6 +76,7 @@ const mergeBatchData = (existing, batch) => {
 
 /**
  * Select all realtime departures, one for each node
+ * @private
  * @type {Function}
  * @param {Object[]} departures
  * @returns {Object[]}

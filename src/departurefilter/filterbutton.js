@@ -4,13 +4,14 @@ import { VEHICLE_TYPE_TRANSLATIONS } from '../constants/constants';
 /**
  * Filter button component
  * @constructs {FilterButton}
- * @param {string} vehicleType
- * @param {boolean} isToggled Button's toggle state
- * @param {Function} onFilterToggle Callback for button
+ * @param {Object} props
+ * @param {Function} props.onFilterToggle Callback for button
+ * @param {string} [props.vehicleType=""]
+ * @param {boolean} [props.isToggled=false] Button's toggle state
  */
 export default ({
     vehicleType = '',
-    isToggled,
+    isToggled = false,
     onFilterToggle,
 } = {}) => {
     let className = `filter-button bg ${vehicleType.toLocaleLowerCase()}${isToggled ? ' toggled' : ''}`;

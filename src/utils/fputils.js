@@ -1,9 +1,10 @@
 import * as oneliners from '1-liners';
 
-/** @module fputils */
+/** @module FPUtils */
 
 /**
  * All functions that should not be auto curried
+ * @private
  * @type {string[]}
  */
 const unCurried = ['curry', 'compose', 'composeAll', 'ifThenElse', 'pipe', 'pipeAll'];
@@ -11,7 +12,10 @@ const rightCurried = ['assign', 'or'];
 
 /**
  * Compose a curry function to curry multiple times (e.g sum(1)(2)(3))
+ * @private
+ * @type {Function}
  * @param {number} arity
+ * @returns {Function}
  */
 const curryMany = (arity) => oneliners.reduce(oneliners.compose, [...new Array(arity - 1)].map(() => oneliners.curry));
 

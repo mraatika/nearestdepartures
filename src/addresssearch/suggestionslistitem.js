@@ -1,3 +1,12 @@
+/**
+ * A row in suggestions list
+ * @constructs SuggestionsListItem
+ * @param {Object} props
+ * @param {Object} props.suggestion
+ * @param {Function} props.onClick
+ * @param {boolean} [props.selected=false]
+ * @returns {SuggestionsListItem}
+ */
 export default ({ suggestion, onClick, selected = false }) => (
     <li
         class={'suggestions-list-item' + (selected ? ' selected' : '') }

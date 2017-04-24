@@ -1,9 +1,14 @@
 import fputils from './fputils';
 import { sortBy } from './utils'
 
+/** @module DepartureSorter */
+
 /**
  * Return sorter function for departures
+ * @private
+ * @param {Object[]} list List of departures
  * @param {string} propName Property to sort by
+ * @param {number} sortDir 1=ascending, -1=descending
  * @returns {Object[]} Sorted departures
  */
 export default function sort(list, propName, sortDir) {

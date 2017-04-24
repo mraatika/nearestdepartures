@@ -1,3 +1,5 @@
+/** @module AddressSearchService */
+
 /**
  * Search for address/location coordinates
  * @async

@@ -1,3 +1,5 @@
+/** @module Constants */
+
 /**
  * Vehicle types
  * @type {Object}

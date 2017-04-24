@@ -1,3 +1,5 @@
+/** @module Utils */
+
 /**
  * Find polyfill
  * @param {Function} fn Iteratee
@@ -5,6 +7,7 @@
  */
 const findPolyfill = fn =>
 /**
+ * @private
  * @param {Array} list
  * @returns {*|undefined}
  */
@@ -18,6 +21,7 @@ const findPolyfill = fn =>
 
 /**
  * Curried native Array.prototype.find
+ * @private
  * @param {Function} fn Iteratee
  * @returns {Function}
  */

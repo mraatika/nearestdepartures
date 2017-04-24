@@ -4,10 +4,12 @@ import './departurefilter.css';
 
 /**
  * Buttons for filtering departureslist
- * @param {string[]} filters
- * @param {string[]} activeFilters
- * @param {number} defaultRange
- * @param {Function} onFilterToggle Callback for a button click
+ * @param {Object} props
+ * @param {Function} props.onFilterToggle Callback for a button click
+ * @param {Function} props.onRangeChange Callback for range filter chang
+ * @param {string[]} [props.filters=[]]
+ * @param {string[]} [props.activeFilters=[]]
+ * @param {number} [props.range=0]
  */
 export default ({
     filters = [],

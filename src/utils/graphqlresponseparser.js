@@ -4,6 +4,7 @@ import fputils from './fputils';
 
 /**
  * Curried sum of two numbers
+ * @private
  * @type {Function}
  * @param {number} a
  * @param {number} b
@@ -13,7 +14,8 @@ const sumWith = fputils.curry((a, b) => a + b);
 
 /**
  * Get relevant data from a stoptime object
- * @param {*} departure
+ * @param {Object} stoptime
+ * @returns {Function}
  */
 export const formStoptimeData = (stoptime) => {
     const { scheduledDeparture, headsign, realtimeDeparture, serviceDay } = stoptime;
@@ -39,6 +41,7 @@ export const formStoptimeData = (stoptime) => {
 
 /**
  * Combine object (stoptime) with route object
+ * @private
  * @param {Object} route
  * @returns {Function}
  */
@@ -47,6 +50,8 @@ const combineWithRoute = route => fputils.assign(fputils.shallowClone(route));
 /**
  * Get stoptimes from routes and creates an object of each one
  * and adds route data to those objects
+ * @private
+ * @type {Function}
  * @param {Object} route
  * @returns {Object[]} stoptimes with route data
  */
@@ -62,6 +67,7 @@ const combineRouteInfoWithStoptimes = (route) => {
 
 /**
  * Get route info from data node
+ * @private
  * @param {Object} node
  * @returns {Object}
  */
@@ -80,6 +86,7 @@ const getRouteInfo = (node) => {
 
 /**
  * Find routes with stoptimes from response data
+ * @private
  * @type {Function}
  * @param {Object} data
  * @returns {Object[]} routes with at least one stoptime
@@ -97,6 +104,7 @@ const findRoutesFromData = fputils.composeAll([
 
 /**
  * Parse response from digitransit api
+ * @type {Function}
  * @param {Object} [result={}]
  * @returns {Object[]}
  */
