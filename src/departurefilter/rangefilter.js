@@ -1,28 +1,14 @@
-/**
- * Minimum range value
- * @type {number}
- */
-const MIN_RANGE = 100;
-/**
- * Maximum range value
- * @type {number}
- */
-const MAX_RANGE = 2000;
-/**
- * Range change step
- * @type {number}
- */
-const STEP = 100;
+import { MIN_RANGE, MAX_RANGE, RANGE_STEP } from '../constants/constants'
 
 /**
  * Range input for filtering departures by distance
  * @constructs {RangeFilter}
  * @param {Object} props
+ * @param {number} range Current value
  * @param {Function} props.onChange
- * @param {number} [props.range=100]
  */
 export default ({
-    range = MIN_RANGE,
+    range,
     onChange,
 }) => (
     <div class="range-filter-wrapper">
@@ -35,7 +21,7 @@ export default ({
                 title="Maksimi etäisyys pysäkille"
                 min={MIN_RANGE}
                 max={MAX_RANGE}
-                step={STEP}
+                step={RANGE_STEP}
                 defaultValue={range}
                 onChange={e => onChange(e.target.value)}
                 onInput={e => onChange(e.target.value)} />

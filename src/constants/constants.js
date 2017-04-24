@@ -35,9 +35,29 @@ export const LOCATION_MAGIC_WORD = 'oma sijainti';
 export const DEFAULT_RANGE = 400;
 
 /**
+ * Minimum range value
+ * @type {number}
+ */
+export const MIN_RANGE = 100;
+/**
+ * Maximum range value
+ * @type {number}
+ */
+export const MAX_RANGE = 2000;
+/**
+ * Range change step
+ * @type {number}
+ */
+export const RANGE_STEP = 100;
+
+/**
  * Max amount of address suggestions to display
  * @type {number}
  */
 export const MAX_ADDRESS_SUGGESTIONS = 10;
 
+/**
+ * Interval between departure update in ms
+ * @type {number}
+ */
 export const BATCH_INTERVAL = 30 * 1000;
