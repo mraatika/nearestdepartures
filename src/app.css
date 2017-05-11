@@ -80,10 +80,18 @@ footer {
     border-top: 10px solid #005993;
 }
 
+a:visited {
+    color: inherit;
+}
+
 .footer-content {
     overflow: auto;
     text-align: right;
     padding: 2em 1em;
+}
+
+.footer-content p:last-child {
+    margin-bottom: 0;
 }
 
 h1 {
@@ -102,6 +110,10 @@ h1 {
 
 .pull-right {
     float: right;
+}
+
+.clear {
+    clear: both;
 }
 
 .accessibility-hidden {

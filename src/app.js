@@ -272,10 +272,9 @@ class App extends Component {
 
                 <footer>
                     <div class="footer-content">
-                        <div class="pull-left">{`Lähdöt päivitetty ${departureUpdateTime ? toTimeString(departureUpdateTime) : '-'}`}</div>
-                        <div class="pull-right text-right">
-                            {`julkisilla v${process.env.VERSION} / built ${toTimeString(new Date(process.env.BUILD_TIME))}`}
-                        </div>
+                        <p class="pull-left">{`Lähdöt päivitetty ${departureUpdateTime ? toTimeString(departureUpdateTime) : '-'}`}</p>
+                        <p class="pull-right text-right">{`Julkisilla.info v${process.env.VERSION}`}</p>
+                        <p class="clear">Lähtöjen tiedot ovat HSL:n tarjoamaa <a href="https://digitransit.fi/">avointa dataa</a>.</p>
                     </div>
                 </footer>
             </div>
