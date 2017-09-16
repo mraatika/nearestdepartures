@@ -1,0 +1,23 @@
+footer {
+  width: 100%;
+  margin-top: 1em;
+  background-color: #8c4799;
+  color: #fff;
+  font-size: .8em;
+}
+
+.footer-content {
+  overflow: auto;
+  text-align: right;
+  padding: 2em 1em;
+}
+
+.footer-content p:last-child {
+  margin-bottom: 0;
+}
+
+.footer-content {
+  box-sizing: border-box;
+  max-width: 1024px;
+  margin: 0 auto;
+}

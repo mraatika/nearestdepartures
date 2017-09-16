@@ -1,46 +1,46 @@
 .suggestions ol {
-    position: absolute;
-    width: 100%;
-    top: 0;
-    left: 0;
-    margin: 0;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  margin: 0;
 
-    list-style: none;
-    padding-left: 0;
-    z-index: 99;
+  list-style: none;
+  padding-left: 0;
+  z-index: 99;
 }
 
 .suggestions li {
-    line-height: 1.2;
-    padding: .4em 1em;
-    border-bottom: 1px solid #ddd;
-    background: #fff;
-    cursor: pointer;
+  line-height: 1.2;
+  padding: .4em 1em;
+  border-bottom: 1px solid #ddd;
+  background: #fff;
+  cursor: pointer;
 }
 
 .suggestions li:last-child {
-    border-width: 16px;
+  border-width: 16px;
 }
 
 .suggestions li:hover {
-    background: #44b5ff;
-    color: white;
+  background: #44b5ff;
+  color: white;
 }
 
 .suggestion-name {
-    margin-bottom: .2em;
+  margin-bottom: .2em;
 }
 
 .suggestion-locality {
-    color: #888;
+  color: #888;
 }
 
 .suggestions li.selected {
-    background: #089eff;
-    color: white;
+  background: #089eff;
+  color: white;
 }
 
 .suggestions li:hover .suggestion-locality,
 li.selected .suggestion-locality {
-    color: #ddd;
+  color: #ddd;
 }

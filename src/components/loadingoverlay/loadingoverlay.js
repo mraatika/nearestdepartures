@@ -1,4 +1,5 @@
-import spinner from '../public/spinner.svg';
+import spinner from './spinner.svg';
+import './loadingoverlay.css';
 
 /**
  * Overlay component with spinner image
@@ -8,7 +9,7 @@ import spinner from '../public/spinner.svg';
  * @returns {LoadingOverlay}
  */
 export default ({ show }) => (
-    <div class="loading-overlay" style={{ display: show ? 'block' : 'none' }} role="dialog" aria-label="Odotetaan" aria-busy={show}>
-        <img class="spinner" src={spinner} alt="spinner" />
-    </div>
+  <div class="loading-overlay" style={{ display: show ? 'block' : 'none' }} role="dialog" aria-label="Odotetaan" aria-busy={show}>
+    <img class="spinner" src={spinner} alt="spinner" />
+  </div>
 );

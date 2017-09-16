@@ -1,4 +1,4 @@
-import icons from '../public/icons.svg';
+import icons from './icons.svg';
 
 /**
  * Vehicle type icon component

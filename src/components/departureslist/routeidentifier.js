@@ -1,4 +1,4 @@
-import VehicleIcon from '../vehicleicon';
+import VehicleIcon from '../common/vehicleicon';
 
 /**
  * Component for displaying a vehicle icon and route number
@@ -10,10 +10,10 @@ import VehicleIcon from '../vehicleicon';
  */
 export default ({
     routeName = '',
-    vehicleType = '',
+  vehicleType = '',
 } = {}) => (
-    <span class={ vehicleType.toLowerCase() }>
-        <VehicleIcon iconName={vehicleType.toLocaleLowerCase()} />
-        <span class="route-identifier">{ routeName }</span>
-    </span>
+  <span class={vehicleType.toLowerCase()}>
+    <VehicleIcon iconName={vehicleType.toLocaleLowerCase()} />
+    <span class="route-identifier">{routeName}</span>
+  </span>
 );

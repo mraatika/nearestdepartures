@@ -1,4 +1,4 @@
-import { padNumber } from '../utils/utils';
+import { padNumber } from '../../utils/utils';
 /**
  * Get time as string containing hours and minutes separated by a colon
  * @private
@@ -15,16 +15,16 @@ const getTimeAsText = date => `${padNumber(date.getHours())}:${padNumber(date.ge
  * @return {Time}
  */
 export default ({ time }) => {
-    const now = Date.now();
-    const date = new Date(time * 1000);
-    const timeLeftInMins = Math.floor(((date - now) / 1000) / 60);
-    let timeText = '';
+  const now = Date.now();
+  const date = new Date(time * 1000);
+  const timeLeftInMins = Math.floor(((date - now) / 1000) / 60);
+  let timeText = '';
 
-    if (date > now && timeLeftInMins < 10) {
-        timeText = timeLeftInMins < 1 ? 'Now' : `${timeLeftInMins} min`;
-    } else {
-        timeText = getTimeAsText(date);
-    }
+  if (date > now && timeLeftInMins < 10) {
+    timeText = timeLeftInMins < 1 ? 'Now' : `${timeLeftInMins} min`;
+  } else {
+    timeText = getTimeAsText(date);
+  }
 
-    return <span>{timeText}</span>;
+  return <span>{timeText}</span>;
 };
