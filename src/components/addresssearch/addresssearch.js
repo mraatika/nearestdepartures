@@ -200,7 +200,7 @@ export default class AddressSearch extends Component {
           <button
             className="address-search-clear"
             onClick={this.onClearClick.bind(this)}>
-            <span className="address-search-clear--stretch">X</span>
+            <span>x</span>
           </button>
           <button className="address-search-submit" type="submit">Hae</button>
         </div>

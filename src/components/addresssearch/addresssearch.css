@@ -53,18 +53,17 @@
     width: 40px;
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 1rem;
+    font-size: 1.4rem;
     font-weight: bold;
-    line-height: 2.2;
+    line-height: 1.5;
     color: #666;
-    border: 0;
     background: none;
-    vertical-align: middle;
+    border: 0;
 }
 
-.address-search-clear--stretch {
-    display: inline-block;
-    transform: scaleX(1.25);
+.address-search-clear span {
+    display: block;
+    background: #fff;
 }
 
 .address-search-clear:focus,

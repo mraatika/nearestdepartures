@@ -51,7 +51,7 @@ it('renders a clear button', () => {
 it('renders a submit button with X', () => {
   const $ = dom.load(renderToString(<AddressSearch />));
   const buttonText = $('button.address-search-clear').text();
-  expect(buttonText).toEqual('X');
+  expect(buttonText.toLocaleLowerCase()).toEqual('x');
 });
 
 it('gets default value from props', () => {
@@ -132,7 +132,7 @@ describe('submitting', () => {
   it('calls onSearch when submit button is clicked', () => {
     const spy = jest.fn();
     const rendered = renderIntoDocument(<AddressSearch onSearch={spy} />);
-    const button = scryRenderedVNodesWithType(rendered, 'button')[1];
+    const button = scryRenderedVNodesWithType(rendered, 'button')[1]/*  */;
 
     // trigger click event
     const clickEvent = new MouseEvent('click');
