@@ -27,7 +27,6 @@
     display: inline-block;
     margin-right: .5em;
 
-    font-size: .9rem;
     font-weight: 600;
     color: #333;
 
@@ -45,7 +44,6 @@
     margin: 0;
     padding-left: 0;
     letter-spacing: 0;
-    font-size: 1rem;
     padding: .4em 0;
 
     border-bottom: 1px solid #ddd;

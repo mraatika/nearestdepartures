@@ -1,19 +1,15 @@
 footer {
   width: 100%;
   margin-top: 1em;
-  background-color: #8c4799;
+  background-color: #005993;
   color: #fff;
-  font-size: .8em;
+  box-sizing: border-box;
+  padding: 1em;
+  font-size: .9rem;
 }
 
-.footer-content {
-  overflow: auto;
-  text-align: right;
-  padding: 2em 1em;
-}
-
-.footer-content p:last-child {
-  margin-bottom: 0;
+.footer-app-name {
+  font-family: "Patua One", cursive;
 }
 
 .footer-content {
@@ -21,3 +17,4 @@ footer {
   max-width: 1024px;
   margin: 0 auto;
 }
+

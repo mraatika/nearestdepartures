@@ -15,8 +15,9 @@
 .address-search input,
 .address-search .address-search-submit {
     display: inline-block;
-    padding: 10px 0;
     border-radius: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
     -webkit-appearance: none;
 }
 
@@ -52,7 +53,7 @@
     width: 40px;
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 1em;
+    font-size: 1rem;
     font-weight: bold;
     line-height: 2.2;
     color: #666;

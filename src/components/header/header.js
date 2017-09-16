@@ -11,6 +11,6 @@ export default () => (
       <VehicleIcon iconName="bus" />
       <span class="app-name">julkisilla.info</span>
     </h1>
-    <p class="app-description">löydä lähimmät julkisen liikenteen lähdöt helposti</p>
+    <p class="app-description">Löydä lähimmät julkisen liikenteen lähdöt helposti</p>
   </header>
 );

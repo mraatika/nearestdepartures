@@ -10,9 +10,13 @@ import './footer.css';
 export default ({ departureUpdateTime }) => (
   <footer>
     <div class="footer-content">
-        <p class="pull-left">{`Lähdöt päivitetty ${departureUpdateTime ? toTimeString(departureUpdateTime) : '-'}`}</p>
-        <p class="pull-right text-right">{`Julkisilla.info v${process.env.VERSION}`}</p>
-        <p class="clear">Lähtöjen tiedot ovat HSL:n tarjoamaa <a href="https://digitransit.fi/">avointa dataa</a>.</p>
+        <p class="footer-app-name">{`Julkisilla.info v${process.env.VERSION}`}</p>
+        <p>
+          Lähdöt päivitetty&nbsp;
+          <i>{departureUpdateTime ? toTimeString(departureUpdateTime) : 'Ei koskaan'}</i>
+          &nbsp;/&nbsp;
+          Lähtöjen tiedot ovat HSL:n tarjoamaa <a href="https://digitransit.fi/">avointa dataa</a>.
+        </p>
     </div>
   </footer>
 );

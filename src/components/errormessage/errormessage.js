@@ -1,3 +1,5 @@
+import './errormessage.css';
+
 /**
  * Component for displaying error messages
  * @constructs ErrorMessage
