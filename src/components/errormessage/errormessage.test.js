@@ -9,16 +9,16 @@ it('renders div', () => {
     expect(element.length).toEqual(1);
 });
 
-it('renders has class alert', () => {
+it('renders has class error-message', () => {
     const $ = dom.load(renderToString(<ErrorMessage />));
     const element = $('div');
-    expect(element.hasClass('alert')).toEqual(true);
+    expect(element.hasClass('error-message')).toEqual(true);
 });
 
 it('is hidden if message is not given', () => {
     const $ = dom.load(renderToString(<ErrorMessage />));
     const element = $('div');
-    expect(element.css('display')).toEqual('none');
+    expect(element.hasClass('hidden')).toEqual(true);
 });
 
 it('renders an error message', () => {
@@ -32,7 +32,7 @@ it('sets element visible when error message is defined', () => {
     const message = 'An error happened!';
     const $ = dom.load(renderToString(<ErrorMessage message={message} />));
     const element = $('div');
-    expect(element.css('display')).toEqual('block');
+    expect(element.hasClass('hidden')).toEqual(false);
 });
 
 it('renders a close button', () => {

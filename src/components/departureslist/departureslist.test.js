@@ -2,7 +2,7 @@ import { renderIntoDocument, findRenderedVNodeWithType } from 'inferno-test-util
 import { renderToString } from 'inferno-server';
 import dom from 'cheerio';
 import DeparturesList from './departureslist';
-import LoadingOverlay from '../loadingoverlay';
+import LoadingOverlay from '../loadingoverlay/loadingoverlay';
 
 it('renders a list div', () => {
     const $ = dom.load(renderToString(<DeparturesList />));

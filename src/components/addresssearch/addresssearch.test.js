@@ -1,9 +1,9 @@
-import { renderIntoDocument, findRenderedVNodeWithType } from 'inferno-test-utils';
+import { renderIntoDocument, findRenderedVNodeWithType, scryRenderedVNodesWithType } from 'inferno-test-utils';
 import { renderToString } from 'inferno-server';
 import dom from 'cheerio';
 import AddressSearch from './addresssearch';
 
-jest.mock('../services/addresssearchservice');
+jest.mock('../../services/addresssearchservice');
 
 it('renders a form', () => {
   const $ = dom.load(renderToString(<AddressSearch />));
@@ -30,16 +30,28 @@ it('text input has placeholder', () => {
   expect(labelText).toEqual('Hae paikannuksella, osoitteella tai paikannimellä...');
 });
 
-it('renders a button', () => {
+it('renders a submit button', () => {
   const $ = dom.load(renderToString(<AddressSearch />));
-  const button = $('button');
+  const button = $('button[type=submit]');
   expect(button.length).toEqual(1);
 });
 
-it('renders a button with text', () => {
+it('renders a submit button with text', () => {
   const $ = dom.load(renderToString(<AddressSearch />));
-  const buttonText = $('button').text();
+  const buttonText = $('button[type=submit]').text();
   expect(buttonText).toEqual('Hae');
+});
+
+it('renders a clear button', () => {
+  const $ = dom.load(renderToString(<AddressSearch />));
+  const button = $('button.address-search-clear');
+  expect(button.length).toEqual(1);
+});
+
+it('renders a submit button with X', () => {
+  const $ = dom.load(renderToString(<AddressSearch />));
+  const buttonText = $('button.address-search-clear').text();
+  expect(buttonText).toEqual('X');
 });
 
 it('gets default value from props', () => {
@@ -65,7 +77,7 @@ it('sets input value to state onInput', () => {
 it('calls onSearch when submit button is pressed', () => {
   const spy = jest.fn();
   const rendered = renderIntoDocument(<AddressSearch onSearch={spy} />);
-  const button = findRenderedVNodeWithType(rendered, 'button');
+  const button = scryRenderedVNodesWithType(rendered, 'button')[1];
 
   const event = new MouseEvent('click');
   button.dom.dispatchEvent(event);
@@ -120,7 +132,7 @@ describe('submitting', () => {
   it('calls onSearch when submit button is clicked', () => {
     const spy = jest.fn();
     const rendered = renderIntoDocument(<AddressSearch onSearch={spy} />);
-    const button = findRenderedVNodeWithType(rendered, 'button');
+    const button = scryRenderedVNodesWithType(rendered, 'button')[1];
 
     // trigger click event
     const clickEvent = new MouseEvent('click');

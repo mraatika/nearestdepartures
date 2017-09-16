@@ -3,19 +3,6 @@ import { renderToString } from 'inferno-server';
 import dom from 'cheerio';
 import FilterButton from './filterbutton';
 
-function fireClick(node){
-    if (document.createEvent) {
-        var evt = document.createEvent('MouseEvents');
-        evt.initEvent('click', true, true);
-        evt.ctrlKey = true;
-        node.dispatchEvent(evt);
-    } else if (document.createEventObject) {
-        node.fireEvent('onclick') ;
-    } else if (typeof node.onclick == 'function') {
-        node.onclick();
-    }
-}
-
 it('renders a button', () => {
     const $ = dom.load(renderToString(<FilterButton />));
     const button = $('button');
