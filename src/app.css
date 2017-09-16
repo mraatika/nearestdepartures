@@ -17,6 +17,12 @@ main {
   flex-grow: 1;
   flex-shrink: 1;
   flex-basis: auto;
+
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 0 1em;
 }
 
 .app-content {
@@ -25,24 +31,16 @@ main {
   flex-direction: column;
 }
 
-main {
-  box-sizing: border-box;
-  max-width: 1024px;
-  margin: 0 auto;
-}
-
-main {
-  width: 100%;
-  padding: 0 1em;
-  flex-grow: 1;
-}
-
 .pull-left {
     float: left;
 }
 
 .pull-right {
     float: right;
+}
+
+.hidden {
+  display: none;
 }
 
 .clear {
@@ -97,27 +95,4 @@ main {
 
 .ferry.bg {
     background-color: #00b9e4;
-}
-
-.alert {
-    position: relative;
-    padding: 15px;
-    margin-bottom: 15px;
-    border: 1px solid #ebccd1;
-    border-radius: 4px;
-    background-color: #f2dede;
-    color: #a94442;
-    text-align: center;
-}
-
-.alert .close-button {
-    position: absolute;
-    top: 2px;
-    right: 2px;
-    cursor: pointer;
-    border: none;
-    background: transparent;
-    font-weight: bold;
-    color: inherit;
-    font-size: 0.8em;
 }

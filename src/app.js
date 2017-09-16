@@ -5,7 +5,7 @@ import Header from './components/header/header';
 import Footer from './components/footer/footer';
 import DeparturesList from './components/departureslist/departureslist';
 import DepartureFilter from './components/departurefilter/departurefilter';
-import ErrorMessage from './components/common/errormessage';
+import ErrorMessage from './components/errormessage/errormessage';
 import AddressSearch from './components/addresssearch/addresssearch';
 import { fetchDepartures, batchDepartures } from './utils/departurefetchmerge';
 import { findGPSLocation, stopLocating } from './services/locationservice';
