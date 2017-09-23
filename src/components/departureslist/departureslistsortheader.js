@@ -30,14 +30,14 @@ export default ({
     text = '',
     onClick
 }) => (
-    <span
+    <div
         tabindex="0"
         role="button"
         aria-pressed={active ? 'true' : 'false'}
         aria-label={`Järjestä lista ${text} mukaan`}
-        class={`header ${propName.toLowerCase()}-header`}
+        class={`header ${propName.toLowerCase()}`}
         onClick={() => onClick(propName)}
         onKeyPress={keyPressHandler(onClick, propName)}>
         <span class={active ? 'active' : ''}>{text}</span>
-    </span>
+    </div>
 );

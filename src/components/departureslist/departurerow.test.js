@@ -2,16 +2,16 @@ import { renderToString } from 'inferno-server';
 import dom from 'cheerio';
 import DepartureRow from './departurerow';
 
-it('renders row div', () => {
+it('renders a link', () => {
     const $ = dom.load(renderToString(<DepartureRow />));
-    const tableRow = $('div.departures-list-row');
+    const tableRow = $('a.departures-list-row');
     expect(tableRow.length).toBe(1);
 });
 
 it('renders route name', () => {
     const routeName = '58B';
     const $ = dom.load(renderToString(<DepartureRow routeName={routeName}/>));
-    const output = $('.route').text();
+    const output = $('.routename').text();
     expect(output).toEqual(routeName);
 });
 

@@ -11,6 +11,7 @@
 }
 
 .departures-list-header {
+    display: flex;
     margin-bottom: 6px;
     white-space: nowrap;
 }
@@ -24,87 +25,70 @@
 }
 
 .departures-list-header .header {
-    display: inline-block;
-    margin-right: .5em;
-
     font-weight: 600;
     color: #333;
 
     cursor: pointer;
     user-select: none;
-    outline: none;
 }
 
 .departures-list-row {
     position: relative;
+    display: flex;
+    align-content: space-between;
+    padding: .4em 0;
+    margin: 0;
+
     overflow-y: visible;
     white-space: nowrap;
     background: #fff;
-    line-height: 1.8;
-    margin: 0;
-    padding-left: 0;
-    letter-spacing: 0;
-    padding: .4em 0;
-
     border-bottom: 1px solid #ddd;
+    line-height: 1.8;
+    letter-spacing: 0;
+}
+
+.departures-list-header .header,
+.departures-list-row > div {
+    padding: 0 .5rem;
+}
+
+.departures-list-header .header:first-child,
+.departures-list-row > div:first-child {
+    padding-left: 0;
+}
+
+.departures-list-header .header:last-child,
+.departures-list-row > div:last-child {
+    padding-right: 0;
 }
 
 .departures-list-row:last-child {
     border: 0;
 }
 
-.departures-list .time-header,
 .departures-list .time {
-    width: 3.25em;
-    padding-right: .5em;
+    width: 3rem;
 }
 
-.departures-list .routename-header,
-.departures-list .route {
-    width: 5em;
-}
-
-.departures-list .routename-header {
-    margin-left: .4em;
-}
-
-.departures-list .destination-header {
-    width: calc(100% - 15.5em);
-    padding-left: .5em;
-}
-
-.departures-list .distance-header {
-    margin-right: 0;
-}
-
-.departures-list .time {
-    display: inline-block;
-    text-align: left;
-    vertical-align: bottom;
-}
-
-.departures-list .route {
-    display: inline-block;
-    padding-left: .25em;
+.departures-list .routename {
+    width: 3.5rem;
     overflow: hidden;
-    vertical-align: middle;
+}
+
+.departures-list-row .routename {
     font-weight: 600;
 }
 
 .departures-list .destination {
-    width: calc(100% - 12.6em);
-    padding-left: .5em;
-    vertical-align: bottom;
-    overflow: hidden;
+    flex: 1;
     position: relative;
-    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
 }
 
 .departures-list .distance {
-    width: 3em;
     color: #444;
     text-align: right;
-    display: inline-block;
     vertical-align: bottom;
 }
 
