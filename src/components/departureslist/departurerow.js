@@ -23,18 +23,16 @@ export default ({
     vehicleType,
     url,
 } = {}) => (
-    <div class="departures-list-row">
-        <a href={url} target="_blank">
-            <span class={`time${realtime ? ' realtime' : ''}`}>
-                <Time time={ realtimeDeparture } />
-            </span>
-            <span class="route">
-                <RouteIdentifier vehicleType={vehicleType} routeName={routeName} />
-            </span>
-            <span class="destination">{ destination }</span>
-            <span class="distance">
-                <Distance distance={distance} />
-            </span>
-        </a>
-    </div>
+    <a class="departures-list-row" href={url} target="_blank">
+        <div class={`time${realtime ? ' realtime' : ''}`}>
+            <Time time={ realtimeDeparture } />
+        </div>
+        <div class="routename">
+            <RouteIdentifier vehicleType={vehicleType} routeName={routeName} />
+        </div>
+        <div class="destination">{ destination }</div>
+        <div class="distance">
+            <Distance distance={distance} />
+        </div>
+    </a>
 );

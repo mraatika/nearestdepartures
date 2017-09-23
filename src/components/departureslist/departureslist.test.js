@@ -18,25 +18,25 @@ it('renders a table header', () => {
 
 it('renders a header with text Lähtee', () => {
     const $ = dom.load(renderToString(<DeparturesList />));
-    const headerText = $('.time-header').text();
+    const headerText = $('.time').text();
     expect(headerText).toBe('Lähtee');
 });
 
 it('renders a header with text Linja', () => {
     const $ = dom.load(renderToString(<DeparturesList />));
-    const headerText = $('.routename-header').text();
+    const headerText = $('.routename').text();
     expect(headerText).toBe('Linja');
 });
 
 it('renders a header with text Määränpää', () => {
     const $ = dom.load(renderToString(<DeparturesList />));
-    const headerText = $('.destination-header').text();
+    const headerText = $('.destination').text();
     expect(headerText).toBe('Määränpää');
 });
 
 it('renders a header with text Pysäkille', () => {
     const $ = dom.load(renderToString(<DeparturesList />));
-    const headerText = $('.distance-header').text();
+    const headerText = $('.distance').text();
     expect(headerText).toBe('Pysäkille');
 });
 

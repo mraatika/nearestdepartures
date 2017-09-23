@@ -41,7 +41,6 @@ export default class DeparturesList extends Component {
    * @param {string} propName Name of the prop to sort by
    */
   updateSortProps(propName) {
-    console.log(propName);
     // if sorted with same prop as before then switch sort mode asc <--> desc
     const sortDir = this.state.sortProp === propName ? (this.state.sortDir * -1) : 1;
     // set sort props to state and then sort departures

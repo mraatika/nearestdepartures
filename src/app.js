@@ -12,6 +12,7 @@ import { findGPSLocation, stopLocating } from './services/locationservice';
 import { lookupAddress, searchAddress } from './services/addresssearchservice';
 import formatError, { POSITION_ERROR } from './utils/formaterror';
 import { VEHICLE_TYPE, LOCATION_MAGIC_WORD, DEFAULT_RANGE, BATCH_INTERVAL } from './constants/constants';
+import AccuracyIndicator from './components/common/accuracyindicator';
 import './app.css';
 
 /**
@@ -247,7 +248,7 @@ class App extends Component {
    * @returns {string} markup
    */
   render() {
-    const { filtered, filters, error, addressSearchTerm, loading, departureUpdateTime } = this.state;
+    const { filtered, filters, error, location, addressSearchTerm, loading, departureUpdateTime } = this.state;
 
     return (
       <div class="app-content">
@@ -260,6 +261,8 @@ class App extends Component {
             address={addressSearchTerm}
             onSearch={this.searchForAddress.bind(this)}
             clearAddressSearchTerm={this.clearAddressSearchTerm.bind(this)} />
+
+          {location && <AccuracyIndicator accuracy={location.accuracy} />}
 
           <DepartureFilter
             filters={allVehicleTypes}

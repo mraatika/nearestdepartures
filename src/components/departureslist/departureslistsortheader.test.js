@@ -3,29 +3,29 @@ import { renderToString } from 'inferno-server';
 import dom from 'cheerio';
 import DeparturesListSortHeader from './departureslistsortheader';
 
-it('renders a span element', () => {
+it('renders a div element', () => {
     const $ = dom.load(renderToString(<DeparturesListSortHeader />));
-    const element = $('span.header');
+    const element = $('div.header');
     expect(element.length).toEqual(1);
 });
 
 it('renders span element with text', () => {
     const text = 'HeaderText';
     const $ = dom.load(renderToString(<DeparturesListSortHeader text={text} />));
-    const element = $('span.header');
+    const element = $('div.header');
     expect(element.text()).toEqual(text);
 });
 
 it('has class related to given propName', () => {
     const propName = 'time';
     const $ = dom.load(renderToString(<DeparturesListSortHeader propName={propName} />));
-    const element = $('span.header');
-    expect(element.hasClass(`${propName}-header`)).toEqual(true);
+    const element = $('div.header');
+    expect(element.hasClass(`${propName}`)).toEqual(true);
 });
 
 it('is tabbable', () => {
     const $ = dom.load(renderToString(<DeparturesListSortHeader />));
-    const element = $('span.header');
+    const element = $('div.header');
     expect(element.attr('tabindex')).toEqual('0');
 });
 
@@ -79,12 +79,12 @@ it('does not call onClick callback on other key press', () => {
 
 it('text span does not have classname active when props.active is false', () => {
     const $ = dom.load(renderToString(<DeparturesListSortHeader active={false} />));
-    const element = $('span.header > span');
+    const element = $('div.header > span');
     expect(element.hasClass('active')).toEqual(false);
 });
 
 it('text span has classname active when props.active is true', () => {
     const $ = dom.load(renderToString(<DeparturesListSortHeader active={true} />));
-    const element = $('span.header > span');
+    const element = $('div.header > span');
     expect(element.hasClass('active')).toEqual(true);
 });
