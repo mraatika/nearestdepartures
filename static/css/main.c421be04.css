@@ -82,6 +82,9 @@ header .icon {
 }
 
 .departures-list-header {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
     margin-bottom: 6px;
     white-space: nowrap;
 }
@@ -95,9 +98,6 @@ header .icon {
 }
 
 .departures-list-header .header {
-    display: inline-block;
-    margin-right: .5em;
-
     font-weight: 600;
     color: #333;
 
@@ -106,79 +106,70 @@ header .icon {
        -moz-user-select: none;
         -ms-user-select: none;
             user-select: none;
-    outline: none;
 }
 
 .departures-list-row {
     position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-line-pack: justify;
+        align-content: space-between;
+    padding: .4em 0;
+    margin: 0;
+
     overflow-y: visible;
     white-space: nowrap;
     background: #fff;
-    line-height: 1.8;
-    margin: 0;
-    padding-left: 0;
-    letter-spacing: 0;
-    padding: .4em 0;
-
     border-bottom: 1px solid #ddd;
+    line-height: 1.8;
+    letter-spacing: 0;
+}
+
+.departures-list-header .header,
+.departures-list-row > div {
+    padding: 0 .5rem;
+}
+
+.departures-list-header .header:first-child,
+.departures-list-row > div:first-child {
+    padding-left: 0;
+}
+
+.departures-list-header .header:last-child,
+.departures-list-row > div:last-child {
+    padding-right: 0;
 }
 
 .departures-list-row:last-child {
     border: 0;
 }
 
-.departures-list .time-header,
 .departures-list .time {
-    width: 3.25em;
-    padding-right: .5em;
+    width: 3rem;
 }
 
-.departures-list .routename-header,
-.departures-list .route {
-    width: 5em;
-}
-
-.departures-list .routename-header {
-    margin-left: .4em;
-}
-
-.departures-list .destination-header {
-    width: calc(100% - 15.5em);
-    padding-left: .5em;
-}
-
-.departures-list .distance-header {
-    margin-right: 0;
-}
-
-.departures-list .time {
-    display: inline-block;
-    text-align: left;
-    vertical-align: bottom;
-}
-
-.departures-list .route {
-    display: inline-block;
-    padding-left: .25em;
+.departures-list .routename {
+    width: 3.5rem;
     overflow: hidden;
-    vertical-align: middle;
+}
+
+.departures-list-row .routename {
     font-weight: 600;
 }
 
 .departures-list .destination {
-    width: calc(100% - 12.6em);
-    padding-left: .5em;
-    vertical-align: bottom;
-    overflow: hidden;
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
     position: relative;
-    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
 }
 
 .departures-list .distance {
-    width: 3em;
     color: #444;
     text-align: right;
-    display: inline-block;
     vertical-align: bottom;
 }
 
@@ -205,7 +196,7 @@ header .icon {
 
 .range-filter-wrapper {
     padding: 1em 0;
-    margin: 1.5em 0;
+    margin: 1em 0;
 }
 
 .range-filter-wrapper label {
@@ -391,7 +382,7 @@ li.selected .suggestion-locality {
     width: 100%;
     border: 1px solid #eee;
     padding-right: 82px;
-    padding-left: 5px;
+    padding-left: .5rem;
     outline: none;
     box-sizing: border-box;
 }
@@ -459,21 +450,37 @@ li.selected .suggestion-locality {
 .suggestions {
     position: relative;
 }
+.location-accuracy {
+    font-size: .9rem;
+    margin-top: .5rem;
+    text-align: right;
+}
+
+.location-accuracy.warning {
+    color: #A07903;
+}
+
+.location-accuracy.danger {
+    color: #a94442;
+}
+
+.location-accuracy-attention {
+    visibility: hidden;
+    display: inline-block;
+    font-size: 1.2rem;
+    text-align: center;
+    margin-right: .3rem;
+    -webkit-transform: scaleX(2);
+        -ms-transform: scaleX(2);
+            transform: scaleX(2);
+}
+
+.location-accuracy.danger .location-accuracy-attention,
+.location-accuracy.warning .location-accuracy-attention {
+    visibility: visible;
+}
 #app {
   height: 100%;
-}
-
-a {
-  color: #fff;
-}
-
-a:visited {
-  color: inherit;
-}
-
-h1 {
-  margin: 10px 0;
-  font: normal 2em Georgia, 'Times New Roman', Times, serif;
 }
 
 main {
@@ -501,28 +508,6 @@ main {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-}
-
-.pull-left {
-    float: left;
-}
-
-.pull-right {
-    float: right;
-}
-
-.hidden {
-  display: none;
-}
-
-.clear {
-    clear: both;
-}
-
-.accessibility-hidden {
-    position: absolute;
-    left: -9999px;
-    top: -9999px;
 }
 
 .realtime {
@@ -570,20 +555,58 @@ main {
 }
 html,
 body {
-  height: 100%;
+    height: 100%;
 }
 
 html {
-  font-size: 100%;
+    font-size: 100%;
 }
 
 body {
-  margin: 0;
-  padding: 0;
-  font-size: 16px;
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
 
-  font-family: "Open Sans", arial, verdana, tahoma, sans-serif;
+    font-family: "Open Sans", arial, verdana, tahoma, sans-serif;
 }
 
+h1 {
+    margin: 10px 0;
+    font: normal 2em Georgia, 'Times New Roman', Times, serif;
+}
 
-/*# sourceMappingURL=main.1c0dd5f1.css.map*/
+a {
+    color: #fff;
+}
+
+a:visited {
+    color: inherit;
+}
+
+input {
+    font-size: inherit;
+}
+
+.pull-left {
+    float: left;
+}
+
+.pull-right {
+    float: right;
+}
+
+.hidden {
+    display: none;
+}
+
+.clear {
+    clear: both;
+}
+
+.accessibility-hidden {
+    position: absolute;
+    left: -9999px;
+    top: -9999px;
+}
+
+/*# sourceMappingURL=main.c421be04.css.map*/
