@@ -1,6 +1,8 @@
 {
   "main.css": "static/css/main.1aea4444.css",
-  "main.js": "static/js/main.b4a92d08.js",
+  "main.css.map": "static/css/main.1aea4444.css.map",
+  "main.js": "static/js/main.beccd42b.js",
+  "main.js.map": "static/js/main.beccd42b.js.map",
   "static/media/icons.svg": "static/media/icons.7cc3ba83.svg",
   "static/media/spinner.svg": "static/media/spinner.8fd60d77.svg"
 }
