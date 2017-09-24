@@ -33,7 +33,7 @@ export default class AddressSearch extends Component {
     if (newProps.address !== this.props.address) {
       this.setState({
         searchTerm: newProps.address,
-        selectedSuggestion: null,
+        selectedSuggestion: undefined,
       });
 
       if (!newProps.address) {
@@ -198,6 +198,7 @@ export default class AddressSearch extends Component {
             onBlur={this.hideSuggestions.bind(this)}
             value={searchTerm} />
           <button
+            type="button"
             className="address-search-clear"
             onClick={this.onClearClick.bind(this)}>
             <span>x</span>
