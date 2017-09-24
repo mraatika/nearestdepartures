@@ -190,8 +190,8 @@ class App extends Component {
    * Search coordinates for given address/poi/etc.
    * @param {string} [address]
    */
-  searchForAddress({ searchTerm = '', location = null }) {
-    this.setState({ loading: true, addressSearchTerm: searchTerm });
+  searchForAddress({ searchTerm = '', location }) {
+    this.setState({ location: undefined, loading: true, addressSearchTerm: searchTerm });
 
     // stop location search if still running
     stopLocating();

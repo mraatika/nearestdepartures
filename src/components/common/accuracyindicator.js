@@ -21,7 +21,7 @@ const chooseColorClass = (accuracy) => {
 const AccuracyIndicator = ({ accuracy }) => (
     <div class={`location-accuracy ${chooseColorClass(accuracy)}`}>
         <span class="location-accuracy-attention">!</span>
-        {`Paikannuksen tarkkuus: ${Math.round(accuracy)}m`}
+        {`Paikannuksen tarkkuus: ${Math.round(+accuracy || 0)}m`}
     </div>
 );
 
