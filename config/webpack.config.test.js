@@ -1,17 +1,20 @@
 'use strict';
 
 const autoprefixer = require('autoprefixer');
+const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const InterpolateHtmlPlugin = require('inferno-dev-utils/InterpolateHtmlPlugin');
+const eslintFormatter = require('inferno-dev-utils/eslintFormatter');
+const ModuleScopePlugin = require('inferno-dev-utils/ModuleScopePlugin');
 const paths = require('./paths');
 const getClientEnvironment = require('./env');
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // It requires a trailing slash, or the file assets will get an incorrect path.
-const publicPath = 'https://mraatika.github.io/nearestdepartures/';
+const publicPath = './';
 // Some apps do not use client-side routing with pushState.
 // For these, "homepage" can be set to "." to enable relative asset paths.
 const shouldUseRelativeAssetPaths = publicPath === './';
@@ -45,8 +48,6 @@ const extractTextPluginOptions = shouldUseRelativeAssetPaths
 module.exports = {
   // Don't attempt to continue if there are any errors.
   bail: true,
-  // We generate sourcemaps in production. This is slow but gives good results.
-  // You can exclude the *.map files from the build during deployment.
   devtool: 'source-map',
   // In production, we only want to load the polyfills and the app code.
   entry: [require.resolve('./polyfills'), paths.appIndexJs],
@@ -60,29 +61,49 @@ module.exports = {
     chunkFilename: 'static/js/[name].[chunkhash:8].chunk.js',
     // We inferred the "public path" (such as / or /my-project) from homepage.
     publicPath: publicPath,
+    // Point sourcemap entries to original disk location (format as URL on Windows)
+    devtoolModuleFilenameTemplate: info =>
+      path
+        .relative(paths.appSrc, info.absoluteResourcePath)
+        .replace(/\\/g, '/'),
   },
   resolve: {
-    alias: {
-      react: 'inferno-compat',
-      'react-dom': 'inferno-compat',
-    },
     // This allows you to set a fallback for where Webpack should look for modules.
-    // We read `NODE_PATH` environment variable in `paths.js` and pass paths here.
     // We placed these paths second because we want `node_modules` to "win"
     // if there are any conflicts. This matches Node resolution mechanism.
     // https://github.com/infernojs/create-inferno-app/issues/253
-    modules: ['node_modules', paths.appNodeModules].concat(paths.nodePaths),
+    modules: ['node_modules', paths.appNodeModules].concat(
+      // It is guaranteed to exist because we tweak it in `env.js`
+      process.env.NODE_PATH.split(path.delimiter).filter(Boolean)
+    ),
     // These are the reasonable defaults supported by the Node ecosystem.
     // We also include JSX as a common component filename extension to support
     // some tools, although we do not recommend using it, see:
     // https://github.com/infernojs/create-inferno-app/issues/290
-    extensions: ['.js', '.json', '.jsx'],
-  },
+    // `web` extension prefixes have been added for better support
+    // for React Native Web.
+    extensions: ['.web.js', '.js', '.json', '.web.jsx', '.jsx'],
+    alias: {
+      react: 'inferno-compat',
+      'react-dom': 'inferno-compat',
 
+    },
+    plugins: [
+      // Prevents users from importing files from outside of src/ (or node_modules/).
+      // This often causes confusion because we only process files within src/ with babel.
+      // To fix this, we prevent you from importing files out of src/ -- if you'd like to,
+      // please link the files into your node_modules/ and let module-resolution kick in.
+      // Make sure your source files are compiled, as they will not be processed in any way.
+      new ModuleScopePlugin(paths.appSrc),
+    ],
+  },
   module: {
+    strictExportPresence: true,
     rules: [
-      // Disable require.ensure as it's not a standard language feature.
-      { parser: { requireEnsure: false } },
+      // TODO: Disable require.ensure as it's not a standard language feature.
+      // We are waiting for https://github.com/facebookincubator/create-inferno-app/issues/2176.
+      // { parser: { requireEnsure: false } },
+
       // First, run the linter.
       // It's important to do this before Babel processes the JS.
       {
@@ -90,17 +111,20 @@ module.exports = {
         enforce: 'pre',
         use: [
           {
+            options: {
+              formatter: eslintFormatter,
 
-            loader: 'eslint-loader',
+            },
+            loader: require.resolve('eslint-loader'),
           },
         ],
         include: paths.appSrc,
       },
       // ** ADDING/UPDATING LOADERS **
-      // The "url" loader handles all assets unless explicitly excluded.
+      // The "file" loader handles all assets unless explicitly excluded.
       // The `exclude` list *must* be updated with every change to loader extensions.
       // When adding a new loader, you must add its `test`
-      // as a new entry in the `exclude` list in the "url" loader.
+      // as a new entry in the `exclude` list in the "file" loader.
 
       // "file" loader makes sure those assets end up in the `build` folder.
       // When you `import` an asset, you get its filename.
@@ -115,7 +139,7 @@ module.exports = {
           /\.jpe?g$/,
           /\.png$/,
         ],
-        loader: 'file-loader',
+        loader: require.resolve('file-loader'),
         options: {
           name: 'static/media/[name].[hash:8].[ext]',
         },
@@ -124,7 +148,7 @@ module.exports = {
       // assets smaller than specified size as data URLs to avoid requests.
       {
         test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-        loader: 'url-loader',
+        loader: require.resolve('url-loader'),
         options: {
           limit: 10000,
           name: 'static/media/[name].[hash:8].[ext]',
@@ -134,7 +158,11 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         include: paths.appSrc,
-        loader: 'babel-loader'
+        loader: require.resolve('babel-loader'),
+        options: {
+
+          compact: true,
+        },
       },
       // The notation here is somewhat confusing.
       // "postcss" loader applies autoprefixer to our CSS.
@@ -153,26 +181,32 @@ module.exports = {
         loader: ExtractTextPlugin.extract(
           Object.assign(
             {
-              fallback: 'style-loader',
+              fallback: require.resolve('style-loader'),
               use: [
                 {
-                  loader: 'css-loader',
+                  loader: require.resolve('css-loader'),
                   options: {
                     importLoaders: 1,
+                    minimize: true,
+                    sourceMap: true,
                   },
                 },
                 {
-                  loader: 'postcss-loader',
+                  loader: require.resolve('postcss-loader'),
                   options: {
-                    ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
+                    // Necessary for external CSS imports to work
+                    // https://github.com/facebookincubator/create-react-app/issues/2677
+                    ident: 'postcss',
                     plugins: () => [
+                      require('postcss-flexbugs-fixes'),
                       autoprefixer({
                         browsers: [
                           '>1%',
                           'last 4 versions',
                           'Firefox ESR',
-                          'not ie < 9', // Inferno doesn't support IE8 anyway
+                          'not ie < 11',
                         ],
+                        flexbox: 'no-2009',
                       }),
                     ],
                   },
@@ -185,7 +219,7 @@ module.exports = {
         // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
       },
       // ** STOP ** Are you adding a new loader?
-      // Remember to add the new extension(s) to the "url" loader exclusion list.
+      // Remember to add the new extension(s) to the "file" loader exclusion list.
     ],
   },
   plugins: [
@@ -217,6 +251,7 @@ module.exports = {
     // It is absolutely essential that NODE_ENV was set to production here.
     // Otherwise Inferno will be compiled in the very slow development mode.
     new webpack.DefinePlugin(env.stringified),
+
     // Note: this won't work without ExtractTextPlugin.extract(..) in `loaders`.
     new ExtractTextPlugin({
       filename: cssFilename,
@@ -231,6 +266,7 @@ module.exports = {
   // Some libraries import Node modules but don't use them in the browser.
   // Tell Webpack to provide empty mocks for them so importing them works.
   node: {
+    dgram: 'empty',
     fs: 'empty',
     net: 'empty',
     tls: 'empty',
