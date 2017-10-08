@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /appcache
+Disallow: /icons
+Disallow: /sw.js
