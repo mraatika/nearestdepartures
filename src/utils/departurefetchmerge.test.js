@@ -11,8 +11,7 @@ beforeEach(() => {
 });
 
 it('returns a Promise', () => {
-    const result = fetchDepartures();
-    expect(result).toBeInstanceOf(Promise);
+    return fetchDepartures();
 });
 
 describe('fetching', () => {

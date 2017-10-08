@@ -1,31 +1,31 @@
 import geolocate from 'mock-geolocation';
 import { findGPSLocation, stopLocating } from './locationservice';
 
-global.Promise = require.requireActual('promise');
 
 describe('when unsupported', () => {
     it('throws when geolocation api is unsupported', () => {
-        expect(findGPSLocation()).toThrow();
+        return findGPSLocation().catch(e => expect(e.message).toEqual('Selain ei tue paikannusta'));
     });
 });
 
 describe('when supported', () => {
     beforeEach(() => geolocate.use());
+
     afterEach(() => {
         stopLocating();
         geolocate.restore();
     });
 
     it('calls watchPosition', () => {
-    navigator.geolocation.watchPosition = jest.fn();
+        navigator.geolocation.watchPosition = jest.fn();
 
         findGPSLocation();
         expect(navigator.geolocation.watchPosition).toHaveBeenCalled();
     });
 
-    it('resolves when current position is found', async () => {
+    it('resolves when current position is found', () => {
         navigator.geolocation.watchPosition = jest.fn(resolve => resolve({ coords: {} }));
-        await findGPSLocation();
+        return findGPSLocation();
     });
 
     it('returns location when it is found', async () => {
@@ -42,10 +42,11 @@ describe('when supported', () => {
     it('clears watcher when current position is found', async () => {
         const watcherId = '123';
 
-    navigator.geolocation.watchPosition = jest.fn((resolve) => {
+        navigator.geolocation.watchPosition = jest.fn((resolve) => {
             setTimeout(() => resolve({ coords: {} }), 0);
             return watcherId;
         });
+
         navigator.geolocation.clearWatch = jest.fn();
 
         await findGPSLocation();
@@ -61,9 +62,10 @@ describe('when supported', () => {
         expect(navigator.geolocation.watchPosition).toHaveBeenCalledTimes(1);
     });
 
-    it('throws when current position is not found', async () => {
-        navigator.geolocation.watchPosition = jest.fn((resolve, reject) => reject());
-        expect(findGPSLocation()).toThrow();
+    it('throws when current position is not found', () => {
+        const error = new Error();
+        navigator.geolocation.watchPosition = jest.fn((resolve, reject) => reject(error));
+        return findGPSLocation().catch(e => expect(e).toBe(error));
     });
 
     it('stops location search with stopLocating if a watcher is initiated', async () => {

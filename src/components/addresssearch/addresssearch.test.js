@@ -103,7 +103,7 @@ describe('onComponentWillReceiveProps', () => {
     tree.children.state.selectedSuggestion = {};
 
     tree.children.componentWillReceiveProps({  address: 'Street 2, City' });
-    expect(tree.children.state.selectedSuggestion).toEqual(null);
+    expect(tree.children.state.selectedSuggestion).toEqual(undefined);
   });
 
   it('should not clear last selected suggestion if address is the same', () => {
