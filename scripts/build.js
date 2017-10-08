@@ -1,8 +1,5 @@
 'use strict';
 
-// Do this as the first thing so that any code reading it knows the right env.
-process.env.NODE_ENV = 'production';
-
 // Makes the script crash on unhandled rejections instead of silently
 // ignoring them. In the future, promise rejections that are not handled will
 // terminate the Node.js process with a non-zero exit code.
@@ -21,7 +18,6 @@ const fs = require('fs-extra');
 const path = require('path');
 const url = require('url');
 const webpack = require('webpack');
-const config = require('../config/webpack.config.prod');
 const paths = require('../config/paths');
 const checkRequiredFiles = require('inferno-dev-utils/checkRequiredFiles');
 const FileSizeReporter = require('inferno-dev-utils/FileSizeReporter');
@@ -32,8 +28,13 @@ const useYarn = fs.existsSync(paths.yarnLockFile);
 
 // Warn and crash if required files are missing
 if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
-  process.exit(1);
+    process.exit(1);
 }
+
+const config = process.env.NODE_ENV === 'production'
+    ? require('../config/webpack.config.prod')
+    : require('../config/webpack.config.test');
+
 
 // First, read the current file sizes in build directory.
 // This lets us display how much they changed later.

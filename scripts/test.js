@@ -1,6 +1,6 @@
 'use strict';
 
-process.env.NODE_ENV = 'test';
+process.env.NODE_ENV = 'unittest';
 process.env.PUBLIC_URL = '';
 
 // Makes the script crash on unhandled rejections instead of silently
