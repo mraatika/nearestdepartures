@@ -2,8 +2,9 @@ header {
   background-color: #007ac9;
   border-bottom: 10px solid #005993;
   color: #fff;
-  text-align: center;
+  text-align: left;
   margin-bottom: 36px;
+  padding: 0 1rem;
 }
 
 header .icon {
@@ -11,6 +12,18 @@ header .icon {
   height: 60px;
   margin-right: 6px;
   vertical-align: bottom;
+}
+
+header .favourites {
+  position: absolute;
+  text-align: right;
+  top: 1rem;
+  left: 1rem;
+  right: 1rem;
+}
+
+.app-description {
+  display: none;
 }
 
 .app-description:before,
@@ -36,4 +49,14 @@ header .icon {
 .app-name {
   font-family: 'Patua One', cursive;
   text-transform: lowercase;
+}
+
+@media (min-width: 720px) {
+  header {
+    text-align: center;
+  }
+
+  .app-description {
+    display: block;
+  }
 }

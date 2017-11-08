@@ -1,0 +1,118 @@
+.favourites-button {
+  color: #fff;
+}
+
+.favourites .favourites-toggle {
+  margin-left: -8px;
+}
+
+.favourites-modal-wrapper {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  visibility: hidden;
+  z-index: 100;
+}
+
+.favourites-modal-wrapper.visible {
+  visibility: visible;
+}
+
+.favouriteslist {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  max-width: 750px;
+  padding: 1rem;
+  margin: 0 auto;
+  z-index: 101;
+  color: #333;
+  background-color: #fff;
+  box-shadow: 0 0 30px #444;
+  border-radius: 2px;
+}
+
+.favouriteslist-header {
+  display: flex;
+  align-items: flex-start;
+}
+
+.favouriteslist h2 {
+  font-family: "Patua One", cursive;
+  text-align: left;
+  margin: 0;
+  flex: 1;
+}
+
+.favouriteslist-close-button {
+  text-decoration: underline;
+  background: none;
+  border: 0;
+  color: #139cd4;
+  cursor: pointer;
+}
+
+.favouriteslist ul {
+  padding: 0;
+}
+
+.favouriteslist li {
+  position: relative;
+  display: flex;
+  padding: .4em 0;
+  overflow-y: visible;
+  white-space: nowrap;
+  background: #fff;
+  line-height: 1.8;
+  letter-spacing: 0;
+}
+
+.favouriteslist-item.selected:before {
+  content: '●';
+}
+
+.favouriteslist li button {
+  text-align: left;
+}
+
+.favouriteslist li > div:first-child {
+  flex: 1;
+}
+
+.favouriteslist .favouriteslist-item-remove {
+  font-size: 1.2rem;
+  color: rgb(161, 2, 2);
+}
+
+.favouriteslist li:not(.favouriteslist-placeholder) {
+  border-bottom: 1px solid #ddd;
+}
+
+.favouriteslist-item-label {
+  overflow: hidden;
+}
+
+.favouriteslist-placeholder {
+  font-style: italic;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, .6);
+}
+
+@media (min-width: 750px) {
+  .favouriteslist {
+    top: 5%;
+    bottom: 5%;
+    padding: 2rem;
+  }
+}

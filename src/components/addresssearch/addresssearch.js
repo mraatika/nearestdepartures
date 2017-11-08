@@ -2,7 +2,8 @@ import debounce from 'lodash/debounce';
 import Component from 'inferno-component';
 import SuggestionsList from './suggestionslist';
 import { searchAddress } from '../../services/addresssearchservice';
-import { MAX_ADDRESS_SUGGESTIONS } from '../../constants/constants';
+import { MAX_ADDRESS_SUGGESTIONS, LOCATION_MAGIC_WORD } from '../../constants/constants';
+import { findAddressByCurrentLocation, findAddressBySearchTerm } from './model';
 import './addresssearch.css';
 
 /**
@@ -18,28 +19,15 @@ export default class AddressSearch extends Component {
    */
   constructor(props) {
     super(props);
-    this.state = { searchTerm: props.address, suggestions: [] };
+    this.state = { searchTerm: '', suggestions: [] };
     this.debouncedFetchSuggestions = debounce(this.fetchSuggestions, 300);
   }
 
   /**
-   * Address changes when location search succeeds
-   * @param {Object} newProps
-   * @param {string} newProps.address
+   * Search current location and search departures when this component was mounted
    */
-  componentWillReceiveProps(newProps) {
-    // only update when address actually changes so
-    // it won't override text written to the input
-    if (newProps.address !== this.props.address) {
-      this.setState({
-        searchTerm: newProps.address,
-        selectedSuggestion: undefined,
-      });
-
-      if (!newProps.address) {
-        this.addressInput.focus();
-      }
-    }
+  componentDidMount() {
+    this.doSubmitAction();
   }
 
   /**
@@ -51,22 +39,30 @@ export default class AddressSearch extends Component {
 
     this.hideSuggestions();
 
-    // if a suggestion is selected then use that
-    // as search term otherwise find address based on search term
-    const param = selectedSuggestion ? {
-      location: selectedSuggestion.location,
-      searchTerm: selectedSuggestion.label,
-    } : { searchTerm };
+    // if a suggestion was selected then we can use it to search for departures
+    if (selectedSuggestion) {
+      return this.props.onSearch(selectedSuggestion);
+    }
 
-    this.props.onSearch(param);
+    // search address with a search string or current location
+    const promise = searchTerm && searchTerm.toLocaleLowerCase() !== LOCATION_MAGIC_WORD
+      ? findAddressBySearchTerm(searchTerm)
+      : findAddressByCurrentLocation()
+
+    promise
+      .then(address => {
+        this.setState({ searchTerm: address.label })
+        this.props.onSearch(address)
+      })
+      .catch(this.props.onError);
   }
 
   /**
    * Set suggestion selected
    * @param {Object} suggestion
    */
-  selectSuggestion(suggestion) {
-    this.setState({ selectedSuggestion: suggestion, searchTerm: suggestion.label });
+  selectSuggestion(suggestion, callback) {
+    this.setState({ selectedSuggestion: suggestion, searchTerm: suggestion.label }, callback);
   }
 
   /**
@@ -117,7 +113,7 @@ export default class AddressSearch extends Component {
 
   onClearClick(e) {
     e.preventDefault();
-    this.props.clearAddressSearchTerm();
+    this.setState({ searchTerm: '', selectedSuggestion: null });
   }
 
   /**
@@ -143,8 +139,7 @@ export default class AddressSearch extends Component {
    * @param {Object} suggestion
    */
   onSuggestionClick(suggestion) {
-    this.selectSuggestion(suggestion);
-    this.doSubmitAction();
+    this.selectSuggestion(suggestion, this.doSubmitAction);
   }
 
   /**
@@ -186,6 +181,7 @@ export default class AddressSearch extends Component {
       <form
         onSubmit={this.onSubmit.bind(this)}
         onKeyUp={this.onKeyEvent.bind(this)}>
+
         <div class="address-search">
           <input
             ref={c => this.addressInput = c}

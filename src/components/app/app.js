@@ -16,7 +16,7 @@ import './app.css';
  */
 const DEFAULT_STATE = {
   loading: true,
-  addressSearchTerm: '',
+  address: undefined,
   error: null,
   filters: {
     range: DEFAULT_RANGE,
@@ -42,7 +42,6 @@ class App extends Component {
    * Find location and fetch departures when component has mounted
    */
   componentDidMount() {
-    this.searchForDepartures(this.state);
     // batch departures in every x seconds
     setInterval(() => this.batchDeparturesToState(), BATCH_INTERVAL);
   }
@@ -80,19 +79,12 @@ class App extends Component {
    * Search coordinates for given address/poi/etc.
    * @param {string} [address]
    */
-  searchForDepartures({ searchTerm = '', location }) {
-    this.setState({ location: undefined, loading: true, addressSearchTerm: searchTerm });
+  searchForDepartures(address) {
+    this.setState({ address, loading: true });
 
-    model.findDepartures(this.state, searchTerm, location)
+    model.findDepartures(this.state, address.location)
       .then(this.setState.bind(this))
-      .catch(this.onError.bind(this))
-  }
-
-  /**
-   * Empty the address search bar
-   */
-  clearAddressSearchTerm() {
-    this.setState({ addressSearchTerm: '' });
+      .catch(this.onError.bind(this));
   }
 
   /**
@@ -117,21 +109,24 @@ class App extends Component {
    * @returns {string} markup
    */
   render() {
-    const { filtered, filters, error, location, addressSearchTerm, loading, departureUpdateTime } = this.state;
+    const { filtered, filters, error, address, loading, departureUpdateTime } = this.state;
 
     return (
       <div class="app-content">
-        <Header />
+        <Header
+          address={address}
+          selectLocation={this.searchForDepartures.bind(this)}
+        />
 
         <main>
           {error && <ErrorMessage message={error.message} onClick={this.hideError.bind(this)} />}
 
           <AddressSearch
-            address={addressSearchTerm}
             onSearch={this.searchForDepartures.bind(this)}
-            clearAddressSearchTerm={this.clearAddressSearchTerm.bind(this)} />
+            onError={this.onError.bind(this)}
+          />
 
-          {location && <AccuracyIndicator accuracy={location.accuracy} />}
+          {address && address.location && <AccuracyIndicator accuracy={address.location.accuracy} />}
 
           <DepartureFilter
             filters={model.allVehicleTypes}

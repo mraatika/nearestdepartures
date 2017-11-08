@@ -32,6 +32,10 @@ input {
     font-size: inherit;
 }
 
+.full-width {
+  width: 100%;
+}
+
 .pull-left {
     float: left;
 }
@@ -52,4 +56,11 @@ input {
     position: absolute;
     left: -9999px;
     top: -9999px;
+}
+
+button.text-only-button {
+  background: none;
+  border: 0;
+  font-size: 1rem;
+  cursor: pointer;
 }

@@ -47,7 +47,7 @@ export async function lookupAddress({ latitude, longitude }) {
 
   if (data && data.features.length) {
     const { properties } = data.features[0];
-    return properties.label;
+    return properties;
   }
 
   return null;
