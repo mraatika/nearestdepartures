@@ -17,6 +17,10 @@ export default ({ departureUpdateTime }) => (
           &nbsp;/&nbsp;
           Lähtöjen tiedot ovat HSL:n tarjoamaa <a href="https://digitransit.fi/">avointa dataa</a>.
         </p>
+        <p>
+          <a href="https://github.com/mraatika/nearestdepartures">Github</a>|
+          <a href="https://github.com/mraatika/nearestdepartures/issues">Vikaraportit ja kehitysehdotukset</a>
+        </p>
     </div>
   </footer>
 );
