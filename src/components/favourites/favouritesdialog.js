@@ -8,10 +8,29 @@ import './favourites.css';
  * @class FavouritesList
  * @extends {Component}
  */
-class FavouritesList extends Component {
+class FavouritesDialog extends Component {
+  constructor(props) {
+    super(props);
+    this.onKeyUp = this.onKeyUp.bind(this);
+  }
+
   componentDidUpdate() {
-    // for usability reasons focus on the dialog when toggled visible
-    if (this.props.isVisible) this.dialog.focus();
+    if (this.props.isVisible) {
+      // start listening to keyup events
+      document.body.addEventListener('keyup', this.onKeyUp);
+      // for usability reasons focus on the dialog when toggled visible
+      this.dialog.focus();
+    } else {
+      // stop listening to keyup events
+      document.body.removeEventListener('keyup', this.onKeyUp);
+    }
+  }
+
+  onKeyUp(e) {
+    // close the dialog on esc press
+    if (e.key === 'Escape') {
+      this.props.onClose();
+    }
   }
 
   render() {
@@ -49,4 +68,4 @@ class FavouritesList extends Component {
   }
 }
 
-export default FavouritesList;
+export default FavouritesDialog;

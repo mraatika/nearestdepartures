@@ -1,6 +1,6 @@
 import Component from 'inferno-component';
 import IconButton from '../iconbutton/iconbutton';
-import FavouritesList from './favouriteslist';
+import FavouritesDialog from './favouritesdialog';
 import * as storage from '../../services/storageservice';
 import { areLocationsEqual } from './model';
 
@@ -10,8 +10,8 @@ const initialState = {
 };
 
 class FavouritesListWrapper extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = { ...initialState };
 
@@ -88,7 +88,7 @@ class FavouritesListWrapper extends Component {
           aria-pressed={this.state.isListVisible}
           onClick={this.toggleList} />
 
-        <FavouritesList
+        <FavouritesDialog
           favourites={favourites}
           isVisible={this.state.isListVisible}
           selectFavourite={this.onAddressSelect.bind(this)}
