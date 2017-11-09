@@ -1,6 +1,6 @@
 import { findGPSLocation } from '../../services/locationservice';
 import { lookupAddress, searchAddress } from '../../services/addresssearchservice';
-
+import { MAX_ADDRESS_SUGGESTIONS } from '../../constants/constants';
 /**
  * Find current location and lookup address based on that
  * @async
@@ -23,4 +23,40 @@ export const findAddressByCurrentLocation = async () => {
 export const findAddressBySearchTerm = async (searchTerm) => {
   const result = await searchAddress(searchTerm);
   return result[0];
+}
+
+/**
+ * Fetch a list of address suggestions from the api
+ * @async
+ * @param {string} searchTerm
+ * @return {object} object representing changes in the component state
+ */
+export const fetchSuggestions = async (searchTerm) => {
+  const result = await searchAddress(searchTerm, MAX_ADDRESS_SUGGESTIONS);
+  const sorted = result.sort((a, b) => b.confidence - a.confidence);
+  return { suggestions: sorted };
+}
+
+/**
+ * Select next suggestion.
+ * @param {object} state
+ * @return {object} suggestion
+ */
+export const selectNextSuggestion = (state) => {
+  const { suggestions, selectedSuggestion } = state;
+  const currentIndex = suggestions.indexOf(selectedSuggestion);
+  const nextIndex = ((currentIndex + 1) >= suggestions.length) ? 0 : currentIndex + 1;
+  return suggestions[nextIndex];
+}
+
+/**
+ * Select previous suggestion.
+ * @param {object} state
+ * @return {object} suggestion
+ */
+export const selectPrevSuggestion = (state) => {
+  const { suggestions, selectedSuggestion } = state;
+  const currentIndex = suggestions.indexOf(selectedSuggestion);
+  const prevIndex = [-1, 0].indexOf(currentIndex) > -1 ? (suggestions.length - 1) : (currentIndex - 1);
+  return suggestions[prevIndex];
 }

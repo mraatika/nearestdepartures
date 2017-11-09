@@ -76,6 +76,13 @@ class App extends Component {
   }
 
   /**
+   * Remove address from the state
+   */
+  clearAddress() {
+    this.setState({ address: undefined });
+  }
+
+  /**
    * Search coordinates for given address/poi/etc.
    * @param {string} [address]
    */
@@ -122,8 +129,10 @@ class App extends Component {
           {error && <ErrorMessage message={error.message} onClick={this.hideError.bind(this)} />}
 
           <AddressSearch
+            address={address}
             onSearch={this.searchForDepartures.bind(this)}
             onError={this.onError.bind(this)}
+            clearAddress={this.clearAddress.bind(this)}
           />
 
           {address && address.location && <AccuracyIndicator accuracy={address.location.accuracy} />}
