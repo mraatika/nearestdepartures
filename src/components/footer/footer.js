@@ -10,7 +10,7 @@ import './footer.css';
 export default ({ departureUpdateTime }) => (
   <footer>
     <div class="footer-content">
-        <p class="footer-app-name">{`Julkisilla.info v${process.env.VERSION}`}</p>
+        <p class="footer-app-name">{`Julkisilla.info v${process.env.INFERNO_APP_VERSION}`}</p>
         <p>
           Lähdöt päivitetty&nbsp;
           <i>{departureUpdateTime ? toTimeString(departureUpdateTime) : 'Ei koskaan'}</i>
