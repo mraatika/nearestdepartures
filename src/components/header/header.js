@@ -10,11 +10,13 @@ import Favourites from '../favourites/favourites';
  */
 const Header = ({ address, selectLocation }) => (
   <header>
-    <h1>
-      <VehicleIcon iconName="bus" />
-      <span class="app-name">julkisilla.info</span>
-    </h1>
-    <p class="app-description">Löydä lähimmät julkisen liikenteen lähdöt helposti</p>
+    <div className="header-title-wrapper">
+      <h1>
+        <VehicleIcon iconName="bus" />
+        <span class="app-name">julkisilla.info</span>
+      </h1>
+      <p class="app-description">Löydä lähimmät julkisen liikenteen lähdöt helposti</p>
+    </div>
 
     <Favourites
       address={address}

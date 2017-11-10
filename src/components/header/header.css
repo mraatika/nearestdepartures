@@ -5,6 +5,8 @@ header {
   text-align: left;
   margin-bottom: 36px;
   padding: 0 1rem;
+  display: flex;
+  align-items: center;
 }
 
 header .icon {
@@ -14,12 +16,8 @@ header .icon {
   vertical-align: bottom;
 }
 
-header .favourites {
-  position: absolute;
-  text-align: right;
-  top: 1rem;
-  left: 1rem;
-  right: 1rem;
+.header-title-wrapper {
+  flex: 1;
 }
 
 .app-description {
@@ -54,6 +52,7 @@ header .favourites {
 @media (min-width: 750px) {
   header {
     text-align: center;
+    display: block;
   }
 
   header .icon {
@@ -63,5 +62,13 @@ header .favourites {
 
   .app-description {
     display: block;
+  }
+
+  header .favourites {
+    text-align: right;
+    position: absolute;
+    top: .8rem;
+    left: 1rem;
+    right: 1rem;
   }
 }
