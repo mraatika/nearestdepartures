@@ -87,7 +87,7 @@ class App extends Component {
    * @param {string} [address]
    */
   searchForDepartures(address) {
-    this.setState({ address, loading: true });
+    this.setState({ address, loading: true, error: undefined });
 
     model.findDepartures(this.state, address.location)
       .then(this.setState.bind(this))
