@@ -1,55 +1,101 @@
 html,
 body {
-    height: 100%;
+  height: 100%;
 }
 
 html {
-    font-size: 100%;
+  font-size: 100%;
 }
 
 body {
-    margin: 0;
-    padding: 0;
-    font-size: 16px;
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
 
-    font-family: "Open Sans", arial, verdana, tahoma, sans-serif;
+  font-family: "Open Sans", arial, verdana, tahoma, sans-serif;
 }
 
 h1 {
-    margin: 10px 0;
-    font: normal 2em Georgia, 'Times New Roman', Times, serif;
+  margin: 10px 0;
+  font: normal 2em Georgia, 'Times New Roman', Times, serif;
 }
 
 a {
-    color: #fff;
+  color: #fff;
 }
 
 a:visited {
-    color: inherit;
+  color: inherit;
 }
 
 input {
-    font-size: inherit;
+  font-size: inherit;
+}
+
+.full-width {
+  width: 100%;
 }
 
 .pull-left {
-    float: left;
+  float: left;
 }
 
 .pull-right {
-    float: right;
+  float: right;
 }
 
 .hidden {
-    display: none;
+  display: none;
 }
 
 .clear {
-    clear: both;
+  clear: both;
 }
 
 .accessibility-hidden {
-    position: absolute;
-    left: -9999px;
-    top: -9999px;
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+}
+
+.no-scroll {
+  overflow: hidden;
+}
+
+.info-message {
+  color: #004085;
+  background-color: #b8daff;
+  border: 1px solid rgba(0,0,0,.125);
+  padding: 1rem;
+  border-radius: 2px;
+}
+
+.badge {
+  display: inline-block;
+  padding: .25em .6em;
+  font-family: "Patua One", cursive;
+  font-size: 1.2rem;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25rem;
+}
+
+.badge.info {
+  color: #fff;
+  background-color: #007bff;
+}
+
+button.text-only-button {
+  background: none;
+  border: 0;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+@media (min-width: 750px) {
+  body {
+    font-size: 16px;
+  }
 }

@@ -52,6 +52,16 @@ async function getCurrentPosition() {
 }
 
 /**
+* Cancel location search
+*/
+export function stopLocating() {
+  if (watcherId) {
+    navigator.geolocation.clearWatch(watcherId);
+    watcherId = null;
+  }
+}
+
+/**
 * Find current position using geolocation api
 * @async
 * @returns {Promise}
@@ -64,17 +74,12 @@ export async function findGPSLocation() {
       const position = await getCurrentPosition();
       return position.coords;
     } catch (e) {
+      // stop locating when there is an error to clear the current
+      // watcher and the watcherId
+      stopLocating();
       throw new Error(formatError(POSITION_ERROR, e));
     }
-  }
-}
-
-/**
-* Cancel location search
-*/
-export function stopLocating() {
-  if (watcherId) {
-    navigator.geolocation.clearWatch(watcherId);
-    watcherId = null;
+  } else {
+    throw new Error('Sijainninhaku on jo käynnissä');
   }
 }

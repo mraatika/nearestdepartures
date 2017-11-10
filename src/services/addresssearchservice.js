@@ -10,9 +10,17 @@
 export async function searchAddress(searchTerm, maxResults = 1) {
   const encoded = encodeURIComponent(searchTerm);
   const url = `https://api.digitransit.fi/geocoding/v1/search?text=${encoded}&size=${maxResults}&lang=fi&boundary.rect.min_lat=59.9&boundary.rect.max_lat=60.45&boundary.rect.min_lon=24.3&boundary.rect.max_lon=25.5`;
-  const response = await fetch(url);
+  let response;
 
-  if (!response.ok) throw new Error('Service responded with no ok');
+  try {
+    response = await fetch(url);
+  } catch (e) {
+    throw new Error('Osoitteen haku epäonnistui: Paveluun ei saatu yhteyttä');
+  }
+
+  if (!response.ok) {
+    throw new Error('Osoitteen haku epäonnistui: Palvelu palautti virheen');
+  }
 
   const data = await response.json();
 
@@ -38,17 +46,23 @@ export async function searchAddress(searchTerm, maxResults = 1) {
 */
 export async function lookupAddress({ latitude, longitude }) {
   const queryParams = `point.lat=${encodeURIComponent(latitude)}&point.lon=${encodeURIComponent(longitude)}&size=1`;
-  const response = await fetch(`https://api.digitransit.fi/geocoding/v1/reverse?${queryParams}`);
+  let response;
 
-  if (!response.ok) throw new Error('Osoitteen haku epäonnistui: Osoitepalvelu palautti virheen');
-
-  const data = await response.json();
-  if (!data || !data.features.length) throw new Error('Osoitteen haku epäonnistui: Osoitetta tai paikkaa ei löytynyt');
-
-  if (data && data.features.length) {
-    const { properties } = data.features[0];
-    return properties.label;
+  try {
+    response = await fetch(`https://api.digitransit.fi/geocoding/v1/reverse?${queryParams}`);
+  } catch (e) {
+    throw new Error('Osoitteen haku epäonnistui: Palveluun ei saatu yhteyttä');
   }
 
-  return null;
+  if (!response.ok) {
+    throw new Error('Osoitteen haku epäonnistui: Osoitepalvelu palautti virheen');
+  }
+
+  const data = await response.json();
+
+  if (!data || !data.features.length) {
+    throw new Error('Osoitteen haku epäonnistui: Osoitetta tai paikkaa ei löytynyt');
+  }
+
+  return data.features[0].properties;
 }

@@ -58,7 +58,6 @@
     "jest-fetch-mock": "^1.0.8",
     "mock-geolocation": "^1.0.11",
     "object-assign": "4.1.1",
-    "offline-plugin": "^4.6.2",
     "postcss-flexbugs-fixes": "^3.0.0",
     "postcss-loader": "2.0.6",
     "promise": "8.0.1",

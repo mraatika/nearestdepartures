@@ -1,9 +1,10 @@
 import fputils from '../../utils/fputils';
 import { getNowInSeconds } from '../../utils/utils';
-import { findGPSLocation, stopLocating } from '../../services/locationservice';
-import { lookupAddress, searchAddress } from '../../services/addresssearchservice';
+import { stopLocating } from '../../services/locationservice';
 import { fetchDepartures, batchDepartures } from '../../utils/departurefetchmerge';
-import { LOCATION_MAGIC_WORD, VEHICLE_TYPE } from '../../constants/constants';
+import { VEHICLE_TYPE } from '../../constants/constants';
+
+/** @module AppModel */
 
 /**
  * All vehicle filters
@@ -59,58 +60,16 @@ const findDeparturesByLocation = async (location, state) => {
 }
 
 /**
- * Find location and then departures by location found
- * @async
+ * Find departures by given location
  * @param {object} state Current app state
- * @return {object} object representing state changes
-*/
-const findDeparturesByCurrentLocation = async (state) => {
-  // find location
-  const location = await findGPSLocation();
-  const address = await lookupAddress(location);
-  // and finally fetch all departures
-  return findDeparturesByLocation(location, { ...state, addressSearchTerm: address });
-}
-
-/**
- * Find departures by address search string. First search location with that address and
- * then use that location to fetch departures.
- * @async
- * @param {string} searchTerm
- * @param {object} state Current app state
- * @return {object} object representing state changes
-*/
-const findDeparturesByAddress = async (searchTerm, state) => {
-  console.log(searchTerm, state.filters);
-  const result = await searchAddress(searchTerm);
-  const { location, label } = result[0];
-  return findDeparturesByLocation(location, { ...state, addressSearchTerm: label });
-}
-
-/**
- * Find departures. Select correct method for search depending on given parameters.
- * @param {object} state Current app state
- * @param {string} searchTerm
  * @param {object} location
  * @return {object} object representing state changes
  */
-export const findDepartures = async(state, searchTerm, location) => {
+export const findDepartures = async(state, location) => {
   // stop location search if still running
   stopLocating();
-
   // search departures by given location
-  if (location) {
-    console.log('by location');
-    return findDeparturesByLocation(location, state);
-  }
-
-  // search departures by address search term
-  if (searchTerm && searchTerm.toLocaleLowerCase() !== LOCATION_MAGIC_WORD) {
-    return findDeparturesByAddress(searchTerm, state);
-  }
-
-  // search departures by current location
-  return findDeparturesByCurrentLocation(state);
+  return findDeparturesByLocation(location, state);
 }
 
 /**
@@ -132,7 +91,7 @@ export const batchDeparturesToState = async (state) => {
  */
 export const updateVehicleFilters = (type, multiselect, state) => {
   const { filters } = state;
-  const { vehicleTypes: current } = filters;
+  const { vehicleTypes: current = [] } = filters;
   const currentToggled = current.indexOf(type) > -1;
 
   const activeFilters = fputils.ifThenElse(

@@ -1,14 +1,19 @@
 import debounce from 'lodash/debounce';
 import Component from 'inferno-component';
 import SuggestionsList from './suggestionslist';
-import { searchAddress } from '../../services/addresssearchservice';
-import { MAX_ADDRESS_SUGGESTIONS } from '../../constants/constants';
+import { LOCATION_MAGIC_WORD } from '../../constants/constants';
+import * as model from './model';
 import './addresssearch.css';
 
 /**
  * AddressSearch component for address input.
  * @class AddressSearch
  * @extends {Component}
+ * @param {object} props
+ * @param {object} props.address
+ * @param {function} props.onSearch
+ * @param {function} props.onError
+ * @param {function} props.clearAddress
  */
 export default class AddressSearch extends Component {
   /**
@@ -18,25 +23,33 @@ export default class AddressSearch extends Component {
    */
   constructor(props) {
     super(props);
-    this.state = { searchTerm: props.address, suggestions: [] };
+    this.state = { searchTerm: props.address ? props.address.label : '', suggestions: [] };
     this.debouncedFetchSuggestions = debounce(this.fetchSuggestions, 300);
   }
 
   /**
-   * Address changes when location search succeeds
-   * @param {Object} newProps
-   * @param {string} newProps.address
+   * Search current location and search departures when this component was mounted
    */
-  componentWillReceiveProps(newProps) {
-    // only update when address actually changes so
-    // it won't override text written to the input
-    if (newProps.address !== this.props.address) {
+  componentDidMount() {
+    this.doSubmitAction();
+  }
+
+  /**
+   * Invoked when props change. Address is hosted in the ancestor component
+   * so whenever it updates the search term in the search field should update too
+   * @param {object} nextProps
+   */
+  componentWillReceiveProps(nextProps) {
+    const { address } = nextProps;
+
+    if (address !== this.props.address) {
       this.setState({
-        searchTerm: newProps.address,
+        searchTerm: address ? address.label : '',
         selectedSuggestion: undefined,
       });
 
-      if (!newProps.address) {
+      // if the address was cleared then focus on address input
+      if (!address) {
         this.addressInput.focus();
       }
     }
@@ -51,42 +64,19 @@ export default class AddressSearch extends Component {
 
     this.hideSuggestions();
 
-    // if a suggestion is selected then use that
-    // as search term otherwise find address based on search term
-    const param = selectedSuggestion ? {
-      location: selectedSuggestion.location,
-      searchTerm: selectedSuggestion.label,
-    } : { searchTerm };
+    // if a suggestion was selected then we can use it to search for departures
+    if (selectedSuggestion) {
+      return this.props.onSearch(selectedSuggestion);
+    }
 
-    this.props.onSearch(param);
-  }
+    // search address with a search string or current location
+    const promise = searchTerm && searchTerm.toLowerCase() !== LOCATION_MAGIC_WORD
+      ? model.findAddressBySearchTerm(searchTerm)
+      : model.findAddressByCurrentLocation()
 
-  /**
-   * Set suggestion selected
-   * @param {Object} suggestion
-   */
-  selectSuggestion(suggestion) {
-    this.setState({ selectedSuggestion: suggestion, searchTerm: suggestion.label });
-  }
-
-  /**
-   * Select next suggestion. Callback for down arrow button.
-   */
-  selectNextSuggestion() {
-    const { suggestions, selectedSuggestion } = this.state;
-    const currentIndex = suggestions.indexOf(selectedSuggestion);
-    const nextIndex = ((currentIndex + 1) >= suggestions.length) ? 0 : currentIndex + 1;
-    this.selectSuggestion(suggestions[nextIndex]);
-  }
-
-  /**
-   * Select previous suggestion. Callback for up arrow button.
-   */
-  selectPrevSuggestion() {
-    const { suggestions, selectedSuggestion } = this.state;
-    const currentIndex = suggestions.indexOf(selectedSuggestion);
-    const prevIndex = [-1, 0].indexOf(currentIndex) > -1 ? (suggestions.length - 1) : (currentIndex - 1);
-    this.selectSuggestion(suggestions[prevIndex]);
+    promise
+      .then(this.props.onSearch)
+      .catch(this.props.onError);
   }
 
   /**
@@ -94,10 +84,17 @@ export default class AddressSearch extends Component {
    * @param {string} searchTerm
    */
   fetchSuggestions(searchTerm) {
-    searchAddress(searchTerm, MAX_ADDRESS_SUGGESTIONS)
-      .then(result => result.sort((a, b) => b.confidence - a.confidence))
-      .then(sorted => this.setState({ suggestions: sorted }))
-      .catch(e => console.log(e));
+    model.fetchSuggestions(searchTerm)
+      .then(this.setState.bind(this))
+      .catch(console.error);
+  }
+
+  /**
+   * Set suggestion selected
+   * @param {Object} suggestion
+   */
+  selectSuggestion(suggestion, callback) {
+    this.setState({ selectedSuggestion: suggestion, searchTerm: suggestion.label }, callback);
   }
 
   /**
@@ -108,16 +105,21 @@ export default class AddressSearch extends Component {
   }
 
   /**
-  * Callback for submit event
-  */
+   * Callback for suggestion list item's click. Set clicked
+   * suggestion selected and submit form
+   * @param {Object} suggestion
+   */
+  onSuggestionClick(suggestion) {
+    this.selectSuggestion(suggestion, this.doSubmitAction);
+  }
+
+  /**
+   * Callback for submit event
+   * @param {Event} e
+   */
   onSubmit(e) {
     e.preventDefault();
     this.doSubmitAction();
-  }
-
-  onClearClick(e) {
-    e.preventDefault();
-    this.props.clearAddressSearchTerm();
   }
 
   /**
@@ -138,13 +140,19 @@ export default class AddressSearch extends Component {
   }
 
   /**
-   * Callback for suggestion list item's click. Set clicked
-   * suggestion selected and submit form
-   * @param {Object} suggestion
+   * Select next suggestion. Callback for down arrow button.
    */
-  onSuggestionClick(suggestion) {
-    this.selectSuggestion(suggestion);
-    this.doSubmitAction();
+  onKeyDownPress() {
+    const next = model.selectNextSuggestion(this.state);
+    this.selectSuggestion(next);
+  }
+
+  /**
+   * Select previous suggestion. Callback for up arrow button.
+   */
+  onKeyUpPress() {
+    const prev = model.selectPrevSuggestion(this.state);
+    this.selectSuggestion(prev);
   }
 
   /**
@@ -158,12 +166,12 @@ export default class AddressSearch extends Component {
       // if up was pressed
       case 38:
         e.preventDefault();
-        this.selectPrevSuggestion();
+        this.onKeyUpPress();
         break;
       // if down was pressed
       case 40:
         e.preventDefault();
-        this.selectNextSuggestion();
+        this.onKeyDownPress();
         break;
       // if esc was pressed
       case 27:
@@ -186,6 +194,7 @@ export default class AddressSearch extends Component {
       <form
         onSubmit={this.onSubmit.bind(this)}
         onKeyUp={this.onKeyEvent.bind(this)}>
+
         <div class="address-search">
           <input
             ref={c => this.addressInput = c}
@@ -200,7 +209,7 @@ export default class AddressSearch extends Component {
           <button
             type="button"
             className="address-search-clear"
-            onClick={this.onClearClick.bind(this)}>
+            onClick={this.props.clearAddress}>
             <span>x</span>
           </button>
           <button className="address-search-submit" type="submit">Hae</button>

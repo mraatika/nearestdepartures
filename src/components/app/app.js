@@ -16,7 +16,7 @@ import './app.css';
  */
 const DEFAULT_STATE = {
   loading: true,
-  addressSearchTerm: '',
+  address: undefined,
   error: null,
   filters: {
     range: DEFAULT_RANGE,
@@ -42,7 +42,6 @@ class App extends Component {
    * Find location and fetch departures when component has mounted
    */
   componentDidMount() {
-    this.searchForDepartures(this.state);
     // batch departures in every x seconds
     setInterval(() => this.batchDeparturesToState(), BATCH_INTERVAL);
   }
@@ -77,22 +76,22 @@ class App extends Component {
   }
 
   /**
-   * Search coordinates for given address/poi/etc.
-   * @param {string} [address]
+   * Remove address from the state
    */
-  searchForDepartures({ searchTerm = '', location }) {
-    this.setState({ location: undefined, loading: true, addressSearchTerm: searchTerm });
-
-    model.findDepartures(this.state, searchTerm, location)
-      .then(this.setState.bind(this))
-      .catch(this.onError.bind(this))
+  clearAddress() {
+    this.setState({ address: undefined });
   }
 
   /**
-   * Empty the address search bar
+   * Search coordinates for given address/poi/etc.
+   * @param {string} [address]
    */
-  clearAddressSearchTerm() {
-    this.setState({ addressSearchTerm: '' });
+  searchForDepartures(address) {
+    this.setState({ address, loading: true, error: undefined });
+
+    model.findDepartures(this.state, address.location)
+      .then(this.setState.bind(this))
+      .catch(this.onError.bind(this));
   }
 
   /**
@@ -100,7 +99,7 @@ class App extends Component {
    * @param {string} error Error message
    */
   onError(error) {
-    console.error(error);
+    process.env.NODE_ENV !== 'production' && console.error(error);
     this.setState({ error, loading: false, departures: [], filtered: [] });
   }
 
@@ -117,21 +116,26 @@ class App extends Component {
    * @returns {string} markup
    */
   render() {
-    const { filtered, filters, error, location, addressSearchTerm, loading, departureUpdateTime } = this.state;
+    const { filtered, filters, error, address, loading, departureUpdateTime } = this.state;
 
     return (
       <div class="app-content">
-        <Header />
+        <Header
+          address={address}
+          selectLocation={this.searchForDepartures.bind(this)}
+        />
 
         <main>
           {error && <ErrorMessage message={error.message} onClick={this.hideError.bind(this)} />}
 
           <AddressSearch
-            address={addressSearchTerm}
+            address={address}
             onSearch={this.searchForDepartures.bind(this)}
-            clearAddressSearchTerm={this.clearAddressSearchTerm.bind(this)} />
+            onError={this.onError.bind(this)}
+            clearAddress={this.clearAddress.bind(this)}
+          />
 
-          {location && <AccuracyIndicator accuracy={location.accuracy} />}
+          {address && address.location && <AccuracyIndicator accuracy={address.location.accuracy} />}
 
           <DepartureFilter
             filters={model.allVehicleTypes}
