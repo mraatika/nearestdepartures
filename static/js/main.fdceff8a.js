@@ -185,22 +185,6 @@ var compareProp=function compareProp(subject){return function(e){return getProp(
 
 /***/ }),
 /* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(178);
-
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(26).default;
-module.exports.default = module.exports;
-
-
-
-/***/ }),
-/* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -226,6 +210,22 @@ function _toConsumableArray(arr){if(Array.isArray(arr)){for(var i=0,arr2=Array(a
 // c) fn's arity is one or less
 if(typeof orig!=='function'||unCurried.indexOf(key)>-1||arity<2){fn=orig;// some fn should be curried right (such as assign)
 }else if(rightCurried.indexOf(key)>-1){fn=__WEBPACK_IMPORTED_MODULE_0_1_liners__["curryRight"](orig);}else{fn=curryMany(arity)(orig);}obj[key]=fn;return obj;},{}));
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(178);
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(26).default;
+module.exports.default = module.exports;
+
+
 
 /***/ }),
 /* 6 */
@@ -559,9 +559,9 @@ module.exports = Symbol;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return findGPSLocation; });
 /* harmony export (immutable) */ __webpack_exports__["b"] = stopLocating;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(3);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return findGPSLocation; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_formaterror__ = __webpack_require__(180);
 /**
@@ -570,9 +570,7 @@ module.exports = Symbol;
 * @async
 * @returns {Promise}
 */var getCurrentPosition=function(){var _ref=_asyncToGenerator(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(){return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context){while(1){switch(_context.prev=_context.next){case 0:return _context.abrupt('return',new Promise(function(resolve,reject){watcherId=navigator.geolocation.watchPosition(onLocationResult(resolve),reject,POSITION_OPTIONS);}));case 1:case'end':return _context.stop();}}},_callee,this);}));return function getCurrentPosition(){return _ref.apply(this,arguments);};}();/**
-* Find current position using geolocation api
-* @async
-* @returns {Promise}
+* Cancel location search
 */function _asyncToGenerator(fn){return function(){var gen=fn.apply(this,arguments);return new Promise(function(resolve,reject){function step(key,arg){try{var info=gen[key](arg);var value=info.value;}catch(error){reject(error);return;}if(info.done){resolve(value);}else{return Promise.resolve(value).then(function(value){step("next",value);},function(err){step("throw",err);});}}return step("next");});};}/** @module LocationService *//**
 * Options for getCurrentPosition
 * @private
@@ -592,9 +590,13 @@ timeout:1*60*1000};/**
   * Callback for watchPosition success resolves if
   * acquired location is precise enough
   * @param {Object} position object
-  */return function(position){stopLocating(watcherId);resolve(position);};};var findGPSLocation=function(){var _ref2=_asyncToGenerator(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(){var position;return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2){while(1){switch(_context2.prev=_context2.next){case 0:if(navigator.geolocation){_context2.next=2;break;}throw new Error('Selain ei tue paikannusta');case 2:if(watcherId){_context2.next=13;break;}_context2.prev=3;_context2.next=6;return getCurrentPosition();case 6:position=_context2.sent;return _context2.abrupt('return',position.coords);case 10:_context2.prev=10;_context2.t0=_context2['catch'](3);throw new Error(Object(__WEBPACK_IMPORTED_MODULE_1__utils_formaterror__["b" /* default */])(__WEBPACK_IMPORTED_MODULE_1__utils_formaterror__["a" /* POSITION_ERROR */],_context2.t0));case 13:case'end':return _context2.stop();}}},_callee2,this,[[3,10]]);}));return function findGPSLocation(){return _ref2.apply(this,arguments);};}();/**
-* Cancel location search
-*/function stopLocating(){if(watcherId){navigator.geolocation.clearWatch(watcherId);watcherId=null;}}
+  */return function(position){stopLocating(watcherId);resolve(position);};};function stopLocating(){if(watcherId){navigator.geolocation.clearWatch(watcherId);watcherId=null;}}/**
+* Find current position using geolocation api
+* @async
+* @returns {Promise}
+*/var findGPSLocation=function(){var _ref2=_asyncToGenerator(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(){var position;return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2){while(1){switch(_context2.prev=_context2.next){case 0:if(navigator.geolocation){_context2.next=2;break;}throw new Error('Selain ei tue paikannusta');case 2:if(watcherId){_context2.next=16;break;}_context2.prev=3;_context2.next=6;return getCurrentPosition();case 6:position=_context2.sent;return _context2.abrupt('return',position.coords);case 10:_context2.prev=10;_context2.t0=_context2['catch'](3);// stop locating when there is an error to clear the current
+// watcher and the watcherId
+stopLocating();throw new Error(Object(__WEBPACK_IMPORTED_MODULE_1__utils_formaterror__["b" /* default */])(__WEBPACK_IMPORTED_MODULE_1__utils_formaterror__["a" /* POSITION_ERROR */],_context2.t0));case 14:_context2.next=17;break;case 16:throw new Error('Sijainninhaku on jo käynnissä');case 17:case'end':return _context2.stop();}}},_callee2,this,[[3,10]]);}));return function findGPSLocation(){return _ref2.apply(this,arguments);};}();
 
 /***/ }),
 /* 13 */
@@ -4536,7 +4538,7 @@ exports.version = version;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_inferno_component__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_inferno_component__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_inferno_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_inferno_component__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__departureslist_departureslist__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__departurefilter_departurefilter__ = __webpack_require__(158);
@@ -4576,10 +4578,10 @@ setInterval(function(){return _this2.batchDeparturesToState();},__WEBPACK_IMPORT
    */},{key:'clearAddress',value:function clearAddress(){this.setState({address:undefined});}/**
    * Search coordinates for given address/poi/etc.
    * @param {string} [address]
-   */},{key:'searchForDepartures',value:function searchForDepartures(address){this.setState({address:address,loading:true});__WEBPACK_IMPORTED_MODULE_6__model__["d" /* findDepartures */](this.state,address.location).then(this.setState.bind(this)).catch(this.onError.bind(this));}/**
+   */},{key:'searchForDepartures',value:function searchForDepartures(address){this.setState({address:address,loading:true,error:undefined});__WEBPACK_IMPORTED_MODULE_6__model__["d" /* findDepartures */](this.state,address.location).then(this.setState.bind(this)).catch(this.onError.bind(this));}/**
    * Adds error to the state and clears departures
    * @param {string} error Error message
-   */},{key:'onError',value:function onError(error){console.error(error);this.setState({error:error,loading:false,departures:[],filtered:[]});}/**
+   */},{key:'onError',value:function onError(error){"test"!=='production'&&console.error(error);this.setState({error:error,loading:false,departures:[],filtered:[]});}/**
    * Hides the error message
    * @param {string} error Error message
    */},{key:'hideError',value:function hideError(){this.setState({error:undefined});}/**
@@ -4916,7 +4918,7 @@ exports['default'] = Component;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_inferno_component__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_inferno_component__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_inferno_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_inferno_component__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__departurerow__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__loadingoverlay_loadingoverlay__ = __webpack_require__(33);
@@ -5098,7 +5100,7 @@ if([13,32].indexOf(keyCode)>-1){e.preventDefault();callback(propName);}};};/**
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = sort;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__fputils__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__fputils__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils__ = __webpack_require__(1);
 /** @module DepartureSorter *//**
  * Return sorter function for departures
@@ -9562,13 +9564,13 @@ module.exports = exports["default"];
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_inferno__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_inferno___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_inferno__);
 /**
- * Filter button component
- * @constructs {FilterButton}
- * @param {Object} props
- * @param {Function} props.onFilterToggle Callback for button
- * @param {string} [props.vehicleType=""]
- * @param {boolean} [props.isToggled=false] Button's toggle state
- *//* harmony default export */ __webpack_exports__["a"] = (function(){var _ref=arguments.length>0&&arguments[0]!==undefined?arguments[0]:{},_ref$vehicleType=_ref.vehicleType,vehicleType=_ref$vehicleType===undefined?'':_ref$vehicleType,_ref$isToggled=_ref.isToggled,isToggled=_ref$isToggled===undefined?false:_ref$isToggled,onFilterToggle=_ref.onFilterToggle;var className='filter-button bg '+vehicleType.toLocaleLowerCase()+(isToggled?' toggled':'');return Object(__WEBPACK_IMPORTED_MODULE_2_inferno__["createVNode"])(2,'button',className,Object(__WEBPACK_IMPORTED_MODULE_2_inferno__["createVNode"])(16,__WEBPACK_IMPORTED_MODULE_0__common_vehicleicon__["a" /* default */],null,null,{'aria-hidden':true,'iconName':vehicleType.toLocaleLowerCase()+'-withoutBox'}),{'aria-label':'Suodatin '+__WEBPACK_IMPORTED_MODULE_1__constants_constants__["i" /* VEHICLE_TYPE_TRANSLATIONS */][vehicleType],'aria-pressed':''+isToggled,'onClick':function onClick(e){return onFilterToggle(vehicleType,e.ctrlKey);}});});
+* Filter button component
+* @constructs {FilterButton}
+* @param {Object} props
+* @param {Function} props.onFilterToggle Callback for button
+* @param {string} [props.vehicleType=""]
+* @param {boolean} [props.isToggled] Button's toggle state
+*//* harmony default export */ __webpack_exports__["a"] = (function(_ref){var _ref$vehicleType=_ref.vehicleType,vehicleType=_ref$vehicleType===undefined?'':_ref$vehicleType,isToggled=_ref.isToggled,onFilterToggle=_ref.onFilterToggle;var className='filter-button bg '+vehicleType.toLocaleLowerCase()+(isToggled?' toggled':'');return Object(__WEBPACK_IMPORTED_MODULE_2_inferno__["createVNode"])(2,'button',className,[Object(__WEBPACK_IMPORTED_MODULE_2_inferno__["createVNode"])(16,__WEBPACK_IMPORTED_MODULE_0__common_vehicleicon__["a" /* default */],null,null,{'aria-hidden':true,'iconName':vehicleType.toLocaleLowerCase()+'-withoutBox'}),Object(__WEBPACK_IMPORTED_MODULE_2_inferno__["createVNode"])(2,'div','bottom-border')],{'aria-label':'Suodatin '+__WEBPACK_IMPORTED_MODULE_1__constants_constants__["i" /* VEHICLE_TYPE_TRANSLATIONS */][vehicleType],'aria-pressed':isToggled,'onClick':function onClick(e){return onFilterToggle(vehicleType,e.ctrlKey);}});});
 
 /***/ }),
 /* 160 */
@@ -9622,7 +9624,7 @@ module.exports = exports["default"];
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_debounce__ = __webpack_require__(165);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_debounce___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash_debounce__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_inferno_component__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_inferno_component__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_inferno_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_inferno_component__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__suggestionslist__ = __webpack_require__(174);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__constants_constants__ = __webpack_require__(2);
@@ -9635,11 +9637,16 @@ var _createClass=function(){function defineProperties(target,props){for(var i=0;
  * AddressSearch component for address input.
  * @class AddressSearch
  * @extends {Component}
+ * @param {object} props
+ * @param {object} props.address
+ * @param {function} props.onSearch
+ * @param {function} props.onError
+ * @param {function} props.clearAddress
  */var AddressSearch=function(_Component){_inherits(AddressSearch,_Component);/**
    * Creates an instance of AddressSearch.
    * @param {Object} props
    * @param {string} address
-   */function AddressSearch(props){_classCallCheck(this,AddressSearch);var _this=_possibleConstructorReturn(this,(AddressSearch.__proto__||Object.getPrototypeOf(AddressSearch)).call(this,props));_this.state={searchTerm:'',suggestions:[]};_this.debouncedFetchSuggestions=__WEBPACK_IMPORTED_MODULE_0_lodash_debounce___default()(_this.fetchSuggestions,300);return _this;}/**
+   */function AddressSearch(props){_classCallCheck(this,AddressSearch);var _this=_possibleConstructorReturn(this,(AddressSearch.__proto__||Object.getPrototypeOf(AddressSearch)).call(this,props));_this.state={searchTerm:props.address?props.address.label:'',suggestions:[]};_this.debouncedFetchSuggestions=__WEBPACK_IMPORTED_MODULE_0_lodash_debounce___default()(_this.fetchSuggestions,300);return _this;}/**
    * Search current location and search departures when this component was mounted
    */_createClass(AddressSearch,[{key:'componentDidMount',value:function componentDidMount(){this.doSubmitAction();}/**
    * Invoked when props change. Address is hosted in the ancestor component
@@ -9667,9 +9674,6 @@ var promise=searchTerm&&searchTerm.toLowerCase()!==__WEBPACK_IMPORTED_MODULE_3__
    * Callback for submit event
    * @param {Event} e
    */},{key:'onSubmit',value:function onSubmit(e){e.preventDefault();this.doSubmitAction();}/**
-   * Callback for clear address button
-   * @param {Event} e
-   */},{key:'onClearClick',value:function onClearClick(e){e.preventDefault();this.props.clearAddress();}/**
    * Callback for text input's input event
    * @param {Event} e
    */},{key:'onSearchTermChange',value:function onSearchTermChange(e){var term=e.target.value;this.setState({searchTerm:term,selectedSuggestion:undefined});if(!term.length){this.hideSuggestions();return;}this.debouncedFetchSuggestions(term);}/**
@@ -9685,7 +9689,7 @@ case 40:e.preventDefault();this.onKeyDownPress();break;// if esc was pressed
 case 27:e.preventDefault();this.hideSuggestions();break;default:break;}}/**
    * Render component
    * @returns {string} markup
-   */},{key:'render',value:function render(){var _this2=this;var _state2=this.state,searchTerm=_state2.searchTerm,suggestions=_state2.suggestions,selectedSuggestion=_state2.selectedSuggestion;return Object(__WEBPACK_IMPORTED_MODULE_6_inferno__["createVNode"])(2,'form',null,[Object(__WEBPACK_IMPORTED_MODULE_6_inferno__["createVNode"])(2,'div','address-search',[Object(__WEBPACK_IMPORTED_MODULE_6_inferno__["createVNode"])(512,'input',null,null,{'type':'text','aria-autocomplete':'list','aria-owns':'suggestions-list','aria-label':'Osoite/sijainti','placeholder':'Hae paikannuksella, osoitteella tai paikannimell\xE4...','onInput':this.onSearchTermChange.bind(this),'onBlur':this.hideSuggestions.bind(this),'value':searchTerm},null,function(c){return _this2.addressInput=c;}),Object(__WEBPACK_IMPORTED_MODULE_6_inferno__["createVNode"])(2,'button','address-search-clear',Object(__WEBPACK_IMPORTED_MODULE_6_inferno__["createVNode"])(2,'span',null,'x'),{'type':'button','onClick':this.onClearClick.bind(this)}),Object(__WEBPACK_IMPORTED_MODULE_6_inferno__["createVNode"])(2,'button','address-search-submit','Hae',{'type':'submit'})]),Object(__WEBPACK_IMPORTED_MODULE_6_inferno__["createVNode"])(2,'div','suggestions',Object(__WEBPACK_IMPORTED_MODULE_6_inferno__["createVNode"])(16,__WEBPACK_IMPORTED_MODULE_2__suggestionslist__["a" /* default */],null,null,{'suggestions':suggestions,'selected':selectedSuggestion,'onItemClick':this.onSuggestionClick.bind(this)}))],{'onSubmit':this.onSubmit.bind(this),'onKeyUp':this.onKeyEvent.bind(this)});}}]);return AddressSearch;}(__WEBPACK_IMPORTED_MODULE_1_inferno_component___default.a);/* harmony default export */ __webpack_exports__["a"] = (AddressSearch);
+   */},{key:'render',value:function render(){var _this2=this;var _state2=this.state,searchTerm=_state2.searchTerm,suggestions=_state2.suggestions,selectedSuggestion=_state2.selectedSuggestion;return Object(__WEBPACK_IMPORTED_MODULE_6_inferno__["createVNode"])(2,'form',null,[Object(__WEBPACK_IMPORTED_MODULE_6_inferno__["createVNode"])(2,'div','address-search',[Object(__WEBPACK_IMPORTED_MODULE_6_inferno__["createVNode"])(512,'input',null,null,{'type':'text','aria-autocomplete':'list','aria-owns':'suggestions-list','aria-label':'Osoite/sijainti','placeholder':'Hae paikannuksella, osoitteella tai paikannimell\xE4...','onInput':this.onSearchTermChange.bind(this),'onBlur':this.hideSuggestions.bind(this),'value':searchTerm},null,function(c){return _this2.addressInput=c;}),Object(__WEBPACK_IMPORTED_MODULE_6_inferno__["createVNode"])(2,'button','address-search-clear',Object(__WEBPACK_IMPORTED_MODULE_6_inferno__["createVNode"])(2,'span',null,'x'),{'type':'button','onClick':this.props.clearAddress}),Object(__WEBPACK_IMPORTED_MODULE_6_inferno__["createVNode"])(2,'button','address-search-submit','Hae',{'type':'submit'})]),Object(__WEBPACK_IMPORTED_MODULE_6_inferno__["createVNode"])(2,'div','suggestions',Object(__WEBPACK_IMPORTED_MODULE_6_inferno__["createVNode"])(16,__WEBPACK_IMPORTED_MODULE_2__suggestionslist__["a" /* default */],null,null,{'suggestions':suggestions,'selected':selectedSuggestion,'onItemClick':this.onSuggestionClick.bind(this)}))],{'onSubmit':this.onSubmit.bind(this),'onKeyUp':this.onKeyEvent.bind(this)});}}]);return AddressSearch;}(__WEBPACK_IMPORTED_MODULE_1_inferno_component___default.a);/* harmony default export */ __webpack_exports__["a"] = (AddressSearch);
 
 /***/ }),
 /* 165 */
@@ -10231,12 +10235,12 @@ module.exports = isObjectLike;
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return fetchSuggestions; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return selectNextSuggestion; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return selectPrevSuggestion; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_locationservice__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_addresssearchservice__ = __webpack_require__(181);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__constants_constants__ = __webpack_require__(2);
-var _this=this;function _asyncToGenerator(fn){return function(){var gen=fn.apply(this,arguments);return new Promise(function(resolve,reject){function step(key,arg){try{var info=gen[key](arg);var value=info.value;}catch(error){reject(error);return;}if(info.done){resolve(value);}else{return Promise.resolve(value).then(function(value){step("next",value);},function(err){step("throw",err);});}}return step("next");});};}/**
+var _this=this;function _asyncToGenerator(fn){return function(){var gen=fn.apply(this,arguments);return new Promise(function(resolve,reject){function step(key,arg){try{var info=gen[key](arg);var value=info.value;}catch(error){reject(error);return;}if(info.done){resolve(value);}else{return Promise.resolve(value).then(function(value){step("next",value);},function(err){step("throw",err);});}}return step("next");});};}/** @module AddressSearchModel *//**
  * Find current location and lookup address based on that
  * @async
  * @return {object} address object with location
@@ -10254,11 +10258,11 @@ var _this=this;function _asyncToGenerator(fn){return function(){var gen=fn.apply
  * Select next suggestion.
  * @param {object} state
  * @return {object} suggestion
- */var selectNextSuggestion=function selectNextSuggestion(state){var suggestions=state.suggestions,selectedSuggestion=state.selectedSuggestion;var currentIndex=suggestions.indexOf(selectedSuggestion);var nextIndex=currentIndex+1>=suggestions.length?0:currentIndex+1;return suggestions[nextIndex];};/**
+ */var selectNextSuggestion=function selectNextSuggestion(state){var _state$suggestions=state.suggestions,suggestions=_state$suggestions===undefined?[]:_state$suggestions,selectedSuggestion=state.selectedSuggestion;var currentIndex=suggestions.indexOf(selectedSuggestion);var nextIndex=currentIndex+1>=suggestions.length?0:currentIndex+1;return suggestions[nextIndex];};/**
  * Select previous suggestion.
  * @param {object} state
  * @return {object} suggestion
- */var selectPrevSuggestion=function selectPrevSuggestion(state){var suggestions=state.suggestions,selectedSuggestion=state.selectedSuggestion;var currentIndex=suggestions.indexOf(selectedSuggestion);var prevIndex=[-1,0].indexOf(currentIndex)>-1?suggestions.length-1:currentIndex-1;return suggestions[prevIndex];};
+ */var selectPrevSuggestion=function selectPrevSuggestion(state){var _state$suggestions2=state.suggestions,suggestions=_state$suggestions2===undefined?[]:_state$suggestions2,selectedSuggestion=state.selectedSuggestion;var currentIndex=suggestions.indexOf(selectedSuggestion);var prevIndex=[-1,0].indexOf(currentIndex)>-1?suggestions.length-1:currentIndex-1;return suggestions[prevIndex];};
 
 /***/ }),
 /* 178 */
@@ -11056,7 +11060,7 @@ if (hadRuntime) {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return searchAddress; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return lookupAddress; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 var _slicedToArray=function(){function sliceIterator(arr,i){var _arr=[];var _n=true;var _d=false;var _e=undefined;try{for(var _i=arr[Symbol.iterator](),_s;!(_n=(_s=_i.next()).done);_n=true){_arr.push(_s.value);if(i&&_arr.length===i)break;}}catch(err){_d=true;_e=err;}finally{try{if(!_n&&_i["return"])_i["return"]();}finally{if(_d)throw _e;}}return _arr;}return function(arr,i){if(Array.isArray(arr)){return arr;}else if(Symbol.iterator in Object(arr)){return sliceIterator(arr,i);}else{throw new TypeError("Invalid attempt to destructure non-iterable instance");}};}();function _asyncToGenerator(fn){return function(){var gen=fn.apply(this,arguments);return new Promise(function(resolve,reject){function step(key,arg){try{var info=gen[key](arg);var value=info.value;}catch(error){reject(error);return;}if(info.done){resolve(value);}else{return Promise.resolve(value).then(function(value){step("next",value);},function(err){step("throw",err);});}}return step("next");});};}/** @module AddressSearchService *//**
 * Search for address/location coordinates
@@ -11064,14 +11068,14 @@ var _slicedToArray=function(){function sliceIterator(arr,i){var _arr=[];var _n=t
 * @param {string} searchTerm
 * @param {number} maxResults
 * @returns {Object[]} An array of objects containing latitude, longitude and label
-*/var searchAddress=function(){var _ref=_asyncToGenerator(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(searchTerm){var maxResults=arguments.length>1&&arguments[1]!==undefined?arguments[1]:1;var encoded,url,response,data;return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context){while(1){switch(_context.prev=_context.next){case 0:encoded=encodeURIComponent(searchTerm);url='https://api.digitransit.fi/geocoding/v1/search?text='+encoded+'&size='+maxResults+'&lang=fi&boundary.rect.min_lat=59.9&boundary.rect.max_lat=60.45&boundary.rect.min_lon=24.3&boundary.rect.max_lon=25.5';_context.next=4;return fetch(url);case 4:response=_context.sent;if(response.ok){_context.next=7;break;}throw new Error('Service responded with no ok');case 7:_context.next=9;return response.json();case 9:data=_context.sent;if(!(!data||!data.features.length)){_context.next=12;break;}throw new Error('Osoitteen haku ep\xE4onnistui: Osoitetta tai paikkaa ei l\xF6ytynyt hakusanalla '+searchTerm);case 12:return _context.abrupt('return',data.features.map(function(feature){var geometry=feature.geometry,properties=feature.properties;var _geometry$coordinates=_slicedToArray(geometry.coordinates,2),longitude=_geometry$coordinates[0],latitude=_geometry$coordinates[1];return Object.assign({},properties,{location:{latitude:latitude,longitude:longitude}});}));case 13:case'end':return _context.stop();}}},_callee,this);}));return function searchAddress(_x2){return _ref.apply(this,arguments);};}();/**
+*/var searchAddress=function(){var _ref=_asyncToGenerator(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(searchTerm){var maxResults=arguments.length>1&&arguments[1]!==undefined?arguments[1]:1;var encoded,url,response,data;return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context){while(1){switch(_context.prev=_context.next){case 0:encoded=encodeURIComponent(searchTerm);url='https://api.digitransit.fi/geocoding/v1/search?text='+encoded+'&size='+maxResults+'&lang=fi&boundary.rect.min_lat=59.9&boundary.rect.max_lat=60.45&boundary.rect.min_lon=24.3&boundary.rect.max_lon=25.5';response=void 0;_context.prev=3;_context.next=6;return fetch(url);case 6:response=_context.sent;_context.next=12;break;case 9:_context.prev=9;_context.t0=_context['catch'](3);throw new Error('Osoitteen haku epäonnistui: Paveluun ei saatu yhteyttä');case 12:if(response.ok){_context.next=14;break;}throw new Error('Osoitteen haku epäonnistui: Palvelu palautti virheen');case 14:_context.next=16;return response.json();case 16:data=_context.sent;if(!(!data||!data.features.length)){_context.next=19;break;}throw new Error('Osoitteen haku ep\xE4onnistui: Osoitetta tai paikkaa ei l\xF6ytynyt hakusanalla '+searchTerm);case 19:return _context.abrupt('return',data.features.map(function(feature){var geometry=feature.geometry,properties=feature.properties;var _geometry$coordinates=_slicedToArray(geometry.coordinates,2),longitude=_geometry$coordinates[0],latitude=_geometry$coordinates[1];return Object.assign({},properties,{location:{latitude:latitude,longitude:longitude}});}));case 20:case'end':return _context.stop();}}},_callee,this,[[3,9]]);}));return function searchAddress(_x2){return _ref.apply(this,arguments);};}();/**
 * Search address for given coordinates
 * @async
 * @param {Object} location
 * @param {number} location.latitude
 * @param {number} location.longitude
 * @returns {string} address
-*/var lookupAddress=function(){var _ref3=_asyncToGenerator(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(_ref2){var latitude=_ref2.latitude,longitude=_ref2.longitude;var queryParams,response,data,properties;return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2){while(1){switch(_context2.prev=_context2.next){case 0:queryParams='point.lat='+encodeURIComponent(latitude)+'&point.lon='+encodeURIComponent(longitude)+'&size=1';_context2.next=3;return fetch('https://api.digitransit.fi/geocoding/v1/reverse?'+queryParams);case 3:response=_context2.sent;if(response.ok){_context2.next=6;break;}throw new Error('Osoitteen haku epäonnistui: Osoitepalvelu palautti virheen');case 6:_context2.next=8;return response.json();case 8:data=_context2.sent;if(!(!data||!data.features.length)){_context2.next=11;break;}throw new Error('Osoitteen haku epäonnistui: Osoitetta tai paikkaa ei löytynyt');case 11:if(!(data&&data.features.length)){_context2.next=14;break;}properties=data.features[0].properties;return _context2.abrupt('return',properties);case 14:return _context2.abrupt('return',null);case 15:case'end':return _context2.stop();}}},_callee2,this);}));return function lookupAddress(_x3){return _ref3.apply(this,arguments);};}();
+*/var lookupAddress=function(){var _ref3=_asyncToGenerator(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(_ref2){var latitude=_ref2.latitude,longitude=_ref2.longitude;var queryParams,response,data;return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2){while(1){switch(_context2.prev=_context2.next){case 0:queryParams='point.lat='+encodeURIComponent(latitude)+'&point.lon='+encodeURIComponent(longitude)+'&size=1';response=void 0;_context2.prev=2;_context2.next=5;return fetch('https://api.digitransit.fi/geocoding/v1/reverse?'+queryParams);case 5:response=_context2.sent;_context2.next=11;break;case 8:_context2.prev=8;_context2.t0=_context2['catch'](2);throw new Error('Osoitteen haku epäonnistui: Palveluun ei saatu yhteyttä');case 11:if(response.ok){_context2.next=13;break;}throw new Error('Osoitteen haku epäonnistui: Osoitepalvelu palautti virheen');case 13:_context2.next=15;return response.json();case 15:data=_context2.sent;if(!(!data||!data.features.length)){_context2.next=18;break;}throw new Error('Osoitteen haku epäonnistui: Osoitetta tai paikkaa ei löytynyt');case 18:return _context2.abrupt('return',data.features[0].properties);case 19:case'end':return _context2.stop();}}},_callee2,this,[[2,8]]);}));return function lookupAddress(_x3){return _ref3.apply(this,arguments);};}();
 
 /***/ }),
 /* 182 */
@@ -11089,14 +11093,14 @@ var _slicedToArray=function(){function sliceIterator(arr,i){var _arr=[];var _n=t
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return findDepartures; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return batchDeparturesToState; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return updateVehicleFilters; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_fputils__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_fputils__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_utils__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_locationservice__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__utils_departurefetchmerge__ = __webpack_require__(184);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__constants_constants__ = __webpack_require__(2);
-var _this=this;function _asyncToGenerator(fn){return function(){var gen=fn.apply(this,arguments);return new Promise(function(resolve,reject){function step(key,arg){try{var info=gen[key](arg);var value=info.value;}catch(error){reject(error);return;}if(info.done){resolve(value);}else{return Promise.resolve(value).then(function(value){step("next",value);},function(err){step("throw",err);});}}return step("next");});};}/**
+var _this=this;function _asyncToGenerator(fn){return function(){var gen=fn.apply(this,arguments);return new Promise(function(resolve,reject){function step(key,arg){try{var info=gen[key](arg);var value=info.value;}catch(error){reject(error);return;}if(info.done){resolve(value);}else{return Promise.resolve(value).then(function(value){step("next",value);},function(err){step("throw",err);});}}return step("next");});};}/** @module AppModel *//**
  * All vehicle filters
  * @private
  * @type {string[]}
@@ -11139,7 +11143,7 @@ return _context2.abrupt('return',findDeparturesByLocation(location,state));case 
  * @param {string} type
  * @param {boolean} multiselect
  * @return {object} object representing state changes
- */var updateVehicleFilters=function updateVehicleFilters(type,multiselect,state){var filters=state.filters;var current=filters.vehicleTypes;var currentToggled=current.indexOf(type)>-1;var activeFilters=__WEBPACK_IMPORTED_MODULE_1__utils_fputils__["a" /* default */].ifThenElse(function(){return!!multiselect;},// if pressed with ctrl key
+ */var updateVehicleFilters=function updateVehicleFilters(type,multiselect,state){var filters=state.filters;var _filters$vehicleTypes=filters.vehicleTypes,current=_filters$vehicleTypes===undefined?[]:_filters$vehicleTypes;var currentToggled=current.indexOf(type)>-1;var activeFilters=__WEBPACK_IMPORTED_MODULE_1__utils_fputils__["a" /* default */].ifThenElse(function(){return!!multiselect;},// if pressed with ctrl key
 __WEBPACK_IMPORTED_MODULE_1__utils_fputils__["a" /* default */].ifThenElse(function(){return currentToggled;},// remove filter from actives
 __WEBPACK_IMPORTED_MODULE_1__utils_fputils__["a" /* default */].filter(function(f){return f!==type;}),// add filter to actives
 __WEBPACK_IMPORTED_MODULE_1__utils_fputils__["a" /* default */].concat(type)),// if pressed without ctrl key
@@ -11155,9 +11159,9 @@ return Object.assign({},filters,{vehicleTypes:activeFilters});};
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return fetchDepartures; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return batchDepartures; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__fputils__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__fputils__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__constants_constants__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_departuresservice__ = __webpack_require__(185);
@@ -11205,57 +11209,57 @@ _context.t0=__WEBPACK_IMPORTED_MODULE_1__fputils__["a" /* default */].flatMap(fu
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return fetchDepartures; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return batchDepartures; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_fputils__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_fputils__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_graphqlresponseparser__ = __webpack_require__(186);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__querynearest__ = __webpack_require__(187);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__querybatch__ = __webpack_require__(188);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_utils__ = __webpack_require__(1);
 function _asyncToGenerator(fn){return function(){var gen=fn.apply(this,arguments);return new Promise(function(resolve,reject){function step(key,arg){try{var info=gen[key](arg);var value=info.value;}catch(error){reject(error);return;}if(info.done){resolve(value);}else{return Promise.resolve(value).then(function(value){step("next",value);},function(err){step("throw",err);});}}return step("next");});};}/** @module DeparturesService *//**
- * Limit results by time (2h in seconds)
- * @private
- * @type {number}
- */var TIME_RANGE=3*60*60;/**
- * Number of stoptimes per route to fetch
- * @private
- * @type {number}
- */var NUMBER_OF_DEPARTURES_PER_ROUTE=2;/**
- * Max number of results to fetch
- * @private
- * @type {number}
- */var MAX_RESULTS=20;/**
- * Form graphql query for request body
- * @private
- * @param {Object} props
- * @param {number} props.latitude
- * @param {number} props.longitude
- * @param {number} props.startTime
- * @param {string[]} props.vehicleTypes
- * @returns {Object}
- */function formRequestBody(){var _ref=arguments.length>0&&arguments[0]!==undefined?arguments[0]:{},latitude=_ref.latitude,longitude=_ref.longitude,startTime=_ref.startTime,vehicleTypes=_ref.vehicleTypes;return{query:__WEBPACK_IMPORTED_MODULE_3__querynearest__["a" /* default */],variables:{latitude:latitude,longitude:longitude,vehicleTypes:vehicleTypes,timeRange:TIME_RANGE,departuresCount:NUMBER_OF_DEPARTURES_PER_ROUTE,maxResults:MAX_RESULTS}};}/**
- * Fetch nearest departures from digitransit's public api
- * @async
- * @param {Object} location
- * @param {number} location.latitude
- * @param {number} location.longitude
- * @returns {Promise}
- */var fetchDepartures=function(){var _ref2=_asyncToGenerator(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(){var location=arguments.length>0&&arguments[0]!==undefined?arguments[0]:{};var filters=arguments.length>1&&arguments[1]!==undefined?arguments[1]:{};var _location$latitude,latitude,_location$longitude,longitude,vehicleTypes,reqBody,response,data;return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context){while(1){switch(_context.prev=_context.next){case 0:_location$latitude=location.latitude,latitude=_location$latitude===undefined?60.189425:_location$latitude,_location$longitude=location.longitude,longitude=_location$longitude===undefined?24.951884:_location$longitude;vehicleTypes=filters.vehicleTypes;reqBody=formRequestBody({latitude:latitude,longitude:longitude,vehicleTypes:vehicleTypes});_context.next=5;return fetch('https://api.digitransit.fi/routing/v1/routers/hsl/index/graphql',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(reqBody)});case 5:response=_context.sent;if(response.ok){_context.next=8;break;}throw new Error('Palvelu palautti virheen');case 8:_context.next=10;return response.json();case 10:data=_context.sent;return _context.abrupt('return',Object(__WEBPACK_IMPORTED_MODULE_2__utils_graphqlresponseparser__["a" /* default */])(data));case 12:case'end':return _context.stop();}}},_callee,this);}));return function fetchDepartures(){return _ref2.apply(this,arguments);};}();/**
- * Form body for batch request
- * @private
- * @param {Object} props
- * @param {string} props.id
- * @returns {Object}
- */function formBatchRequestBody(_ref3){var id=_ref3.id;var startTime=Object(__WEBPACK_IMPORTED_MODULE_5__utils_utils__["c" /* getNowInSeconds */])();return{query:__WEBPACK_IMPORTED_MODULE_4__querybatch__["a" /* default */],variables:{id:id,startTime:startTime,departuresCount:NUMBER_OF_DEPARTURES_PER_ROUTE}};}/**
- * Parse batch response data
- * @private
- * @param {Object[]} data
- * @returns {Function}
- */var parseBatchResponse=__WEBPACK_IMPORTED_MODULE_1__utils_fputils__["a" /* default */].flatMap(function(data){var _data$payload$data$no=data.payload.data.node,nodeId=_data$payload$data$no.id,stoptimes=_data$payload$data$no.stoptimes;if(!stoptimes)return[];return stoptimes.map(function(stoptime){return Object.assign({nodeId:nodeId},Object(__WEBPACK_IMPORTED_MODULE_2__utils_graphqlresponseparser__["b" /* formStoptimeData */])(stoptime));});});/**
- * Batch updated departures
- * @param {Object[]} [departures=[]] Departures to batch
- * @returns {Object[]}
- */var batchDepartures=function(){var _ref4=_asyncToGenerator(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(){var departures=arguments.length>0&&arguments[0]!==undefined?arguments[0]:[];var query,response,data;return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2){while(1){switch(_context2.prev=_context2.next){case 0:if(departures.length){_context2.next=2;break;}return _context2.abrupt('return',departures);case 2:query=departures.map(function(d){return formBatchRequestBody({id:d.nodeId});});_context2.next=5;return fetch('https://api.digitransit.fi/routing/v1/routers/hsl/index/graphql/batch',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(query)});case 5:response=_context2.sent;if(response.ok){_context2.next=8;break;}throw new Error('Palvelu palautti virheen');case 8:_context2.next=10;return response.json();case 10:data=_context2.sent;return _context2.abrupt('return',parseBatchResponse(data));case 12:case'end':return _context2.stop();}}},_callee2,this);}));return function batchDepartures(){return _ref4.apply(this,arguments);};}();
+* Limit results by time (2h in seconds)
+* @private
+* @type {number}
+*/var TIME_RANGE=3*60*60;/**
+* Number of stoptimes per route to fetch
+* @private
+* @type {number}
+*/var NUMBER_OF_DEPARTURES_PER_ROUTE=2;/**
+* Max number of results to fetch
+* @private
+* @type {number}
+*/var MAX_RESULTS=20;/**
+* Form graphql query for request body
+* @private
+* @param {Object} props
+* @param {number} props.latitude
+* @param {number} props.longitude
+* @param {number} props.startTime
+* @param {string[]} props.vehicleTypes
+* @returns {Object}
+*/function formRequestBody(){var _ref=arguments.length>0&&arguments[0]!==undefined?arguments[0]:{},latitude=_ref.latitude,longitude=_ref.longitude,startTime=_ref.startTime,vehicleTypes=_ref.vehicleTypes;return{query:__WEBPACK_IMPORTED_MODULE_3__querynearest__["a" /* default */],variables:{latitude:latitude,longitude:longitude,vehicleTypes:vehicleTypes,timeRange:TIME_RANGE,departuresCount:NUMBER_OF_DEPARTURES_PER_ROUTE,maxResults:MAX_RESULTS}};}/**
+* Fetch nearest departures from digitransit's public api
+* @async
+* @param {Object} location
+* @param {number} location.latitude
+* @param {number} location.longitude
+* @returns {Promise}
+*/var fetchDepartures=function(){var _ref2=_asyncToGenerator(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(){var location=arguments.length>0&&arguments[0]!==undefined?arguments[0]:{};var filters=arguments.length>1&&arguments[1]!==undefined?arguments[1]:{};var _location$latitude,latitude,_location$longitude,longitude,vehicleTypes,reqBody,response,data;return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context){while(1){switch(_context.prev=_context.next){case 0:_location$latitude=location.latitude,latitude=_location$latitude===undefined?60.189425:_location$latitude,_location$longitude=location.longitude,longitude=_location$longitude===undefined?24.951884:_location$longitude;vehicleTypes=filters.vehicleTypes;reqBody=formRequestBody({latitude:latitude,longitude:longitude,vehicleTypes:vehicleTypes});response=void 0;_context.prev=4;_context.next=7;return fetch('https://api.digitransit.fi/routing/v1/routers/hsl/index/graphql',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(reqBody)});case 7:response=_context.sent;_context.next=13;break;case 10:_context.prev=10;_context.t0=_context['catch'](4);throw new Error('Lähtöjen haku epäonnisui: Palveluun ei saatu yhteyttä');case 13:if(response.ok){_context.next=15;break;}throw new Error('Lähtöjen haku epäonnisui: Palvelu palautti virheen');case 15:_context.next=17;return response.json();case 17:data=_context.sent;return _context.abrupt('return',Object(__WEBPACK_IMPORTED_MODULE_2__utils_graphqlresponseparser__["a" /* default */])(data));case 19:case'end':return _context.stop();}}},_callee,this,[[4,10]]);}));return function fetchDepartures(){return _ref2.apply(this,arguments);};}();/**
+* Form body for batch request
+* @private
+* @param {Object} props
+* @param {string} props.id
+* @returns {Object}
+*/function formBatchRequestBody(_ref3){var id=_ref3.id;var startTime=Object(__WEBPACK_IMPORTED_MODULE_5__utils_utils__["c" /* getNowInSeconds */])();return{query:__WEBPACK_IMPORTED_MODULE_4__querybatch__["a" /* default */],variables:{id:id,startTime:startTime,departuresCount:NUMBER_OF_DEPARTURES_PER_ROUTE}};}/**
+* Parse batch response data
+* @private
+* @param {Object[]} data
+* @returns {Function}
+*/var parseBatchResponse=__WEBPACK_IMPORTED_MODULE_1__utils_fputils__["a" /* default */].flatMap(function(data){var _data$payload$data$no=data.payload.data.node,nodeId=_data$payload$data$no.id,stoptimes=_data$payload$data$no.stoptimes;if(!stoptimes)return[];return stoptimes.map(function(stoptime){return Object.assign({nodeId:nodeId},Object(__WEBPACK_IMPORTED_MODULE_2__utils_graphqlresponseparser__["b" /* formStoptimeData */])(stoptime));});});/**
+* Batch updated departures
+* @param {Object[]} [departures=[]] Departures to batch
+* @returns {Object[]}
+*/var batchDepartures=function(){var _ref4=_asyncToGenerator(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(){var departures=arguments.length>0&&arguments[0]!==undefined?arguments[0]:[];var query,response,data;return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2){while(1){switch(_context2.prev=_context2.next){case 0:if(departures.length){_context2.next=2;break;}return _context2.abrupt('return',departures);case 2:query=departures.map(function(d){return formBatchRequestBody({id:d.nodeId});});response=void 0;_context2.prev=4;_context2.next=7;return fetch('https://api.digitransit.fi/routing/v1/routers/hsl/index/graphql/batch',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(query)});case 7:response=_context2.sent;_context2.next=13;break;case 10:_context2.prev=10;_context2.t0=_context2['catch'](4);throw new Error('Lähtöjen päivitys epäonnistui: Palveluun ei saatu yhteyttä');case 13:if(response.ok){_context2.next=15;break;}throw new Error('Lähtöjen päivitys epäonnistui: Palvelu palautti virheen');case 15:_context2.next=17;return response.json();case 17:data=_context2.sent;return _context2.abrupt('return',parseBatchResponse(data));case 19:case'end':return _context2.stop();}}},_callee2,this,[[4,10]]);}));return function batchDepartures(){return _ref4.apply(this,arguments);};}();
 
 /***/ }),
 /* 186 */
@@ -11263,7 +11267,7 @@ function _asyncToGenerator(fn){return function(){var gen=fn.apply(this,arguments
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return formStoptimeData; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__fputils__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__fputils__ = __webpack_require__(3);
 /** @module GraphQLResponseParser *//**
  * Curried sum of two numbers
  * @private
@@ -11348,7 +11352,10 @@ __WEBPACK_IMPORTED_MODULE_0__fputils__["a" /* default */].always([]))));
 /**
  * App header component
  * @constructs Header
- */var Header=function Header(_ref){var address=_ref.address,selectLocation=_ref.selectLocation;return Object(__WEBPACK_IMPORTED_MODULE_3_inferno__["createVNode"])(2,'header',null,[Object(__WEBPACK_IMPORTED_MODULE_3_inferno__["createVNode"])(2,'h1',null,[Object(__WEBPACK_IMPORTED_MODULE_3_inferno__["createVNode"])(16,__WEBPACK_IMPORTED_MODULE_1__common_vehicleicon__["a" /* default */],null,null,{'iconName':'bus'}),Object(__WEBPACK_IMPORTED_MODULE_3_inferno__["createVNode"])(2,'span','app-name','julkisilla.info')]),Object(__WEBPACK_IMPORTED_MODULE_3_inferno__["createVNode"])(2,'p','app-description','L\xF6yd\xE4 l\xE4himm\xE4t julkisen liikenteen l\xE4hd\xF6t helposti'),Object(__WEBPACK_IMPORTED_MODULE_3_inferno__["createVNode"])(16,__WEBPACK_IMPORTED_MODULE_2__favourites_favourites__["a" /* default */],null,null,{'address':address,'selectLocation':selectLocation})]);};/* harmony default export */ __webpack_exports__["a"] = (Header);
+ * @param {object} props
+ * @param {object} props.address
+ * @param {function} props.selectLocation
+ */var Header=function Header(_ref){var address=_ref.address,selectLocation=_ref.selectLocation;return Object(__WEBPACK_IMPORTED_MODULE_3_inferno__["createVNode"])(2,'header',null,[Object(__WEBPACK_IMPORTED_MODULE_3_inferno__["createVNode"])(2,'div','header-title-wrapper',[Object(__WEBPACK_IMPORTED_MODULE_3_inferno__["createVNode"])(2,'h1',null,[Object(__WEBPACK_IMPORTED_MODULE_3_inferno__["createVNode"])(16,__WEBPACK_IMPORTED_MODULE_1__common_vehicleicon__["a" /* default */],null,null,{'iconName':'bus'}),Object(__WEBPACK_IMPORTED_MODULE_3_inferno__["createVNode"])(2,'span','app-name','julkisilla.info')]),Object(__WEBPACK_IMPORTED_MODULE_3_inferno__["createVNode"])(2,'p','app-description','L\xF6yd\xE4 l\xE4himm\xE4t julkisen liikenteen l\xE4hd\xF6t helposti')]),Object(__WEBPACK_IMPORTED_MODULE_3_inferno__["createVNode"])(16,__WEBPACK_IMPORTED_MODULE_2__favourites_favourites__["a" /* default */],null,null,{'address':address,'selectLocation':selectLocation})]);};/* harmony default export */ __webpack_exports__["a"] = (Header);
 
 /***/ }),
 /* 190 */
@@ -11361,15 +11368,50 @@ __WEBPACK_IMPORTED_MODULE_0__fputils__["a" /* default */].always([]))));
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_inferno_component__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_inferno_component__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_inferno_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_inferno_component__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__iconbutton_iconbutton__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__favouritesdialog__ = __webpack_require__(193);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_storageservice__ = __webpack_require__(195);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__model__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_inferno__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_inferno___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_inferno__);
-var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();function _toConsumableArray(arr){if(Array.isArray(arr)){for(var i=0,arr2=Array(arr.length);i<arr.length;i++){arr2[i]=arr[i];}return arr2;}else{return Array.from(arr);}}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&(typeof call==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof superClass);}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}var initialState={favourites:[],isListVisible:false};var FavouritesListWrapper=function(_Component){_inherits(FavouritesListWrapper,_Component);function FavouritesListWrapper(props){_classCallCheck(this,FavouritesListWrapper);var _this=_possibleConstructorReturn(this,(FavouritesListWrapper.__proto__||Object.getPrototypeOf(FavouritesListWrapper)).call(this,props));_this.state=Object.assign({},initialState);_this.toggleList=_this.toggleList.bind(_this);_this.isLocationFavoured=_this.isLocationFavoured.bind(_this);_this.toggleFavourite=_this.toggleFavourite.bind(_this);_this.removeFromFavourites=_this.removeFromFavourites.bind(_this);return _this;}_createClass(FavouritesListWrapper,[{key:'componentDidMount',value:function componentDidMount(){var favourites=__WEBPACK_IMPORTED_MODULE_3__services_storageservice__["a" /* get */]('favourites');if(favourites)this.setState({favourites:favourites});}},{key:'isLocationFavoured',value:function isLocationFavoured(address){var favourites=this.state.favourites;return address&&favourites.find(function(f){return Object(__WEBPACK_IMPORTED_MODULE_4__model__["a" /* areLocationsEqual */])(f,address);});}},{key:'toggleFavourite',value:function toggleFavourite(){var address=this.props.address;return this.isLocationFavoured(address)?this.removeFromFavourites(address):this.addToFavourites(address);}},{key:'addToFavourites',value:function addToFavourites(address){if(address){var favourites=[].concat(_toConsumableArray(this.state.favourites),[address]);this.setFavourites(favourites);}}},{key:'removeFromFavourites',value:function removeFromFavourites(address){var favourites=this.state.favourites.filter(function(f){return!Object(__WEBPACK_IMPORTED_MODULE_4__model__["a" /* areLocationsEqual */])(f,address);});this.setFavourites(favourites);}},{key:'setFavourites',value:function setFavourites(favourites){__WEBPACK_IMPORTED_MODULE_3__services_storageservice__["b" /* set */]('favourites',favourites);this.setState({favourites:favourites});}},{key:'toggleList',value:function toggleList(){this.setState({isListVisible:!this.state.isListVisible});}},{key:'onAddressSelect',value:function onAddressSelect(address){this.toggleList();this.props.selectLocation(address);}},{key:'render',value:function render(){var favourites=this.state.favourites;var address=this.props.address;var isCurrentAddressFavoured=this.isLocationFavoured(address);return Object(__WEBPACK_IMPORTED_MODULE_5_inferno__["createVNode"])(2,'div','favourites',[Object(__WEBPACK_IMPORTED_MODULE_5_inferno__["createVNode"])(16,__WEBPACK_IMPORTED_MODULE_1__iconbutton_iconbutton__["a" /* default */],null,null,{'className':'favourites-button','text':isCurrentAddressFavoured?'★':'☆','title':'Lis\xE4\xE4 suosikkeihin/poista suosikeista','aria-pressed':!!isCurrentAddressFavoured,'disabled':!address,'onClick':this.toggleFavourite}),Object(__WEBPACK_IMPORTED_MODULE_5_inferno__["createVNode"])(16,__WEBPACK_IMPORTED_MODULE_1__iconbutton_iconbutton__["a" /* default */],null,null,{'className':'favourites-button favourites-toggle','text':'\u25BC','title':'Avaa Omat suosikit-lista','aria-pressed':this.state.isListVisible,'onClick':this.toggleList}),Object(__WEBPACK_IMPORTED_MODULE_5_inferno__["createVNode"])(16,__WEBPACK_IMPORTED_MODULE_2__favouritesdialog__["a" /* default */],null,null,{'favourites':favourites,'isVisible':this.state.isListVisible,'selectFavourite':this.onAddressSelect.bind(this),'selectedAddress':address,'onClose':this.toggleList,'removeFavourite':this.removeFromFavourites})]);}}]);return FavouritesListWrapper;}(__WEBPACK_IMPORTED_MODULE_0_inferno_component___default.a);/* harmony default export */ __webpack_exports__["a"] = (FavouritesListWrapper);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_fputils__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_inferno__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_inferno___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_inferno__);
+var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();function _toConsumableArray(arr){if(Array.isArray(arr)){for(var i=0,arr2=Array(arr.length);i<arr.length;i++){arr2[i]=arr[i];}return arr2;}else{return Array.from(arr);}}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&(typeof call==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof superClass);}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}/**
+ * Component's initial state
+ */var initialState={favourites:[],isDialogVisible:false};/**
+ * Wrapper component for favourites buttons and the favourites dialog
+ * @class Favourites
+ * @extends {Component}
+ */var Favourites=function(_Component){_inherits(Favourites,_Component);/**
+   * @constructor
+   * @param {object} props
+   * @param {object} props.address
+   * @param {function} props.selectLocation
+   */function Favourites(props){_classCallCheck(this,Favourites);var _this=_possibleConstructorReturn(this,(Favourites.__proto__||Object.getPrototypeOf(Favourites)).call(this,props));_this.state=Object.assign({},initialState);_this.toggleDialog=_this.toggleDialog.bind(_this);_this.isLocationFavoured=_this.isLocationFavoured.bind(_this);_this.toggleFavourite=_this.toggleFavourite.bind(_this);_this.removeFromFavourites=_this.removeFromFavourites.bind(_this);return _this;}/**
+   * Load favourites from the local storage when component mounts
+   */_createClass(Favourites,[{key:'componentDidMount',value:function componentDidMount(){var favourites=__WEBPACK_IMPORTED_MODULE_3__services_storageservice__["a" /* get */]('favourites');if(favourites)this.setState({favourites:favourites});}/**
+   * Check if the list of favourites contains the given address
+   * @param {object} address
+   * @return {boolean}
+   */},{key:'isLocationFavoured',value:function isLocationFavoured(address){var favourites=this.state.favourites;return!!(address&&favourites.find(function(f){return Object(__WEBPACK_IMPORTED_MODULE_4__model__["a" /* areLocationsEqual */])(f,address);}));}/**
+   * Add current address to/remove from the list of favourites
+   */},{key:'toggleFavourite',value:function toggleFavourite(){var address=this.props.address;this.isLocationFavoured(address)?this.removeFromFavourites(address):this.addToFavourites(address);}/**
+   * Add address to the list of favourites
+   * @param {object} address
+   */},{key:'addToFavourites',value:function addToFavourites(address){if(address){// only save data that we care about
+var saveObject=__WEBPACK_IMPORTED_MODULE_5__utils_fputils__["a" /* default */].pick(['label','location'])(address);var favourites=[].concat(_toConsumableArray(this.state.favourites),[saveObject]);this.saveFavourites(favourites);}}/**
+   * Remove address from the list of favourites
+   * @param {object} address
+   */},{key:'removeFromFavourites',value:function removeFromFavourites(address){var favourites=this.state.favourites.filter(function(f){return!Object(__WEBPACK_IMPORTED_MODULE_4__model__["a" /* areLocationsEqual */])(f,address);});this.saveFavourites(favourites);}/**
+   * Save favourites to the local storage and then set them to the component's state
+   * @param {object[]} favourites
+   */},{key:'saveFavourites',value:function saveFavourites(favourites){__WEBPACK_IMPORTED_MODULE_3__services_storageservice__["b" /* set */]('favourites',favourites);this.setState({favourites:favourites});}/**
+   * Toggle dialog visibility
+   */},{key:'toggleDialog',value:function toggleDialog(){this.setState({isDialogVisible:!this.state.isDialogVisible});}/**
+   * Callback for favouritelistitem's click event
+   * @param {object} address
+   */},{key:'onAddressSelect',value:function onAddressSelect(address){this.toggleDialog();this.props.selectLocation(address);}},{key:'render',value:function render(){var favourites=this.state.favourites;var address=this.props.address;var isCurrentAddressFavoured=this.isLocationFavoured(address);return Object(__WEBPACK_IMPORTED_MODULE_6_inferno__["createVNode"])(2,'div','favourites',[Object(__WEBPACK_IMPORTED_MODULE_6_inferno__["createVNode"])(16,__WEBPACK_IMPORTED_MODULE_1__iconbutton_iconbutton__["a" /* default */],null,null,{'className':'favourites-button','text':isCurrentAddressFavoured?'★':'☆','title':'Lis\xE4\xE4 suosikkeihin/poista suosikeista','aria-pressed':!!isCurrentAddressFavoured,'disabled':!address,'onClick':this.toggleFavourite}),Object(__WEBPACK_IMPORTED_MODULE_6_inferno__["createVNode"])(16,__WEBPACK_IMPORTED_MODULE_1__iconbutton_iconbutton__["a" /* default */],null,null,{'className':'favourites-button favourites-toggle','text':'\u25BC','title':'Avaa Omat suosikit-lista','aria-pressed':this.state.isDialogVisible,'onClick':this.toggleDialog}),Object(__WEBPACK_IMPORTED_MODULE_6_inferno__["createVNode"])(16,__WEBPACK_IMPORTED_MODULE_2__favouritesdialog__["a" /* default */],null,null,{'favourites':favourites,'isVisible':this.state.isDialogVisible,'selectFavourite':this.onAddressSelect.bind(this),'selectedAddress':address,'onClose':this.toggleDialog,'removeFavourite':this.removeFromFavourites})]);}}]);return Favourites;}(__WEBPACK_IMPORTED_MODULE_0_inferno_component___default.a);/* harmony default export */ __webpack_exports__["a"] = (Favourites);
 
 /***/ }),
 /* 192 */
@@ -11382,7 +11424,7 @@ var _createClass=function(){function defineProperties(target,props){for(var i=0;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_inferno_component__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_inferno_component__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_inferno_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_inferno_component__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__favouriteslistitem__ = __webpack_require__(194);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__model__ = __webpack_require__(15);
@@ -11391,14 +11433,23 @@ var _createClass=function(){function defineProperties(target,props){for(var i=0;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_inferno__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_inferno___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_inferno__);
 var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&(typeof call==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof superClass);}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}/**
- * A list component for displaying user's saved locations
+ * A dialog component for displaying user's saved locations
  * @class FavouritesList
  * @extends {Component}
- */var FavouritesDialog=function(_Component){_inherits(FavouritesDialog,_Component);function FavouritesDialog(props){_classCallCheck(this,FavouritesDialog);var _this=_possibleConstructorReturn(this,(FavouritesDialog.__proto__||Object.getPrototypeOf(FavouritesDialog)).call(this,props));_this.onKeyUp=_this.onKeyUp.bind(_this);return _this;}_createClass(FavouritesDialog,[{key:'componentDidUpdate',value:function componentDidUpdate(){if(this.props.isVisible){// start listening to keyup events
+ */var FavouritesDialog=function(_Component){_inherits(FavouritesDialog,_Component);/**
+   * @constructor
+   * @param {object} props
+   * @param {object[]} props.favourites
+   * @param {boolean} props.isVisible
+   * @param {object} props.selectedAddress
+   * @param {function} props.selectFavourite
+   * @param {function} props.removeFavourite
+   * @param {function} props.onClose
+   */function FavouritesDialog(props){_classCallCheck(this,FavouritesDialog);var _this=_possibleConstructorReturn(this,(FavouritesDialog.__proto__||Object.getPrototypeOf(FavouritesDialog)).call(this,props));_this.onKeyUp=_this.onKeyUp.bind(_this);return _this;}_createClass(FavouritesDialog,[{key:'componentDidUpdate',value:function componentDidUpdate(){if(this.props.isVisible){document.body.className='no-scroll '+document.body.className;// start listening to keyup events
 document.body.addEventListener('keyup',this.onKeyUp);// for usability reasons focus on the dialog when toggled visible
-this.dialog.focus();}else{// stop listening to keyup events
+this.dialog.focus();}else{document.body.className=document.body.className.replace('no-scroll','');// stop listening to keyup events
 document.body.removeEventListener('keyup',this.onKeyUp);}}},{key:'onKeyUp',value:function onKeyUp(e){// close the dialog on esc press
-if(e.key==='Escape'){this.props.onClose();}}},{key:'render',value:function render(){var _this2=this;var _props$favourites=this.props.favourites,favourites=_props$favourites===undefined?[]:_props$favourites;return Object(__WEBPACK_IMPORTED_MODULE_4_inferno__["createVNode"])(2,'div','favourites-modal-wrapper '+(this.props.isVisible?'visible':'hidden'),[Object(__WEBPACK_IMPORTED_MODULE_4_inferno__["createVNode"])(2,'div','modal'),Object(__WEBPACK_IMPORTED_MODULE_4_inferno__["createVNode"])(2,'div','favouriteslist',[Object(__WEBPACK_IMPORTED_MODULE_4_inferno__["createVNode"])(2,'div','favouriteslist-header',[Object(__WEBPACK_IMPORTED_MODULE_4_inferno__["createVNode"])(2,'h2',null,'Omat suosikit'),Object(__WEBPACK_IMPORTED_MODULE_4_inferno__["createVNode"])(2,'button','favouriteslist-close-button text-only-button','sulje [x]',{'onClick':this.props.onClose})]),Object(__WEBPACK_IMPORTED_MODULE_4_inferno__["createVNode"])(2,'ul',null,[favourites.map(function(address){return Object(__WEBPACK_IMPORTED_MODULE_4_inferno__["createVNode"])(16,__WEBPACK_IMPORTED_MODULE_1__favouriteslistitem__["a" /* default */],null,null,{'address':address,'removeFavourite':_this2.props.removeFavourite,'selectFavourite':_this2.props.selectFavourite,'isSelected':Object(__WEBPACK_IMPORTED_MODULE_2__model__["a" /* areLocationsEqual */])(_this2.props.selectedAddress,address)});}),!favourites.length&&Object(__WEBPACK_IMPORTED_MODULE_4_inferno__["createVNode"])(2,'li','favouriteslist-placeholder','Ei tallennettuja suosikkeja')])],{'tabIndex':'0','role':'dialog','aria-modal':true},null,function(r){return _this2.dialog=r;})]);}}]);return FavouritesDialog;}(__WEBPACK_IMPORTED_MODULE_0_inferno_component___default.a);/* harmony default export */ __webpack_exports__["a"] = (FavouritesDialog);
+if(e.key==='Escape'){this.props.onClose();}}},{key:'render',value:function render(){var _this2=this;var _props$favourites=this.props.favourites,favourites=_props$favourites===undefined?[]:_props$favourites;return Object(__WEBPACK_IMPORTED_MODULE_4_inferno__["createVNode"])(2,'div','favourites-modal-wrapper '+(this.props.isVisible?'visible':'hidden'),[Object(__WEBPACK_IMPORTED_MODULE_4_inferno__["createVNode"])(2,'div','modal'),Object(__WEBPACK_IMPORTED_MODULE_4_inferno__["createVNode"])(2,'div','favouriteslist',[Object(__WEBPACK_IMPORTED_MODULE_4_inferno__["createVNode"])(2,'div','favouriteslist-header',[Object(__WEBPACK_IMPORTED_MODULE_4_inferno__["createVNode"])(2,'h2',null,'Omat suosikit'),Object(__WEBPACK_IMPORTED_MODULE_4_inferno__["createVNode"])(2,'button','favouriteslist-close-button text-only-button','sulje [x]',{'onClick':this.props.onClose})]),Object(__WEBPACK_IMPORTED_MODULE_4_inferno__["createVNode"])(2,'ul',null,[favourites.map(function(address){return Object(__WEBPACK_IMPORTED_MODULE_4_inferno__["createVNode"])(16,__WEBPACK_IMPORTED_MODULE_1__favouriteslistitem__["a" /* default */],null,null,{'address':address,'removeFavourite':_this2.props.removeFavourite,'selectFavourite':_this2.props.selectFavourite,'isSelected':Object(__WEBPACK_IMPORTED_MODULE_2__model__["a" /* areLocationsEqual */])(_this2.props.selectedAddress,address)});}),!favourites.length&&Object(__WEBPACK_IMPORTED_MODULE_4_inferno__["createVNode"])(2,'li','favouriteslist-placeholder','Ei tallennettuja suosikkeja')]),Object(__WEBPACK_IMPORTED_MODULE_4_inferno__["createVNode"])(2,'div','info-message',[Object(__WEBPACK_IMPORTED_MODULE_4_inferno__["createVNode"])(2,'span','badge info','!'),'Suosikit tallentuvat paikallisesti, joten ne ovat hy\xF6dynnett\xE4viss\xE4 vain samalla selaimella ja laitteella, johon ne on tallennettu.'])],{'tabIndex':'0','role':'dialog','aria-modal':true},null,function(r){return _this2.dialog=r;})]);}}]);return FavouritesDialog;}(__WEBPACK_IMPORTED_MODULE_0_inferno_component___default.a);/* harmony default export */ __webpack_exports__["a"] = (FavouritesDialog);
 
 /***/ }),
 /* 194 */
@@ -11500,4 +11551,4 @@ if(e.key==='Escape'){this.props.onClose();}}},{key:'render',value:function rende
 
 /***/ })
 /******/ ]);
-//# sourceMappingURL=main.05823588.js.map
+//# sourceMappingURL=main.fdceff8a.js.map
