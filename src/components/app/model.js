@@ -89,7 +89,7 @@ export const batchDeparturesToState = async (state) => {
  */
 export const updateVehicleFilters = (type, multiselect, state) => {
   const { filters } = state;
-  const { vehicleTypes: current } = filters;
+  const { vehicleTypes: current = [] } = filters;
   const currentToggled = current.indexOf(type) > -1;
 
   const activeFilters = fputils.ifThenElse(
