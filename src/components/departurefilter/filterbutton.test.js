@@ -28,7 +28,7 @@ it('contains an icon corresponding to vehicleType', () => {
     const vehicleType = 'TRAM';
     const $ = dom.load(renderToString(<FilterButton vehicleType={vehicleType} />));
     const svgUse = $('use');
-    const result = svgUse.attr('xlink:href');
+    const result = svgUse.attr('href');
     expect(result.indexOf('#icon-icon_tram')).not.toBe(-1);
 });
 
@@ -49,15 +49,15 @@ it('does not have class toggled when props.isToggled is false', () => {
 it('sets aria-pressed status to true when props.isToggled is true', () => {
     const $ = dom.load(renderToString(<FilterButton isToggled={true}/>));
     const button = $('button');
-    const result = button.attr('aria-pressed');
-    expect(result).toBe('true');
+    const result = button.attr();
+    expect('aria-pressed' in result).toBeTruthy();
 });
 
 it('sets aria-pressed status to false when props.isToggled is false', () => {
     const $ = dom.load(renderToString(<FilterButton isToggled={false}/>));
     const button = $('button');
-    const result = button.attr('aria-pressed');
-    expect(result).toBe('false');
+    const result = button.attr();
+    expect('aria-pressed' in result).toBeFalsy();
 });
 
 it('calls given callback on click', () => {

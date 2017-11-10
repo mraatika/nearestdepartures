@@ -44,7 +44,7 @@ it('renders an svg icon with viewbox attribute', () => {
     const vehicleType = 'TRAM';
     const $ = dom.load(renderToString(<RouteIdentifier routeName={routeName} vehicleType={vehicleType} />));
     const icon = $('span').find('svg');
-    const result = icon.attr('viewbox');
+    const result = icon.attr('viewBox');
     expect(result).toBe('0 0 100 100');
 });
 
@@ -53,7 +53,7 @@ it('renders an svg icon corresponding to vehicle type TRAM', () => {
     const vehicleType = 'TRAM';
     const $ = dom.load(renderToString(<RouteIdentifier routeName={routeName} vehicleType={vehicleType} />));
     const svgUse = $('span').find('svg').find('use');
-    const result = svgUse.attr('xlink:href');
+    const result = svgUse.attr('href');
     expect(result.indexOf('#icon-icon_tram')).not.toBe(-1);
 });
 
@@ -62,7 +62,7 @@ it('renders an svg icon corresponding to vehicle type BUS', () => {
     const vehicleType = 'BUS';
     const $ = dom.load(renderToString(<RouteIdentifier routeName={routeName} vehicleType={vehicleType} />));
     const svgUse = $('span').find('svg').find('use');
-    const result = svgUse.attr('xlink:href');
+    const result = svgUse.attr('href');
     expect(result.indexOf('#icon-icon_bus')).not.toBe(-1);
 });
 

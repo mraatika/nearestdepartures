@@ -53,13 +53,14 @@ describe('when supported', () => {
     expect(navigator.geolocation.clearWatch).toHaveBeenCalledWith(watcherId);
   });
 
-  it('should not initiate multiple watchers', async () => {
+  it('throws when called when the previous watch is still active', () => {
     navigator.geolocation.watchPosition = jest.fn().mockReturnValueOnce('123');
 
     findGPSLocation();
-    findGPSLocation();
 
-    expect(navigator.geolocation.watchPosition).toHaveBeenCalledTimes(1);
+    return findGPSLocation()
+      .then(() => expect('').toEqual('Not supposed to be here'))
+      .catch(e => expect(e.message).toEqual('Sijainninhaku on jo käynnissä'))
   });
 
   it('throws when current position is not found', () => {
