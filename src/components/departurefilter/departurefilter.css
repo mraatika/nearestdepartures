@@ -1,70 +1,104 @@
 .departure-filter {
-    margin-bottom: 20px;
-    text-align: center;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 .range-filter-wrapper {
-    padding: 1em 0;
-    margin: 1em 0;
+  padding: 1em 0;
+  margin: 1em 0;
 }
 
 .range-filter-wrapper label {
-    display: block;
-    margin: 6px 0;
+  display: block;
+  margin: 6px 0;
 }
 
 /* FILTER BUTTONS */
 
+.vehicle-type-filters {
+  display: flex;
+}
+
 .departure-filter button {
-    width: 20%;
-    padding: .4em 0;
+  flex: 1;
+  padding: 6px 0 0 0;
 
-    border-right: 1px solid #ddd;
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-    border-left: 0;
+  border-right: 1px solid #ddd;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  border-left: 0;
 
-    color: #fff;
+  color: #fff;
 
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .departure-filter button:not(.toggled) {
-    background: #fff !important;
-    color: #ccc;
+  background: #fff !important;
+  color: #ccc;
 }
 
+
 .departure-filter button:first-child {
-    border-left: 1px solid #ddd;
+  border-left: 1px solid #ddd;
 }
 
 .departure-filter .icon {
-    width: 24px;
-    height: 24px;
+  width: 24px;
+  height: 24px;
+  margin-bottom: 2px;
+}
+
+.departure-filter button:not(.toggled) .bottom-border {
+  visibility: hidden;
+}
+
+.departure-filter button .bottom-border {
+  height: 4px;
+}
+
+.departure-filter button.bus .bottom-border {
+  background: #0065a7;
+}
+
+.departure-filter button.tram .bottom-border {
+  background: #006b42;
+}
+
+.departure-filter button.rail .bottom-border {
+  background: #71397c;
+}
+
+.departure-filter button.subway .bottom-border {
+  background: #d65417;
+}
+
+.departure-filter button.ferry .bottom-border {
+  background: #0094b6;
 }
 
 /* RANGE FILTER */
 
 .departure-filter output {
-    display: block;
-    text-align: right;
+  display: block;
+  text-align: right;
 }
 
 .departure-filter input[type=range] {
-    display: block;
-    width: 100%;
-    padding: 0;
-    margin: 0;
-    border: 0;
-    -webkit-appearance: none;
-    background: transparent; /* Otherwise white in Chrome */
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  -webkit-appearance: none;
+  background: transparent; /* Otherwise white in Chrome */
 }
 
 .departure-filter input[type=range]::-webkit-slider-runnable-track {
-    width: 100%;
-    height: 10px;
-    cursor: pointer;
-    background: #00b9e4;
+  width: 100%;
+  height: 10px;
+  cursor: pointer;
+  background: #00b9e4;
 }
 
 .departure-filter input[type=range]::-moz-range-track {
@@ -75,42 +109,44 @@
 }
 
 .departure-filter input[type=range]::-ms-track {
-    width: 100%;
-    height: 10px;
-    cursor: pointer;
-    background: #00b9e4;;
-    color: transparent;
-    margin: 12px 0;
-    border: 0;
+  width: 100%;
+  height: 10px;
+  cursor: pointer;
+  background: #00b9e4;;
+  color: transparent;
+  margin: 12px 0;
+  border: 0;
 }
 
 .departure-filter input[type=range]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    height: 24px;
-    width: 24px;
-    border: 0;
-    border-radius: 50%;
-    background: #007ac9;
-    cursor: pointer;
-    margin-top: -7px;
+  -webkit-appearance: none;
+  height: 24px;
+  width: 24px;
+  border: 0;
+  border-radius: 50%;
+  background: #007ac9;
+  cursor: pointer;
+  margin-top: -7px;
 }
 
 .departure-filter input[type=range]::-moz-range-thumb {
-    height: 24px;
-    width: 24px;
-    border-radius: 50%;
-    border: 0;
-    background: #007ac9;
-    cursor: pointer;
-    margin-top: 0;
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  border: 0;
+  background: #007ac9;
+  cursor: pointer;
+  margin-top: 0;
 }
 
 .departure-filter input[type=range]::-ms-thumb {
-    height: 24px;
-    width: 24px;
-    border-radius: 50%;
-    border: 0;
-    background: #007ac9;
-    cursor: pointer;
-    margin-top: 0;
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  border: 0;
+  background: #007ac9;
+  cursor: pointer;
+  margin-top: 0;
 }
+
+

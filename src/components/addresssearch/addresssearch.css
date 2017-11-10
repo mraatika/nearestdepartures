@@ -30,7 +30,7 @@
     cursor: pointer;
 }
 
-.address-search-submit {
+button.address-search-submit {
     right: 0;
     width: 80px;
     font-size: 1rem;
@@ -38,16 +38,13 @@
     background: #007ac9;
     outline: none;
     height: 40px;
+    border-bottom: 4px solid #0065a7;
 }
 
 .address-search-submit:focus,
 .address-search-submit:hover
 .address-search-submit:active {
     background: #0065a7;
-}
-
-.address-search button::-moz-focus-inner {
-    border: 0;
 }
 
 .address-search-clear {
