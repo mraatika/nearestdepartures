@@ -4,6 +4,8 @@ import { stopLocating } from '../../services/locationservice';
 import { fetchDepartures, batchDepartures } from '../../utils/departurefetchmerge';
 import { VEHICLE_TYPE } from '../../constants/constants';
 
+/** @module AppModel */
+
 /**
  * All vehicle filters
  * @private

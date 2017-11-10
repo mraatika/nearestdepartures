@@ -1,6 +1,9 @@
 import { findGPSLocation } from '../../services/locationservice';
 import { lookupAddress, searchAddress } from '../../services/addresssearchservice';
 import { MAX_ADDRESS_SUGGESTIONS } from '../../constants/constants';
+
+/** @module AddressSearchModel */
+
 /**
  * Find current location and lookup address based on that
  * @async
