@@ -26,11 +26,13 @@ class FavouritesDialog extends Component {
 
   componentDidUpdate() {
     if (this.props.isVisible) {
+      document.body.className = `no-scroll ${document.body.className}`;
       // start listening to keyup events
       document.body.addEventListener('keyup', this.onKeyUp);
       // for usability reasons focus on the dialog when toggled visible
       this.dialog.focus();
     } else {
+      document.body.className = document.body.className.replace('no-scroll', '');
       // stop listening to keyup events
       document.body.removeEventListener('keyup', this.onKeyUp);
     }
@@ -72,6 +74,10 @@ class FavouritesDialog extends Component {
             )}
             {!favourites.length && <li class="favouriteslist-placeholder">Ei tallennettuja suosikkeja</li>}
           </ul>
+          <div class="info-message">
+            <span class="badge info">!</span>
+            Suosikit tallentuvat paikallisesti, joten ne ovat hyödynnettävissä vain samalla selaimella ja laitteella, johon ne on tallennettu.
+          </div>
         </div>
       </div>
     );

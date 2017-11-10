@@ -34,11 +34,16 @@
   background-color: #fff;
   box-shadow: 0 0 30px #444;
   border-radius: 2px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 .favouriteslist-header {
   display: flex;
   align-items: flex-start;
+  flex-shrink: 0;
 }
 
 .favouriteslist h2 {
@@ -58,6 +63,8 @@
 
 .favouriteslist ul {
   padding: 0;
+  flex-grow: 1;
+  overflow-y: auto;
 }
 
 .favouriteslist li {
@@ -98,6 +105,16 @@
 
 .favouriteslist-placeholder {
   font-style: italic;
+}
+
+.favouriteslist .info-message {
+  display: flex;
+  align-items: flex-start;
+  flex-shrink: 0;
+}
+
+.favouriteslist .badge {
+  margin-right: .6rem;
 }
 
 .modal {

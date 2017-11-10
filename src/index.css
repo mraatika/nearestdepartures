@@ -58,6 +58,35 @@ input {
   top: -9999px;
 }
 
+.no-scroll {
+  overflow: hidden;
+}
+
+.info-message {
+  color: #004085;
+  background-color: #b8daff;
+  border: 1px solid rgba(0,0,0,.125);
+  padding: 1rem;
+  border-radius: 2px;
+}
+
+.badge {
+  display: inline-block;
+  padding: .25em .6em;
+  font-family: "Patua One", cursive;
+  font-size: 1.2rem;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25rem;
+}
+
+.badge.info {
+  color: #fff;
+  background-color: #007bff;
+}
+
 button.text-only-button {
   background: none;
   border: 0;
