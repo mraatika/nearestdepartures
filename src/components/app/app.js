@@ -99,7 +99,7 @@ class App extends Component {
    * @param {string} error Error message
    */
   onError(error) {
-    console.error(error);
+    process.env.NODE_ENV !== 'production' && console.error(error);
     this.setState({ error, loading: false, departures: [], filtered: [] });
   }
 

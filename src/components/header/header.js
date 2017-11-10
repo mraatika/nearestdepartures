@@ -4,6 +4,9 @@ import Favourites from '../favourites/favourites';
 /**
  * App header component
  * @constructs Header
+ * @param {object} props
+ * @param {object} props.address
+ * @param {function} props.selectLocation
  */
 const Header = ({ address, selectLocation }) => (
   <header>

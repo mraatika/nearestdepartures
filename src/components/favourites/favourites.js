@@ -4,64 +4,108 @@ import FavouritesDialog from './favouritesdialog';
 import * as storage from '../../services/storageservice';
 import { areLocationsEqual } from './model';
 
+/**
+ * Component's initial state
+ */
 const initialState = {
   favourites: [],
-  isListVisible: false
+  isDialogVisible: false
 };
 
-class FavouritesListWrapper extends Component {
+/**
+ * Wrapper component for favourites buttons and the favourites dialog
+ * @class Favourites
+ * @extends {Component}
+ */
+class Favourites extends Component {
+  /**
+   * @constructor
+   * @param {object} props
+   * @param {object} props.address
+   * @param {function} props.selectLocation
+   */
   constructor(props) {
     super(props);
 
     this.state = { ...initialState };
 
-    this.toggleList = this.toggleList.bind(this);
+    this.toggleDialog = this.toggleDialog.bind(this);
     this.isLocationFavoured = this.isLocationFavoured.bind(this);
     this.toggleFavourite = this.toggleFavourite.bind(this);
     this.removeFromFavourites = this.removeFromFavourites.bind(this);
   }
 
+  /**
+   * Load favourites from the local storage when component mounts
+   */
   componentDidMount() {
     const favourites = storage.get('favourites');
     if (favourites) this.setState({ favourites });
   }
 
+  /**
+   * Check if the list of favourites contains the given address
+   * @param {object} address
+   * @return {boolean}
+   */
   isLocationFavoured(address) {
     const { favourites } = this.state;
-    return address && favourites.find(f => areLocationsEqual(f, address));
+    return !!(address && favourites.find(f => areLocationsEqual(f, address)));
   }
 
+  /**
+   * Add current address to/remove from the list of favourites
+   */
   toggleFavourite() {
     const { address } = this.props;
 
-    return this.isLocationFavoured(address)
+    this.isLocationFavoured(address)
       ? this.removeFromFavourites(address)
       : this.addToFavourites(address);
   }
 
+  /**
+   * Add address to the list of favourites
+   * @param {object} address
+   */
   addToFavourites(address) {
     if (address) {
       const favourites = [...this.state.favourites, address];
-      this.setFavourites(favourites);
+      this.saveFavourites(favourites);
     }
   }
 
+  /**
+   * Remove address from the list of favourites
+   * @param {object} address
+   */
   removeFromFavourites(address) {
     const favourites = this.state.favourites.filter(f => !areLocationsEqual(f, address));
-    this.setFavourites(favourites);
+    this.saveFavourites(favourites);
   }
 
-  setFavourites(favourites) {
+  /**
+   * Save favourites to the local storage and then set them to the component's state
+   * @param {object[]} favourites
+   */
+  saveFavourites(favourites) {
     storage.set('favourites', favourites);
     this.setState({ favourites });
   }
 
-  toggleList() {
-    this.setState({ isListVisible: !this.state.isListVisible });
+  /**
+   * Toggle dialog visibility
+   */
+  toggleDialog() {
+    this.setState({ isDialogVisible: !this.state.isDialogVisible });
   }
 
+  /**
+   * Callback for favouritelistitem's click event
+   * @param {object} address
+   */
   onAddressSelect(address) {
-    this.toggleList();
+    this.toggleDialog();
     this.props.selectLocation(address);
   }
 
@@ -85,15 +129,15 @@ class FavouritesListWrapper extends Component {
           className="favourites-button favourites-toggle"
           text="▼"
           title="Avaa Omat suosikit-lista"
-          aria-pressed={this.state.isListVisible}
-          onClick={this.toggleList} />
+          aria-pressed={this.state.isDialogVisible}
+          onClick={this.toggleDialog} />
 
         <FavouritesDialog
           favourites={favourites}
-          isVisible={this.state.isListVisible}
+          isVisible={this.state.isDialogVisible}
           selectFavourite={this.onAddressSelect.bind(this)}
           selectedAddress={address}
-          onClose={this.toggleList}
+          onClose={this.toggleDialog}
           removeFavourite={this.removeFromFavourites}
         />
       </div>
@@ -101,4 +145,4 @@ class FavouritesListWrapper extends Component {
   }
 }
 
-export default FavouritesListWrapper;
+export default Favourites;

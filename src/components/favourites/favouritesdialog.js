@@ -4,11 +4,21 @@ import { areLocationsEqual } from './model';
 import './favourites.css';
 
 /**
- * A list component for displaying user's saved locations
+ * A dialog component for displaying user's saved locations
  * @class FavouritesList
  * @extends {Component}
  */
 class FavouritesDialog extends Component {
+  /**
+   * @constructor
+   * @param {object} props
+   * @param {object[]} props.favourites
+   * @param {boolean} props.isVisible
+   * @param {object} props.selectedAddress
+   * @param {function} props.selectFavourite
+   * @param {function} props.removeFavourite
+   * @param {function} props.onClose
+   */
   constructor(props) {
     super(props);
     this.onKeyUp = this.onKeyUp.bind(this);
