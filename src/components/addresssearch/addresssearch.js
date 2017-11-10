@@ -9,6 +9,11 @@ import './addresssearch.css';
  * AddressSearch component for address input.
  * @class AddressSearch
  * @extends {Component}
+ * @param {object} props
+ * @param {object} props.address
+ * @param {function} props.onSearch
+ * @param {function} props.onError
+ * @param {function} props.clearAddress
  */
 export default class AddressSearch extends Component {
   /**
@@ -18,7 +23,7 @@ export default class AddressSearch extends Component {
    */
   constructor(props) {
     super(props);
-    this.state = { searchTerm: '', suggestions: [] };
+    this.state = { searchTerm: props.address ? props.address.label : '', suggestions: [] };
     this.debouncedFetchSuggestions = debounce(this.fetchSuggestions, 300);
   }
 
@@ -118,15 +123,6 @@ export default class AddressSearch extends Component {
   }
 
   /**
-   * Callback for clear address button
-   * @param {Event} e
-   */
-  onClearClick(e) {
-    e.preventDefault();
-    this.props.clearAddress();
-  }
-
-  /**
    * Callback for text input's input event
    * @param {Event} e
    */
@@ -213,7 +209,7 @@ export default class AddressSearch extends Component {
           <button
             type="button"
             className="address-search-clear"
-            onClick={this.onClearClick.bind(this)}>
+            onClick={this.props.clearAddress}>
             <span>x</span>
           </button>
           <button className="address-search-submit" type="submit">Hae</button>

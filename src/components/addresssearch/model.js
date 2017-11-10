@@ -43,7 +43,7 @@ export const fetchSuggestions = async (searchTerm) => {
  * @return {object} suggestion
  */
 export const selectNextSuggestion = (state) => {
-  const { suggestions, selectedSuggestion } = state;
+  const { suggestions = [], selectedSuggestion } = state;
   const currentIndex = suggestions.indexOf(selectedSuggestion);
   const nextIndex = ((currentIndex + 1) >= suggestions.length) ? 0 : currentIndex + 1;
   return suggestions[nextIndex];
@@ -55,7 +55,7 @@ export const selectNextSuggestion = (state) => {
  * @return {object} suggestion
  */
 export const selectPrevSuggestion = (state) => {
-  const { suggestions, selectedSuggestion } = state;
+  const { suggestions = [], selectedSuggestion } = state;
   const currentIndex = suggestions.indexOf(selectedSuggestion);
   const prevIndex = [-1, 0].indexOf(currentIndex) > -1 ? (suggestions.length - 1) : (currentIndex - 1);
   return suggestions[prevIndex];
