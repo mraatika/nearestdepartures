@@ -3,6 +3,7 @@ import IconButton from '../iconbutton/iconbutton';
 import FavouritesDialog from './favouritesdialog';
 import * as storage from '../../services/storageservice';
 import { areLocationsEqual } from './model';
+import fputils from '../../utils/fputils';
 
 /**
  * Component's initial state
@@ -70,7 +71,9 @@ class Favourites extends Component {
    */
   addToFavourites(address) {
     if (address) {
-      const favourites = [...this.state.favourites, address];
+      // only save data that we care about
+      const saveObject = fputils.pick(['label', 'location'])(address);
+      const favourites = [...this.state.favourites, saveObject];
       this.saveFavourites(favourites);
     }
   }
