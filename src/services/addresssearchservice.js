@@ -10,7 +10,7 @@
 export async function searchAddress(searchTerm, maxResults = 1) {
   const encoded = encodeURIComponent(searchTerm);
   const url = `https://api.digitransit.fi/geocoding/v1/search?text=${encoded}&size=${maxResults}&lang=fi&boundary.rect.min_lat=59.9&boundary.rect.max_lat=60.45&boundary.rect.min_lon=24.3&boundary.rect.max_lon=25.5`;
-  let response
+  let response;
 
   try {
     response = await fetch(url);
@@ -46,7 +46,7 @@ export async function searchAddress(searchTerm, maxResults = 1) {
 */
 export async function lookupAddress({ latitude, longitude }) {
   const queryParams = `point.lat=${encodeURIComponent(latitude)}&point.lon=${encodeURIComponent(longitude)}&size=1`;
-  let response
+  let response;
 
   try {
     response = await fetch(`https://api.digitransit.fi/geocoding/v1/reverse?${queryParams}`);
