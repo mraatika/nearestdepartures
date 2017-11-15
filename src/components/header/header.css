@@ -4,7 +4,7 @@ header {
   color: #fff;
   text-align: left;
   margin-bottom: 36px;
-  padding: 0 1rem;
+  padding: .6rem 1rem;
   display: flex;
   align-items: center;
 }
@@ -53,6 +53,7 @@ header .icon {
   header {
     text-align: center;
     display: block;
+    padding: 0 1rem;
   }
 
   header .icon {
