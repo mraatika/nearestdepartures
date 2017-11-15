@@ -3,6 +3,7 @@ import IconButton from '../iconbutton/iconbutton';
 import FavouritesDialog from './favouritesdialog';
 import * as storage from '../../services/storageservice';
 import { areLocationsEqual } from './model';
+import { find } from '../../utils/utils';
 import fputils from '../../utils/fputils';
 
 /**
@@ -51,7 +52,7 @@ class Favourites extends Component {
    */
   isLocationFavoured(address) {
     const { favourites } = this.state;
-    return !!(address && favourites.find(f => areLocationsEqual(f, address)));
+    return !!(address && find(f => areLocationsEqual(f, address))(favourites));
   }
 
   /**
