@@ -23,7 +23,7 @@ export default ({
     vehicleType,
     url,
 } = {}) => (
-    <a class="departures-list-row" href={url} target="_blank">
+    <a class="departures-list-row" href={url} target="_blank" rel="noopener">
         <div class={`time${realtime ? ' realtime' : ''}`}>
             <Time time={ realtimeDeparture } />
         </div>
