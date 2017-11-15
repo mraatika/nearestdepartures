@@ -1,6 +1,7 @@
 import './header.css';
-import VehicleIcon from '../common/vehicleicon';
+import VehicleIcon from '../vehicleicon/vehicleicon';
 import Favourites from '../favourites/favourites';
+
 /**
  * App header component
  * @constructs Header

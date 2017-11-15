@@ -1,4 +1,4 @@
-import VehicleIcon from '../common/vehicleicon';
+import VehicleIcon from '../vehicleicon/vehicleicon';
 
 /**
  * Component for displaying a vehicle icon and route number

@@ -1,4 +1,4 @@
-import VehicleIcon from '../common/vehicleicon';
+import VehicleIcon from '../vehicleicon/vehicleicon';
 import {  VEHICLE_TYPE_TRANSLATIONS } from '../../constants/constants';
 
 /**

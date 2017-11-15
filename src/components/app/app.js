@@ -7,7 +7,7 @@ import { DEFAULT_RANGE, BATCH_INTERVAL } from '../../constants/constants';
 import * as model from './model';
 import Header from '../header/header';
 import Footer from '../footer/footer';
-import AccuracyIndicator from '../common/accuracyindicator';
+import AccuracyIndicator from '../accuracyindicator/accuracyindicator';
 import './app.css';
 
 /**
