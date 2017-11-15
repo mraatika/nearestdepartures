@@ -1,16 +1,27 @@
 header {
   background-color: #007ac9;
-  border-bottom: 10px solid #005993;
+  border-bottom: 4px solid #005993;
   color: #fff;
-  text-align: center;
+  text-align: left;
   margin-bottom: 36px;
+  padding: .6rem 1rem;
+  display: flex;
+  align-items: center;
 }
 
 header .icon {
-  width: 60px;
-  height: 60px;
+  width: 40px;
+  height: 40px;
   margin-right: 6px;
   vertical-align: bottom;
+}
+
+.header-title-wrapper {
+  flex: 1;
+}
+
+.app-description {
+  display: none;
 }
 
 .app-description:before,
@@ -36,4 +47,29 @@ header .icon {
 .app-name {
   font-family: 'Patua One', cursive;
   text-transform: lowercase;
+}
+
+@media (min-width: 750px) {
+  header {
+    text-align: center;
+    display: block;
+    padding: 0 1rem;
+  }
+
+  header .icon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .app-description {
+    display: block;
+  }
+
+  header .favourites {
+    text-align: right;
+    position: absolute;
+    top: .8rem;
+    left: 1rem;
+    right: 1rem;
+  }
 }

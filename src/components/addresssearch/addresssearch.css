@@ -9,16 +9,17 @@
     padding-right: 82px;
     padding-left: .5rem;
     outline: none;
-    box-sizing: border-box;
-}
+  }
 
-.address-search input,
-.address-search .address-search-submit {
+  .address-search input,
+  .address-search .address-search-submit {
     display: inline-block;
     border-radius: 0;
     padding-top: 10px;
     padding-bottom: 10px;
     -webkit-appearance: none;
+    height: 40px;
+    box-sizing: border-box;
 }
 
 .address-search button {
@@ -30,24 +31,19 @@
     cursor: pointer;
 }
 
-.address-search-submit {
+button.address-search-submit {
     right: 0;
     width: 80px;
     font-size: 1rem;
     color: #fff;
     background: #007ac9;
-    outline: none;
-    height: 40px;
+    border-bottom: 4px solid #0065a7;
 }
 
 .address-search-submit:focus,
 .address-search-submit:hover
 .address-search-submit:active {
     background: #0065a7;
-}
-
-.address-search button::-moz-focus-inner {
-    border: 0;
 }
 
 .address-search-clear {

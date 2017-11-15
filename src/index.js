@@ -1,10 +1,8 @@
 import { render } from 'inferno';
-import App from './app';
+import App from './components/app/app';
 import './index.css';
-
-// use offline-plugin when in production
-if (process.env.NODE_ENV === 'production') {
-    require('offline-plugin/runtime').install();
-}
+import registerServiceWorker from './registerServiceWorker';
 
 render(<App />, document.getElementById('app'));
+
+registerServiceWorker();

@@ -1,0 +1,21 @@
+#app {
+  height: 100%;
+}
+
+main {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: auto;
+
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.app-content {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}

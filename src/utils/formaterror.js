@@ -20,8 +20,8 @@ export const POSITION_ERROR = 'POSITION_ERROR';
  * @param {object} error
  * @returns {string} Human readable error message
  */
-export default function formatError(type, error) {
-    if (type === POSITION_ERROR) {
-        return `Sijainti ei ole saatavilla: ${POSITION_ERROR_CODES[error.code]}.`;
-    }
-}
+ const formatError = (type, error) => (type === POSITION_ERROR
+    ? `Sijainti ei ole saatavilla: ${POSITION_ERROR_CODES[error.code]}.`
+    : error.message);
+
+export default formatError;
