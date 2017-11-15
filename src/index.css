@@ -87,6 +87,84 @@ input {
   background-color: #007bff;
 }
 
+.realtime {
+  color: #46b32a;
+}
+
+.tram {
+  color: #00985f;
+}
+
+.bus {
+  color: #007ac9;
+}
+
+.subway {
+  color: #ff6319;
+}
+
+.rail {
+  color: #8c4799;
+}
+
+.ferry {
+  color: #00b9e4;
+}
+
+.tram.bg {
+  background-color: #00985f;
+}
+
+.bus.bg {
+  background-color: #007ac9;
+}
+
+.subway.bg {
+  background-color: #ff6319;
+}
+
+.rail.bg {
+  background-color: #8c4799;
+}
+
+.ferry.bg {
+  background-color: #00b9e4;
+}
+
+button .bottom-border {
+  height: 4px;
+}
+
+button.bus:focus,
+button.bus:active,
+button.bus .bottom-border {
+  background: #0065a7;
+}
+
+button.tram:focus,
+button.tram:active,
+button.tram .bottom-border {
+  background: #006b42;
+}
+
+button.rail:focus,
+button.rail:active,
+button.rail .bottom-border {
+  background: #71397c;
+}
+
+button.subway:focus,
+button.subway:active,
+button.subway .bottom-border {
+  background: #d65417;
+}
+
+button.ferry:focus,
+button.ferry:active,
+button.ferry .bottom-border {
+  background: #0094b6;
+}
+
 button.text-only-button {
   background: none;
   border: 0;

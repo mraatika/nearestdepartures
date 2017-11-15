@@ -27,7 +27,6 @@
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
   border-left: 0;
-
   color: #fff;
 
   cursor: pointer;
@@ -37,7 +36,6 @@
   background: #fff !important;
   color: #ccc;
 }
-
 
 .departure-filter button:first-child {
   border-left: 1px solid #ddd;
@@ -51,30 +49,6 @@
 
 .departure-filter button:not(.toggled) .bottom-border {
   visibility: hidden;
-}
-
-.departure-filter button .bottom-border {
-  height: 4px;
-}
-
-.departure-filter button.bus .bottom-border {
-  background: #0065a7;
-}
-
-.departure-filter button.tram .bottom-border {
-  background: #006b42;
-}
-
-.departure-filter button.rail .bottom-border {
-  background: #71397c;
-}
-
-.departure-filter button.subway .bottom-border {
-  background: #d65417;
-}
-
-.departure-filter button.ferry .bottom-border {
-  background: #0094b6;
 }
 
 /* RANGE FILTER */
