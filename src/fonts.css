@@ -1,0 +1,23 @@
+/* regular text */
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url(./fonts/Open_Sans/OpenSans-Regular.ttf) format('truetype');
+}
+
+/* bold text */
+@font-face {
+  font-family: 'Open Sans';
+  font-style: bold;
+  font-weight: 600;
+  src: url(./fonts/Open_Sans/OpenSans-SemiBold.ttf) format('truetype');
+}
+
+/* header text */
+@font-face {
+  font-family: 'Patua One';
+  font-style: normal;
+  font-weight: 400;
+  src: url(./fonts/Patua_One/PatuaOne-Regular.ttf) format('truetype');
+}
