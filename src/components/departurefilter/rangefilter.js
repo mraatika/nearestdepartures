@@ -1,4 +1,14 @@
+import { linkEvent } from 'inferno';
 import { MIN_RANGE, MAX_RANGE, RANGE_STEP } from '../../constants/constants'
+
+/**
+ * Callback for input's change
+ * @param {object} props
+ * @param {function} props.onChange
+ * @param {Event} e
+ */
+const onInputChange = (onChange, e) =>
+  onChange(e.target.value)
 
 /**
  * Range input for filtering departures by distance
@@ -8,7 +18,7 @@ import { MIN_RANGE, MAX_RANGE, RANGE_STEP } from '../../constants/constants'
  * @param {Function} props.onChange
  */
 export default ({
-    range,
+  range,
   onChange,
 }) => (
   <div class="range-filter-wrapper">
@@ -23,8 +33,8 @@ export default ({
         max={MAX_RANGE}
         step={RANGE_STEP}
         defaultValue={range}
-        onChange={e => onChange(e.target.value)}
-        onInput={e => onChange(e.target.value)} />
+        onChange={linkEvent(onChange, onInputChange)}
+        onInput={linkEvent(onChange, onInputChange)} />
     </label>
   </div>
   );

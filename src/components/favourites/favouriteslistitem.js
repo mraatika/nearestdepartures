@@ -1,3 +1,4 @@
+import { linkEvent } from 'inferno';
 import IconButton from '../iconbutton/iconbutton';
 import './favourites.css';
 
@@ -12,7 +13,7 @@ import './favourites.css';
 const FavouritesListItem = ({ address, removeFavourite, selectFavourite, isSelected }) => (
   <li key={address} class={`favouriteslist-item${isSelected ? ' selected' : ''}`}>
     <div class="favouriteslist-item-label">
-      <button class="text-only-button full-width" onClick={() => selectFavourite(address)}>
+      <button class="text-only-button full-width" onClick={linkEvent(address, selectFavourite)}>
         {address.label}
       </button>
     </div>
@@ -20,7 +21,7 @@ const FavouritesListItem = ({ address, removeFavourite, selectFavourite, isSelec
       <IconButton
         className="favouriteslist-item-remove"
         text="x"
-        onClick={() => removeFavourite(address)}
+        onClick={linkEvent(address, removeFavourite)}
         title="Poista Omat suosikit -listalta"
       />
       </div>

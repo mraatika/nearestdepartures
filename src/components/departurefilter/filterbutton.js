@@ -1,5 +1,16 @@
+import { linkEvent } from 'inferno';
 import VehicleIcon from '../vehicleicon/vehicleicon';
-import {  VEHICLE_TYPE_TRANSLATIONS } from '../../constants/constants';
+import { VEHICLE_TYPE_TRANSLATIONS } from '../../constants/constants';
+
+/**
+ * Callback for filter button click
+ * @param {object} props
+ * @param {string} props.vehicleType
+ * @param {Function} props.onFilterToggle
+ * @param {Event} e
+ */
+const propagateFilterToggle = ({ vehicleType, onFilterToggle }, e) =>
+  onFilterToggle(vehicleType, e.ctrlKey)
 
 /**
 * Filter button component
@@ -17,7 +28,7 @@ export default ({ vehicleType = '', isToggled,  onFilterToggle }) => {
       class={className}
       aria-label={`Suodatin ${VEHICLE_TYPE_TRANSLATIONS[vehicleType]}`}
       aria-pressed={!!isToggled}
-      onClick={e => onFilterToggle(vehicleType, e.ctrlKey)}
+      onClick={linkEvent({vehicleType, onFilterToggle}, propagateFilterToggle)}
     >
       <VehicleIcon aria-hidden={true} iconName={`${vehicleType.toLocaleLowerCase()}-withoutBox`} />
       <div className="bottom-border" />
