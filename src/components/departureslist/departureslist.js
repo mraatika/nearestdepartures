@@ -72,6 +72,7 @@ export default class DeparturesList extends Component {
         <div class="departures-list-header">
           {sortHeaders.map(({ text, propName }) =>
             <DeparturesListSortHeader
+              key={propName}
               propName={propName}
               active={sortProp === propName}
               onClick={this.updateSortProps}
