@@ -38,7 +38,7 @@ it('calls onClick callback when clicked', () => {
     const event = new MouseEvent('click', { bubbles: true });
     button.dom.dispatchEvent(event);
 
-    expect(spy).toHaveBeenCalledWith(propName);
+    expect(spy).toHaveBeenCalledWith(propName, event);
 });
 
 it('calls onClick callback on space press', () => {

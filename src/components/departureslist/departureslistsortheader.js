@@ -1,3 +1,5 @@
+import { linkEvent } from 'inferno';
+
 /**
  * Creates a callback for keypress event
  * @private
@@ -36,7 +38,7 @@ export default ({
         aria-pressed={active ? 'true' : 'false'}
         aria-label={`Järjestä lista ${text} mukaan`}
         class={`header ${propName.toLowerCase()}`}
-        onClick={() => onClick(propName)}
+        onClick={linkEvent(propName, onClick)}
         onKeyPress={keyPressHandler(onClick, propName)}>
         <span class={active ? 'active' : ''}>{text}</span>
     </div>

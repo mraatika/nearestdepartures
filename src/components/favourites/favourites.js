@@ -35,6 +35,7 @@ class Favourites extends Component {
     this.isLocationFavoured = this.isLocationFavoured.bind(this);
     this.toggleFavourite = this.toggleFavourite.bind(this);
     this.removeFromFavourites = this.removeFromFavourites.bind(this);
+    this.onAddressSelect = this.onAddressSelect.bind(this);
   }
 
   /**
@@ -114,7 +115,7 @@ class Favourites extends Component {
   }
 
   render() {
-    const { favourites } = this.state;
+    const { favourites, isDialogVisible } = this.state;
     const { address } = this.props;
     const isCurrentAddressFavoured = this.isLocationFavoured(address);
 
@@ -133,13 +134,13 @@ class Favourites extends Component {
           className="favourites-button favourites-toggle"
           text="▼"
           title="Avaa Omat suosikit-lista"
-          aria-pressed={this.state.isDialogVisible}
+          aria-pressed={isDialogVisible}
           onClick={this.toggleDialog} />
 
         <FavouritesDialog
           favourites={favourites}
-          isVisible={this.state.isDialogVisible}
-          selectFavourite={this.onAddressSelect.bind(this)}
+          isVisible={isDialogVisible}
+          selectFavourite={this.onAddressSelect}
           selectedAddress={address}
           onClose={this.toggleDialog}
           removeFavourite={this.removeFromFavourites}
