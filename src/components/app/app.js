@@ -2,7 +2,7 @@ import Component from 'inferno-component';
 import DeparturesList from '../departureslist/departureslist';
 import DepartureFilter from '../departurefilter/departurefilter';
 import ErrorMessage from '../errormessage/errormessage';
-import AddressSearch from '../addresssearch/addresssearch';
+import AddressSearch from '../addresssearch';
 import { DEFAULT_RANGE, BATCH_INTERVAL } from '../../constants/constants';
 import * as model from './model';
 import Header from '../header/header';
