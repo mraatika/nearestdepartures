@@ -24,14 +24,19 @@ class FavouritesDialog extends Component {
     this.onKeyUp = this.onKeyUp.bind(this);
   }
 
-  componentDidUpdate() {
-    if (this.props.isVisible) {
+  componentDidUpdate(prevProps) {
+    const { isVisible: isNowVisible } = this.props;
+    const { isVisible: wasVisible } = prevProps;
+
+    // if the dialog was opened
+    if (!wasVisible && isNowVisible) {
       document.body.className = `no-scroll ${document.body.className}`;
       // start listening to keyup events
       document.body.addEventListener('keyup', this.onKeyUp);
       // for usability reasons focus on the dialog when toggled visible
       this.dialog.focus();
-    } else {
+      // if the dialog was closed
+    } else if (wasVisible && !isNowVisible) {
       document.body.className = document.body.className.replace('no-scroll', '');
       // stop listening to keyup events
       document.body.removeEventListener('keyup', this.onKeyUp);
