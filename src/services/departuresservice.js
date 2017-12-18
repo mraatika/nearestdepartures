@@ -7,11 +7,11 @@ import { getNowInSeconds } from '../utils/utils';
 /** @module DeparturesService */
 
 /**
-* Limit results by time (2h in seconds)
+* Limit results by time (1h in seconds)
 * @private
 * @type {number}
 */
-const TIME_RANGE = 3 * 60 * 60;
+const TIME_RANGE = 1 * 60 * 60;
 /**
 * Number of stoptimes per route to fetch
 * @private
@@ -23,7 +23,7 @@ const NUMBER_OF_DEPARTURES_PER_ROUTE = 2;
 * @private
 * @type {number}
 */
-const MAX_RESULTS = 20;
+const MAX_RESULTS = 50;
 
 /**
 * Form graphql query for request body
