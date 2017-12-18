@@ -24,23 +24,9 @@ header .icon {
   display: none;
 }
 
-.app-description:before,
-.app-description:after {
-  content: "~";
-}
-
-.app-description:before {
-  margin-right: 2px;
-}
-
-.app-description:after {
-  margin-left: 2px;
-}
-
 .app-description {
   font-size: .8rem;
-  font-style: italic;
-  line-height: 1;
+  line-height: .5;
   margin-bottom: 1.5em;
 }
 
