@@ -28,19 +28,19 @@
   user-select: none;
 }
 
-.departures-list-row {
-  position: relative;
-  display: flex;
-  align-content: space-between;
-  padding: .4em 0;
+.departures-list-row-container {
+  border-bottom: 1px solid #ddd;
   margin: 0;
 
   overflow-y: visible;
   white-space: nowrap;
   background: #fff;
-  border-bottom: 1px solid #ddd;
-  line-height: 1.8;
-  letter-spacing: 0;
+  line-height: 2.5;
+}
+
+.departures-list-row {
+  display: flex;
+  align-content: space-between;
 }
 
 .departures-list-header .header,
@@ -99,6 +99,48 @@
 
 .departures-list .route-identifier {
   padding: 0 5px;
+}
+
+.departures-list-row-additional-info {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 250ms linear;
+  padding-left: .8rem;
+}
+
+.departures-list-row-additional-info-content {
+  display: flex;
+  flex-direction: row;
+  padding: .8rem 0;
+}
+
+.departures-list-row-additional-info-content > div {
+  margin-right: 2rem;
+}
+
+.departures-list-row-additional-info .title {
+  font-weight: 600;
+  font-size: .8rem;
+  color: #56666e;
+}
+
+.departures-list-row-additional-info.visible {
+  max-height: 120px;
+}
+
+.departures-list-row-additional-info h4 {
+  margin: 0;
+  line-height: 1.5;
+  text-decoration: underline;
+}
+
+.departure-stop-code {
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  font-size: .8rem;
+  color: #56666e;
+  padding: 0 .2rem;
+  margin-right: .4rem;
 }
 
 .departures-list-row.no-results {

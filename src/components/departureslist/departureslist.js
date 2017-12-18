@@ -81,7 +81,7 @@ export default class DeparturesList extends Component {
           )}
         </div>
 
-        <div class="departures-list-body">{rows}</div>
+        <ul class="departures-list-body">{rows}</ul>
       </div>
     );
   }
