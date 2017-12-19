@@ -1,21 +1,5 @@
 import { linkEvent } from 'inferno';
-
-/**
-* Creates a callback for keypress event
-* @private
-* @param {Function} callback
-* @param {string} propName
-* @return {Function}
-*/
-const keyPressHandler = (callback, propName) => (e) => {
-  const { keyCode } = e;
-  // act if key was space or enter
-  if ([13, 32].indexOf(keyCode) > -1) {
-    e.preventDefault();
-    callback(propName);
-  }
-};
-
+import { keyPressHandler } from '../../utils/utils';
 /**
 * Departures list sorting header component
 * @constructs DepartureListSortHeader

@@ -37,11 +37,16 @@ it('is a link to given routeUrl', () => {
   expect(aHref).toEqual(url);
 });
 
-it('does not have an aria-extended prop when content is hidden', () => {
-  const id = "abc123";
-  const $ = dom.load(renderToString(<DepartureRow />));
+it('does not have an aria-extended prop when content is not toggled', () => {
+  const $ = dom.load(renderToString(<DepartureRow isToggled={false} />));
   const expected = $('.departures-list-row-container').attr('aria-expanded');
   expect(expected).toEqual();
+});
+
+it('has aria-extended prop when content is toggled', () => {
+  const $ = dom.load(renderToString(<DepartureRow isToggled={true} />));
+  const expected = $('.departures-list-row-container').attr('aria-expanded');
+  expect(expected).not.toEqual();
 });
 
 describe('displaying departure time', () => {
@@ -89,22 +94,64 @@ describe('Togglable additional info section', () => {
   });
 
   it('is hidden when content is not toggled', () => {
-    const rendered = renderIntoDocument(<DepartureRow />);
+    const rendered = renderIntoDocument(<DepartureRow isToggled={false} />);
     const additionalInfo = findRenderedDOMElementWithClass(rendered, 'departures-list-row-additional-info');
     expect(additionalInfo.getAttribute('aria-hidden')).toEqual('true');
   });
 
-  it('shows the additional info section when the row is clicked', () => {
-    const rendered = renderIntoDocument(<DepartureRow />);
-    const container = findRenderedDOMElementWithClass(rendered, 'departures-list-row-container');
+  it('is visible when content is toggled', () => {
+    const rendered = renderIntoDocument(<DepartureRow isToggled={true} />);
+    const additionalInfo = findRenderedDOMElementWithClass(rendered, 'departures-list-row-additional-info');
+    expect(additionalInfo.getAttribute('aria-hidden')).toEqual('false');
+  });
+
+  it('calls the onRowToggle callback when clicked', () => {
+    const spy = jest.fn();
+    const id = 'abc123'
+    const rendered = renderIntoDocument(<DepartureRow id={id} onRowToggle={spy} />);
     const item = findRenderedDOMElementWithClass(rendered, 'departures-list-row');
 
     const event = new MouseEvent('click', { bubbles: true });
     item.dispatchEvent(event);
 
-    const additionalInfo = findRenderedDOMElementWithClass(rendered, 'departures-list-row-additional-info');
-    expect(additionalInfo.getAttribute('aria-hidden')).toEqual('false');
-    expect(container.getAttribute('aria-expanded')).toEqual('true');
+    expect(spy).toHaveBeenCalledWith(id, event);
+  });
+
+  it('calls the onRowToggle callback when enter is pressed', () => {
+    const spy = jest.fn();
+    const id = 'abc123'
+    const rendered = renderIntoDocument(<DepartureRow id={id} onRowToggle={spy} />);
+    const item = findRenderedDOMElementWithClass(rendered, 'departures-list-row');
+
+    const event = new KeyboardEvent('keypress', { bubbles: true, keyCode: 13 });
+    item.dispatchEvent(event);
+
+    expect(spy).toHaveBeenCalledWith(id);
+  });
+
+  it('calls the onRowToggle callback when space is pressed', () => {
+    const spy = jest.fn();
+    const id = 'abc123'
+    const rendered = renderIntoDocument(<DepartureRow id={id} onRowToggle={spy} />);
+    const item = findRenderedDOMElementWithClass(rendered, 'departures-list-row');
+
+    const event = new KeyboardEvent('keypress', { bubbles: true, keyCode: 32 });
+    item.dispatchEvent(event);
+
+    expect(spy).toHaveBeenCalledWith(id);
+  });
+
+  it('calls the onRowToggle callback when space is pressed', () => {
+    const spy = jest.fn();
+    const id = 'abc123'
+    const rendered = renderIntoDocument(<DepartureRow id={id} onRowToggle={spy} />);
+    const item = findRenderedDOMElementWithClass(rendered, 'departures-list-row');
+
+    item.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true, keyCode: 13 }));
+    item.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true, keyCode: 76 }));
+    item.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true, keyCode: 2 }));
+
+    expect(spy).not.toHaveBeenCalled();
   });
 });
 

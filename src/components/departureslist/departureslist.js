@@ -8,10 +8,21 @@ import './departureslist.css';
 /**
  * Generate a row for each departure
  * @private
- * @param {Object[]} departures
- * @returns {Function[]}
+ * @param {object} props
+ * @param {object[]} props.departures
+ * @param {boolean} props.toggledRowId
+ * @param {function} props.onRowToggle
+ * @returns {DepartureRow[]}
  */
-const generateDepartureRows = departures => departures.map(departure => <DepartureRow key={departure.id} {...departure} />);
+const generateDepartureRows = ({ departures, toggledRowId, onRowToggle }) => departures.map(departure =>
+  <DepartureRow
+    key={departure.id}
+    isToggled={toggledRowId === departure.id}
+    onRowToggle={onRowToggle}
+    {...departure}
+  />
+);
+
 /**
  * Generate a placeholder row
  * @private
@@ -43,8 +54,9 @@ export default class DeparturesList extends Component {
    */
   constructor(props = {}) {
     super(props);
-    this.state = { sortProp: 'time', sortDir: 1 };
+    this.state = { sortProp: 'time', sortDir: 1, toggledRowId: null };
     this.updateSortProps = this.updateSortProps.bind(this);
+    this.onRowToggle = this.onRowToggle.bind(this);
   }
 
   /**
@@ -58,12 +70,18 @@ export default class DeparturesList extends Component {
     this.setState({ sortProp: propName, sortDir });
   }
 
+  onRowToggle(id) {
+    this.setState({ toggledRowId: id });
+  }
+
   render() {
-    const { sortProp, sortDir } = this.state;
+    const { sortProp, sortDir, toggledRowId } = this.state;
     // sort departures using sort props from state
     const sorted = sortDepartures(this.props.departures, sortProp, sortDir);
     // display rows or a placeholder row when there are no departures to display
-    const rows = sorted.length ? generateDepartureRows(sorted) : generateEmptyRow();
+    const rows = sorted.length
+      ? generateDepartureRows({ departures: sorted, toggledRowId, onRowToggle: this.onRowToggle })
+      : generateEmptyRow();
 
     return (
       <div class="departures-list">
