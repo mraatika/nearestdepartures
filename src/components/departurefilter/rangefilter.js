@@ -28,7 +28,7 @@ export default ({
       <input
         type="range"
         name="range"
-        title="Maksimi etäisyys pysäkille"
+        title="Maksimietäisyys pysäkille"
         min={MIN_RANGE}
         max={MAX_RANGE}
         step={RANGE_STEP}
