@@ -41,6 +41,7 @@
 .departures-list-row {
   display: flex;
   align-content: space-between;
+  cursor: pointer;
 }
 
 .departures-list-header .header,
@@ -62,7 +63,7 @@
   border: 0;
 }
 
-.departures-list .time {
+.departures-list-row .time {
   width: 3rem;
 }
 
@@ -105,33 +106,35 @@
   max-height: 0;
   overflow: hidden;
   transition: max-height 250ms linear;
-  padding-left: .8rem;
 }
 
 .departures-list-row-additional-info-content {
   display: flex;
   flex-direction: row;
-  padding: .8rem 0;
-}
-
-.departures-list-row-additional-info-content > div {
-  margin-right: 2rem;
-}
-
-.departures-list-row-additional-info .title {
-  font-weight: 600;
-  font-size: .8rem;
-  color: #56666e;
+  padding: 1.6rem .8rem;
+  line-height: 1;
 }
 
 .departures-list-row-additional-info.visible {
   max-height: 120px;
 }
 
-.departures-list-row-additional-info h4 {
-  margin: 0;
-  line-height: 1.5;
+.departures-list-row-additional-info .title {
+  font-weight: 600;
+  margin-bottom: .8rem;
+}
+
+.departures-list-row-additional-info .departure-stop-name {
   text-decoration: underline;
+}
+
+.departure-additional-info-content-block {
+  display: flex;
+  margin-right: 2rem;
+}
+
+.departure-additional-info-content-block .icon-image {
+  margin-right: .8rem;
 }
 
 .departure-stop-code {

@@ -2,6 +2,7 @@ import { linkEvent } from 'inferno';
 import Time from './time';
 import RouteIdentifier from './routeidentifier';
 import Distance from './distance';
+import Icon from '../icon/icon';
 import { keyPressHandler } from '../../utils/utils';
 
 /**
@@ -36,44 +37,47 @@ const DepartureRow = ({
   stopDescription,
   scheduledDeparture,
 }) =>
-  <li
-    class="departures-list-row-container"
-    aria-expanded={!!isToggled}
-  >
+  <li class="departures-list-row-container">
     <div
       class="departures-list-row"
-      role="presentation"
       onClick={linkEvent(id, onRowToggle)}
       onKeyPress={keyPressHandler(onRowToggle, id)}
       tabIndex={0}
+      aria-expanded={!!isToggled}
+      aria-controls={`departure-${id}`}
     >
-      <div class={`time${realtime ? ' realtime' : ''}`}>
-        <Time time={realtimeDeparture} />
-      </div>
+      <div class={`time${realtime ? ' realtime' : ''}`}><Time time={realtimeDeparture} /></div>
       <div class="routename">
         <a href={routeUrl} target="_blank" rel="noopener">
           <RouteIdentifier vehicleType={vehicleType} routeName={routeName} />
         </a>
       </div>
       <div class="destination">{destination}</div>
-      <div class="distance">
-        <Distance distance={distance} />
-      </div>
+      <div class="distance"><Distance distance={distance} /></div>
     </div>
     <div
+      id={`departure-${id}`}
       class={`departures-list-row-additional-info${isToggled ? ' visible' : ''}`}
       aria-hidden={!isToggled}
     >
       <div class="departures-list-row-additional-info-content">
-        <div>
-          <div class="title">Aikataulun mukainen lähtöaika:</div>
-          <Time time={scheduledDeparture} actualTime={true} />
+        <div class="departure-additional-info-content-block">
+          <Icon type="clock" />
+          <div>
+            {realtime && <div class={`title${realtime ? ' realtime' : ''}`}>
+              <Time time={realtimeDeparture} actualTime={true} /> (arvioitu)
+            </div>}
+            <div className="scheduled-departure">
+              <Time time={scheduledDeparture} actualTime={true} /> (aikataulu)
+            </div>
+          </div>
         </div>
-        <div>
-          <div class="title">Pysäkki:</div>
+        <div class="departure-additional-info-content-block">
+          <Icon type="bus-stop" />
           <a href={stopUrl} target="_blank" rel="noopener">
-            <h4>{stopName}</h4>
-            <span class="departure-stop-code">{stopCode}</span>{stopDescription}
+            <div class="departure-stop-name title">{stopName}</div>
+            <span class="departure-stop-code">{stopCode}</span>
+            <span className="departure-stop-description">{stopDescription}</span>
           </a>
         </div>
       </div>

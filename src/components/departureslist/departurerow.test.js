@@ -39,14 +39,21 @@ it('is a link to given routeUrl', () => {
 
 it('does not have an aria-extended prop when content is not toggled', () => {
   const $ = dom.load(renderToString(<DepartureRow isToggled={false} />));
-  const expected = $('.departures-list-row-container').attr('aria-expanded');
+  const expected = $('.departures-list-row').attr('aria-expanded');
   expect(expected).toEqual();
 });
 
 it('has aria-extended prop when content is toggled', () => {
   const $ = dom.load(renderToString(<DepartureRow isToggled={true} />));
-  const expected = $('.departures-list-row-container').attr('aria-expanded');
+  const expected = $('.departures-list-row').attr('aria-expanded');
   expect(expected).not.toEqual();
+});
+
+it('has aria-controls prop', () => {
+  const id = "123";
+  const $ = dom.load(renderToString(<DepartureRow id={id} />));
+  const expected = $('.departures-list-row').attr('aria-controls');
+  expect(expected).toEqual(`departure-${id}`);
 });
 
 describe('displaying departure time', () => {
@@ -84,6 +91,13 @@ describe('Togglable additional info section', () => {
     const $ = dom.load(renderToString(<DepartureRow />));
     const expected = $('.departures-list-row-additional-info').length;
     expect(expected).toEqual(1);
+  });
+
+  it('has an id', () => {
+    const id = '123';
+    const $ = dom.load(renderToString(<DepartureRow id={id} />));
+    const expected = $('.departures-list-row-additional-info').prop('id');
+    expect(expected).toEqual(`departure-${id}`);
   });
 
   it('is hidden when content is not toggled', () => {
@@ -153,8 +167,56 @@ describe('Togglable additional info section', () => {
 
     expect(spy).not.toHaveBeenCalled();
   });
+
+  it('contains scheduled departure time', () => {
+    const time = new Date(2017, 0, 1, 12, 12).getTime() / 1000;
+    const $ = dom.load(renderToString(<DepartureRow scheduledDeparture={time} realtime={false} />));
+    const result = $('.departures-list-row-additional-info')
+      .find('.scheduled-departure')
+      .text();
+    expect(result).toEqual('12:12 (aikataulu)');
+  });
+
+  it('contains realtime departure time if available', () => {
+    const time = new Date(2017, 0, 1, 12, 12).getTime() / 1000;
+    const $ = dom.load(renderToString(<DepartureRow realtimeDeparture={time} realtime={true} />));
+    const result = $('.departures-list-row-additional-info')
+      .find('.realtime')
+      .text();
+    expect(result).toEqual('12:12 (arvioitu)');
+  });
+
+  it('does not contain realtime departure time if only scheduled time is available', () => {
+    const time = new Date(2017, 0, 1, 12, 12).getTime() / 1000;
+    const $ = dom.load(renderToString(<DepartureRow scheduledDeparture={time} />));
+    const result = $('.departures-list-row-additional-info').find('.realtime');
+    expect(result.length).toEqual(0);
+  });
+
+  it('contains stop name', () => {
+    const stopName = 'Urheilutalo';
+    const $ = dom.load(renderToString(<DepartureRow stopName={stopName} />));
+    const result = $('.departures-list-row-additional-info')
+      .find('.departure-stop-name')
+      .text();
+    expect(result).toEqual(stopName);
+  });
+
+  it('contains stop code', () => {
+    const stopCode = '0283';
+    const $ = dom.load(renderToString(<DepartureRow stopCode={stopCode} />));
+    const result = $('.departures-list-row-additional-info')
+      .find('.departure-stop-code')
+      .text();
+    expect(result).toEqual(stopCode);
+  });
+
+  it('contains stop description', () => {
+    const stopDescription = 'Urheilutalo';
+    const $ = dom.load(renderToString(<DepartureRow stopDescription={stopDescription} />));
+    const result = $('.departures-list-row-additional-info')
+      .find('.departure-stop-description')
+      .text();
+    expect(result).toEqual(stopDescription);
+  });
 });
-
-
-
-

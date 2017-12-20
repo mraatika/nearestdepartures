@@ -71,7 +71,8 @@ export default class DeparturesList extends Component {
   }
 
   onRowToggle(id) {
-    this.setState({ toggledRowId: id });
+    const current = this.state.toggledRowId;
+    this.setState({ toggledRowId: id === current ? undefined : id });
   }
 
   render() {
@@ -98,7 +99,6 @@ export default class DeparturesList extends Component {
             />
           )}
         </div>
-
         <ul class="departures-list-body">{rows}</ul>
       </div>
     );
