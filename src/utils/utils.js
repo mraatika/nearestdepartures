@@ -100,21 +100,3 @@ export const uniq = (fn = val => val) =>
     }, []);
 };
 
-/**
- * Sort list in ascending order by results of running each value thru iteratee fn
- * @param {Function} iteratee
- * @returns {Function}
- */
-export const sortBy = (iteratee = val => val) =>
-/**
- * @param {Array} list
- * @returns {Array} Sorted list
- */
-(list = []) => {
-    const copy = [...list];
-    return copy.sort((a, b) => {
-        if (iteratee(a) < iteratee(b)) return -1;
-        if (iteratee(a) > iteratee(b)) return 1;
-        return 0;
-    });
-}
