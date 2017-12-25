@@ -17,11 +17,7 @@
 }
 
 .departures-list-header .active {
-  border-bottom: 2px solid #007ac9 !important;
-}
-
-.departures-list-header .header:focus > span {
-  border-bottom: 2px solid #83ceff;
+  border-bottom: 2px solid #007ac9;
 }
 
 .departures-list-header .header {
@@ -72,18 +68,21 @@
 
 .departures-list .routename {
   width: 3.5rem;
-  overflow: hidden;
 }
 
 .departures-list-row .routename {
   font-weight: 600;
+  overflow: hidden;
 }
 
 .departures-list .destination {
   flex: 1;
   position: relative;
-  overflow: hidden;
   vertical-align: bottom;
+}
+
+.departures-list-row .destination {
+  overflow: hidden;
 }
 
 .departures-list .distance {
