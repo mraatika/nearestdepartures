@@ -107,3 +107,23 @@ it('sorts departures descending by departure time', () => {
     expect(result).toEqual(sorted);
 });
 
+it('sorts departures descending by distance and then by realtimedeparture', () => {
+  const departures = [
+    { distance: 150, realtimeDeparture: 100, serviceDay: 100, realtime: true },
+    { distance: 100, realtimeDeparture: 50, serviceDay: 100, realtime: true },
+    { distance: 150, realtimeDeparture: 50, serviceDay: 100, realtime: true },
+    { distance: 50, realtimeDeparture: 600, serviceDay: 100, realtime: true },
+    { distance: 100, realtimeDeparture: 600, serviceDay: 100, realtime: true },
+    { distance: 50, realtimeDeparture: 50, serviceDay: 100, realtime: true },
+  ];
+  const sorted = [
+    { distance: 50, realtimeDeparture: 50, serviceDay: 100, realtime: true },
+    { distance: 50, realtimeDeparture: 600, serviceDay: 100, realtime: true },
+    { distance: 100, realtimeDeparture: 50, serviceDay: 100, realtime: true },
+    { distance: 100, realtimeDeparture: 600, serviceDay: 100, realtime: true },
+    { distance: 150, realtimeDeparture: 50, serviceDay: 100, realtime: true },
+    { distance: 150, realtimeDeparture: 100, serviceDay: 100, realtime: true },
+  ];
+  const result = sort(departures, 'distance');
+  expect(result).toEqual(sorted);
+});
