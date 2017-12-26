@@ -111,12 +111,14 @@
 .departures-list-row-additional-info-content {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   padding: 1.6rem .8rem;
   line-height: 1;
+  margin-bottom: -16px;
 }
 
 .departures-list-row-additional-info.visible {
-  max-height: 120px;
+  max-height: 280px;
 }
 
 .departures-list-row-additional-info .title {
@@ -130,6 +132,10 @@
 
 .departure-additional-info-content-block {
   display: flex;
+  margin-bottom: 16px;
+}
+
+.departure-additional-info-content-block:first-child {
   margin-right: 2rem;
 }
 
