@@ -32,6 +32,11 @@ input {
   font-size: inherit;
 }
 
+ul {
+  list-style: none;
+  padding: 0;
+}
+
 .full-width {
   width: 100%;
 }
@@ -56,6 +61,12 @@ input {
   position: absolute;
   left: -9999px;
   top: -9999px;
+}
+
+button.accessibility-util-button {
+  border: 0;
+  background: 0;
+  padding: 0;
 }
 
 .no-scroll {

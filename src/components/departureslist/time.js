@@ -12,18 +12,19 @@ const getTimeAsText = date => `${padNumber(date.getHours())}:${padNumber(date.ge
  * @constructs Time
  * @param {Object} props
  * @param {number} props.time Time in seconds
+ * @param {boolean} props.actualTime if true will display the time always in HH:mm form
  * @return {Time}
  */
-export default ({ time }) => {
+export default ({ time, actualTime }) => {
   const now = Date.now();
   const date = new Date(time * 1000);
   const timeLeftInMins = Math.floor(((date - now) / 1000) / 60);
   let timeText = '';
 
-  if (date > now && timeLeftInMins < 10) {
-    timeText = timeLeftInMins < 1 ? 'Now' : `${timeLeftInMins} min`;
-  } else {
+  if (actualTime || date < now || timeLeftInMins >= 10) {
     timeText = getTimeAsText(date);
+  } else {
+    timeText = timeLeftInMins < 1 ? 'Now' : `${timeLeftInMins} min`;
   }
 
   return <span>{timeText}</span>;
