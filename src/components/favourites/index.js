@@ -1,5 +1,5 @@
 import Component from 'inferno-component';
-import Favourites from './favourites'
+import Favourites from './favourites';
 import * as storage from '../../services/storageservice';
 import { areLocationsEqual, isLocationFavoured } from './model';
 import fputils from '../../utils/fputils';
@@ -116,8 +116,8 @@ class FavouritesContainer extends Component {
         onAddressSelect={this.onAddressSelect}
         removeFromFavourites={this.removeFromFavourites}
       />
-    )
+    );
   }
 }
 
-export default FavouritesContainer
+export default FavouritesContainer;

@@ -43,7 +43,7 @@ const formStateWithDepartures = (departures, state) => ({
   departures: departures,
   filtered: filterDepartures(state.filters, departures),
   departureUpdateTime: new Date(),
-})
+});
 
 /**
 * Fetch departures by location
@@ -57,7 +57,7 @@ const findDeparturesByLocation = async (location, state) => {
   const { filters } = state;
   const departures = await fetchDepartures(location, filters.vehicleTypes);
   return { ...formStateWithDepartures(departures, state), location };
-}
+};
 
 /**
  * Find departures by given location
@@ -70,7 +70,7 @@ export const findDepartures = async(state, location) => {
   stopLocating();
   // search departures by given location
   return findDeparturesByLocation(location, state);
-}
+};
 
 /**
  * Batch departures
@@ -81,7 +81,7 @@ export const findDepartures = async(state, location) => {
 export const batchDeparturesToState = async (state) => {
   const departures = await batchDepartures(state.departures);
   return formStateWithDepartures(departures, state);
-}
+};
 
 /**
  * Callback for filter button. Toggles filter state.
@@ -116,4 +116,4 @@ export const updateVehicleFilters = (type, multiselect, state) => {
 
   // update filter props on state and then filter departures
   return { ...filters, vehicleTypes: activeFilters };
-}
+};

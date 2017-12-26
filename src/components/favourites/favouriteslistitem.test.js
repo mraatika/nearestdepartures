@@ -30,7 +30,7 @@ it('renders label as a button element', () => {
 
 it('calls selectFavourite callback when the label is clicked', () => {
   const spy = jest.fn();
-  const address = { label: 'Address' }
+  const address = { label: 'Address' };
   const rendered = renderIntoDocument(<FavouritestListItem address={address} selectFavourite={spy} />);
   const button = scryRenderedVNodesWithType(rendered, 'button')[0];
 
@@ -49,7 +49,7 @@ it('renders a close button with text x', () => {
 
 it('calls removeFavourite callback when the close button is clicked', () => {
   const spy = jest.fn();
-  const address = { label: 'Address' }
+  const address = { label: 'Address' };
   const rendered = renderIntoDocument(<FavouritestListItem address={address} removeFavourite={spy} />);
   const button = scryRenderedVNodesWithType(rendered, 'button')[1];
 

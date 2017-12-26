@@ -12,7 +12,7 @@ const getSortByProp = (propName, a, b) => {
   if (a[propName] < b[propName]) return -1;
   if (a[propName] > b[propName]) return 1;
   return 0;
-}
+};
 
 /**
  * Sort list in ascending order by a prop and then by departure time

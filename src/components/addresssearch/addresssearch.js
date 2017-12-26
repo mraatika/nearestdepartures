@@ -57,7 +57,7 @@ const AddressSearch = ({
         selected={selectedSuggestion}
         onItemClick={onSuggestionClick} />
     </div>
-  </form>
+  </form>;
 
 export default AddressSearch;
 

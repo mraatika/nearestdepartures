@@ -17,7 +17,7 @@ const mergeDepartures = (fetched, existing) => {
     const isFetched = findFrom(fetched, 'id');
     const existingWithoutNew = existing.filter(d => !isFetched(d));
     return [...existingWithoutNew, ...fetched];
-}
+};
 
 /**
  * Fetch departures, merge results with existing departures

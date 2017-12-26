@@ -60,7 +60,7 @@ describe('when supported', () => {
 
     return findGPSLocation()
       .then(() => expect('').toEqual('Not supposed to be here'))
-      .catch(e => expect(e.message).toEqual('Sijainninhaku on jo käynnissä'))
+      .catch(e => expect(e.message).toEqual('Sijainninhaku on jo käynnissä'));
   });
 
   it('throws when current position is not found', () => {

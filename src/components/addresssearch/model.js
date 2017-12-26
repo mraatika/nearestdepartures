@@ -16,7 +16,7 @@ export const findAddressByCurrentLocation = async () => {
   const address = await lookupAddress(location);
   // and finally fetch all departures
   return { ...address, location };
-}
+};
 
 /**
  * Search address by a search term
@@ -27,7 +27,7 @@ export const findAddressByCurrentLocation = async () => {
 export const findAddressBySearchTerm = async (searchTerm) => {
   const result = await searchAddress(searchTerm);
   return result[0];
-}
+};
 
 const isPreferredMunicipality = result => PREFERRED_MUNICIPALITIES.indexOf(result.localadmin) > -1;
 const sortByConfidence = (a, b) => b.confidence - a.confidence;
@@ -45,7 +45,7 @@ const filterPreferredMunicipalitiesOnly =
 export const fetchSuggestions = async (searchTerm) => {
   const result = await searchAddress(searchTerm, MAX_ADDRESS_SUGGESTIONS);
   return { suggestions: filterPreferredMunicipalitiesOnly(result) };
-}
+};
 
 /**
  * Select next suggestion.
@@ -57,7 +57,7 @@ export const selectNextSuggestion = (state) => {
   const currentIndex = suggestions.indexOf(selectedSuggestion);
   const nextIndex = ((currentIndex + 1) >= suggestions.length) ? 0 : currentIndex + 1;
   return suggestions[nextIndex];
-}
+};
 
 /**
  * Select previous suggestion.
@@ -69,4 +69,4 @@ export const selectPrevSuggestion = (state) => {
   const currentIndex = suggestions.indexOf(selectedSuggestion);
   const prevIndex = [-1, 0].indexOf(currentIndex) > -1 ? (suggestions.length - 1) : (currentIndex - 1);
   return suggestions[prevIndex];
-}
+};

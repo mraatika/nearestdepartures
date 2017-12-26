@@ -48,6 +48,6 @@ const Favourites = ({ 
       onClose={toggleDialog}
       removeFavourite={removeFromFavourites}
     />
-  </div>
+  </div>;
 
 export default Favourites;

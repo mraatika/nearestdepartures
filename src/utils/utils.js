@@ -64,8 +64,8 @@ export const findFrom = (list = [], prop) => {
         const subjectValue = getProp(subject);
         const comparator = Array.isArray(subject) ? compareArray : compareProp;
         return find(comparator(subjectValue))(list);
-    }
-}
+    };
+};
 
 /**
  * Pad number with leading zero if necessary

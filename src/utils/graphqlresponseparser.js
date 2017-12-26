@@ -82,7 +82,7 @@ const getRouteInfo = (node) => {
         stoptimes: node.place.stoptimes,
         url: `https://www.reittiopas.fi/linjat/${route.gtfsId}/pysakit/${code}`
     };
-}
+};
 
 /**
  * Find routes with stoptimes from response data

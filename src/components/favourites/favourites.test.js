@@ -4,7 +4,7 @@ import IconButton from '../iconbutton/iconbutton';
 import dom from 'cheerio';
 import Favourites from './favourites';
 
-jest.mock('../../services/storageservice')
+jest.mock('../../services/storageservice');
 
 it('renders a div element', () => {
   const $ = dom.load(renderToString(<Favourites />));

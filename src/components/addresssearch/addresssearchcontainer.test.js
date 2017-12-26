@@ -67,7 +67,7 @@ describe('submitting', () => {
 
     return Promise
       .resolve()
-      .then(() => expect(spy).toHaveBeenCalled())
+      .then(() => expect(spy).toHaveBeenCalled());
   });
 
   it('calls onSearch when submit button is clicked', () => {
@@ -81,7 +81,7 @@ describe('submitting', () => {
 
     return Promise
       .resolve()
-      .then(() => expect(spy).toHaveBeenCalled())
+      .then(() => expect(spy).toHaveBeenCalled());
   });
 
   it('calls onSearch with address received from the address service if no suggestion is selected', () => {

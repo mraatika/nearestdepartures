@@ -10,7 +10,7 @@ import { VEHICLE_TYPE_TRANSLATIONS } from '../../constants/constants';
  * @param {Event} e
  */
 const propagateFilterToggle = ({ vehicleType, onFilterToggle }, e) =>
-  onFilterToggle(vehicleType, e.ctrlKey)
+  onFilterToggle(vehicleType, e.ctrlKey);
 
 /**
 * Filter button component
@@ -34,4 +34,4 @@ export default ({ vehicleType = '', isToggled,  onFilterToggle }) => {
       <div className="bottom-border" />
     </button>
   );
-}
+};

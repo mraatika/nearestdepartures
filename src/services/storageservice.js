@@ -11,4 +11,4 @@ export const get = key => (key ? JSON.parse(localStorage.getItem(key)) : null);
   */
 export const set = (key, value) => {
   localStorage.setItem(key, JSON.stringify(value));
-}
+};

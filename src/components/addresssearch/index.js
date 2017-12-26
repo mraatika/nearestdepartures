@@ -56,7 +56,6 @@ export default class AddressSearchContainer extends Component {
 
       // if the address was cleared then focus on address input
       if (!address) {
-        console.log('focus');
         this.addressInput.focus();
       }
     }
@@ -79,7 +78,7 @@ export default class AddressSearchContainer extends Component {
     // search address with a search string or current location
     const promise = searchTerm && searchTerm.toLowerCase() !== LOCATION_MAGIC_WORD
       ? model.findAddressBySearchTerm(searchTerm)
-      : model.findAddressByCurrentLocation()
+      : model.findAddressByCurrentLocation();
 
     promise
       .then(this.props.onSearch)
@@ -191,7 +190,7 @@ export default class AddressSearchContainer extends Component {
   }
 
   getAddressInputRef(component) {
-    this.addressInput = component
+    this.addressInput = component;
   }
 
   /**
@@ -214,6 +213,6 @@ export default class AddressSearchContainer extends Component {
         onSuggestionClick={this.onSuggestionClick}
         getAddressInputRef={this.getAddressInputRef}
       />
-    )
+    );
   }
 }

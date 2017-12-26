@@ -11,6 +11,6 @@ const IconButton = ({ text, className, ...rest }) => (
   <button class={`icon-button${className ? ` ${className}` : ''}`} {...rest}>
     {text}
   </button>
-)
+);
 
 export default IconButton;
