@@ -121,7 +121,7 @@ describe('Togglable additional info section', () => {
 
   it('calls the onRowToggle callback when clicked', () => {
     const spy = jest.fn();
-    const id = 'abc123'
+    const id = 'abc123';
     const rendered = renderIntoDocument(<DepartureRow id={id} onRowToggle={spy} />);
     const item = findRenderedDOMElementWithClass(rendered, 'departures-list-row');
 
@@ -133,7 +133,7 @@ describe('Togglable additional info section', () => {
 
   it('calls the onRowToggle callback when enter is pressed', () => {
     const spy = jest.fn();
-    const id = 'abc123'
+    const id = 'abc123';
     const rendered = renderIntoDocument(<DepartureRow id={id} onRowToggle={spy} />);
     const item = findRenderedDOMElementWithClass(rendered, 'departures-list-row');
 
@@ -145,7 +145,7 @@ describe('Togglable additional info section', () => {
 
   it('calls the onRowToggle callback when space is pressed', () => {
     const spy = jest.fn();
-    const id = 'abc123'
+    const id = 'abc123';
     const rendered = renderIntoDocument(<DepartureRow id={id} onRowToggle={spy} />);
     const item = findRenderedDOMElementWithClass(rendered, 'departures-list-row');
 
@@ -157,7 +157,7 @@ describe('Togglable additional info section', () => {
 
   it('calls the onRowToggle callback when space is pressed', () => {
     const spy = jest.fn();
-    const id = 'abc123'
+    const id = 'abc123';
     const rendered = renderIntoDocument(<DepartureRow id={id} onRowToggle={spy} />);
     const item = findRenderedDOMElementWithClass(rendered, 'departures-list-row');
 

@@ -82,6 +82,6 @@ const DepartureRow = ({
         </div>
       </div>
     </div>
-  </li>
+  </li>;
 
 export default DepartureRow;

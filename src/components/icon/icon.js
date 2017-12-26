@@ -7,6 +7,6 @@ import './icon.css';
  * @param {string} props.type
  */
 const Icon = ({ type }) =>
-  <span class={`icon-image icon-${type}`} />
+  <span class={`icon-image icon-${type}`} />;
 
 export default Icon;
