@@ -1,6 +1,7 @@
 import { findGPSLocation } from '../../services/locationservice';
 import { lookupAddress, searchAddress } from '../../services/addresssearchservice';
 import { MAX_ADDRESS_SUGGESTIONS } from '../../constants/constants';
+import { PREFERRED_MUNICIPALITIES } from '../../constants/constants';
 
 /** @module AddressSearchModel */
 
@@ -28,6 +29,13 @@ export const findAddressBySearchTerm = async (searchTerm) => {
   return result[0];
 }
 
+const isPreferredMunicipality = result => PREFERRED_MUNICIPALITIES.indexOf(result.localadmin) > -1;
+const sortByConfidence = (a, b) => b.confidence - a.confidence;
+const filterPreferredMunicipalitiesOnly =
+  list => list
+    .filter(isPreferredMunicipality)
+    .sort(sortByConfidence);
+
 /**
  * Fetch a list of address suggestions from the api
  * @async
@@ -36,8 +44,7 @@ export const findAddressBySearchTerm = async (searchTerm) => {
  */
 export const fetchSuggestions = async (searchTerm) => {
   const result = await searchAddress(searchTerm, MAX_ADDRESS_SUGGESTIONS);
-  const sorted = result.sort((a, b) => b.confidence - a.confidence);
-  return { suggestions: sorted };
+  return { suggestions: filterPreferredMunicipalitiesOnly(result) };
 }
 
 /**
