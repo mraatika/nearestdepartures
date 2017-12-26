@@ -8,6 +8,8 @@
   list-style: none;
   padding-left: 0;
   z-index: 99;
+
+  box-shadow: 0 6px 24px -4px #ccc;
 }
 
 .suggestions li {
@@ -16,10 +18,6 @@
   border-bottom: 1px solid #ddd;
   background: #fff;
   cursor: pointer;
-}
-
-.suggestions li:last-child {
-  border-width: 16px;
 }
 
 .suggestions li:hover {
