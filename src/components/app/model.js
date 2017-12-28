@@ -1,4 +1,4 @@
-import fputils from '../../utils/fputils';
+import values from '1-liners/values';
 import { getNowInSeconds } from '../../utils/utils';
 import { stopLocating } from '../../services/locationservice';
 import { fetchDepartures, batchDepartures } from '../../utils/departurefetchmerge';
@@ -11,7 +11,7 @@ import { VEHICLE_TYPE } from '../../constants/constants';
  * @private
  * @type {string[]}
  */
-export const allVehicleTypes = fputils.values(VEHICLE_TYPE);
+export const allVehicleTypes = values(VEHICLE_TYPE);
 
 /**
  * Matcher function for departure filtering
@@ -84,6 +84,33 @@ export const batchDeparturesToState = async (state) => {
 };
 
 /**
+ * Form updated filters
+ * @private
+ * @param {string} type
+ * @param {string[]} current
+ * @param {boolean} multiselect
+ * @return {string[]}
+ */
+const getActiveFilters = (type, current, multiselect) => {
+  const currentToggled = current.indexOf(type) > -1;
+
+  // if pressed with ctrl key
+  if (multiselect) {
+    return currentToggled
+      // remove filter from actives
+      ? current.filter(f => f !== type)
+      // add filter to actives
+      : current.concat(type);
+  }
+  // if pressed without ctrl key
+  return current.length > 1 || !currentToggled
+    // if filter is not toggled then select only that
+    ? [type]
+    // else select all filters
+    : allVehicleTypes.slice(0);
+};
+
+/**
  * Callback for filter button. Toggles filter state.
  * @param {string} type
  * @param {boolean} multiselect
@@ -92,27 +119,7 @@ export const batchDeparturesToState = async (state) => {
 export const updateVehicleFilters = (type, multiselect, state) => {
   const { filters } = state;
   const { vehicleTypes: current = [] } = filters;
-  const currentToggled = current.indexOf(type) > -1;
-
-  const activeFilters = fputils.ifThenElse(
-    () => !!multiselect,
-    // if pressed with ctrl key
-    fputils.ifThenElse(
-      () => currentToggled,
-      // remove filter from actives
-      fputils.filter(f => f !== type),
-      // add filter to actives
-      fputils.concat(type),
-    ),
-    // if pressed without ctrl key
-    fputils.ifThenElse(
-      () => current.length > 1 || !currentToggled,
-      // if filter is not toggled then select only that
-      () => [type],
-      // else select all filters
-      () => allVehicleTypes.slice(0),
-    )
-  )(current);
+  const activeFilters = getActiveFilters(type, current, multiselect);
 
   // update filter props on state and then filter departures
   return { ...filters, vehicleTypes: activeFilters };

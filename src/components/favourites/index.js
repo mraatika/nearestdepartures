@@ -2,7 +2,6 @@ import Component from 'inferno-component';
 import Favourites from './favourites';
 import * as storage from '../../services/storageservice';
 import { areLocationsEqual, isLocationFavoured } from './model';
-import fputils from '../../utils/fputils';
 
 /**
  * Component's initial state
@@ -59,9 +58,9 @@ class FavouritesContainer extends Component {
    */
   addToFavourites(address) {
     if (address) {
+      const { label, location } = address;
       // only save data that we care about
-      const saveObject = fputils.pick(['label', 'location'])(address);
-      const favourites = [...this.state.favourites, saveObject];
+      const favourites = [...this.state.favourites, { label, location }];
       this.saveFavourites(favourites);
     }
   }

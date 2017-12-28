@@ -1,4 +1,5 @@
-import fputils from './fputils';
+import flatMap from '1-liners/flatMap';
+import omit from '1-liners/omit';
 
 /** @module GraphQLResponseParser */
 
@@ -10,7 +11,7 @@ import fputils from './fputils';
 * @param {number} b
 * @return {number} sum
 */
-const sumWith = fputils.curry((a, b) => a + b);
+const sumWith = a => b => a + b;
 
 /**
 * Get relevant data from a stoptime object
@@ -21,31 +22,17 @@ export const formStoptimeData = (stoptime) => {
   const { scheduledDeparture, headsign, realtimeDeparture, serviceDay } = stoptime;
   // times are seconds from midnight and serviceday is current day
   const sumWithServiceDay = sumWith(serviceDay);
-
-  return fputils.pipeAll([
-    fputils.pick(['realtime']),
-    fputils.assign({
-      id: stoptime.trip.id,
-      scheduledDeparture: sumWithServiceDay(scheduledDeparture),
-      realtimeDeparture: sumWithServiceDay(realtimeDeparture),
-      destination: headsign,
-    }),
-    fputils.ifThenElse(
-      fputils.property('destination'),
-      fputils.identity,
-      // if destination is falsy then delete that property
-      fputils.omit(['destination']),
-    )
-  ])(stoptime);
+  const props =  {
+    realtime: stoptime.realtime,
+    id: stoptime.trip.id,
+    scheduledDeparture: sumWithServiceDay(scheduledDeparture),
+    realtimeDeparture: sumWithServiceDay(realtimeDeparture),
+    destination: headsign,
+  };
+  // omit the destination prop completely if falsy because
+  // in that case it needs to be added from route
+  return headsign ? props : omit(['destination'], props);
 };
-
-/**
-* Combine object (stoptime) with route object
-* @private
-* @param {Object} route
-* @returns {Function}
-*/
-const combineWithRoute = route => fputils.assign(fputils.shallowClone(route));
 
 /**
 * Get stoptimes from routes and creates an object of each one
@@ -55,15 +42,8 @@ const combineWithRoute = route => fputils.assign(fputils.shallowClone(route));
 * @param {Object} route
 * @returns {Object[]} stoptimes with route data
 */
-const combineRouteInfoWithStoptimes = (route) => {
-  return fputils.composeAll([
-    // combine with route info
-    fputils.map(fputils.shave(1)(combineWithRoute(route))),
-    // get times etc. departure specific info
-    fputils.map(formStoptimeData),
-    fputils.property('stoptimes'),
-  ])(route);
-};
+const combineRouteInfoWithStoptimes = route =>
+  route.stoptimes.map(s => ({ ...route, ...formStoptimeData(s) }));
 
 /**
 * Get route info from data node
@@ -74,6 +54,7 @@ const combineRouteInfoWithStoptimes = (route) => {
 const getRouteInfo = (node) => {
   const { route, code, headsign } = node.place.pattern;
   const { name: stopName, code: stopCode, gtfsId: stopId, desc } = node.place.stop;
+
   return {
     nodeId: node.place.id,
     destination: headsign,
@@ -96,16 +77,13 @@ const getRouteInfo = (node) => {
 * @param {Object} data
 * @returns {Object[]} routes with at least one stoptime
 */
-const findRoutesFromData = fputils.composeAll([
-  // select all nodes with stoptimes
-  fputils.filter(fputils.compose(fputils.head, fputils.property('stoptimes'))),
-  // get route info for each node
-  fputils.map(getRouteInfo),
-  // pluck nodes
-  fputils.map(val => val.node),
-  fputils.property('edges'),
-  fputils.property('nearest'),
-]);
+const findRoutesFromData = (data) => {
+  const { edges } = data.nearest;
+  return edges
+    .map(({ node }) => getRouteInfo(node))
+    .filter(r => r.stoptimes.length);
+};
+
 
 /**
 * Parse response from digitransit api
@@ -113,17 +91,9 @@ const findRoutesFromData = fputils.composeAll([
 * @param {Object} [result={}]
 * @returns {Object[]}
 */
-export default fputils.pipe(
-  // default to an empty object
-  fputils.or({}),
-  fputils.ifThenElse(
-    fputils.property('data'),
-    fputils.pipeAll([
-      fputils.property('data'),
-      findRoutesFromData,
-      fputils.flatMap(combineRouteInfoWithStoptimes),
-    ]),
-    // if data is falsy then return an empty array
-    fputils.always([])
-  ),
-);
+export default (response = {}) => {
+  const { data } = response;
+  return data
+    ? flatMap(combineRouteInfoWithStoptimes, findRoutesFromData(data))
+    : [];
+};
