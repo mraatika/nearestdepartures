@@ -111,7 +111,7 @@ function formBatchRequestBody({ id }) {
 const parseBatchResponse = fputils.flatMap((data) => {
   const { id: nodeId, stoptimes } = data.payload.data.node;
   if (!stoptimes) return [];
-  return stoptimes.map((stoptime) => Object.assign({ nodeId }, formStoptimeData(stoptime)));
+  return stoptimes.map(stoptime => ({ nodeId, ...formStoptimeData(stoptime) }));
 });
 
 /**

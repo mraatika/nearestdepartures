@@ -35,7 +35,7 @@ class App extends Component {
    */
   constructor() {
     super();
-    this.state = Object.assign({}, DEFAULT_STATE);
+    this.state = { ...DEFAULT_STATE };
   }
 
   /**

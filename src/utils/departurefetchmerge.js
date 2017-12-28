@@ -7,96 +7,95 @@ import { findFrom } from '../utils/utils';
 /** @module DepartureFetchMerge */
 
 /**
- * Merge two departure arrays, discard doubles preferring fetched
- * @private
- * @param {Object[]} fetched
- * @param {Object[]} existing
- * @returns {Object[]}
- */
+* Merge two departure arrays, discard doubles preferring fetched
+* @private
+* @param {Object[]} fetched
+* @param {Object[]} existing
+* @returns {Object[]}
+*/
 const mergeDepartures = (fetched, existing) => {
-    const isFetched = findFrom(fetched, 'id');
-    const existingWithoutNew = existing.filter(d => !isFetched(d));
-    return [...existingWithoutNew, ...fetched];
+  const isFetched = findFrom(fetched, 'id');
+  const existingWithoutNew = existing.filter(d => !isFetched(d));
+  return [...existingWithoutNew, ...fetched];
 };
 
 /**
- * Fetch departures, merge results with existing departures
- * @async
- * @param {Object} location
- * @param {number} location.latitude
- * @param {number} location.longitude
- * @param {string[]} vehicleTypes]
- * @param {Object[]} [existing=[]]
- * @returns {Object[]}
- */
+* Fetch departures, merge results with existing departures
+* @async
+* @param {Object} location
+* @param {number} location.latitude
+* @param {number} location.longitude
+* @param {string[]} vehicleTypes]
+* @param {Object[]} [existing=[]]
+* @returns {Object[]}
+*/
 export async function fetchDepartures(location, vehicleTypes = [], existing = []) {
-    // no need to fetch if vehicle types is empty
-    if (!vehicleTypes.length) return existing;
+  // no need to fetch if vehicle types is empty
+  if (!vehicleTypes.length) return existing;
 
-    const findFromVehcileTypes = findFrom(vehicleTypes);
-    const promises = [];
+  const findFromVehcileTypes = findFrom(vehicleTypes);
+  const promises = [];
 
-    // fetch bus departures with separate call
-    if (findFromVehcileTypes(VEHICLE_TYPE.BUS)) {
-        promises.push(departuresService.fetchDepartures(location, { vehicleTypes: [VEHICLE_TYPE.BUS] }));
-    }
+  // fetch bus departures with separate call
+  if (findFromVehcileTypes(VEHICLE_TYPE.BUS)) {
+    promises.push(departuresService.fetchDepartures(location, { vehicleTypes: [VEHICLE_TYPE.BUS] }));
+  }
 
-    // fetch tram departures with separate call
-    if (findFromVehcileTypes(VEHICLE_TYPE.TRAM)) {
-        promises.push(departuresService.fetchDepartures(location, { vehicleTypes: [VEHICLE_TYPE.TRAM] }));
-    }
+  // fetch tram departures with separate call
+  if (findFromVehcileTypes(VEHICLE_TYPE.TRAM)) {
+    promises.push(departuresService.fetchDepartures(location, { vehicleTypes: [VEHICLE_TYPE.TRAM] }));
+  }
 
-    // fetch departures other types with one call
-    if (findFromVehcileTypes([VEHICLE_TYPE.FERRY, VEHICLE_TYPE.RAIL, VEHICLE_TYPE.SUBWAY])) {
-        promises.push(departuresService.fetchDepartures(location, {
-            vehicleTypes: [VEHICLE_TYPE.FERRY, VEHICLE_TYPE.RAIL, VEHICLE_TYPE.SUBWAY],
-        }));
-    }
+  // fetch departures other types with one call
+  if (findFromVehcileTypes([VEHICLE_TYPE.FERRY, VEHICLE_TYPE.RAIL, VEHICLE_TYPE.SUBWAY])) {
+    promises.push(departuresService.fetchDepartures(location, {
+      vehicleTypes: [VEHICLE_TYPE.FERRY, VEHICLE_TYPE.RAIL, VEHICLE_TYPE.SUBWAY],
+    }));
+  }
 
-    // wait for promises and flatten results (each fetch returns an array)
-    const departures = fputils.flatMap(p => p)(await Promise.all(promises));
+  // wait for promises and flatten results (each fetch returns an array)
+  const departures = fputils.flatMap(p => p)(await Promise.all(promises));
 
-    if (!departures.length) return existing;
+  if (!departures.length) return existing;
 
-    return mergeDepartures(departures, existing);
+  return mergeDepartures(departures, existing);
 };
 
 /**
- * Merge batch data with existing departures
- * @private
- * @param {Object[]} existing
- * @param {Object[]} batch
- */
-const mergeBatchData = (existing, batch) => {
-    return existing.map((d) => {
-        const update = find(b => b.nodeId === d.nodeId && b.id === d.id)(batch);
-        return Object.assign({}, d, update);
-    });
-};
+* Merge batch data with existing departures
+* @private
+* @param {Object[]} existing
+* @param {Object[]} batch
+*/
+const mergeBatchData = (existing, batch) =>
+  existing.map((d) => {
+    const update = find(b => b.nodeId === d.nodeId && b.id === d.id)(batch);
+    return { ...d, ...update };
+  });
 
 /**
- * Select all realtime departures, one for each node
- * @private
- * @type {Function}
- * @param {Object[]} departures
- * @returns {Object[]}
- */
+* Select all realtime departures, one for each node
+* @private
+* @type {Function}
+* @param {Object[]} departures
+* @returns {Object[]}
+*/
 const filterUniqueRealtimeDepartures = fputils.compose(
-    uniq(d => d.nodeId),
-    fputils.filter(d => d.realtime)
+  uniq(d => d.nodeId),
+  fputils.filter(d => d.realtime)
 );
 
 /**
- * Update given realtime departures by fetching a batch from api
- * @param {Object[]} [departures=[]]
- * @returns {Object[]}
- */
+* Update given realtime departures by fetching a batch from api
+* @param {Object[]} [departures=[]]
+* @returns {Object[]}
+*/
 export async function batchDepartures(departures = []) {
-    const realtimeDepartures = filterUniqueRealtimeDepartures(departures);
+  const realtimeDepartures = filterUniqueRealtimeDepartures(departures);
 
-    if (!realtimeDepartures.length) return departures;
+  if (!realtimeDepartures.length) return departures;
 
-    const data = await departuresService.batchDepartures(realtimeDepartures);
+  const data = await departuresService.batchDepartures(realtimeDepartures);
 
-    return mergeBatchData(departures, data);
+  return mergeBatchData(departures, data);
 }
