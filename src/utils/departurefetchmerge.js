@@ -1,4 +1,4 @@
-import fputils from './fputils';
+import flatMap from '1-liners/flatMap';
 import { find, uniq } from './utils';
 import { VEHICLE_TYPE } from '../constants/constants';
 import * as departuresService from '../services/departuresservice';
@@ -54,7 +54,7 @@ export async function fetchDepartures(location, vehicleTypes = [], existing = []
   }
 
   // wait for promises and flatten results (each fetch returns an array)
-  const departures = fputils.flatMap(p => p)(await Promise.all(promises));
+  const departures = flatMap(p => p, await Promise.all(promises));
 
   if (!departures.length) return existing;
 
@@ -80,10 +80,8 @@ const mergeBatchData = (existing, batch) =>
 * @param {Object[]} departures
 * @returns {Object[]}
 */
-const filterUniqueRealtimeDepartures = fputils.compose(
-  uniq(d => d.nodeId),
-  fputils.filter(d => d.realtime)
-);
+const filterUniqueRealtimeDepartures = departures =>
+  uniq(d => d.nodeId)(departures.filter(d => d.realtime));
 
 /**
 * Update given realtime departures by fetching a batch from api

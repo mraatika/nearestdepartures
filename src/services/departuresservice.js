@@ -1,4 +1,4 @@
-import fputils from '../utils/fputils';
+import flatMap from '1-liners/flatMap';
 import parseFetchResponse, { formStoptimeData } from '../utils/graphqlresponseparser';
 import query from './querynearest';
 import batchQuery from './querybatch';
@@ -108,11 +108,10 @@ function formBatchRequestBody({ id }) {
 * @param {Object[]} data
 * @returns {Function}
 */
-const parseBatchResponse = fputils.flatMap((data) => {
-  const { id: nodeId, stoptimes } = data.payload.data.node;
-  if (!stoptimes) return [];
+const parseBatchResponse = response => flatMap((data) => {
+  const { id: nodeId, stoptimes = [] } = data.payload.data.node;
   return stoptimes.map(stoptime => ({ nodeId, ...formStoptimeData(stoptime) }));
-});
+}, response);
 
 /**
 * Batch updated departures
