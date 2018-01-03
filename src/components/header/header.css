@@ -2,11 +2,16 @@ header {
   background-color: #007ac9;
   border-bottom: 4px solid #005993;
   color: #fff;
-  text-align: left;
   margin-bottom: 36px;
-  padding: .6rem 1rem;
+}
+
+.header-content {
+  position: relative;
   display: flex;
   align-items: center;
+  margin: 0 auto;
+  max-width: 1024px;
+  padding: .6rem 1rem;
 }
 
 header .icon {
