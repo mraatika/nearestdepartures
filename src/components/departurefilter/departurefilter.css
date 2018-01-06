@@ -21,7 +21,7 @@
 
 .departure-filter button {
   flex: 1;
-  padding: 6px 0 0 0;
+  padding: 0;
 
   border-right: 1px solid #ddd;
   border-top: 1px solid #ddd;
@@ -44,6 +44,7 @@
 .departure-filter .icon {
   width: 24px;
   height: 24px;
+  margin-top: 6px;
   margin-bottom: 2px;
 }
 
