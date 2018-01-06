@@ -1,7 +1,7 @@
 {
     "short_name": "Julkisilla",
     "name": "julkisilla.info",
-    "description": "Löydä lähimmät julkisen liikenteen lähdöt helposti",
+    "description": "Julkisilla.info -palvelulla löydät lähimmät Pääkaupunkiseudun julkisen liikenteen lähdöt helposti ja nopeasti. Löydät lähdöt joko osoitteella tai paikannimellä hakemalla tai käyttäen laitteen paikannusta.",
     "language": "fi-FI",
     "start_url": "./index.html",
     "theme_color": "#007ac9",
