@@ -31,10 +31,11 @@ header {
 .app-name {
   font-family: 'Patua One', cursive;
   text-transform: lowercase;
-  margin-left: -8px;
+  margin-left: 6px;
 }
 
 .app-logo {
+  height: 40px;
   margin-bottom: -8px;
 }
 
@@ -45,13 +46,16 @@ header {
     padding: 0 1rem;
   }
 
-  header .icon {
-    width: 60px;
-    height: 60px;
+  .app-name {
+    margin-left: -8px;
   }
 
   .app-description {
     display: block;
+  }
+
+  .app-logo {
+    height: 60px;
   }
 
   header .favourites {
