@@ -14,13 +14,6 @@ header {
   padding: .6rem 1rem;
 }
 
-header .icon {
-  width: 40px;
-  height: 40px;
-  margin-right: 6px;
-  vertical-align: bottom;
-}
-
 .header-title-wrapper {
   flex: 1;
 }
@@ -38,6 +31,11 @@ header .icon {
 .app-name {
   font-family: 'Patua One', cursive;
   text-transform: lowercase;
+  margin-left: -8px;
+}
+
+.app-logo {
+  margin-bottom: -8px;
 }
 
 @media (min-width: 750px) {

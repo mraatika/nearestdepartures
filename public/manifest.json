@@ -9,8 +9,8 @@
     "display": "standalone",
     "icons": [
         {
-            "src": "icons/36x36.png",
-            "sizes": "36x36",
+            "src": "icons/32x32.png",
+            "sizes": "32x32",
             "type": "image/png"
         },
         {
