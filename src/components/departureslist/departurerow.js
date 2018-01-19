@@ -3,7 +3,7 @@ import Time from './time';
 import RouteIdentifier from './routeidentifier';
 import Distance from './distance';
 import Icon from '../icon/icon';
-import { keyPressHandler } from '../../utils/utils';
+import { keyPressHandler, stopPropagation } from '../../utils/utils';
 
 /**
 * Displays a single departure in the departures table
@@ -48,7 +48,7 @@ const DepartureRow = ({
     >
       <div class={`time${realtime ? ' realtime' : ''}`}><Time time={realtimeDeparture} /></div>
       <div class="routename">
-        <a href={routeUrl} target="_blank" rel="noopener">
+        <a onClick={stopPropagation} href={routeUrl} target="_blank" rel="noopener">
           <RouteIdentifier vehicleType={vehicleType} routeName={routeName} />
         </a>
       </div>
