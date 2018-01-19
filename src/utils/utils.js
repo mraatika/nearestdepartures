@@ -137,3 +137,6 @@ export const keyPressHandler = (callback, ...params) =>
       callback(...params);
     }
   };
+
+export const stopPropagation = e => e.stopPropagation();
+

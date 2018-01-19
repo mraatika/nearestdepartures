@@ -1,7 +1,8 @@
 import { renderToString } from 'inferno-server';
-import { renderIntoDocument, findRenderedDOMElementWithClass } from 'inferno-test-utils';
+import { renderIntoDocument, findRenderedDOMElementWithClass, scryRenderedDOMElementsWithTag } from 'inferno-test-utils';
 import dom from 'cheerio';
 import DepartureRow from './departurerow';
+import RouteIdentifier from './routeidentifier';
 
 it('renders a list item', () => {
   const $ = dom.load(renderToString(<DepartureRow />));
@@ -129,6 +130,18 @@ describe('Togglable additional info section', () => {
     item.dispatchEvent(event);
 
     expect(spy).toHaveBeenCalledWith(id, event);
+  });
+
+  it('does not call the onRowToggle callback when route identifier is clicked', () => {
+    const spy = jest.fn();
+    const id = 'abc123';
+    const rendered = renderIntoDocument(<DepartureRow id={id} onRowToggle={spy} />);
+    const routeIdentifier = scryRenderedDOMElementsWithTag(rendered, 'a')[0];
+
+    const event = new MouseEvent('click', { bubbles: true });
+    routeIdentifier.dispatchEvent(event);
+
+    expect(spy).not.toHaveBeenCalled();
   });
 
   it('calls the onRowToggle callback when enter is pressed', () => {
