@@ -10,7 +10,7 @@ html {
 body {
   margin: 0;
   padding: 0;
-  font-size: 14px;
+  font-size: 16px;
 
   font-family: "Open Sans", arial, verdana, tahoma, sans-serif;
 }
@@ -41,20 +41,12 @@ ul {
   width: 100%;
 }
 
-.pull-left {
-  float: left;
-}
-
-.pull-right {
-  float: right;
+.bold {
+  font-weight: 600;
 }
 
 .hidden {
   display: none;
-}
-
-.clear {
-  clear: both;
 }
 
 .accessibility-hidden {

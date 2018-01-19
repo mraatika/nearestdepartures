@@ -64,21 +64,31 @@ const DepartureRow = ({
         <div class="departure-additional-info-content-block">
           <Icon type="clock" />
           <div>
-            {realtime && <div class={`title${realtime ? ' realtime' : ''}`}>
+            {realtime && <div class="realtime bold " title="Arvioitu reaaliaikainen lähtöaika pysäkiltä">
               <Time time={realtimeDeparture} actualTime={true} /> (arvioitu)
             </div>}
-            <div className="scheduled-departure">
+            <div class="scheduled-departure" title="Aikataulun mukainen lähtöaika pysäkiltä">
               <Time time={scheduledDeparture} actualTime={true} /> (aikataulu)
             </div>
           </div>
         </div>
         <div class="departure-additional-info-content-block">
           <Icon type="bus-stop" />
-          <a href={stopUrl} target="_blank" rel="noopener">
-            <div class="departure-stop-name title">{stopName}</div>
-            <span class="departure-stop-code">{stopCode}</span>
-            <span className="departure-stop-description">{stopDescription}</span>
-          </a>
+          <div>
+            <a
+              class="bold departure-stop-name"
+              href={stopUrl}
+              target="_blank"
+              rel="noopener"
+              title="Näytä pysäkin tiedot Reittioppaassa"
+            >
+              {stopName}
+            </a>
+            <div>
+              <div class="departure-stop-code">{stopCode}</div>
+              <span class="departure-stop-description">{stopDescription}</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>

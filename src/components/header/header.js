@@ -1,5 +1,5 @@
 import './header.css';
-import VehicleIcon from '../vehicleicon/vehicleicon';
+import logo from './julkisilla_logo.png';
 import Favourites from '../favourites';
 
 /**
@@ -14,7 +14,7 @@ const Header = ({ address, selectLocation }) => (
     <div class="header-content">
       <div className="header-title-wrapper">
         <h1>
-          <VehicleIcon iconName="bus" />
+          <img class="app-logo" src={logo} alt="logo" />
           <span class="app-name">julkisilla.info</span>
         </h1>
         <p class="app-description">Löydä lähimmät julkisen liikenteen lähdöt helposti</p>
