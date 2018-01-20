@@ -48,7 +48,7 @@ export default class AddressSearchContainer extends Component {
   componentWillReceiveProps(nextProps) {
     const { address } = nextProps;
 
-    if (address !== this.props.address) {
+    if (address !== this.state.searchTerm) {
       this.setState({
         searchTerm: address ? address.label : '',
         selectedSuggestion: undefined,
