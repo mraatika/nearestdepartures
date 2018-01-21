@@ -1,0 +1,291 @@
+{
+  "data": {
+    "nearest": {
+      "edges": [
+        {
+          "node": {
+            "id": "cGxhY2VBdERpc3RhbmNlOjE0NDtSR1Z3WVhKMGRYSmxVbTkzT2toVFREc3hNREl3TkRVME8waFRURG94TURBMk9qRTZNREk9",
+            "distance": 144,
+            "place": {
+              "id": "RGVwYXJ0dXJlUm93OkhTTDsxMDIwNDU0O0hTTDoxMDA2OjE6MDI=",
+              "stop": {
+                "gtfsId": "HSL:1020454",
+                "code": "0302",
+                "name": "Rautatieasema",
+                "desc": "Kaivokatu"
+              },
+              "stoptimes": [
+                {
+                  "serviceDay": "${SERVICE_DAY}",
+                  "scheduledDeparture": "${DEPARTURE_TIME}",
+                  "realtimeDeparture": "${DEPARTURE_TIME}",
+                  "realtimeState": "UPDATED",
+                  "realtime": true,
+                  "headsign": "Hietalahti",
+                  "trip": {
+                    "id": "VHJpcDpIU0w6MTAwNl8yMDE4MDExOF9TdV8yXzExNTM="
+                  }
+                }
+              ],
+              "pattern": {
+                "route": {
+                  "gtfsId": "HSL:1006",
+                  "shortName": "6",
+                  "longName": "Hietalahti - Rautatieasema - Sörnäinen (M) - Arabia",
+                  "mode": "TRAM"
+                },
+                "code": "HSL:1006:1:02",
+                "headsign": "Hietalahti"
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "id": "cGxhY2VBdERpc3RhbmNlOjE0NDtSR1Z3WVhKMGRYSmxVbTkzT2toVFREc3hNREl3TkRVME8waFRURG94TURBek9qRTZNREU9",
+            "distance": 144,
+            "place": {
+              "id": "RGVwYXJ0dXJlUm93OkhTTDsxMDIwNDU0O0hTTDoxMDAzOjE6MDE=",
+              "stop": {
+                "gtfsId": "HSL:1020454",
+                "code": "0302",
+                "name": "Rautatieasema",
+                "desc": "Kaivokatu"
+              },
+              "stoptimes": [
+                {
+                  "serviceDay": "${SERVICE_DAY}",
+                  "scheduledDeparture": "${DEPARTURE_TIME}",
+                  "realtimeDeparture": "${DEPARTURE_TIME}",
+                  "realtimeState": "UPDATED",
+                  "realtime": true,
+                  "headsign": "Olympiaterm. via Eira",
+                  "trip": {
+                    "id": "VHJpcDpIU0w6MTAwM18yMDE4MDExOF9TdV8yXzExNTc="
+                  }
+                },
+                {
+                  "serviceDay": "${SERVICE_DAY}",
+                  "scheduledDeparture": "${DEPARTURE_TIME}",
+                  "realtimeDeparture": "${DEPARTURE_TIME}",
+                  "realtimeState": "UPDATED",
+                  "realtime": true,
+                  "headsign": "Olympiaterm. via Eira",
+                  "trip": {
+                    "id": "VHJpcDpIU0w6MTAwM18yMDE4MDExOF9TdV8yXzEyMDk="
+                  }
+                }
+              ],
+              "pattern": {
+                "route": {
+                  "gtfsId": "HSL:1003",
+                  "shortName": "3",
+                  "longName": "Olympiaterminaali - Eira - Kallio - Meilahti",
+                  "mode": "TRAM"
+                },
+                "code": "HSL:1003:1:01",
+                "headsign": "Olympiaterm."
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "id": "cGxhY2VBdERpc3RhbmNlOjE0NDtSR1Z3WVhKMGRYSmxVbTkzT2toVFREc3hNREl3TkRVME8waFRURG94TURBM09qRTZNREk9",
+            "distance": 144,
+            "place": {
+              "id": "RGVwYXJ0dXJlUm93OkhTTDsxMDIwNDU0O0hTTDoxMDA3OjE6MDI=",
+              "stop": {
+                "gtfsId": "HSL:1020454",
+                "code": "0302",
+                "name": "Rautatieasema",
+                "desc": "Kaivokatu"
+              },
+              "stoptimes": [
+                {
+                  "serviceDay": "${SERVICE_DAY}",
+                  "scheduledDeparture": "${DEPARTURE_TIME}",
+                  "realtimeDeparture": "${DEPARTURE_TIME}",
+                  "realtimeState": "UPDATED",
+                  "realtime": true,
+                  "headsign": "Länsiterm.",
+                  "trip": {
+                    "id": "VHJpcDpIU0w6MTAwN18yMDE4MDExOF9TdV8yXzExNDU="
+                  }
+                },
+                {
+                  "serviceDay": "${SERVICE_DAY}",
+                  "scheduledDeparture": "${DEPARTURE_TIME}",
+                  "realtimeDeparture": "${DEPARTURE_TIME}",
+                  "realtimeState": "UPDATED",
+                  "realtime": true,
+                  "headsign": "Länsiterm.",
+                  "trip": {
+                    "id": "VHJpcDpIU0w6MTAwN18yMDE4MDExOF9TdV8yXzExNTc="
+                  }
+                }
+              ],
+              "pattern": {
+                "route": {
+                  "gtfsId": "HSL:1007",
+                  "shortName": "7",
+                  "longName": "Länsiterminaali - Kruununhaka - Sörnäinen (M) - Länsi-Pasila",
+                  "mode": "TRAM"
+                },
+                "code": "HSL:1007:1:02",
+                "headsign": "Länsiterm."
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "id": "cGxhY2VBdERpc3RhbmNlOjE0NDtSR1Z3WVhKMGRYSmxVbTkzT2toVFREc3hNREl3TkRVME8waFRURG94TURBNU9qRTZNREU9",
+            "distance": 144,
+            "place": {
+              "id": "RGVwYXJ0dXJlUm93OkhTTDsxMDIwNDU0O0hTTDoxMDA5OjE6MDE=",
+              "stop": {
+                "gtfsId": "HSL:1020454",
+                "code": "0302",
+                "name": "Rautatieasema",
+                "desc": "Kaivokatu"
+              },
+              "stoptimes": [
+                {
+                  "serviceDay": "${SERVICE_DAY}",
+                  "scheduledDeparture": "${DEPARTURE_TIME}",
+                  "realtimeDeparture": "${DEPARTURE_TIME}",
+                  "realtimeState": "UPDATED",
+                  "realtime": true,
+                  "headsign": "Jätkäsaari",
+                  "trip": {
+                    "id": "VHJpcDpIU0w6MTAwOV8yMDE4MDExOF9TdV8yXzExNTE="
+                  }
+                },
+                {
+                  "serviceDay": "${SERVICE_DAY}",
+                  "scheduledDeparture": "${DEPARTURE_TIME}",
+                  "realtimeDeparture": "${DEPARTURE_TIME}",
+                  "realtimeState": "UPDATED",
+                  "realtime": true,
+                  "headsign": "Jätkäsaari",
+                  "trip": {
+                    "id": "VHJpcDpIU0w6MTAwOV8yMDE4MDExOF9TdV8yXzEyMDM="
+                  }
+                }
+              ],
+              "pattern": {
+                "route": {
+                  "gtfsId": "HSL:1009",
+                  "shortName": "9",
+                  "longName": "Jätkäsaari - Rautatieasema - Kallio - Pasilan asema",
+                  "mode": "TRAM"
+                },
+                "code": "HSL:1009:1:01",
+                "headsign": "Jätkäsaari"
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "id": "cGxhY2VBdERpc3RhbmNlOjE0NDtSR1Z3WVhKMGRYSmxVbTkzT2toVFREc3hNREl3TkRVME8waFRURG94TURBMlZEb3hPakF4",
+            "distance": 144,
+            "place": {
+              "id": "RGVwYXJ0dXJlUm93OkhTTDsxMDIwNDU0O0hTTDoxMDA2VDoxOjAx",
+              "stop": {
+                "gtfsId": "HSL:1020454",
+                "code": "0302",
+                "name": "Rautatieasema",
+                "desc": "Kaivokatu"
+              },
+              "stoptimes": [
+                {
+                  "serviceDay": "${SERVICE_DAY}",
+                  "scheduledDeparture": "${DEPARTURE_TIME}",
+                  "realtimeDeparture": "${DEPARTURE_TIME}",
+                  "realtimeState": "UPDATED",
+                  "realtime": true,
+                  "headsign": "Länsiterm. via Hietalahti",
+                  "trip": {
+                    "id": "VHJpcDpIU0w6MTAwNlRfMjAxODAxMThfU3VfMl8xMjA1"
+                  }
+                },
+                {
+                  "serviceDay": "${SERVICE_DAY}",
+                  "scheduledDeparture": "${DEPARTURE_TIME}",
+                  "realtimeDeparture": "${DEPARTURE_TIME}",
+                  "realtimeState": "SCHEDULED",
+                  "realtime": false,
+                  "headsign": "Länsiterm. via Hietalahti",
+                  "trip": {
+                    "id": "VHJpcDpIU0w6MTAwNlRfMjAxODAxMThfU3VfMl8xMjE3"
+                  }
+                }
+              ],
+              "pattern": {
+                "route": {
+                  "gtfsId": "HSL:1006T",
+                  "shortName": "6T",
+                  "longName": "Länsiterminaali - Rautatieasema - Sörnäinen (M) - Arabia",
+                  "mode": "TRAM"
+                },
+                "code": "HSL:1006T:1:01",
+                "headsign": "Länsiterm."
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "id": "cGxhY2VBdERpc3RhbmNlOjE1NjtSR1Z3WVhKMGRYSmxVbTkzT2toVFREc3hNREl3TkRRME8waFRURG94TURBeE9qQTZNREk9",
+            "distance": 156,
+            "place": {
+              "id": "RGVwYXJ0dXJlUm93OkhTTDsxMDIwNDQ0O0hTTDoxMDAxOjA6MDI=",
+              "stop": {
+                "gtfsId": "HSL:1020444",
+                "code": "0101",
+                "name": "Lasipalatsi",
+                "desc": "Mannerheimintie 9"
+              },
+              "stoptimes": [
+                {
+                  "serviceDay": "${SERVICE_DAY}",
+                  "scheduledDeparture": "${DEPARTURE_TIME}",
+                  "realtimeDeparture": "${DEPARTURE_TIME}",
+                  "realtimeState": "UPDATED",
+                  "realtime": true,
+                  "headsign": "Käpylä via Töölö",
+                  "trip": {
+                    "id": "VHJpcDpIU0w6MTAwMV8yMDE4MDExOF9TdV8xXzEyMTA="
+                  }
+                },
+                {
+                  "serviceDay": "${SERVICE_DAY}",
+                  "scheduledDeparture": "${DEPARTURE_TIME}",
+                  "realtimeDeparture": "${DEPARTURE_TIME}",
+                  "realtimeState": "SCHEDULED",
+                  "realtime": false,
+                  "headsign": "Käpylä via Töölö",
+                  "trip": {
+                    "id": "VHJpcDpIU0w6MTAwMV8yMDE4MDExOF9TdV8xXzEyMjI="
+                  }
+                }
+              ],
+              "pattern": {
+                "route": {
+                  "gtfsId": "HSL:1001",
+                  "shortName": "1",
+                  "longName": "Eira - Töölö - Sörnäinen (M) - Käpylä",
+                  "mode": "TRAM"
+                },
+                "code": "HSL:1001:0:02",
+                "headsign": "Käpylä"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}
