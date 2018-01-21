@@ -1,0 +1,403 @@
+{
+  "geocoding": {
+    "version": "0.2",
+    "attribution": "http://pelias.mapzen.com/v1/attribution",
+    "query": {
+      "text": "mannerheimintie 9, helsinki",
+      "size": 10,
+      "lang": "fi",
+      "private": false,
+      "boundary.rect.min_lat": 59.9,
+      "boundary.rect.max_lat": 60.45,
+      "boundary.rect.min_lon": 24.3,
+      "boundary.rect.max_lon": 25.5,
+      "querySize": 100,
+      "parser": "addressit",
+      "parsed_text": {
+        "name": "mannerheimintie 9",
+        "regions": [
+          "helsinki"
+        ],
+        "admin_parts": "helsinki",
+        "number": "9",
+        "street": "mannerheimintie",
+        "city": "helsinki"
+      }
+    },
+    "engine": {
+      "name": "Pelias",
+      "author": "Mapzen",
+      "version": "1.0"
+    },
+    "timestamp": 1516530619013
+  },
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          24.938274,
+          60.170515
+        ]
+      },
+      "properties": {
+        "id": "node:4701607918",
+        "gid": "openstreetmap:address:node:4701607918",
+        "layer": "address",
+        "source": "openstreetmap",
+        "source_id": "node:4701607918",
+        "name": "Mannerheimintie 9",
+        "housenumber": "9",
+        "street": "Mannerheimintie",
+        "postalcode": "00100",
+        "postalcode_gid": "whosonfirst:postalcode:421479569",
+        "confidence": 1,
+        "accuracy": "point",
+        "country": "Suomi",
+        "country_gid": "whosonfirst:country:85633143",
+        "country_a": "FIN",
+        "region": "Uusimaa",
+        "region_gid": "whosonfirst:region:85683067",
+        "localadmin": "Helsinki",
+        "localadmin_gid": "whosonfirst:localadmin:907199715",
+        "locality": "Helsinki",
+        "locality_gid": "whosonfirst:locality:101748417",
+        "neighbourhood": "Kluuvi",
+        "neighbourhood_gid": "whosonfirst:neighbourhood:85898847",
+        "label": "Mannerheimintie 9, Helsinki"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          24.941644,
+          60.167226
+        ]
+      },
+      "properties": {
+        "id": "fi/uusimaa:103055993V-2",
+        "gid": "openaddresses:address:fi/uusimaa:103055993V-2",
+        "layer": "address",
+        "source": "openaddresses",
+        "source_id": "fi/uusimaa:103055993v-2",
+        "name": "Mannerheimintie 8",
+        "housenumber": "8",
+        "street": "Mannerheimintie",
+        "postalcode": "00100",
+        "postalcode_gid": "whosonfirst:postalcode:421479569",
+        "confidence": 0.9671704007600886,
+        "accuracy": "point",
+        "country": "Suomi",
+        "country_gid": "whosonfirst:country:85633143",
+        "country_a": "FIN",
+        "region": "Uusimaa",
+        "region_gid": "whosonfirst:region:85683067",
+        "localadmin": "Helsinki",
+        "localadmin_gid": "whosonfirst:localadmin:907199715",
+        "locality": "Helsinki",
+        "locality_gid": "whosonfirst:locality:101748417",
+        "neighbourhood": "Kamppi",
+        "neighbourhood_gid": "whosonfirst:neighbourhood:85898845",
+        "label": "Mannerheimintie 8, Helsinki"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          24.940649,
+          60.167578
+        ]
+      },
+      "properties": {
+        "id": "fi/uusimaa:103055996Y-1",
+        "gid": "openaddresses:address:fi/uusimaa:103055996Y-1",
+        "layer": "address",
+        "source": "openaddresses",
+        "source_id": "fi/uusimaa:103055996y-1",
+        "name": "Mannerheimintie 10",
+        "housenumber": "10",
+        "street": "Mannerheimintie",
+        "postalcode": "00100",
+        "postalcode_gid": "whosonfirst:postalcode:421479569",
+        "confidence": 0.9666894630433871,
+        "accuracy": "point",
+        "country": "Suomi",
+        "country_gid": "whosonfirst:country:85633143",
+        "country_a": "FIN",
+        "region": "Uusimaa",
+        "region_gid": "whosonfirst:region:85683067",
+        "localadmin": "Helsinki",
+        "localadmin_gid": "whosonfirst:localadmin:907199715",
+        "locality": "Helsinki",
+        "locality_gid": "whosonfirst:locality:101748417",
+        "neighbourhood": "Kamppi",
+        "neighbourhood_gid": "whosonfirst:neighbourhood:85898845",
+        "label": "Mannerheimintie 10, Helsinki"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          24.939532,
+          60.169869
+        ]
+      },
+      "properties": {
+        "id": "fi/uusimaa:1030368390-2",
+        "gid": "openaddresses:address:fi/uusimaa:1030368390-2",
+        "layer": "address",
+        "source": "openaddresses",
+        "source_id": "fi/uusimaa:1030368390-2",
+        "name": "Mannerheimintie 7",
+        "housenumber": "7",
+        "street": "Mannerheimintie",
+        "postalcode": "00100",
+        "postalcode_gid": "whosonfirst:postalcode:421479569",
+        "confidence": 0.9583776982068908,
+        "accuracy": "point",
+        "country": "Suomi",
+        "country_gid": "whosonfirst:country:85633143",
+        "country_a": "FIN",
+        "region": "Uusimaa",
+        "region_gid": "whosonfirst:region:85683067",
+        "localadmin": "Helsinki",
+        "localadmin_gid": "whosonfirst:localadmin:907199715",
+        "locality": "Helsinki",
+        "locality_gid": "whosonfirst:locality:101748417",
+        "neighbourhood": "Kluuvi",
+        "neighbourhood_gid": "whosonfirst:neighbourhood:85898847",
+        "label": "Mannerheimintie 7, Helsinki"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          24.936746,
+          60.172035
+        ]
+      },
+      "properties": {
+        "id": "fi/uusimaa:103036757B-2",
+        "gid": "openaddresses:address:fi/uusimaa:103036757B-2",
+        "layer": "address",
+        "source": "openaddresses",
+        "source_id": "fi/uusimaa:103036757b-2",
+        "name": "Mannerheimintie 11",
+        "housenumber": "11",
+        "street": "Mannerheimintie",
+        "postalcode": "00100",
+        "postalcode_gid": "whosonfirst:postalcode:421479569",
+        "confidence": 0.9578967604901891,
+        "accuracy": "point",
+        "country": "Suomi",
+        "country_gid": "whosonfirst:country:85633143",
+        "country_a": "FIN",
+        "region": "Uusimaa",
+        "region_gid": "whosonfirst:region:85683067",
+        "localadmin": "Helsinki",
+        "localadmin_gid": "whosonfirst:localadmin:907199715",
+        "locality": "Helsinki",
+        "locality_gid": "whosonfirst:locality:101748417",
+        "neighbourhood": "Kluuvi",
+        "neighbourhood_gid": "whosonfirst:neighbourhood:85898847",
+        "label": "Mannerheimintie 11, Helsinki"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          24.941999,
+          60.167024
+        ]
+      },
+      "properties": {
+        "id": "fi/uusimaa:103055985L-1",
+        "gid": "openaddresses:address:fi/uusimaa:103055985L-1",
+        "layer": "address",
+        "source": "openaddresses",
+        "source_id": "fi/uusimaa:103055985l-1",
+        "name": "Mannerheimintie 6",
+        "housenumber": "6",
+        "street": "Mannerheimintie",
+        "postalcode": "00100",
+        "postalcode_gid": "whosonfirst:postalcode:421479569",
+        "confidence": 0.95313620474404,
+        "accuracy": "point",
+        "country": "Suomi",
+        "country_gid": "whosonfirst:country:85633143",
+        "country_a": "FIN",
+        "region": "Uusimaa",
+        "region_gid": "whosonfirst:region:85683067",
+        "localadmin": "Helsinki",
+        "localadmin_gid": "whosonfirst:localadmin:907199715",
+        "locality": "Helsinki",
+        "locality_gid": "whosonfirst:locality:101748417",
+        "neighbourhood": "Kamppi",
+        "neighbourhood_gid": "whosonfirst:neighbourhood:85898845",
+        "label": "Mannerheimintie 6, Helsinki"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          24.940683,
+          60.167902
+        ]
+      },
+      "properties": {
+        "id": "fi/uusimaa:1030560025-1",
+        "gid": "openaddresses:address:fi/uusimaa:1030560025-1",
+        "layer": "address",
+        "source": "openaddresses",
+        "source_id": "fi/uusimaa:1030560025-1",
+        "name": "Mannerheimintie 12",
+        "housenumber": "12",
+        "street": "Mannerheimintie",
+        "postalcode": "00100",
+        "postalcode_gid": "whosonfirst:postalcode:421479569",
+        "confidence": 0.9526552670273384,
+        "accuracy": "point",
+        "country": "Suomi",
+        "country_gid": "whosonfirst:country:85633143",
+        "country_a": "FIN",
+        "region": "Uusimaa",
+        "region_gid": "whosonfirst:region:85683067",
+        "localadmin": "Helsinki",
+        "localadmin_gid": "whosonfirst:localadmin:907199715",
+        "locality": "Helsinki",
+        "locality_gid": "whosonfirst:locality:101748417",
+        "neighbourhood": "Kamppi",
+        "neighbourhood_gid": "whosonfirst:neighbourhood:85898845",
+        "label": "Mannerheimintie 12, Helsinki"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          24.940038,
+          60.169563
+        ]
+      },
+      "properties": {
+        "id": "fi/uusimaa:103036835V-1",
+        "gid": "openaddresses:address:fi/uusimaa:103036835V-1",
+        "layer": "address",
+        "source": "openaddresses",
+        "source_id": "fi/uusimaa:103036835v-1",
+        "name": "Mannerheimintie 5",
+        "housenumber": "5",
+        "street": "Mannerheimintie",
+        "postalcode": "00100",
+        "postalcode_gid": "whosonfirst:postalcode:421479569",
+        "confidence": 0.9495592347216595,
+        "accuracy": "point",
+        "country": "Suomi",
+        "country_gid": "whosonfirst:country:85633143",
+        "country_a": "FIN",
+        "region": "Uusimaa",
+        "region_gid": "whosonfirst:region:85683067",
+        "localadmin": "Helsinki",
+        "localadmin_gid": "whosonfirst:localadmin:907199715",
+        "locality": "Helsinki",
+        "locality_gid": "whosonfirst:locality:101748417",
+        "neighbourhood": "Kluuvi",
+        "neighbourhood_gid": "whosonfirst:neighbourhood:85898847",
+        "label": "Mannerheimintie 5, Helsinki"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          24.936138,
+          60.1734
+        ]
+      },
+      "properties": {
+        "id": "fi/uusimaa:103046186H-1",
+        "gid": "openaddresses:address:fi/uusimaa:103046186H-1",
+        "layer": "address",
+        "source": "openaddresses",
+        "source_id": "fi/uusimaa:103046186h-1",
+        "name": "Mannerheimintie 13a",
+        "housenumber": "13a",
+        "street": "Mannerheimintie",
+        "postalcode": "00100",
+        "postalcode_gid": "whosonfirst:postalcode:421479569",
+        "confidence": 0.9486507968123342,
+        "accuracy": "point",
+        "country": "Suomi",
+        "country_gid": "whosonfirst:country:85633143",
+        "country_a": "FIN",
+        "region": "Uusimaa",
+        "region_gid": "whosonfirst:region:85683067",
+        "localadmin": "Helsinki",
+        "localadmin_gid": "whosonfirst:localadmin:907199715",
+        "locality": "Helsinki",
+        "locality_gid": "whosonfirst:locality:101748417",
+        "neighbourhood": "Kluuvi",
+        "neighbourhood_gid": "whosonfirst:neighbourhood:85898847",
+        "label": "Mannerheimintie 13a, Helsinki"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          24.933552,
+          60.174662
+        ]
+      },
+      "properties": {
+        "id": "fi/uusimaa:103209275E-3",
+        "gid": "openaddresses:address:fi/uusimaa:103209275E-3",
+        "layer": "address",
+        "source": "openaddresses",
+        "source_id": "fi/uusimaa:103209275e-3",
+        "name": "Mannerheimintie 13b",
+        "housenumber": "13b",
+        "street": "Mannerheimintie",
+        "postalcode": "00100",
+        "postalcode_gid": "whosonfirst:postalcode:421479569",
+        "confidence": 0.9486507968123342,
+        "accuracy": "point",
+        "country": "Suomi",
+        "country_gid": "whosonfirst:country:85633143",
+        "country_a": "FIN",
+        "region": "Uusimaa",
+        "region_gid": "whosonfirst:region:85683067",
+        "localadmin": "Helsinki",
+        "localadmin_gid": "whosonfirst:localadmin:907199715",
+        "locality": "Helsinki",
+        "locality_gid": "whosonfirst:locality:101748417",
+        "neighbourhood": "Etu-Töölö",
+        "neighbourhood_gid": "whosonfirst:neighbourhood:85898821",
+        "label": "Mannerheimintie 13b, Helsinki"
+      }
+    }
+  ],
+  "bbox": [
+    24.933552,
+    60.167024,
+    24.941999,
+    60.174662
+  ]
+}
