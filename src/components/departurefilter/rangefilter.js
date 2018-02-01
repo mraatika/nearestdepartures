@@ -1,5 +1,6 @@
 import { linkEvent } from 'inferno';
 import { MIN_RANGE, MAX_RANGE, RANGE_STEP } from '../../constants/constants';
+import { saveFilter } from '../../services/storageservice';
 
 /**
  * Callback for input's change
@@ -7,8 +8,11 @@ import { MIN_RANGE, MAX_RANGE, RANGE_STEP } from '../../constants/constants';
  * @param {function} props.onChange
  * @param {Event} e
  */
-const onInputChange = (onChange, e) =>
-  onChange(e.target.value);
+const onInputChange = (onChange, e) => {
+  const value = e.target.value;
+  saveFilter('range', value);
+  onChange(value);
+};
 
 /**
  * Range input for filtering departures by distance
