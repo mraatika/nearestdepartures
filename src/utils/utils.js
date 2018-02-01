@@ -140,3 +140,13 @@ export const keyPressHandler = (callback, ...params) =>
 
 export const stopPropagation = e => e.stopPropagation();
 
+/**
+ * Returns the second argument if object's property {prop} is null or undefined
+ * otherwise the {prop} is returned
+ * @param {string} prop Property's name
+ * @param {*} otherwise Default return value
+ * @param {object} obj The object to get the prop from
+ * @return {*} The value of given property of the supplied object or the default value
+ */
+export const propOr = (prop, otherwise, obj = {}) => obj[prop] == null ? otherwise : obj[prop];
+

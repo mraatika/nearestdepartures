@@ -5,6 +5,7 @@ import ErrorMessage from '../errormessage/errormessage';
 import AddressSearch from '../addresssearch';
 import { DEFAULT_RANGE, BATCH_INTERVAL } from '../../constants/constants';
 import * as model from './model';
+import { getFilter, saveFilter } from '../../services/storageservice';
 import Header from '../header/header';
 import Footer from '../footer/footer';
 import AccuracyIndicator from '../accuracyindicator/accuracyindicator';
@@ -19,8 +20,8 @@ const DEFAULT_STATE = {
   address: undefined,
   error: null,
   filters: {
-    range: DEFAULT_RANGE,
-    vehicleTypes: model.allVehicleTypes,
+    range: getFilter('range') || DEFAULT_RANGE,
+    vehicleTypes: getFilter('vehicleTypes') || model.allVehicleTypes,
   }
 };
 
@@ -56,7 +57,9 @@ class App extends Component {
   }
 
   onFilterToggle(type, multiselect) {
-    this.onFilterChange(model.updateVehicleFilters(type, multiselect, this.state));
+    const filters = model.updateVehicleFilters(type, multiselect, this.state);
+    saveFilter('vehicleTypes', filters.vehicleTypes);
+    this.onFilterChange(filters);
   }
 
   /**
