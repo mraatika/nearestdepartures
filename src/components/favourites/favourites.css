@@ -8,10 +8,6 @@
 
 .favourites-modal-wrapper {
   position: fixed;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
   visibility: hidden;
   z-index: 100;
 }
@@ -22,43 +18,76 @@
 
 .favouriteslist {
   position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
   max-width: 750px;
-  padding: 1rem;
   margin: 0 auto;
   z-index: 101;
   color: #333;
   background-color: #fff;
   box-shadow: 0 0 30px #444;
-  border-radius: 2px;
+  border-radius: 4px;
   text-align: left;
+  overflow: hidden;
+
   display: flex;
   flex-direction: column;
-  overflow: hidden;
 }
 
 .favouriteslist-header {
+  background-color: #007ac9;
+  color: #fff;
+  padding: 3rem 2rem;
+  text-align: center;
+  box-shadow: 1px 2px 4px #888;
+}
+
+.favouriteslist-content {
+  padding: 0 1rem 1rem 1rem;
   display: flex;
-  align-items: flex-start;
-  flex-shrink: 0;
+  flex-direction: column;
+  flex: 1;
 }
 
 .favouriteslist h2 {
   font-family: "Patua One", cursive;
-  text-align: left;
   margin: 0;
-  flex: 1;
 }
 
 .favouriteslist-close-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
   text-decoration: underline;
   background: none;
   border: 0;
-  color: #139cd4;
+  color: #fff;
   cursor: pointer;
+}
+
+.favouriteslist-header-triangle-container {
+  position: relative;
+}
+
+.favouriteslist-header-triangle,
+.favouriteslist-header-triangle-shadow {
+  width: 0;
+	height: 0;
+	border-left: 25px solid transparent;
+  border-right: 25px solid transparent;
+  border-top: 30px solid transparent;
+  margin: 0 auto;
+}
+
+.favouriteslist-header-triangle {
+  border-top-color: #007ac9;
+}
+
+.favouriteslist-header-triangle-shadow {
+  position: absolute;
+  filter: blur(3px);
+  border-top-color: #888;
+  right: calc(50% - 25px);
+  top: 0;
+  z-index: -1;
 }
 
 .favouriteslist ul {
@@ -118,17 +147,22 @@
 
 .modal {
   position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
   background: rgba(0, 0, 0, .6);
 }
 
 @media (min-width: 750px) {
-  .favouriteslist {
+  .favouriteslist.fill-parent {
     top: 5%;
     bottom: 5%;
-    padding: 2rem;
+  }
+
+  .favouriteslist-content {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .favouriteslist-close-button {
+    top: 1.5rem;
+    right: 1.5rem;
   }
 }

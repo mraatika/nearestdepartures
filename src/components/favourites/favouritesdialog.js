@@ -30,7 +30,7 @@ class FavouritesDialog extends Component {
 
     // if the dialog was opened
     if (!wasVisible && isNowVisible) {
-      document.body.className = `no-scroll ${document.body.className}`;
+      document.body.className = `no-scroll ${document.body.className}`.trim();
       // start listening to keyup events
       document.body.addEventListener('keyup', this.onKeyUp);
       // for usability reasons focus on the dialog when toggled visible
@@ -53,10 +53,10 @@ class FavouritesDialog extends Component {
   render() {
     const { favourites = [] } = this.props;
     return (
-      <div class={`favourites-modal-wrapper ${this.props.isVisible ? 'visible' : 'hidden'}`}>
-        <div class="modal" />
+      <div class={`favourites-modal-wrapper fill-parent ${this.props.isVisible ? 'visible' : 'hidden'}`}>
+        <div class="modal fill-parent" />
         <div
-          class="favouriteslist"
+          class="favouriteslist fill-parent"
           ref={r => this.dialog = r}
           tabIndex="0"
           role="dialog"
@@ -68,20 +68,26 @@ class FavouritesDialog extends Component {
               sulje [x]
             </button>
           </div>
-          <ul>
-            {favourites.map(address =>
-              <FavouritesListItem
-                address={address}
-                removeFavourite={this.props.removeFavourite}
-                selectFavourite={this.props.selectFavourite}
-                isSelected={areLocationsEqual(this.props.selectedAddress, address)}
-              />
-            )}
-            {!favourites.length && <li class="favouriteslist-placeholder">Ei tallennettuja suosikkeja</li>}
-          </ul>
-          <div class="info-message">
-            <span class="badge info">!</span>
-            Suosikit tallentuvat paikallisesti, joten ne ovat hyödynnettävissä vain samalla selaimella ja laitteella, johon ne on tallennettu.
+          <div class="favouriteslist-header-triangle-container">
+            <div class="favouriteslist-header-triangle" />
+            <div class="favouriteslist-header-triangle-shadow" />
+          </div>
+          <div class="favouriteslist-content flex-fill">
+            <ul>
+              {favourites.map(address =>
+                <FavouritesListItem
+                  address={address}
+                  removeFavourite={this.props.removeFavourite}
+                  selectFavourite={this.props.selectFavourite}
+                  isSelected={areLocationsEqual(this.props.selectedAddress, address)}
+                />
+              )}
+              {!favourites.length && <li class="favouriteslist-placeholder">Ei tallennettuja suosikkeja</li>}
+            </ul>
+            <div class="info-message">
+              <span class="badge info">!</span>
+              Suosikit tallentuvat paikallisesti, joten ne ovat hyödynnettävissä vain samalla selaimella ja laitteella, johon ne on tallennettu.
+            </div>
           </div>
         </div>
       </div>
