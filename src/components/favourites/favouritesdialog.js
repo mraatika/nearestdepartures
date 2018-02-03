@@ -72,7 +72,7 @@ class FavouritesDialog extends Component {
             <div class="favouriteslist-header-triangle" />
             <div class="favouriteslist-header-triangle-shadow" />
           </div>
-          <div class="favouriteslist-content flex-fill">
+          <div class="favouriteslist-content flex-column">
             <ul>
               {favourites.map(address =>
                 <FavouritesListItem

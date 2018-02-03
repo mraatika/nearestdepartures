@@ -122,7 +122,7 @@ class App extends Component {
     const { filtered, filters, error, address, loading, departureUpdateTime } = this.state;
 
     return (
-      <div class="app-content">
+      <div class="app-content flex-column">
         <Header
           address={address}
           selectLocation={this.searchForDepartures.bind(this)}
