@@ -7,17 +7,19 @@
 }
 
 .favourites-modal-wrapper {
-  position: fixed;
-  visibility: hidden;
   z-index: 100;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.2s linear;
 }
 
 .favourites-modal-wrapper.visible {
+  opacity: 1;
   visibility: visible;
+  transition: all 0.1s linear;
 }
 
 .favouriteslist {
-  position: absolute;
   max-width: 750px;
   margin: 0 auto;
   z-index: 101;
@@ -146,7 +148,6 @@
 }
 
 .modal {
-  position: fixed;
   background: rgba(0, 0, 0, .6);
 }
 

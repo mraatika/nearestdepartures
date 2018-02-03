@@ -53,7 +53,7 @@ class FavouritesDialog extends Component {
   render() {
     const { favourites = [] } = this.props;
     return (
-      <div class={`favourites-modal-wrapper fill-parent ${this.props.isVisible ? 'visible' : 'hidden'}`}>
+      <div class={`favourites-modal-wrapper fill-parent${this.props.isVisible ? ' visible' : ''}`}>
         <div class="modal fill-parent" />
         <div
           class="favouriteslist fill-parent"
