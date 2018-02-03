@@ -141,6 +141,18 @@ export const keyPressHandler = (callback, ...params) =>
 export const stopPropagation = e => e.stopPropagation();
 
 /**
+ * Get a property of an object
+ * @param {string} propName
+ * @return {function}
+ */
+export const prop = propName =>
+  /**
+   * @param {object}
+   * @return {*} object[propName]
+   */
+  obj => obj[propName];
+
+/**
  * Returns the second argument if object's property {prop} is null or undefined
  * otherwise the {prop} is returned
  * @param {string} prop Property's name
