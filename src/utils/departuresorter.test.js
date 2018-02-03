@@ -27,6 +27,30 @@ it('sorts departures descending by route name', () => {
     expect(result).toEqual(sorted);
 });
 
+it('sorts departures descending by route name numbers first and naturally sorted', () => {
+    const departures = [
+        { routeName: '1' },
+        { routeName: '10' },
+        { routeName: '200' },
+        { routeName: '2' },
+        { routeName: 'M2' },
+        { routeName: 'A' },
+    ];
+
+    const sorted = [
+      { routeName: '1' },
+      { routeName: '2' },
+      { routeName: '10' },
+      { routeName: '200' },
+      { routeName: 'A' },
+      { routeName: 'M2' },
+    ];
+
+    const result = sort(departures, 'routeName');
+
+    expect(result).toEqual(sorted);
+});
+
 it('reverses sort array when sortDir is -1', () => {
     const departures = [
         { routeName: 'DEF' },
