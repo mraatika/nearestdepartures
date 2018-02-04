@@ -45,6 +45,8 @@ class App extends Component {
   componentDidMount() {
     // batch departures in every x seconds
     setInterval(() => this.batchDeparturesToState(), BATCH_INTERVAL);
+    model.fetchDisruptionsToState(this.state)
+      .then(this.setState.bind(this));
   }
 
   /**
@@ -56,6 +58,11 @@ class App extends Component {
       .catch(this.onError.bind(this));
   }
 
+  /**
+   * Update vehicle filters
+   * @param {string} type
+   * @param {boolean} multiselect
+   */
   onFilterToggle(type, multiselect) {
     const filters = model.updateVehicleFilters(type, multiselect, this.state);
     saveFilter('vehicleTypes', filters.vehicleTypes);
@@ -119,7 +126,7 @@ class App extends Component {
    * @returns {string} markup
    */
   render() {
-    const { filtered, filters, error, address, loading, departureUpdateTime } = this.state;
+    const { filtered, filters, error, address, loading, departureUpdateTime, disruptions } = this.state;
 
     return (
       <div class="app-content">
@@ -149,7 +156,8 @@ class App extends Component {
 
           <DeparturesList
             isLoading={loading}
-            departures={filtered} />
+            departures={filtered}
+            disruptions={disruptions} />
         </main>
 
         <Footer departureUpdateTime={departureUpdateTime} />

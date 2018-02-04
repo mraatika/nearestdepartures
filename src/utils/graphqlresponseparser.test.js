@@ -74,6 +74,13 @@ it('departure has vehicle type', () => {
     expect(result[0].vehicleType).toBe(vehicleType);
 });
 
+it('departure has route id', () => {
+    const routeId = 'HSL:200A';
+    const response = { data: { nearest: { edges: [{ node: { place: { stop: {}, pattern: { route: { gtfsId: routeId } }, stoptimes: [{ trip: {} }]} } }] } } };
+    const result = parseResponse(response);
+    expect(result[0].routeId).toBe(routeId);
+});
+
 it('departure has route identifier', () => {
     const routeName = '9';
     const response = { data: { nearest: { edges: [{ node: { place: { stop: {}, pattern: { route: { shortName: routeName } }, stoptimes: [{ trip: {} }]} } }] } } };

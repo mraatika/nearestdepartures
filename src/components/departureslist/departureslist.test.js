@@ -2,6 +2,7 @@ import { renderIntoDocument, findRenderedVNodeWithType } from 'inferno-test-util
 import { renderToString } from 'inferno-server';
 import dom from 'cheerio';
 import DeparturesList from './departureslist';
+import DepartureRow from './departurerow';
 import LoadingOverlay from '../loadingoverlay/loadingoverlay';
 
 it('renders a list div', () => {
@@ -58,6 +59,15 @@ it('renders as many departure rows as there are departures', () => {
     const $ = dom.load(renderToString(<DeparturesList departures={departures}/>));
     const rows = $('.departures-list-body').children();
     expect(rows.length).toBe(departures.length);
+});
+
+it('passes disruptions for departure row if found for that particular departure', () => {
+  const routeId = 'HSL:200A';
+  const departures = [{ id: '1', routeId }];
+  const disruptions = { [routeId]: [{}] };
+  const tree = renderIntoDocument(<DeparturesList departures={departures} disruptions={disruptions} />);
+  const departure = findRenderedVNodeWithType(tree, DepartureRow);
+  expect(departure.props.disruptions).toEqual(disruptions[routeId]);
 });
 
 it('renders a loading overlay', () => {

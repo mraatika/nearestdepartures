@@ -1,5 +1,6 @@
 import { linkEvent } from 'inferno';
 import Time from './time';
+import DisruptionAlert from './disruptionalert';
 import RouteIdentifier from './routeidentifier';
 import Distance from './distance';
 import Icon from '../icon/icon';
@@ -18,6 +19,7 @@ import { keyPressHandler, stopPropagation } from '../../utils/utils';
 * @param {number} props.distance
 * @param {string} props.destination
 * @param {string} props.vehicleType
+* @param {object[]} props.disruptions
 * @returns {DepartureRow}
 */
 const DepartureRow = ({
@@ -36,6 +38,7 @@ const DepartureRow = ({
   stopUrl,
   stopDescription,
   scheduledDeparture,
+  disruptions = [],
 }) =>
   <li class="departures-list-row-container">
     <div
@@ -46,13 +49,27 @@ const DepartureRow = ({
       aria-expanded={!!isToggled}
       aria-controls={`departure-${id}`}
     >
-      <div class={`time${realtime ? ' realtime' : ''}`}><Time time={realtimeDeparture} /></div>
+      <div class={`time${realtime ? ' realtime' : ''}`}>
+        <Time time={realtimeDeparture} />
+      </div>
       <div class="routename">
         <a onClick={stopPropagation} href={routeUrl} target="_blank" rel="noopener">
           <RouteIdentifier vehicleType={vehicleType} routeName={routeName} />
         </a>
       </div>
-      <div class="destination">{destination}</div>
+      <div class="destination">
+        {!!(disruptions.length) &&
+          <span
+            title="Linjalla häiriöitä: Klikkaa nähdäksesi lisätietoja"
+            class="alert alert-icon"
+            aria-label="Linjalla häiriöitä"
+            tabIndex="0"
+          >
+            ⚠
+          </span>
+        }
+        {destination}
+      </div>
       <div class="distance"><Distance distance={distance} /></div>
     </div>
     <div
@@ -90,6 +107,7 @@ const DepartureRow = ({
             </div>
           </div>
         </div>
+        {!!disruptions.length && <DisruptionAlert disruptions={disruptions} />}
       </div>
     </div>
   </li>;
