@@ -12,16 +12,19 @@ import './departureslist.css';
  * @param {object[]} props.departures
  * @param {boolean} props.toggledRowId
  * @param {function} props.onRowToggle
+ * @param {object} props.disruptions
  * @returns {DepartureRow[]}
  */
-const generateDepartureRows = ({ departures, toggledRowId, onRowToggle }) => departures.map(departure =>
-  <DepartureRow
-    key={departure.id}
-    isToggled={toggledRowId === departure.id}
-    onRowToggle={onRowToggle}
-    {...departure}
-  />
-);
+const generateDepartureRows = ({ departures, toggledRowId, onRowToggle, disruptions = {} }) =>
+  departures.map(departure =>
+    <DepartureRow
+      key={departure.id}
+      isToggled={toggledRowId === departure.id}
+      onRowToggle={onRowToggle}
+      disruptions={disruptions[departure.routeId]}
+      {...departure}
+    />
+  );
 
 /**
  * Generate a placeholder row
@@ -61,6 +64,7 @@ export default class DeparturesList extends Component {
 
   /**
    * Sorts departures by prop and set to state
+   * @private
    * @param {string} propName Name of the prop to sort by
    */
   updateSortProps(propName) {
@@ -70,23 +74,29 @@ export default class DeparturesList extends Component {
     this.setState({ sortProp: propName, sortDir });
   }
 
+  /**
+   * Toggle departure row's extra content section and close others'
+   * @private
+   * @param {string} id The target row's id
+   */
   onRowToggle(id) {
     const current = this.state.toggledRowId;
     this.setState({ toggledRowId: id === current ? undefined : id });
   }
 
   render() {
+    const { departures, disruptions, isLoading } = this.props;
     const { sortProp, sortDir, toggledRowId } = this.state;
     // sort departures using sort props from state
-    const sorted = sortDepartures(this.props.departures, sortProp, sortDir);
+    const sorted = sortDepartures(departures, sortProp, sortDir);
     // display rows or a placeholder row when there are no departures to display
     const rows = sorted.length
-      ? generateDepartureRows({ departures: sorted, toggledRowId, onRowToggle: this.onRowToggle })
+      ? generateDepartureRows({ departures: sorted, toggledRowId, onRowToggle: this.onRowToggle, disruptions })
       : generateEmptyRow();
 
     return (
       <div class="departures-list">
-        <LoadingOverlay show={this.props.isLoading} />
+        <LoadingOverlay show={isLoading} />
 
         <div class="departures-list-header">
           {sortHeaders.map(({ text, propName }) =>

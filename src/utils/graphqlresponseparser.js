@@ -60,6 +60,7 @@ const getRouteInfo = (node) => {
     destination: headsign,
     distance: node.distance,
     vehicleType: route.mode,
+    routeId: route.gtfsId,
     routeName: route.shortName,
     stoptimes: node.place.stoptimes,
     routeUrl: `https://www.reittiopas.fi/linjat/${route.gtfsId}/pysakit/${code}`,

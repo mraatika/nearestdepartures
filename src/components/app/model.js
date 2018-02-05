@@ -3,6 +3,7 @@ import { getNowInSeconds } from '../../utils/utils';
 import { stopLocating } from '../../services/locationservice';
 import { fetchDepartures, batchDepartures } from '../../utils/departurefetchmerge';
 import { VEHICLE_TYPE } from '../../constants/constants';
+import { fetchDisruptions } from '../../services/disruptionsservice';
 
 /** @module AppModel */
 
@@ -84,6 +85,16 @@ export const batchDeparturesToState = async (state) => {
 };
 
 /**
+ * Fetch disruptions from the api and add them to state
+ * @param {object} state
+ * @return {object} object representing state changes
+ */
+export const fetchDisruptionsToState = async (state) => {
+  const disruptions = await fetchDisruptions();
+  return { disruptions };
+};
+
+/**
  * Form updated filters
  * @private
  * @param {string} type
@@ -114,6 +125,7 @@ const getActiveFilters = (type, current, multiselect) => {
  * Callback for filter button. Toggles filter state.
  * @param {string} type
  * @param {boolean} multiselect
+ * @param {object} state
  * @return {object} object representing state changes
  */
 export const updateVehicleFilters = (type, multiselect, state) => {

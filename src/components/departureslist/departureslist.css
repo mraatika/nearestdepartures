@@ -122,7 +122,7 @@
 }
 
 .departures-list-row-additional-info.visible {
-  max-height: 280px;
+  max-height: 600px;
 }
 
 .departure-additional-info-content-block {
@@ -153,11 +153,24 @@
   white-space: normal;
 }
 
-@media screen and (min-width: 520px) {
-  .departures-list-row-additional-info-content {
-    padding: .8rem 2rem;
-  }
+.alert {
+  color: #a94442;
+}
 
+.alert-icon {
+  display: inline-block;
+  margin-right: .4rem;
+  font-weight: bold;
+}
+
+.alert-info {
+  background-color: #f2dede;
+  white-space: normal;
+  text-align: left;
+  padding: .4rem 1rem;
+}
+
+@media screen and (min-width: 520px) {
   .departure-additional-info-content-block {
     margin-right: 2rem;
   }

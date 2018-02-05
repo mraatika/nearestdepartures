@@ -1,4 +1,7 @@
 import * as model from './model';
+import * as disruptionsService from '../../services/disruptionsservice';
+
+jest.mock('../../services/disruptionsservice');
 
 describe('Toggling vehicle filters', () => {
   it('should not throw if vehicletypes is undefined', () => {
@@ -48,5 +51,23 @@ describe('Toggling vehicle filters', () => {
     const state = { filters: { vehicleTypes: [type, 'TRAIN', 'FERRY'] } };
     const result = model.updateVehicleFilters(type, true, state);
     expect(result.vehicleTypes).toEqual(['TRAIN', 'FERRY']);
+  });
+});
+
+describe('fetchDisruptionsToState', () => {
+  it('should fetch disruptions to state', () => {
+    const disruptions = [];
+    const state = {};
+    disruptionsService.fetchDisruptions.mockReturnValueOnce(Promise.resolve(disruptions));
+    return model.fetchDisruptionsToState(state)
+      .then(res => expect(res).toEqual({ disruptions }));
+  });
+
+  it('should not mutate the current state', () => {
+    const disruptions = [];
+    const state = {};
+    disruptionsService.fetchDisruptions.mockReturnValueOnce(Promise.resolve(disruptions));
+    return model.fetchDisruptionsToState(state)
+      .then(res => expect(res).not.toBe(state));
   });
 });
