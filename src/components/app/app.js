@@ -9,6 +9,7 @@ import { getFilter, saveFilter } from '../../services/storageservice';
 import Header from '../header/header';
 import Footer from '../footer/footer';
 import AccuracyIndicator from '../accuracyindicator/accuracyindicator';
+import { delay } from '../../utils/utils';
 import './app.css';
 
 /**
@@ -45,8 +46,11 @@ class App extends Component {
   componentDidMount() {
     // batch departures in every x seconds
     setInterval(() => this.batchDeparturesToState(), BATCH_INTERVAL);
-    model.fetchDisruptionsToState(this.state)
-      .then(this.setState.bind(this));
+    // defer fetch so that the departure fetches are initiated first
+    delay(() =>
+      model.fetchDisruptionsToState(this.state)
+        .then(this.setState.bind(this))
+    );
   }
 
   /**

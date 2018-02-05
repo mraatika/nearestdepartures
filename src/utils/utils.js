@@ -144,6 +144,13 @@ export const keyPressHandler = (callback, ...params) =>
 export const stopPropagation = e => e.stopPropagation();
 
 /**
+ * Delay execution of a function by given time (in milliseconds)
+ * @param {function} fn
+ * @param {number} [delay=0]
+ */
+export const delay = (fn, delay = 0) => setTimeout(fn, delay);
+
+/**
  * Get a property of an object
  * @param {string} propName
  * @return {function}
