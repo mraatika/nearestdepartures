@@ -63,3 +63,17 @@ export const MAX_ADDRESS_SUGGESTIONS = 10;
  * @type {number}
  */
 export const BATCH_INTERVAL = 30 * 1000;
+
+/**
+ * Municipalities that will appear first in the address search suggestions
+ * @type {string[]}
+ */
+export const PREFERRED_MUNICIPALITIES = [
+  'Helsinki',
+  'Espoo',
+  'Vantaa',
+  'Kauniainen',
+  'Kerava',
+  'Sipoo',
+  'Kirkkonummi'
+];

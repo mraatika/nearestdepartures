@@ -2,18 +2,15 @@ header {
   background-color: #007ac9;
   border-bottom: 4px solid #005993;
   color: #fff;
-  text-align: left;
   margin-bottom: 36px;
-  padding: .6rem 1rem;
-  display: flex;
-  align-items: center;
 }
 
-header .icon {
-  width: 40px;
-  height: 40px;
-  margin-right: 6px;
-  vertical-align: bottom;
+.header-content {
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  max-width: 1024px;
+  padding: .6rem 1rem;
 }
 
 .header-title-wrapper {
@@ -24,29 +21,21 @@ header .icon {
   display: none;
 }
 
-.app-description:before,
-.app-description:after {
-  content: "~";
-}
-
-.app-description:before {
-  margin-right: 2px;
-}
-
-.app-description:after {
-  margin-left: 2px;
-}
-
 .app-description {
   font-size: .8rem;
-  font-style: italic;
-  line-height: 1;
+  line-height: .5;
   margin-bottom: 1.5em;
 }
 
 .app-name {
   font-family: 'Patua One', cursive;
   text-transform: lowercase;
+  margin-left: 6px;
+}
+
+.app-logo {
+  height: 40px;
+  margin-bottom: -8px;
 }
 
 @media (min-width: 750px) {
@@ -56,20 +45,15 @@ header .icon {
     padding: 0 1rem;
   }
 
-  header .icon {
-    width: 60px;
-    height: 60px;
+  .app-name {
+    margin-left: -8px;
   }
 
   .app-description {
     display: block;
   }
 
-  header .favourites {
-    text-align: right;
-    position: absolute;
-    top: .8rem;
-    left: 1rem;
-    right: 1rem;
+  .app-logo {
+    height: 60px;
   }
 }

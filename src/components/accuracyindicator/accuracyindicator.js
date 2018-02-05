@@ -10,7 +10,7 @@ const chooseColorClass = (accuracy) => {
     if (accuracy > 500) return 'danger';
     if (accuracy > 100) return 'warning';
     return '';
-}
+};
 
 /**
  * A component for displaying GPS location accuracy info. Will display

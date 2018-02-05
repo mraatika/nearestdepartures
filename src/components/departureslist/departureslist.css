@@ -17,11 +17,7 @@
 }
 
 .departures-list-header .active {
-  border-bottom: 2px solid #007ac9 !important;
-}
-
-.departures-list-header .header:focus > span {
-  border-bottom: 2px solid #83ceff;
+  border-bottom: 2px solid #007ac9;
 }
 
 .departures-list-header .header {
@@ -32,19 +28,20 @@
   user-select: none;
 }
 
-.departures-list-row {
-  position: relative;
-  display: flex;
-  align-content: space-between;
-  padding: .4em 0;
+.departures-list-row-container {
+  border-bottom: 1px solid #ddd;
   margin: 0;
 
   overflow-y: visible;
   white-space: nowrap;
   background: #fff;
-  border-bottom: 1px solid #ddd;
-  line-height: 1.8;
-  letter-spacing: 0;
+  line-height: 2.5;
+}
+
+.departures-list-row {
+  display: flex;
+  align-content: space-between;
+  cursor: pointer;
 }
 
 .departures-list-header .header,
@@ -66,24 +63,27 @@
   border: 0;
 }
 
-.departures-list .time {
+.departures-list-row .time {
   width: 3rem;
 }
 
 .departures-list .routename {
   width: 3.5rem;
-  overflow: hidden;
 }
 
 .departures-list-row .routename {
   font-weight: 600;
+  overflow: hidden;
 }
 
 .departures-list .destination {
   flex: 1;
   position: relative;
-  overflow: hidden;
   vertical-align: bottom;
+}
+
+.departures-list-row .destination {
+  overflow: hidden;
 }
 
 .departures-list .distance {
@@ -102,9 +102,63 @@
   padding: 0 5px;
 }
 
+.departures-list-row-additional-info {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 250ms linear;
+}
+
+.departures-list-row-additional-info a {
+  text-decoration: underline;
+}
+
+.departures-list-row-additional-info-content {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: .8rem .4rem;
+  line-height: 1.5;
+  margin-bottom: -.4rem;
+}
+
+.departures-list-row-additional-info.visible {
+  max-height: 280px;
+}
+
+.departure-additional-info-content-block {
+  display: flex;
+  margin-right: 1rem;
+  margin-bottom: .4rem;
+}
+
+.departure-additional-info-content-block .icon-image {
+  margin-top: .3rem;
+  margin-right: .4rem;
+}
+
+.departure-stop-code {
+  display: inline-block;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  font-size: .8rem;
+  color: #56666e;
+  padding: 0 .2rem;
+  margin-right: .4rem;
+}
+
 .departures-list-row.no-results {
   font-style: italic;
   text-align: center;
   padding: 20px 0;
   white-space: normal;
+}
+
+@media screen and (min-width: 520px) {
+  .departures-list-row-additional-info-content {
+    padding: .8rem 2rem;
+  }
+
+  .departure-additional-info-content-block {
+    margin-right: 2rem;
+  }
 }

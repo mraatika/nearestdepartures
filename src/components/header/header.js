@@ -1,6 +1,6 @@
 import './header.css';
-import VehicleIcon from '../vehicleicon/vehicleicon';
-import Favourites from '../favourites/favourites';
+import logo from './julkisilla_logo.png';
+import Favourites from '../favourites';
 
 /**
  * App header component
@@ -11,19 +11,20 @@ import Favourites from '../favourites/favourites';
  */
 const Header = ({ address, selectLocation }) => (
   <header>
-    <div className="header-title-wrapper">
-      <h1>
-        <VehicleIcon iconName="bus" />
-        <span class="app-name">julkisilla.info</span>
-      </h1>
-      <p class="app-description">Löydä lähimmät julkisen liikenteen lähdöt helposti</p>
+    <div class="header-content">
+      <div className="header-title-wrapper">
+        <h1>
+          <img class="app-logo" src={logo} alt="logo" />
+          <span class="app-name">julkisilla.info</span>
+        </h1>
+        <p class="app-description">Löydä lähimmät julkisen liikenteen lähdöt helposti</p>
+      </div>
+
+      <Favourites
+        address={address}
+        selectLocation={selectLocation}
+      />
     </div>
-
-    <Favourites
-      address={address}
-      selectLocation={selectLocation}
-    />
-
   </header>
 );
 

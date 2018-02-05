@@ -1,6 +1,7 @@
 import { findGPSLocation } from '../../services/locationservice';
 import { lookupAddress, searchAddress } from '../../services/addresssearchservice';
 import { MAX_ADDRESS_SUGGESTIONS } from '../../constants/constants';
+import { PREFERRED_MUNICIPALITIES } from '../../constants/constants';
 
 /** @module AddressSearchModel */
 
@@ -15,7 +16,7 @@ export const findAddressByCurrentLocation = async () => {
   const address = await lookupAddress(location);
   // and finally fetch all departures
   return { ...address, location };
-}
+};
 
 /**
  * Search address by a search term
@@ -26,7 +27,14 @@ export const findAddressByCurrentLocation = async () => {
 export const findAddressBySearchTerm = async (searchTerm) => {
   const result = await searchAddress(searchTerm);
   return result[0];
-}
+};
+
+const isPreferredMunicipality = result => PREFERRED_MUNICIPALITIES.indexOf(result.localadmin) > -1;
+const sortByConfidence = (a, b) => b.confidence - a.confidence;
+const filterPreferredMunicipalitiesOnly =
+  list => list
+    .filter(isPreferredMunicipality)
+    .sort(sortByConfidence);
 
 /**
  * Fetch a list of address suggestions from the api
@@ -36,9 +44,8 @@ export const findAddressBySearchTerm = async (searchTerm) => {
  */
 export const fetchSuggestions = async (searchTerm) => {
   const result = await searchAddress(searchTerm, MAX_ADDRESS_SUGGESTIONS);
-  const sorted = result.sort((a, b) => b.confidence - a.confidence);
-  return { suggestions: sorted };
-}
+  return { suggestions: filterPreferredMunicipalitiesOnly(result) };
+};
 
 /**
  * Select next suggestion.
@@ -50,7 +57,7 @@ export const selectNextSuggestion = (state) => {
   const currentIndex = suggestions.indexOf(selectedSuggestion);
   const nextIndex = ((currentIndex + 1) >= suggestions.length) ? 0 : currentIndex + 1;
   return suggestions[nextIndex];
-}
+};
 
 /**
  * Select previous suggestion.
@@ -62,4 +69,4 @@ export const selectPrevSuggestion = (state) => {
   const currentIndex = suggestions.indexOf(selectedSuggestion);
   const prevIndex = [-1, 0].indexOf(currentIndex) > -1 ? (suggestions.length - 1) : (currentIndex - 1);
   return suggestions[prevIndex];
-}
+};

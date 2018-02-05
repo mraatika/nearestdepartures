@@ -8,10 +8,21 @@ import './departureslist.css';
 /**
  * Generate a row for each departure
  * @private
- * @param {Object[]} departures
- * @returns {Function[]}
+ * @param {object} props
+ * @param {object[]} props.departures
+ * @param {boolean} props.toggledRowId
+ * @param {function} props.onRowToggle
+ * @returns {DepartureRow[]}
  */
-const generateDepartureRows = departures => departures.map(departure => <DepartureRow key={departure.id} {...departure} />);
+const generateDepartureRows = ({ departures, toggledRowId, onRowToggle }) => departures.map(departure =>
+  <DepartureRow
+    key={departure.id}
+    isToggled={toggledRowId === departure.id}
+    onRowToggle={onRowToggle}
+    {...departure}
+  />
+);
+
 /**
  * Generate a placeholder row
  * @private
@@ -19,6 +30,16 @@ const generateDepartureRows = departures => departures.map(departure => <Departu
  */
 const generateEmptyRow = () => <div class="departures-list-row no-results">Lähtöjä ei löytynyt annetuilla hakukriteereillä tai suodattimilla.</div>;
 
+/**
+ * List's headers
+ * @type {object[]}
+ */
+const sortHeaders = [
+  { text: 'Lähtee', propName: 'time' },
+  { text: 'Linja', propName: 'routeName' },
+  { text: 'Määränpää', propName: 'destination' },
+  { text: 'Pysäkille', propName: 'distance' },
+];
 
 /**
  * A component for displaying a list of departures
@@ -33,7 +54,9 @@ export default class DeparturesList extends Component {
    */
   constructor(props = {}) {
     super(props);
-    this.state = { sortProp: 'time', sortDir: 1 };
+    this.state = { sortProp: 'time', sortDir: 1, toggledRowId: null };
+    this.updateSortProps = this.updateSortProps.bind(this);
+    this.onRowToggle = this.onRowToggle.bind(this);
   }
 
   /**
@@ -47,25 +70,36 @@ export default class DeparturesList extends Component {
     this.setState({ sortProp: propName, sortDir });
   }
 
+  onRowToggle(id) {
+    const current = this.state.toggledRowId;
+    this.setState({ toggledRowId: id === current ? undefined : id });
+  }
+
   render() {
-    const { sortProp, sortDir } = this.state;
+    const { sortProp, sortDir, toggledRowId } = this.state;
     // sort departures using sort props from state
     const sorted = sortDepartures(this.props.departures, sortProp, sortDir);
     // display rows or a placeholder row when there are no departures to display
-    let rows = sorted.length ? generateDepartureRows(sorted) : generateEmptyRow();
-    // bound callback
-    const boundUpdateSortProps = this.updateSortProps.bind(this);
+    const rows = sorted.length
+      ? generateDepartureRows({ departures: sorted, toggledRowId, onRowToggle: this.onRowToggle })
+      : generateEmptyRow();
 
     return (
       <div class="departures-list">
         <LoadingOverlay show={this.props.isLoading} />
+
         <div class="departures-list-header">
-          <DeparturesListSortHeader propName="time" active={sortProp === 'time'} onClick={boundUpdateSortProps} text="Lähtee" />
-          <DeparturesListSortHeader propName="routeName" active={sortProp === 'routeName'} onClick={boundUpdateSortProps} text="Linja" />
-          <DeparturesListSortHeader propName="destination" active={sortProp === 'destination'} onClick={boundUpdateSortProps} text="Määränpää" />
-          <DeparturesListSortHeader propName="distance" active={sortProp === 'distance'} onClick={boundUpdateSortProps} text="Pysäkille" />
+          {sortHeaders.map(({ text, propName }) =>
+            <DeparturesListSortHeader
+              key={propName}
+              propName={propName}
+              active={sortProp === propName}
+              onClick={this.updateSortProps}
+              text={text}
+            />
+          )}
         </div>
-        <div class="departures-list-body">{rows}</div>
+        <ul class="departures-list-body">{rows}</ul>
       </div>
     );
   }

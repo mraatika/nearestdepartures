@@ -14,6 +14,12 @@ export default `
                     place {
                         id
                         ... on DepartureRow {
+                            stop {
+                              gtfsId
+                              code
+                              name
+                              desc
+                            }
                             stoptimes(timeRange: $timeRange, numberOfDepartures: $departuresCount) {
                                 serviceDay
                                 scheduledDeparture

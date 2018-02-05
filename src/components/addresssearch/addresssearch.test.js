@@ -1,22 +1,7 @@
-import { renderIntoDocument, findRenderedVNodeWithType, scryRenderedVNodesWithType } from 'inferno-test-utils';
+import { renderIntoDocument, findRenderedDOMElementWithClass, findRenderedDOMElementWithTag } from 'inferno-test-utils';
 import { renderToString } from 'inferno-server';
 import dom from 'cheerio';
 import AddressSearch from './addresssearch';
-import * as model from './model';
-import { LOCATION_MAGIC_WORD } from '../../constants/constants';
-
-jest.mock('./model');
-jest.mock('../../services/addresssearchservice');
-
-beforeEach(() => {
-  model.findAddressByCurrentLocation = jest.fn(() => Promise.resolve());
-  model.findAddressBySearchTerm = jest.fn(() => Promise.resolve());
-});
-
-afterEach(() => {
-  model.findAddressByCurrentLocation.mockClear();
-  model.findAddressBySearchTerm.mockClear();
-});
 
 it('renders a form', () => {
   const $ = dom.load(renderToString(<AddressSearch />));
@@ -31,10 +16,10 @@ it('renders a text input', () => {
 });
 
 it('text input takes a default value', () => {
-  const address = { label: 'StreetAddress 123' };
-  const $ = dom.load(renderToString(<AddressSearch address={address} />));
+  const label = 'StreetAddress 123';
+  const $ = dom.load(renderToString(<AddressSearch searchTerm={label} />));
   const labelText = $('input').val();
-  expect(labelText).toEqual(address.label);
+  expect(labelText).toEqual(label);
 });
 
 it('text input has placeholder', () => {
@@ -67,262 +52,72 @@ it('renders a submit button with X', () => {
   expect(buttonText.toLocaleLowerCase()).toEqual('x');
 });
 
-it('sets input value to state onInput', () => {
-  const tree = <AddressSearch />;
+it('calls onSearchTerm callback when input field\'s value changes', () => {
+  const spy = jest.fn();
+  const tree = <AddressSearch onSearchTermChange={spy} />;
   const rendered = renderIntoDocument(tree);
-  const input = findRenderedVNodeWithType(rendered, 'input');
+  const input = findRenderedDOMElementWithTag(rendered, 'input');
   const val = 'searchterm';
 
-  input.dom.value = val;
+  input.value = val;
   const event = new Event('input');
-  input.dom.dispatchEvent(event);
+  input.dispatchEvent(event);
 
-  expect(tree.children.state.searchTerm).toEqual(val);
+  expect(spy).toHaveBeenCalledWith(event);
 });
 
-describe('onComponentWillReceiveProps', () => {
-  it('should change address in state when address props change', () => {
-    const address = { label: 'Street 1, City' };
-    const tree = <AddressSearch address={address} />;
-    renderIntoDocument(tree);
-    expect(tree.children.state.searchTerm).toEqual(address.label);
-
-    const newAddress = { label: 'Street 2, City' };
-    tree.children.componentWillReceiveProps({  address: newAddress });
-    expect(tree.children.state.searchTerm).toEqual(newAddress.label);
-  });
-
-  it('should clear last selected suggestion when address changes', () => {
-    const tree = <AddressSearch address="Street 1, City" />;
-    renderIntoDocument(tree);
-    tree.children.state.selectedSuggestion = {};
-
-    tree.children.componentWillReceiveProps({  address: 'Street 2, City' });
-    expect(tree.children.state.selectedSuggestion).toEqual(undefined);
-  });
-
-  it('should not clear last selected suggestion if address is the same', () => {
-    const value = 'Street 1, City';
-    const tree = <AddressSearch address={value} />;
-    renderIntoDocument(tree);
-    tree.children.state.selectedSuggestion = {};
-
-    tree.children.componentWillReceiveProps({  address: value });
-    expect(tree.children.state.selectedSuggestion).not.toEqual(null);
-  });
+it('calls getAddressInputRef with the input field', () => {
+  const spy = jest.fn();
+  const tree = <AddressSearch getAddressInputRef={spy} />;
+  const rendered = renderIntoDocument(tree);
+  const input = findRenderedDOMElementWithTag(rendered, 'input');
+  expect(spy).toHaveBeenCalledWith(input);
 });
 
-describe('submitting', () => {
-  it('calls onSearch when form is submitted', () => {
-    const spy = jest.fn();
-    const rendered = renderIntoDocument(<AddressSearch onSearch={spy} />);
-    const form = findRenderedVNodeWithType(rendered, 'form');
+it('calls onBlur callback when input field losts focus', () => {
+  const spy = jest.fn();
+  const tree = <AddressSearch onBlur={spy} />;
+  const rendered = renderIntoDocument(tree);
+  const input = findRenderedDOMElementWithTag(rendered, 'input');
 
-    const event = new Event('submit', { bubbles: true });
-    form.dom.dispatchEvent(event);
+  const event = new Event('blur');
+  input.dispatchEvent(event);
 
-    return Promise
-      .resolve()
-      .then(() => expect(spy).toHaveBeenCalled())
-  });
-
-  it('calls onSearch when submit button is clicked', () => {
-    const spy = jest.fn();
-    const rendered = renderIntoDocument(<AddressSearch onSearch={spy} />);
-    const button = scryRenderedVNodesWithType(rendered, 'button')[1];
-
-    // trigger click event
-    const clickEvent = new MouseEvent('click');
-    button.dom.dispatchEvent(clickEvent);
-
-    return Promise
-      .resolve()
-      .then(() => expect(spy).toHaveBeenCalled())
-  });
-
-  it('calls onSearch with address received from the address service if no suggestion is selected', () => {
-    const spy = jest.fn();
-    const rendered = renderIntoDocument(<AddressSearch onSearch={spy} />);
-    const component = findRenderedVNodeWithType(rendered, AddressSearch);
-    const input = findRenderedVNodeWithType(rendered, 'input');
-    const val = 'searchterm';
-    const address = { label: 'searchterm street 23' };
-
-    model.findAddressBySearchTerm.mockReturnValueOnce(Promise.resolve(address));
-
-    // trigger input event on search field
-    input.dom.value = val;
-    const inputEvent = new UIEvent('input');
-    input.dom.dispatchEvent(inputEvent);
-
-    const event = new Event('submit', { bubbles: true });
-    component.dom.dispatchEvent(event);
-
-    return Promise
-      .resolve()
-      .then(() => expect(spy).toHaveBeenCalledWith(address));
-  });
-
-  it('calls findAddressBySearchTerm with search term and then onSearch w/ value received from the service when search term is present', () => {
-    const spy = jest.fn();
-    const rendered = renderIntoDocument(<AddressSearch onSearch={spy} />);
-    const component = findRenderedVNodeWithType(rendered, AddressSearch);
-    const input = findRenderedVNodeWithType(rendered, 'input');
-    const val = 'searchterm';
-    const address = { label: 'searchterm street 23' };
-
-    model.findAddressBySearchTerm.mockReturnValueOnce(Promise.resolve(address));
-
-    // trigger input event on search field
-    input.dom.value = val;
-    const inputEvent = new UIEvent('input');
-    input.dom.dispatchEvent(inputEvent);
-
-    const event = new Event('submit', { bubbles: true });
-    component.dom.dispatchEvent(event);
-
-    return Promise
-      .resolve()
-      .then(() => {
-        expect(model.findAddressBySearchTerm).toHaveBeenCalledWith(val);
-        expect(spy).toHaveBeenCalledWith(address);
-      });
-  });
-
-  it('calls findAddressByCurrentLocation when search term is LOCATION_MAGIC_WORD', () => {
-    const spy = jest.fn();
-    const rendered = renderIntoDocument(<AddressSearch onSearch={spy} />);
-    const component = findRenderedVNodeWithType(rendered, AddressSearch);
-    const input = findRenderedVNodeWithType(rendered, 'input');
-    const val = LOCATION_MAGIC_WORD;
-
-    model.findAddressByCurrentLocation.mockClear();
-
-    // trigger input event on search field
-    input.dom.value = val;
-    const inputEvent = new UIEvent('input');
-    input.dom.dispatchEvent(inputEvent);
-
-    const event = new Event('submit', { bubbles: true });
-    component.dom.dispatchEvent(event);
-
-    expect(model.findAddressByCurrentLocation).toHaveBeenCalledTimes(1);
-  });
-
-  it('calls findAddressByCurrentLocation when search term is undefined and then onSearch w/ value received from the service', () => {
-    const spy = jest.fn();
-    const rendered = renderIntoDocument(<AddressSearch onSearch={spy} />);
-    const component = findRenderedVNodeWithType(rendered, AddressSearch);
-    const address = { label: 'searchterm street 23' };
-
-    model.findAddressByCurrentLocation.mockReturnValueOnce(Promise.resolve(address));
-
-    const event = new Event('submit', { bubbles: true });
-    component.dom.dispatchEvent(event);
-
-    return Promise
-      .resolve()
-      .then(() => {
-        expect(model.findAddressByCurrentLocation).toHaveBeenCalledWith();
-        expect(spy).toHaveBeenCalledWith(address);
-      });
-  });
-
-  it('hides suggestions after submit', () => {
-    const spy = jest.fn();
-    const rendered = renderIntoDocument(<AddressSearch onSearch={spy} />);
-    const component = findRenderedVNodeWithType(rendered, AddressSearch);
-
-    component.children.state.suggestions = [{}, {}];
-
-    const event = new Event('submit', { bubbles: true });
-    component.dom.dispatchEvent(event);
-
-    expect(component.children.state.suggestions).toEqual([]);
-  });
-
-  it('does not clear selected suggestion after submit', () => {
-    const spy = jest.fn();
-    const rendered = renderIntoDocument(<AddressSearch onSearch={spy} />);
-    const component = findRenderedVNodeWithType(rendered, AddressSearch);
-    const selectedSuggestion = {};
-
-    component.children.state.selectedSuggestion = selectedSuggestion;
-
-    const event = new Event('submit', { bubbles: true });
-    component.dom.dispatchEvent(event);
-
-    expect(component.children.state.selectedSuggestion).toBe(selectedSuggestion);
-  });
+  expect(spy).toHaveBeenCalled();
 });
 
-describe('suggestions', () => {
+it('calls onClearAddressClick callback when the clear address button is clicked', () => {
+  const spy = jest.fn();
+  const tree = <AddressSearch onClearAddressClick={spy} />;
+  const rendered = renderIntoDocument(tree);
+  const button = findRenderedDOMElementWithClass(rendered, 'address-search-clear');
 
-  beforeEach(() => {
-    model.selectNextSuggestion = jest.fn();
-    model.selectPrevSuggestion = jest.fn();
-  });
+  const event = new MouseEvent('click', { bubbles: true });
+  button.dispatchEvent(event);
 
-  afterEach(() => {
-    model.selectNextSuggestion.mockClear();
-    model.selectPrevSuggestion.mockClear();
-  });
-
-  it('clears suggestions when esc is pressed', () => {
-    const rendered = renderIntoDocument(<AddressSearch />);
-    const component = findRenderedVNodeWithType(rendered, AddressSearch);
-
-    component.children.state.suggestions = [{}, {}];
-
-    const event = new KeyboardEvent('keyup', { bubbles: true, keyCode: 27 });
-    component.dom.dispatchEvent(event);
-
-    expect(component.children.state.suggestions).toEqual([]);
-  });
-
-  it('does not clear selected suggestion when esc is pressed', () => {
-    const rendered = renderIntoDocument(<AddressSearch />);
-    const component = findRenderedVNodeWithType(rendered, AddressSearch);
-    const selectedSuggestion = {};
-
-    component.children.state.selectedSuggestion = selectedSuggestion;
-
-    const event = new KeyboardEvent('keyup', { bubbles: true, keyCode: 27 });
-    component.dom.dispatchEvent(event);
-
-    expect(component.children.state.selectedSuggestion).toEqual(selectedSuggestion);
-  });
-
-  it('clears selected suggestion when value in input is changed', () => {
-    const rendered = renderIntoDocument(<AddressSearch />);
-    const component = findRenderedVNodeWithType(rendered, AddressSearch);
-    const input = findRenderedVNodeWithType(rendered, 'input');
-
-    component.children.state.selectedSuggestion = {};
-
-    input.dom.value = 'abc';
-    const inputEvent = new Event('input');
-    input.dom.dispatchEvent(inputEvent);
-
-    expect(component.children.state.selectedSuggestion).toEqual(undefined);
-  });
-
-  it('selects next suggestion when down key is pressed', () => {
-    const rendered = renderIntoDocument(<AddressSearch />);
-    const component = findRenderedVNodeWithType(rendered, AddressSearch);
-    const event = new KeyboardEvent('keyup', { bubbles: true, keyCode: 40 });
-    component.dom.dispatchEvent(event);
-
-    expect(model.selectNextSuggestion).toHaveBeenCalledWith(component.children.state);
-  });
-
-  it('selects previous suggestion when up is pressed', () => {
-    const rendered = renderIntoDocument(<AddressSearch />);
-    const component = findRenderedVNodeWithType(rendered, AddressSearch);
-    const event = new KeyboardEvent('keyup', { bubbles: true, keyCode: 38 });
-    component.dom.dispatchEvent(event);
-
-    expect(model.selectPrevSuggestion).toHaveBeenCalledWith(component.children.state);
-  });
+  expect(spy).toHaveBeenCalled();
 });
 
+it('calls onSubmit callback when the form is submitted', () => {
+  const spy = jest.fn();
+  const tree = <AddressSearch onSubmit={spy} />;
+  const rendered = renderIntoDocument(tree);
+  const form = findRenderedDOMElementWithTag(rendered, 'form');
+
+  const event = new Event('submit', { bubbles: true });
+  form.dispatchEvent(event);
+
+  expect(spy).toHaveBeenCalled();
+});
+
+it('calls onSubmit callback when the submit button is clicked', () => {
+  const spy = jest.fn();
+  const tree = <AddressSearch onSubmit={spy} />;
+  const rendered = renderIntoDocument(tree);
+  const button = findRenderedDOMElementWithClass(rendered, 'address-search-submit');
+
+  const event = new MouseEvent('click');
+  button.dispatchEvent(event);
+
+  expect(spy).toHaveBeenCalled();
+});

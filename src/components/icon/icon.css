@@ -1,0 +1,16 @@
+.icon-image {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-image: url('./icons_map.png');
+  position: relative;
+}
+
+.icon-image.icon-bus_stop {
+  background-position: 0 0;
+}
+
+.icon-image.icon-clock {
+  background-position: -24px 0;
+}
+
