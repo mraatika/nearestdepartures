@@ -18,3 +18,9 @@ yarn-error.log*
 .vscode/
 file-size-analyzer.txt
 
+# robot logs
+log.html
+output.xml
+report.html
+geckodriver.log
+

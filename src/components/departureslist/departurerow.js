@@ -77,6 +77,7 @@ const DepartureRow = ({
           <div>
             <a
               class="bold departure-stop-name"
+              tabIndex={isToggled ? '0' : '-1'}
               href={stopUrl}
               target="_blank"
               rel="noopener"

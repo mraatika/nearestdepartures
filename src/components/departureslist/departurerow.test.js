@@ -2,7 +2,6 @@ import { renderToString } from 'inferno-server';
 import { renderIntoDocument, findRenderedDOMElementWithClass, scryRenderedDOMElementsWithTag } from 'inferno-test-utils';
 import dom from 'cheerio';
 import DepartureRow from './departurerow';
-import RouteIdentifier from './routeidentifier';
 
 it('renders a list item', () => {
   const $ = dom.load(renderToString(<DepartureRow />));

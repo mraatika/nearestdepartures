@@ -1,4 +1,26 @@
 /** @module DepartureSorter */
+import { prop } from '../utils/utils';
+
+/**
+ * Check if given value starts with one or more numbers
+ * @param {string} prop
+ * @returns {boolean}
+ */
+const startsWithNumbers = prop => /^\d+/.test(prop);
+
+/**
+ * Returns given function's output as number
+ * if it starts with one or more numbers otherwise returns
+ * the value as it is
+ * @private
+ * @param {function} fn
+ * @param {object} obj
+ * @returns {*}
+ */
+const parseNumber = (fn, obj) => {
+  const prop = fn(obj);
+  return startsWithNumbers(prop) ? parseInt(prop, 10) : prop;
+};
 
 /**
  * Get sort direction for a prop
@@ -9,8 +31,11 @@
  * @returns {number}
  */
 const getSortByProp = (propName, a, b) => {
-  if (a[propName] < b[propName]) return -1;
-  if (a[propName] > b[propName]) return 1;
+  const getter = prop(propName);
+  const propA = parseNumber(getter, a);
+  const propB = parseNumber(getter, b);
+  if (propA < propB) return -1;
+  if (propA > propB) return 1;
   return 0;
 };
 
