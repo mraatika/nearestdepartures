@@ -5,7 +5,7 @@
  * @param {object[]} props.disruptions
  */
 export default ({ disruptions }) => (
-  <div class="alert alert-info">
+  <div class="alert alert-info full-width">
     {disruptions.map(disruption => (
       <p>
         {disruption.alertHeaderText && <h3>{disruption.alertHeaderText}</h3>}
