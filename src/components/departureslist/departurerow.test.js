@@ -268,6 +268,7 @@ describe('Disruption indication and display', () => {
     const $link = $('.alert-info .disruption-alert-additional-info');
     expect($link.length).toEqual(1);
     expect($link.is('a')).toEqual(true);
+    expect($link.text()).toEqual('Lisätietoja');
   });
 
   it('should display alert body text', () => {
@@ -276,13 +277,5 @@ describe('Disruption indication and display', () => {
     const $alertBody = $('.alert-info > .alert-info-body');
     expect($alertBody.length).toEqual(1);
     expect($alertBody.text()).toEqual(disruption.alertDescriptionText);
-  });
-
-  it('should display alert duration as human readable time', () => {
-    const disruption = {alertDescriptionText: 'Alert Body', effectiveStartDate: 1517684400, effectiveEndDate: 1517684400};
-    const $ = dom.load(renderToString(<DepartureRow disruptions={[disruption]} />));
-    const $alertDuration = $('.alert-info-duration');
-    expect($alertDuration.length).toEqual(1);
-    expect($alertDuration.text()).toEqual(`Voimassa: 03.01.2018 21:00 - 03.01.2018 21:00. `);
   });
 });

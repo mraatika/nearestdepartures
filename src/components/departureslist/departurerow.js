@@ -1,5 +1,5 @@
 import { linkEvent } from 'inferno';
-import Time from './time';
+import Time from '../time';
 import DisruptionAlert from './disruptionalert';
 import RouteIdentifier from './routeidentifier';
 import Distance from './distance';
