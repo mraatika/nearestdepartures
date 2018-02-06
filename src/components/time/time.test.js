@@ -1,6 +1,6 @@
 import { renderToString } from 'inferno-server';
 import dom from 'cheerio';
-import Time from './time';
+import Time from './index';
 
 it('renders a span element', () => {
     const $ = dom.load(renderToString(<Time />));
