@@ -1,27 +1,27 @@
 .location-accuracy {
-    font-size: .9rem;
-    margin-top: .5rem;
-    text-align: right;
+  font-size: .9rem;
+  margin-top: .5rem;
+  text-align: right;
 }
 
 .location-accuracy.warning {
-    color: #A07903;
+  color: #A07903;
 }
 
 .location-accuracy.danger {
-    color: #a94442;
+  color: #a94442;
 }
 
 .location-accuracy-attention {
-    visibility: hidden;
-    display: inline-block;
-    font-size: 1.2rem;
-    text-align: center;
-    margin-right: .3rem;
-    transform: scaleX(2);
+  visibility: hidden;
+  display: inline-block;
+  font-size: 1.2rem;
+  text-align: center;
+  margin-right: .3rem;
+  transform: scaleX(2);
 }
 
 .location-accuracy.danger .location-accuracy-attention,
 .location-accuracy.warning .location-accuracy-attention {
-    visibility: visible;
+  visibility: visible;
 }

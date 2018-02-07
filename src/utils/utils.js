@@ -100,8 +100,8 @@ export const uniq = (fn = val => val) =>
 * @param {Array} list
 * @returns {Array} Unique values
 */
-(list = []) => list.reduce((uniques, val) =>
-  findFromUniques(val, uniques, fn) ? uniques : [...uniques, val], []);
+  (list = []) => list.reduce((uniques, val) =>
+    findFromUniques(val, uniques, fn) ? uniques : [...uniques, val], []);
 
 /**
 * Sort list in ascending order by results of running each value thru iteratee fn

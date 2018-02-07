@@ -13,8 +13,7 @@ export default ({ disruptions }) => (
         {disruption.alertUrl &&
           <p class="alert-info-duration">
             <a class="disruption-alert-additional-info" href={disruption.alertUrl} target="_blank" rel="noopener">Lisätietoja</a>
-          </p>
-        }
+          </p>}
       </p>
     ))}
   </div>
