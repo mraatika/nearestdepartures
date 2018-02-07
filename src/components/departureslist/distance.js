@@ -1,22 +1,27 @@
 /**
- * A component for displaying distance in human readable form
- * @constructs Distance
- * @param {Object} props
- * @param {number} props.distance distance in meters
- * @returns {Distance}
+* A component for displaying distance in human readable form
+* @constructs Distance
+* @param {Object} props
+* @param {number} props.distance distance in meters
+* @returns {Distance}
+*/
+export default ({ distance }) => <span>{getDistanceinHumanReadableForm(distance)}</span>;
+
+/**
+ * @private
+ * @param {number} distance
+ * @return {number} rounded
  */
-export default ({ distance }) => {
-    let displayedDistance = '';
+const roundToKm = distance => Math.round((distance / 1000) * 10) / 10;
 
-    if (distance) {
-        // if distance is more than km then display kilometers with single decimal
-        if (distance >= 1000) {
-            const rounded = Math.round((distance / 1000) * 10) / 10;
-            displayedDistance = `${rounded} km`;
-        } else {
-            displayedDistance = `${distance} m`;
-        }
-    }
-
-    return <span>{displayedDistance}</span>;
-};
+/**
+ * @private
+ * @param {number} distance
+ * @return {string}
+ */
+const getDistanceinHumanReadableForm = distance =>
+  !distance
+    ? ''
+    : distance >= 1000
+    ? `${roundToKm(distance)} km`
+    : `${distance} m`;
