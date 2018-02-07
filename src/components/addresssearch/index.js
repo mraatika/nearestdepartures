@@ -169,23 +169,23 @@ export default class AddressSearchContainer extends Component {
     const { keyCode } = e;
 
     switch (keyCode) {
-      // if up was pressed
-      case 38:
-        e.preventDefault();
-        this.onKeyUpPress();
-        break;
+    // if up was pressed
+    case 38:
+      e.preventDefault();
+      this.onKeyUpPress();
+      break;
       // if down was pressed
-      case 40:
-        e.preventDefault();
-        this.onKeyDownPress();
-        break;
+    case 40:
+      e.preventDefault();
+      this.onKeyDownPress();
+      break;
       // if esc was pressed
-      case 27:
-        e.preventDefault();
-        this.hideSuggestions();
-        break;
-      default:
-        break;
+    case 27:
+      e.preventDefault();
+      this.hideSuggestions();
+      break;
+    default:
+      break;
     }
   }
 

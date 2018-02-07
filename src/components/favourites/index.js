@@ -16,7 +16,7 @@ const initialState = {
  * @extends {Component}
  */
 class FavouritesContainer extends Component {
-   /**
+  /**
    * @constructor
    * @param {object} props
    * @param {object} props.address

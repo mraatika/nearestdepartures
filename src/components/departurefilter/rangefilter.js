@@ -41,4 +41,4 @@ export default ({
         onInput={linkEvent(onChange, onInputChange)} />
     </label>
   </div>
-  );
+);
