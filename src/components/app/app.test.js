@@ -5,5 +5,5 @@ jest.mock('../../services/departuresservice', () => () => new Promise(res => res
 jest.mock('../../services/locationservice', () => () => new Promise(res => res()));
 
 it('renders without crashing', () => {
-    renderToString(<App />);
+  renderToString(<App />);
 });

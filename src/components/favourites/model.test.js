@@ -2,14 +2,14 @@ import { areLocationsEqual, isLocationFavoured } from './model';
 
 describe('areLocationsEqual', () => {
   it('returns true if two addresses have matching labels', () => {
-      const address = { label: 'Label' };
-      expect(areLocationsEqual(address, address)).toEqual(true);
+    const address = { label: 'Label' };
+    expect(areLocationsEqual(address, address)).toEqual(true);
   });
 
   it('returns false if two addresses do not have matching labels', () => {
-      const address1 = { label: 'Label1' };
-      const address2 = { label: 'Label2' };
-      expect(areLocationsEqual(address1, address2)).toEqual(false);
+    const address1 = { label: 'Label1' };
+    const address2 = { label: 'Label2' };
+    expect(areLocationsEqual(address1, address2)).toEqual(false);
   });
 });
 
