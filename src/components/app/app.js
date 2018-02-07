@@ -8,7 +8,7 @@ import * as model from './model';
 import { getFilter, saveFilter } from '../../services/storageservice';
 import Header from '../header/header';
 import Footer from '../footer/footer';
-import AccuracyIndicator from '../accuracyindicator/accuracyindicator';
+import AccuracyIndicator from '../accuracyindicator';
 import { delay } from '../../utils/utils';
 import './app.css';
 
