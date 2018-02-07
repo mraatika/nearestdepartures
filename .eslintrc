@@ -2,6 +2,7 @@
   "extends": "inferno-app",
   "rules": {
     "semi": ["error", "always"],
-    "no-console": ["warn", { "allow": ["warn", "error"]}]
+    "no-console": ["warn", { "allow": ["warn", "error"]}],
+    "indent": ["error", 2]
   }
 }

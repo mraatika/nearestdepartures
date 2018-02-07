@@ -22,7 +22,7 @@ import { keyPressHandler, stopPropagation } from '../../utils/utils';
 * @param {object[]} props.disruptions
 * @returns {DepartureRow}
 */
-const DepartureRow = ({
+export default ({
   isToggled,
   onRowToggle,
   id,
@@ -66,51 +66,79 @@ const DepartureRow = ({
             tabIndex="0"
           >
             ⚠
-          </span>
-        }
+          </span>}
         {destination}
       </div>
       <div class="distance"><Distance distance={distance} /></div>
     </div>
-    <div
-      id={`departure-${id}`}
-      class={`departures-list-row-additional-info${isToggled ? ' visible' : ''}`}
-      aria-hidden={!isToggled}
-    >
-      <div class="departures-list-row-additional-info-content">
-        <div class="departure-additional-info-content-block">
-          <Icon type="clock" />
-          <div>
-            {realtime && <div class="realtime bold " title="Arvioitu reaaliaikainen lähtöaika pysäkiltä">
-              <Time time={realtimeDeparture} actualTime={true} /> (arvioitu)
-            </div>}
-            <div class="scheduled-departure" title="Aikataulun mukainen lähtöaika pysäkiltä">
-              <Time time={scheduledDeparture} actualTime={true} /> (aikataulu)
-            </div>
-          </div>
-        </div>
-        <div class="departure-additional-info-content-block">
-          <Icon type="bus-stop" />
-          <div>
-            <a
-              class="bold departure-stop-name"
-              tabIndex={isToggled ? '0' : '-1'}
-              href={stopUrl}
-              target="_blank"
-              rel="noopener"
-              title="Näytä pysäkin tiedot Reittioppaassa"
-            >
-              {stopName}
-            </a>
-            <div>
-              <div class="departure-stop-code">{stopCode}</div>
-              <span class="departure-stop-description">{stopDescription}</span>
-            </div>
-          </div>
-        </div>
-        {!!disruptions.length && <DisruptionAlert disruptions={disruptions} />}
-      </div>
-    </div>
+    <DepartureRowAdditionalContent {...{
+      id,
+      realtime,
+      realtimeDeparture,
+      scheduledDeparture,
+      isToggled,
+      stopUrl,
+      stopName,
+      stopCode,
+      stopDescription,
+      disruptions
+    }}/>
   </li>;
 
-export default DepartureRow;
+/**
+ * Additional content component
+ * @private
+ * @constructs DepartureRowAdditionalContent
+ * @param {object} props
+ */
+const DepartureRowAdditionalContent = ({
+  id,
+  realtime,
+  realtimeDeparture,
+  scheduledDeparture,
+  isToggled,
+  stopUrl,
+  stopName,
+  stopCode,
+  stopDescription,
+  disruptions
+}) =>
+  <div
+    id={`departure-${id}`}
+    class={`departures-list-row-additional-info${isToggled ? ' visible' : ''}`}
+    aria-hidden={!isToggled}
+  >
+    <div class="departures-list-row-additional-info-content">
+      <div class="departure-additional-info-content-block">
+        <Icon type="clock" />
+        <div>
+          {realtime && <div class="realtime bold " title="Arvioitu reaaliaikainen lähtöaika pysäkiltä">
+            <Time time={realtimeDeparture} actualTime={true} /> (arvioitu)
+          </div>}
+          <div class="scheduled-departure" title="Aikataulun mukainen lähtöaika pysäkiltä">
+            <Time time={scheduledDeparture} actualTime={true} /> (aikataulu)
+          </div>
+        </div>
+      </div>
+      <div class="departure-additional-info-content-block">
+        <Icon type="bus-stop" />
+        <div>
+          <a
+            class="bold departure-stop-name"
+            tabIndex={isToggled ? '0' : '-1'}
+            href={stopUrl}
+            target="_blank"
+            rel="noopener"
+            title="Näytä pysäkin tiedot Reittioppaassa"
+          >
+            {stopName}
+          </a>
+          <div>
+            <div class="departure-stop-code">{stopCode}</div>
+            <span class="departure-stop-description">{stopDescription}</span>
+          </div>
+        </div>
+      </div>
+      {!!disruptions.length && <DisruptionAlert disruptions={disruptions} />}
+    </div>
+  </div>;

@@ -5,7 +5,7 @@ import { padNumber } from '../../utils/utils';
  * @param {Date} date
  * @returns {string}
  */
-const getTimeAsText = date => `${padNumber(date.getHours())}:${padNumber(date.getMinutes())}`;
+const timeToString = date => `${padNumber(date.getHours())}:${padNumber(date.getMinutes())}`;
 
 /**
  * Component for displaying time in human readable form
@@ -19,13 +19,9 @@ export default ({ time, actualTime }) => {
   const now = Date.now();
   const date = new Date(time * 1000);
   const timeLeftInMins = Math.floor(((date - now) / 1000) / 60);
-  let timeText = '';
-
-  if (actualTime || date < now || timeLeftInMins >= 10) {
-    timeText = getTimeAsText(date);
-  } else {
-    timeText = timeLeftInMins < 1 ? 'Now' : `${timeLeftInMins} min`;
-  }
+  const timeText = (actualTime || date < now || timeLeftInMins >= 10)
+    ?  timeToString(date)
+    : timeLeftInMins < 1 ? 'Now' : `${timeLeftInMins} min`;
 
   return <span>{timeText}</span>;
 };

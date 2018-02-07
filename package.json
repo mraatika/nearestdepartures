@@ -37,7 +37,7 @@
     "test:e2e": "robot --output NONE --log NONE e2e_tests/suites",
     "lint": "node ./node_modules/eslint/bin/eslint src/**/*.{js,jsx}",
     "eject": "inferno-scripts eject",
-    "predeploy:test": "npm run lint && npm run build",
+    "predeploy:test": "npm run build",
     "deploy:test": "gh-pages -d build"
   }
 }

@@ -5,11 +5,11 @@
  * @type {Object}
  */
 export const VEHICLE_TYPE = {
-    BUS: 'BUS',
-    TRAM: 'TRAM',
-    RAIL: 'RAIL',
-    SUBWAY: 'SUBWAY',
-    FERRY: 'FERRY',
+  BUS: 'BUS',
+  TRAM: 'TRAM',
+  RAIL: 'RAIL',
+  SUBWAY: 'SUBWAY',
+  FERRY: 'FERRY',
 };
 
 /**
@@ -17,11 +17,11 @@ export const VEHICLE_TYPE = {
  * @type {Object}
  */
 export const VEHICLE_TYPE_TRANSLATIONS = {
-    BUS: 'Bussi',
-    TRAM: 'Raitiovaunu',
-    RAIL: 'Juna',
-    SUBWAY: 'Metro',
-    FERRY: 'Lautta',
+  BUS: 'Bussi',
+  TRAM: 'Raitiovaunu',
+  RAIL: 'Juna',
+  SUBWAY: 'Metro',
+  FERRY: 'Lautta',
 };
 
 /**
