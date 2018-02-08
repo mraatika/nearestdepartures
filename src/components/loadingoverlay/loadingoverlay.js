@@ -9,7 +9,13 @@ import './loadingoverlay.css';
  * @returns {LoadingOverlay}
  */
 export default ({ show }) => (
-  <div class="loading-overlay" style={{ display: show ? 'block' : 'none' }} role="dialog" aria-label="Odotetaan" aria-busy={show}>
+  <div
+    class="loading-overlay fill-parent"
+    style={{ display: show ? 'block' : 'none' }}
+    role="dialog"
+    aria-label="Odotetaan"
+    aria-busy={show}
+  >
     <img class="spinner" src={spinner} alt="spinner" />
   </div>
 );

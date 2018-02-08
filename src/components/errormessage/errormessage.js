@@ -9,7 +9,7 @@ import './errormessage.css';
  */
 export default ({ message, onClick }) => (
   <div class={`error-message ${message ? '' : ' hidden'}`} onClick={onClick}>
-      <button class="close-button" aria-label="Sulje">x</button>
-      { message }
+    <button class="close-button" aria-label="Sulje">x</button>
+    { message }
   </div>
 );

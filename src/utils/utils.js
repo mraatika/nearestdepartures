@@ -82,6 +82,15 @@ export const padNumber = num => (('' + num).length < 2 ? '0' + num : num);
 export const toTimeString = (time = new Date()) => `${padNumber(time.getHours())}:${padNumber(time.getMinutes())}:${padNumber(time.getSeconds())}`;
 
 /**
+ * @private
+ * @param {*} val
+ * @param {*[]} uniques
+ * @param {function} fn
+ * @returns {*}
+ */
+const findFromUniques = (val, uniques, fn) => find(u => fn(u) === fn(val))(uniques);
+
+/**
 * Select unique values from an array
 * @param {Function} [fn]
 * @returns {Function}
@@ -91,14 +100,8 @@ export const uniq = (fn = val => val) =>
 * @param {Array} list
 * @returns {Array} Unique values
 */
-(list = []) => {
-  const findFromUniques = (val, uniques) => find(u => fn(u) === val)(uniques);
-
-  return list.reduce((uniques, val) => {
-    if (!findFromUniques(fn(val), uniques)) uniques.push(val);
-    return uniques;
-  }, []);
-};
+  (list = []) => list.reduce((uniques, val) =>
+    findFromUniques(val, uniques, fn) ? uniques : [...uniques, val], []);
 
 /**
 * Sort list in ascending order by results of running each value thru iteratee fn
@@ -141,6 +144,13 @@ export const keyPressHandler = (callback, ...params) =>
 export const stopPropagation = e => e.stopPropagation();
 
 /**
+ * Delay execution of a function by given time (in milliseconds)
+ * @param {function} fn
+ * @param {number} [delay=0]
+ */
+export const delay = (fn, delay = 0) => setTimeout(fn, delay);
+
+/**
  * Get a property of an object
  * @param {string} propName
  * @return {function}
@@ -161,4 +171,3 @@ export const prop = propName =>
  * @return {*} The value of given property of the supplied object or the default value
  */
 export const propOr = (prop, otherwise, obj = {}) => obj[prop] == null ? otherwise : obj[prop];
-

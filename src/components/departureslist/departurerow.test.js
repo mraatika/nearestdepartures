@@ -232,3 +232,50 @@ describe('Togglable additional info section', () => {
     expect(result).toEqual(stopDescription);
   });
 });
+
+describe('Disruption indication and display', () => {
+  it('should not display alert if disruptions array is empty', () => {
+    const $ = dom.load(renderToString(<DepartureRow disruptions={[]} />));
+    expect($('.alert-icon').length).toEqual(0);
+  });
+
+  it('should display an alert icon if alert prop is defined', () => {
+    const disruption = {alertHeaderText: 'Alert!'};
+    const $ = dom.load(renderToString(<DepartureRow disruptions={[disruption]} />));
+    const $alert = $('.alert-icon');
+    expect($alert.length).toEqual(1);
+    expect($alert.text()).toEqual('⚠');
+  });
+
+  it('should display alert header if defined', () => {
+    const disruption = {alertHeaderText: 'Alert!'};
+    const $ = dom.load(renderToString(<DepartureRow disruptions={[disruption]} />));
+    const $alertHeader = $('.alert-info h3');
+    expect($alertHeader.length).toEqual(1);
+    expect($alertHeader.text()).toEqual(disruption.alertHeaderText);
+  });
+
+  it('should not display alert header if it is falsy', () => {
+    const disruption = {alertHeaderText: null};
+    const $ = dom.load(renderToString(<DepartureRow disruptions={[disruption]} />));
+    const $alertHeader = $('.alert-info > h3');
+    expect($alertHeader.length).toEqual(0);
+  });
+
+  it('should render alert header as a link if link url is defined', () => {
+    const disruption = {alertHeaderText: 'Alert', alertUrl: 'http://google.com'};
+    const $ = dom.load(renderToString(<DepartureRow disruptions={[disruption]} />));
+    const $link = $('.alert-info .disruption-alert-additional-info');
+    expect($link.length).toEqual(1);
+    expect($link.is('a')).toEqual(true);
+    expect($link.text()).toEqual('Lisätietoja');
+  });
+
+  it('should display alert body text', () => {
+    const disruption = {alertDescriptionText: 'Alert Body'};
+    const $ = dom.load(renderToString(<DepartureRow disruptions={[disruption]} />));
+    const $alertBody = $('.alert-info > .alert-info-body');
+    expect($alertBody.length).toEqual(1);
+    expect($alertBody.text()).toEqual(disruption.alertDescriptionText);
+  });
+});

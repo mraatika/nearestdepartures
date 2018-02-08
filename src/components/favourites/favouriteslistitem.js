@@ -24,7 +24,7 @@ const FavouritesListItem = ({ address, removeFavourite, selectFavourite, isSelec
         onClick={linkEvent(address, removeFavourite)}
         title="Poista Omat suosikit -listalta"
       />
-      </div>
+    </div>
   </li>
 );
 

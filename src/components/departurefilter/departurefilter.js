@@ -21,13 +21,13 @@ export default ({
   <div class="departure-filter">
     <div><RangeFilter range={range} onChange={onRangeChange} /></div>
     <div class="vehicle-type-filters">
-    {filters.map(type =>
-      <FilterButton
-        vehicleType={type}
-        onFilterToggle={onFilterToggle}
-        isToggled={activeFilters.indexOf(type) > -1}
-      />
-    )}
+      {filters.map(type =>
+        <FilterButton
+          vehicleType={type}
+          onFilterToggle={onFilterToggle}
+          isToggled={activeFilters.indexOf(type) > -1}
+        />
+      )}
     </div>
   </div>
 );

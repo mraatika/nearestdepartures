@@ -7,7 +7,7 @@ import icons from './icons.svg';
  * @returns {VehicleIcon}
  */
 export default ({ iconName }) => (
-    <svg viewBox="0 0 100 100" class="icon">
-        <use xlink:href={ icons + `#icon-icon_${iconName}` } style={{ fill: 'currentColor' }}/>
-    </svg>
+  <svg viewBox="0 0 100 100" class="icon">
+    <use xlink:href={ icons + `#icon-icon_${iconName}` } style={{ fill: 'currentColor' }}/>
+  </svg>
 );

@@ -1,5 +1,6 @@
 import { linkEvent } from 'inferno';
-import Time from './time';
+import Time from '../time';
+import DisruptionAlert from './disruptionalert';
 import RouteIdentifier from './routeidentifier';
 import Distance from './distance';
 import Icon from '../icon/icon';
@@ -18,9 +19,10 @@ import { keyPressHandler, stopPropagation } from '../../utils/utils';
 * @param {number} props.distance
 * @param {string} props.destination
 * @param {string} props.vehicleType
+* @param {object[]} props.disruptions
 * @returns {DepartureRow}
 */
-const DepartureRow = ({
+export default ({
   isToggled,
   onRowToggle,
   id,
@@ -36,6 +38,7 @@ const DepartureRow = ({
   stopUrl,
   stopDescription,
   scheduledDeparture,
+  disruptions = [],
 }) =>
   <li class="departures-list-row-container">
     <div
@@ -46,53 +49,96 @@ const DepartureRow = ({
       aria-expanded={!!isToggled}
       aria-controls={`departure-${id}`}
     >
-      <div class={`time${realtime ? ' realtime' : ''}`}><Time time={realtimeDeparture} /></div>
+      <div class={`time${realtime ? ' realtime' : ''}`}>
+        <Time time={realtimeDeparture} />
+      </div>
       <div class="routename">
         <a onClick={stopPropagation} href={routeUrl} target="_blank" rel="noopener">
           <RouteIdentifier vehicleType={vehicleType} routeName={routeName} />
         </a>
       </div>
-      <div class="destination">{destination}</div>
+      <div class="destination">
+        {!!(disruptions.length) &&
+          <span
+            title="Linjalla häiriöitä: Klikkaa nähdäksesi lisätietoja"
+            class="alert alert-icon"
+            aria-label="Linjalla häiriöitä"
+            tabIndex="0"
+          >
+            ⚠
+          </span>}
+        {destination}
+      </div>
       <div class="distance"><Distance distance={distance} /></div>
     </div>
-    <div
-      id={`departure-${id}`}
-      class={`departures-list-row-additional-info${isToggled ? ' visible' : ''}`}
-      aria-hidden={!isToggled}
-    >
-      <div class="departures-list-row-additional-info-content">
-        <div class="departure-additional-info-content-block">
-          <Icon type="clock" />
-          <div>
-            {realtime && <div class="realtime bold " title="Arvioitu reaaliaikainen lähtöaika pysäkiltä">
-              <Time time={realtimeDeparture} actualTime={true} /> (arvioitu)
-            </div>}
-            <div class="scheduled-departure" title="Aikataulun mukainen lähtöaika pysäkiltä">
-              <Time time={scheduledDeparture} actualTime={true} /> (aikataulu)
-            </div>
-          </div>
-        </div>
-        <div class="departure-additional-info-content-block">
-          <Icon type="bus-stop" />
-          <div>
-            <a
-              class="bold departure-stop-name"
-              tabIndex={isToggled ? '0' : '-1'}
-              href={stopUrl}
-              target="_blank"
-              rel="noopener"
-              title="Näytä pysäkin tiedot Reittioppaassa"
-            >
-              {stopName}
-            </a>
-            <div>
-              <div class="departure-stop-code">{stopCode}</div>
-              <span class="departure-stop-description">{stopDescription}</span>
-            </div>
+    <DepartureRowAdditionalContent {...{
+      id,
+      realtime,
+      realtimeDeparture,
+      scheduledDeparture,
+      isToggled,
+      stopUrl,
+      stopName,
+      stopCode,
+      stopDescription,
+      disruptions
+    }}/>
+  </li>;
+
+/**
+ * Additional content component
+ * @private
+ * @constructs DepartureRowAdditionalContent
+ * @param {object} props
+ */
+const DepartureRowAdditionalContent = ({
+  id,
+  realtime,
+  realtimeDeparture,
+  scheduledDeparture,
+  isToggled,
+  stopUrl,
+  stopName,
+  stopCode,
+  stopDescription,
+  disruptions
+}) =>
+  <div
+    id={`departure-${id}`}
+    class={`departures-list-row-additional-info${isToggled ? ' visible' : ''}`}
+    aria-hidden={!isToggled}
+  >
+    <div class="departures-list-row-additional-info-content">
+      <div class="departure-additional-info-content-block">
+        <Icon type="clock" />
+        <div>
+          {realtime && <div class="realtime bold " title="Arvioitu reaaliaikainen lähtöaika pysäkiltä">
+            <Time time={realtimeDeparture} actualTime={true} /> (arvioitu)
+          </div>}
+          <div class="scheduled-departure" title="Aikataulun mukainen lähtöaika pysäkiltä">
+            <Time time={scheduledDeparture} actualTime={true} /> (aikataulu)
           </div>
         </div>
       </div>
+      <div class="departure-additional-info-content-block">
+        <Icon type="bus-stop" />
+        <div>
+          <a
+            class="bold departure-stop-name"
+            tabIndex={isToggled ? '0' : '-1'}
+            href={stopUrl}
+            target="_blank"
+            rel="noopener"
+            title="Näytä pysäkin tiedot Reittioppaassa"
+          >
+            {stopName}
+          </a>
+          <div>
+            <div class="departure-stop-code">{stopCode}</div>
+            <span class="departure-stop-description">{stopDescription}</span>
+          </div>
+        </div>
+      </div>
+      {!!disruptions.length && <DisruptionAlert disruptions={disruptions} />}
     </div>
-  </li>;
-
-export default DepartureRow;
+  </div>;

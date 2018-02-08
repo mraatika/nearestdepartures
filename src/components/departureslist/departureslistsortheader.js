@@ -24,6 +24,6 @@ export default ({
     class={`header ${propName.toLowerCase()}`}
     onClick={linkEvent(propName, onClick)}
     onKeyPress={keyPressHandler(onClick, propName)}>
-  <span class={active ? 'active' : ''}>{text}</span>
+    <span class={active ? 'active' : ''}>{text}</span>
   </div>
 );
