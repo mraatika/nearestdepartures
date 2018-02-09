@@ -27,7 +27,7 @@ const normalizeDisruptions = ({ data }) =>
  */
 export const fetchDisruptions = async () => {
   let response;
-  const url = 'https://api.digitransit.fi/routing/v1/routers/hsl/index/graphql';
+  const url = `${process.env.INFERNO_APP_SERVER_URL}/routing/v1/routers/hsl/index/graphql`;
 
   try {
     response = await fetch(url, {

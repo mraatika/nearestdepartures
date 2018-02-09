@@ -64,7 +64,7 @@ export async function fetchDepartures(location = {}, filters = {}) {
   let response;
 
   try {
-    response = await fetch('https://api.digitransit.fi/routing/v1/routers/hsl/index/graphql', {
+    response = await fetch(`${process.env.INFERNO_APP_SERVER_URL}/routing/v1/routers/hsl/index/graphql`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(reqBody),
@@ -125,7 +125,7 @@ export async function batchDepartures(departures = []) {
   let response;
 
   try {
-    response = await fetch('https://api.digitransit.fi/routing/v1/routers/hsl/index/graphql/batch', {
+    response = await fetch(`${process.env.INFERNO_APP_SERVER_URL}/routing/v1/routers/hsl/index/graphql/batch`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(query),
