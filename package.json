@@ -33,6 +33,8 @@
     "prebuild": "CI=true npm run test && npm run lint",
     "build": "INFERNO_APP_VERSION=$npm_package_version inferno-scripts build",
     "build:cordova": "INFERNO_APP_VERSION=$npm_package_version INFERNO_APP_RUN_ENV='cordova' inferno-scripts build",
+    "mock-server": "python ./e2e_tests/server.py",
+    "start:e2e": "INFERNO_APP_VERSION=$npm_package_version INFERNO_APP_SERVER_URL=http://localhost:5000 inferno-scripts start",
     "test": "inferno-scripts test --env=jsdom --setupFiles=./config/testsetup",
     "test:e2e": "robot --output NONE --log NONE e2e_tests/suites",
     "lint": "node ./node_modules/eslint/bin/eslint src/**/*.{js,jsx}",

@@ -9,20 +9,20 @@ Test Teardown     Close Browser
 *** Test Cases ***
 User changes range
   ${range}=  Set Variable  600
-  Given user has searched for    Porvoonkatu, Helsinki
+  Given user has searched for    Mannerheimintie 9, Helsinki
   When user changes range to  ${range}
   Then range output is  ${range}
 
 User changes range and reloads the page
   ${range}=  Set Variable  600
-  Given user has searched for  Porvoonkatu, Helsinki
+  Given user has searched for  Mannerheimintie 9, Helsinki
   When user changes range to  ${range}
   And Reload Page
   Then range should be  ${range}
 
 User selects a vehicle filter and reloads the page
   ${type}=  Set Variable  bus
-  Given user has searched for  Porvoonkatu, Helsinki
+  Given user has searched for  Mannerheimintie 9, Helsinki
   When user selects vehicle filter  ${type}
   And Reload Page
   Then Vehicle Filter Should Be Selected  ${type}

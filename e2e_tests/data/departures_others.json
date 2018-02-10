@@ -17,8 +17,8 @@
               "stoptimes": [
                 {
                   "serviceDay": "${SERVICE_DAY}",
-                  "scheduledDeparture": "${DEPARTURE_TIME}",
-                  "realtimeDeparture": "${DEPARTURE_TIME}",
+                  "scheduledDeparture": "75712",
+                  "realtimeDeparture": "75712",
                   "realtimeState": "SCHEDULED",
                   "realtime": false,
                   "headsign": "Suomenlinna, päälait",
@@ -55,8 +55,8 @@
               "stoptimes": [
                 {
                   "serviceDay": "${SERVICE_DAY}",
-                  "scheduledDeparture": "${DEPARTURE_TIME}",
-                  "realtimeDeparture": "${DEPARTURE_TIME}",
+                  "scheduledDeparture": "69280",
+                  "realtimeDeparture": "69280",
                   "realtimeState": "SCHEDULED",
                   "realtime": false,
                   "headsign": "Mellunmäki",
@@ -66,8 +66,8 @@
                 },
                 {
                   "serviceDay": "${SERVICE_DAY}",
-                  "scheduledDeparture": "${DEPARTURE_TIME}",
-                  "realtimeDeparture": "${DEPARTURE_TIME}",
+                  "scheduledDeparture": "69760",
+                  "realtimeDeparture": "69760",
                   "realtimeState": "SCHEDULED",
                   "realtime": false,
                   "headsign": "Mellunmäki",
@@ -104,8 +104,8 @@
               "stoptimes": [
                 {
                   "serviceDay": "${SERVICE_DAY}",
-                  "scheduledDeparture": "${DEPARTURE_TIME}",
-                  "realtimeDeparture": "${DEPARTURE_TIME}",
+                  "scheduledDeparture": "75580",
+                  "realtimeDeparture": "75580",
                   "realtimeState": "SCHEDULED",
                   "realtime": false,
                   "headsign": "Vuosaari",
@@ -115,8 +115,8 @@
                 },
                 {
                   "serviceDay": "${SERVICE_DAY}",
-                  "scheduledDeparture": "${DEPARTURE_TIME}",
-                  "realtimeDeparture": "${DEPARTURE_TIME}",
+                  "scheduledDeparture": "72780",
+                  "realtimeDeparture": "72780",
                   "realtimeState": "SCHEDULED",
                   "realtime": false,
                   "headsign": "Vuosaari",
@@ -153,8 +153,8 @@
               "stoptimes": [
                 {
                   "serviceDay": "${SERVICE_DAY}",
-                  "scheduledDeparture": "${DEPARTURE_TIME}",
-                  "realtimeDeparture": "${DEPARTURE_TIME}",
+                  "scheduledDeparture": "75726",
+                  "realtimeDeparture": "75726",
                   "realtimeState": "SCHEDULED",
                   "realtime": false,
                   "headsign": "Matinkylä",
@@ -164,8 +164,8 @@
                 },
                 {
                   "serviceDay": "${SERVICE_DAY}",
-                  "scheduledDeparture": "${DEPARTURE_TIME}",
-                  "realtimeDeparture": "${DEPARTURE_TIME}",
+                  "scheduledDeparture": "79280",
+                  "realtimeDeparture": "79280",
                   "realtimeState": "SCHEDULED",
                   "realtime": false,
                   "headsign": "Matinkylä",
@@ -202,8 +202,8 @@
               "stoptimes": [
                 {
                   "serviceDay": "${SERVICE_DAY}",
-                  "scheduledDeparture": "${DEPARTURE_TIME}",
-                  "realtimeDeparture": "${DEPARTURE_TIME}",
+                  "scheduledDeparture": "71230",
+                  "realtimeDeparture": "71230",
                   "realtimeState": "SCHEDULED",
                   "realtime": false,
                   "headsign": "Tapiola",
@@ -213,8 +213,8 @@
                 },
                 {
                   "serviceDay": "${SERVICE_DAY}",
-                  "scheduledDeparture": "${DEPARTURE_TIME}",
-                  "realtimeDeparture": "${DEPARTURE_TIME}",
+                  "scheduledDeparture": "74310",
+                  "realtimeDeparture": "75530",
                   "realtimeState": "SCHEDULED",
                   "realtime": false,
                   "headsign": "Tapiola",
@@ -251,8 +251,8 @@
               "stoptimes": [
                 {
                   "serviceDay": "${SERVICE_DAY}",
-                  "scheduledDeparture": "${DEPARTURE_TIME}",
-                  "realtimeDeparture": "${DEPARTURE_TIME}",
+                  "scheduledDeparture": "78290",
+                  "realtimeDeparture": "78290",
                   "realtimeState": "SCHEDULED",
                   "realtime": false,
                   "headsign": "Lahti",
@@ -289,8 +289,8 @@
               "stoptimes": [
                 {
                   "serviceDay": "${SERVICE_DAY}",
-                  "scheduledDeparture": "${DEPARTURE_TIME}",
-                  "realtimeDeparture": "${DEPARTURE_TIME}",
+                  "scheduledDeparture": "79201",
+                  "realtimeDeparture": "79201",
                   "realtimeState": "SCHEDULED",
                   "realtime": false,
                   "headsign": "Kauklahti",
@@ -300,8 +300,8 @@
                 },
                 {
                   "serviceDay": "${SERVICE_DAY}",
-                  "scheduledDeparture": "${DEPARTURE_TIME}",
-                  "realtimeDeparture": "${DEPARTURE_TIME}",
+                  "scheduledDeparture": "65383",
+                  "realtimeDeparture": "65383",
                   "realtimeState": "SCHEDULED",
                   "realtime": false,
                   "headsign": "Kauklahti",
@@ -338,8 +338,8 @@
               "stoptimes": [
                 {
                   "serviceDay": "${SERVICE_DAY}",
-                  "scheduledDeparture": "${DEPARTURE_TIME}",
-                  "realtimeDeparture": "${DEPARTURE_TIME}",
+                  "scheduledDeparture": "77777",
+                  "realtimeDeparture": "77777",
                   "realtimeState": "SCHEDULED",
                   "realtime": false,
                   "headsign": "Leppävaara",
@@ -349,8 +349,8 @@
                 },
                 {
                   "serviceDay": "${SERVICE_DAY}",
-                  "scheduledDeparture": "${DEPARTURE_TIME}",
-                  "realtimeDeparture": "${DEPARTURE_TIME}",
+                  "scheduledDeparture": "77882",
+                  "realtimeDeparture": "77882",
                   "realtimeState": "SCHEDULED",
                   "realtime": false,
                   "headsign": "Leppävaara",
@@ -387,8 +387,8 @@
               "stoptimes": [
                 {
                   "serviceDay": "${SERVICE_DAY}",
-                  "scheduledDeparture": "${DEPARTURE_TIME}",
-                  "realtimeDeparture": "${DEPARTURE_TIME}",
+                  "scheduledDeparture": "75780",
+                  "realtimeDeparture": "75780",
                   "realtimeState": "SCHEDULED",
                   "realtime": false,
                   "headsign": "Kirkkonummi",
@@ -398,8 +398,8 @@
                 },
                 {
                   "serviceDay": "${SERVICE_DAY}",
-                  "scheduledDeparture": "${DEPARTURE_TIME}",
-                  "realtimeDeparture": "${DEPARTURE_TIME}",
+                  "scheduledDeparture": "75780",
+                  "realtimeDeparture": "75780",
                   "realtimeState": "SCHEDULED",
                   "realtime": false,
                   "headsign": "Kirkkonummi",
@@ -436,13 +436,13 @@
               "stoptimes": [
                 {
                   "serviceDay": "${SERVICE_DAY}",
-                  "scheduledDeparture": "${DEPARTURE_TIME}",
-                  "realtimeDeparture": "${DEPARTURE_TIME}",
+                  "scheduledDeparture": "75780",
+                  "realtimeDeparture": "75780",
                   "realtimeState": "SCHEDULED",
                   "realtime": false,
                   "headsign": "Suomenlinna, päälait",
                   "trip": {
-                    "id": "VHJpcDpIU0w6MTAxOV8yMDE4MDExOF9TdV8xXzEzMDA="
+                    "id": "VHJpcDpIU0w6MTAxOV8yMDE4MDExOF9TdV8xXzEzMDB="
                   }
                 }
               ],

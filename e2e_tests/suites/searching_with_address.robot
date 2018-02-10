@@ -7,7 +7,7 @@ Test Teardown     Close Browser
 
 *** Test Cases ***
 User selects a suggestion by clicking
-  ${suggestion}=    Set Variable    Porvoonkatu, Helsinki
+  ${suggestion}=    Set Variable    Mannerheimintie 9, Helsinki
   Given user has entered search value    porvoon
   When user clicks suggestion    ${suggestion}
   And loading is done

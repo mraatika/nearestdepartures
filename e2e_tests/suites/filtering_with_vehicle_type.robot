@@ -8,16 +8,16 @@ Test Teardown     Close Browser
 Test Template     Filter By Type
 
 *** Test Cases ***
-Selecting Bus Filter  bus  Porvoonkatu 1, Helsinki
-Selecting Tram Filter  tram  Porvoonkatu 1, Helsinki
-Selecting Rail Filter  rail  Pasilan asema
-Selecting Subway Filter  subway  Metro Sörnäinen
-Selecting Ferry Filter  ferry  Kauppatori
+Selecting Bus Filter  bus
+Selecting Tram Filter  tram
+Selecting Rail Filter  rail
+Selecting Subway Filter  subway
+Selecting Ferry Filter  ferry
 
 *** Keywords ***
 Filter By type
-  [Arguments]  ${type}  ${address}
-  user has searched for  ${address}
+  [Arguments]  ${type}
+  user has searched for  Mannerheimintie 9, Helsinki
   departures list should not be empty
   user selects vehicle filter  ${type}
   vehicle filter should be selected  ${type}

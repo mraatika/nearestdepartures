@@ -11,14 +11,14 @@ ${REMOVE_FAVOURITE_BUTTON}  class:favouriteslist-item-remove
 
 *** Test Cases ***
 Adding a favourite
-  ${address}=  Set Variable  Porvoonkatu 1, Helsinki
+  ${address}=  Set Variable  Mannerheimintie 9, Helsinki
   Given user has searched for  ${address}
   When user adds current address to favourites
   Then favourites button should be toggled
   And favourites list should contain  ${address}
 
 Searching with favourite
-  ${address}=  Set Variable  Porvoonkatu 1, Helsinki
+  ${address}=  Set Variable  Mannerheimintie 9, Helsinki
   Given user has favoured address  ${address}
   When user clicks clear button
   And user selects favourite  ${address}
@@ -27,7 +27,7 @@ Searching with favourite
   And departures list should not be empty
 
 Removing a favourite from modal
-  ${address}=  Set Variable  Porvoonkatu 1, Helsinki
+  ${address}=  Set Variable  Mannerheimintie 9, Helsinki
   Given user has favoured address  ${address}
   When open favourites
   And user clicks remove button
@@ -35,7 +35,7 @@ Removing a favourite from modal
   And favourites button should not be toggled
 
 Removing a favourite using toggle
-  ${address}=  Set Variable  Porvoonkatu 1, Helsinki
+  ${address}=  Set Variable  Mannerheimintie 9, Helsinki
   Given user has favoured address  ${address}
   When toggle favourite
   And open favourites

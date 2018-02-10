@@ -17,8 +17,8 @@
               "stoptimes": [
                 {
                   "serviceDay": "${SERVICE_DAY}",
-                  "scheduledDeparture": "${DEPARTURE_TIME}",
-                  "realtimeDeparture": "${DEPARTURE_TIME}",
+                  "scheduledDeparture": "75780",
+                  "realtimeDeparture": "75780",
                   "realtimeState": "UPDATED",
                   "realtime": true,
                   "headsign": "Hietalahti",
@@ -55,8 +55,8 @@
               "stoptimes": [
                 {
                   "serviceDay": "${SERVICE_DAY}",
-                  "scheduledDeparture": "${DEPARTURE_TIME}",
-                  "realtimeDeparture": "${DEPARTURE_TIME}",
+                  "scheduledDeparture": "75780",
+                  "realtimeDeparture": "75780",
                   "realtimeState": "UPDATED",
                   "realtime": true,
                   "headsign": "Olympiaterm. via Eira",
@@ -66,8 +66,8 @@
                 },
                 {
                   "serviceDay": "${SERVICE_DAY}",
-                  "scheduledDeparture": "${DEPARTURE_TIME}",
-                  "realtimeDeparture": "${DEPARTURE_TIME}",
+                  "scheduledDeparture": "75780",
+                  "realtimeDeparture": "75780",
                   "realtimeState": "UPDATED",
                   "realtime": true,
                   "headsign": "Olympiaterm. via Eira",
@@ -104,8 +104,8 @@
               "stoptimes": [
                 {
                   "serviceDay": "${SERVICE_DAY}",
-                  "scheduledDeparture": "${DEPARTURE_TIME}",
-                  "realtimeDeparture": "${DEPARTURE_TIME}",
+                  "scheduledDeparture": "75780",
+                  "realtimeDeparture": "75780",
                   "realtimeState": "UPDATED",
                   "realtime": true,
                   "headsign": "Länsiterm.",
@@ -115,8 +115,8 @@
                 },
                 {
                   "serviceDay": "${SERVICE_DAY}",
-                  "scheduledDeparture": "${DEPARTURE_TIME}",
-                  "realtimeDeparture": "${DEPARTURE_TIME}",
+                  "scheduledDeparture": "75780",
+                  "realtimeDeparture": "75780",
                   "realtimeState": "UPDATED",
                   "realtime": true,
                   "headsign": "Länsiterm.",
@@ -153,8 +153,8 @@
               "stoptimes": [
                 {
                   "serviceDay": "${SERVICE_DAY}",
-                  "scheduledDeparture": "${DEPARTURE_TIME}",
-                  "realtimeDeparture": "${DEPARTURE_TIME}",
+                  "scheduledDeparture": "75780",
+                  "realtimeDeparture": "75780",
                   "realtimeState": "UPDATED",
                   "realtime": true,
                   "headsign": "Jätkäsaari",
@@ -164,8 +164,8 @@
                 },
                 {
                   "serviceDay": "${SERVICE_DAY}",
-                  "scheduledDeparture": "${DEPARTURE_TIME}",
-                  "realtimeDeparture": "${DEPARTURE_TIME}",
+                  "scheduledDeparture": "75780",
+                  "realtimeDeparture": "75780",
                   "realtimeState": "UPDATED",
                   "realtime": true,
                   "headsign": "Jätkäsaari",
@@ -202,8 +202,8 @@
               "stoptimes": [
                 {
                   "serviceDay": "${SERVICE_DAY}",
-                  "scheduledDeparture": "${DEPARTURE_TIME}",
-                  "realtimeDeparture": "${DEPARTURE_TIME}",
+                  "scheduledDeparture": "75780",
+                  "realtimeDeparture": "75780",
                   "realtimeState": "UPDATED",
                   "realtime": true,
                   "headsign": "Länsiterm. via Hietalahti",
@@ -213,8 +213,8 @@
                 },
                 {
                   "serviceDay": "${SERVICE_DAY}",
-                  "scheduledDeparture": "${DEPARTURE_TIME}",
-                  "realtimeDeparture": "${DEPARTURE_TIME}",
+                  "scheduledDeparture": "75780",
+                  "realtimeDeparture": "75780",
                   "realtimeState": "SCHEDULED",
                   "realtime": false,
                   "headsign": "Länsiterm. via Hietalahti",
@@ -251,8 +251,8 @@
               "stoptimes": [
                 {
                   "serviceDay": "${SERVICE_DAY}",
-                  "scheduledDeparture": "${DEPARTURE_TIME}",
-                  "realtimeDeparture": "${DEPARTURE_TIME}",
+                  "scheduledDeparture": "75780",
+                  "realtimeDeparture": "75780",
                   "realtimeState": "UPDATED",
                   "realtime": true,
                   "headsign": "Käpylä via Töölö",
@@ -262,8 +262,8 @@
                 },
                 {
                   "serviceDay": "${SERVICE_DAY}",
-                  "scheduledDeparture": "${DEPARTURE_TIME}",
-                  "realtimeDeparture": "${DEPARTURE_TIME}",
+                  "scheduledDeparture": "75780",
+                  "realtimeDeparture": "75780",
                   "realtimeState": "SCHEDULED",
                   "realtime": false,
                   "headsign": "Käpylä via Töölö",

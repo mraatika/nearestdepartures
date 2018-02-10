@@ -17,8 +17,8 @@
               "stoptimes": [
                 {
                   "serviceDay": "${SERVICE_DAY}",
-                  "scheduledDeparture": "${DEPARTURE_TIME}",
-                  "realtimeDeparture": "${DEPARTURE_TIME}",
+                  "scheduledDeparture": "74460",
+                  "realtimeDeparture": "74460",
                   "realtimeState": "UPDATED",
                   "realtime": true,
                   "headsign": "Seurasaari via Hietaniemi",
@@ -28,8 +28,8 @@
                 },
                 {
                   "serviceDay": "${SERVICE_DAY}",
-                  "scheduledDeparture": "${DEPARTURE_TIME}",
-                  "realtimeDeparture": "${DEPARTURE_TIME}",
+                  "scheduledDeparture": "75780",
+                  "realtimeDeparture": "75780",
                   "realtimeState": "SCHEDULED",
                   "realtime": false,
                   "headsign": "Seurasaari via Hietaniemi",
@@ -66,8 +66,8 @@
               "stoptimes": [
                 {
                   "serviceDay": "${SERVICE_DAY}",
-                  "scheduledDeparture": "${DEPARTURE_TIME}",
-                  "realtimeDeparture": "${DEPARTURE_TIME}",
+                  "scheduledDeparture": "75820",
+                  "realtimeDeparture": "75820",
                   "realtimeState": "SCHEDULED",
                   "realtime": false,
                   "headsign": "Jupperi via Pitäjänmäki as.",
@@ -77,8 +77,8 @@
                 },
                 {
                   "serviceDay": "${SERVICE_DAY}",
-                  "scheduledDeparture": "${DEPARTURE_TIME}",
-                  "realtimeDeparture": "${DEPARTURE_TIME}",
+                  "scheduledDeparture": "76190",
+                  "realtimeDeparture": "76190",
                   "realtimeState": "SCHEDULED",
                   "realtime": false,
                   "headsign": "Jupperi via Pitäjänmäki as.",
@@ -115,8 +115,8 @@
               "stoptimes": [
                 {
                   "serviceDay": "${SERVICE_DAY}",
-                  "scheduledDeparture": "${DEPARTURE_TIME}",
-                  "realtimeDeparture": "${DEPARTURE_TIME}",
+                  "scheduledDeparture": "75402",
+                  "realtimeDeparture": "75402",
                   "realtimeState": "SCHEDULED",
                   "realtime": false,
                   "headsign": "Kuurinniitty via Pitäjänmäki as.",
@@ -126,8 +126,8 @@
                 },
                 {
                   "serviceDay": "${SERVICE_DAY}",
-                  "scheduledDeparture": "${DEPARTURE_TIME}",
-                  "realtimeDeparture": "${DEPARTURE_TIME}",
+                  "scheduledDeparture": "75780",
+                  "realtimeDeparture": "75780",
                   "realtimeState": "SCHEDULED",
                   "realtime": false,
                   "headsign": "Kuurinniitty via Pitäjänmäki as.",
@@ -164,8 +164,8 @@
               "stoptimes": [
                 {
                   "serviceDay": "${SERVICE_DAY}",
-                  "scheduledDeparture": "${DEPARTURE_TIME}",
-                  "realtimeDeparture": "${DEPARTURE_TIME}",
+                  "scheduledDeparture": "74502",
+                  "realtimeDeparture": "74502",
                   "realtimeState": "UPDATED",
                   "realtime": true,
                   "headsign": "Merikatu via Erottaja",
@@ -175,8 +175,8 @@
                 },
                 {
                   "serviceDay": "${SERVICE_DAY}",
-                  "scheduledDeparture": "${DEPARTURE_TIME}",
-                  "realtimeDeparture": "${DEPARTURE_TIME}",
+                  "scheduledDeparture": "75180",
+                  "realtimeDeparture": "75180",
                   "realtimeState": "SCHEDULED",
                   "realtime": false,
                   "headsign": "Merikatu via Erottaja",
@@ -213,8 +213,8 @@
               "stoptimes": [
                 {
                   "serviceDay": "${SERVICE_DAY}",
-                  "scheduledDeparture": "${DEPARTURE_TIME}",
-                  "realtimeDeparture": "${DEPARTURE_TIME}",
+                  "scheduledDeparture": "64180",
+                  "realtimeDeparture": "64180",
                   "realtimeState": "SCHEDULED",
                   "realtime": false,
                   "headsign": "Askisto via Vapaala",
@@ -251,8 +251,8 @@
               "stoptimes": [
                 {
                   "serviceDay": "${SERVICE_DAY}",
-                  "scheduledDeparture": "${DEPARTURE_TIME}",
-                  "realtimeDeparture": "${DEPARTURE_TIME}",
+                  "scheduledDeparture": "72410",
+                  "realtimeDeparture": "72410",
                   "realtimeState": "SCHEDULED",
                   "realtime": false,
                   "headsign": "Rinnekoti",

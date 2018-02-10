@@ -1,68 +1,68 @@
 {
   "geocoding": {
-    "version": "0.2",
-    "attribution": "http://pelias.mapzen.com/v1/attribution",
-    "query": {
-      "size": 1,
-      "private": false,
-      "point.lat": 60.170515,
-      "point.lon": 24.93827399999998,
-      "boundary.circle.lat": 60.170515,
-      "boundary.circle.lon": 24.93827399999998,
-      "lang": "fi",
-      "querySize": 20
-    },
-    "engine": {
-      "name": "Pelias",
-      "author": "Mapzen",
-      "version": "1.0"
-    },
-    "timestamp": 1516530875976
+      "version": "0.2",
+      "attribution": "http://pelias.mapzen.com/v1/attribution",
+      "query": {
+          "size": 1,
+          "private": false,
+          "point.lat": 60.233875,
+          "point.lon": 24.892180999999937,
+          "boundary.circle.lat": 60.233875,
+          "boundary.circle.lon": 24.892180999999937,
+          "lang": "fi",
+          "querySize": 20
+      },
+      "engine": {
+          "name": "Pelias",
+          "author": "Mapzen",
+          "version": "1.0"
+      },
+      "timestamp": 1518191397649
   },
   "type": "FeatureCollection",
   "features": [
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          24.938274,
-          60.170515
-        ]
-      },
-      "properties": {
-        "id": "node:4701607918",
-        "gid": "openstreetmap:address:node:4701607918",
-        "layer": "address",
-        "source": "openstreetmap",
-        "source_id": "node:4701607918",
-        "name": "Mannerheimintie 9",
-        "housenumber": "9",
-        "street": "Mannerheimintie",
-        "postalcode": "00100",
-        "postalcode_gid": "whosonfirst:postalcode:421479569",
-        "confidence": 1,
-        "distance": 0,
-        "accuracy": "point",
-        "country": "Suomi",
-        "country_gid": "whosonfirst:country:85633143",
-        "country_a": "FIN",
-        "region": "Uusimaa",
-        "region_gid": "whosonfirst:region:85683067",
-        "localadmin": "Helsinki",
-        "localadmin_gid": "whosonfirst:localadmin:907199715",
-        "locality": "Helsinki",
-        "locality_gid": "whosonfirst:locality:101748417",
-        "neighbourhood": "Kluuvi",
-        "neighbourhood_gid": "whosonfirst:neighbourhood:85898847",
-        "label": "Mannerheimintie 9, Helsinki"
+      {
+          "type": "Feature",
+          "geometry": {
+              "type": "Point",
+              "coordinates": [
+                  24.892181,
+                  60.233875
+              ]
+          },
+          "properties": {
+              "id": "way:31004282",
+              "gid": "openstreetmap:address:way:31004282",
+              "layer": "address",
+              "source": "openstreetmap",
+              "source_id": "way:31004282",
+              "name": "Aku Korhosen tie 2",
+              "housenumber": "2",
+              "street": "Aku Korhosen tie",
+              "postalcode": "00440",
+              "postalcode_gid": "whosonfirst:postalcode:421473057",
+              "confidence": 1,
+              "distance": 0,
+              "accuracy": "point",
+              "country": "Suomi",
+              "country_gid": "whosonfirst:country:85633143",
+              "country_a": "FIN",
+              "region": "Uusimaa",
+              "region_gid": "whosonfirst:region:85683067",
+              "localadmin": "Helsinki",
+              "localadmin_gid": "whosonfirst:localadmin:907199715",
+              "locality": "Helsinki",
+              "locality_gid": "whosonfirst:locality:101748417",
+              "neighbourhood": "Pohjois-Haaga",
+              "neighbourhood_gid": "whosonfirst:neighbourhood:85907969",
+              "label": "Aku Korhosen tie 2, Helsinki"
+          }
       }
-    }
   ],
   "bbox": [
-    24.938274,
-    60.170515,
-    24.938274,
-    60.170515
+      24.892181,
+      60.233875,
+      24.892181,
+      60.233875
   ]
 }

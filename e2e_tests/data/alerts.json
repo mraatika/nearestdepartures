@@ -1,0 +1,17 @@
+{
+  "data": {
+    "alerts": [
+      {
+        "alertHeaderText": null,
+        "alertDescriptionText": "Helsingin sisäisen liikenteen linja 24, klo 09:52 peruttu. Syy: tilapäinen häiriö.",
+        "alertUrl": null,
+        "effectiveStartDate": 1518249000,
+        "effectiveEndDate": 1518252720,
+        "route": {
+          "gtfsId": "HSL:1024",
+          "shortName": "506"
+        }
+      }
+    ]
+  }
+}
