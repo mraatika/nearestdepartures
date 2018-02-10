@@ -28,6 +28,20 @@ User selects a vehicle filter and reloads the page
   Then Vehicle Filter Should Be Selected  ${type}
   And Vehicle Filter Count Should Be  1
 
+User toggles filter on and off
+  ${type}=  Set Variable  bus
+  Given user has searched for  Mannerheimintie 9, Helsinki
+  When user selects vehicle filter  ${type}
+  And user selects vehicle filter  ${type}
+  Then Vehicle Filter Should Be Selected  ALL
+
+User toggles multiple filters
+  Given user has searched for  Mannerheimintie 9, Helsinki
+  When user selects vehicle filter  bus
+  And user selects vehicle filter  tram  TRUE
+  Then Vehicle Filter Should Be Selected  bus
+  And Vehicle Filter Should Be Selected  tram
+
 *** Keywords ***
 User Changes Range to
   [Arguments]  ${range}
