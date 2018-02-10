@@ -1,6 +1,6 @@
 {
   "name": "nearestdepartures",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "An app for finding nearest public transport departures in Helsinki region using the digitransit api",
   "private": true,
   "homepage": ".",
