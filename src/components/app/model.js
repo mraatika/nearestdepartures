@@ -90,8 +90,14 @@ export const batchDeparturesToState = async (state) => {
  * @return {object} object representing state changes
  */
 export const fetchDisruptionsToState = async (state) => {
-  const disruptions = await fetchDisruptions();
-  return { disruptions };
+  try {
+    const disruptions = await fetchDisruptions();
+    return { disruptions };
+  } catch(e) {
+    // if disruption fetching fails then nothing special should happen
+    process.env.NODE_ENV === 'production' && console.error(e);
+    return {};
+  }
 };
 
 /**
