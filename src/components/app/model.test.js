@@ -68,6 +68,17 @@ describe('fetchDisruptionsToState', () => {
     const state = {};
     disruptionsService.fetchDisruptions.mockReturnValueOnce(Promise.resolve(disruptions));
     return model.fetchDisruptionsToState(state)
-      .then(res => expect(res).not.toBe(state));
+    .then(res => expect(res).not.toBe(state));
+  });
+
+  it('should not crash if fetching fails', () => {
+    disruptionsService.fetchDisruptions.mockReturnValueOnce(Promise.reject());
+    expect(() => model.fetchDisruptionsToState({})).not.toThrow();
+  });
+
+  it('should return an empty object if fetching fails', () => {
+    disruptionsService.fetchDisruptions.mockReturnValueOnce(Promise.reject());
+    return model.fetchDisruptionsToState({})
+      .then(res => expect(res).toEqual({}));
   });
 });
