@@ -1,3 +1,5 @@
+import ExternalLink from '../externallink';
+
 /**
  * A component for displaying effective disruptions for a route
  * @constructs DisruptionAlert
@@ -12,7 +14,11 @@ export default ({ disruptions }) => (
         <p class="alert-info-body">{disruption.alertDescriptionText}</p>
         {disruption.alertUrl &&
           <p class="alert-info-duration">
-            <a class="disruption-alert-additional-info" href={disruption.alertUrl} target="_blank" rel="noopener">Lisätietoja</a>
+            <ExternalLink
+              class="disruption-alert-additional-info"
+              href={disruption.alertUrl}
+              text="Lisätietoja"
+            />
           </p>}
       </p>
     ))}

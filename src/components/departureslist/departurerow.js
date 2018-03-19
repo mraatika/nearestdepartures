@@ -4,7 +4,8 @@ import DisruptionAlert from './disruptionalert';
 import RouteIdentifier from './routeidentifier';
 import Distance from './distance';
 import Icon from '../icon/icon';
-import { keyPressHandler, stopPropagation } from '../../utils/utils';
+import ExternalLink from '../externallink';
+import { keyPressHandler } from '../../utils/utils';
 
 /**
 * Displays a single departure in the departures table
@@ -53,9 +54,9 @@ export default ({
         <Time time={realtimeDeparture} />
       </div>
       <div class="routename">
-        <a onClick={stopPropagation} href={routeUrl} target="_blank" rel="noopener">
+        <ExternalLink href={routeUrl}>
           <RouteIdentifier vehicleType={vehicleType} routeName={routeName} />
-        </a>
+        </ExternalLink>
       </div>
       <div class="destination">
         {!!(disruptions.length) &&
@@ -123,16 +124,13 @@ const DepartureRowAdditionalContent = ({
       <div class="departure-additional-info-content-block">
         <Icon type="bus-stop" />
         <div>
-          <a
+          <ExternalLink
             class="bold departure-stop-name"
             tabIndex={isToggled ? '0' : '-1'}
             href={stopUrl}
-            target="_blank"
-            rel="noopener"
             title="Näytä pysäkin tiedot Reittioppaassa"
-          >
-            {stopName}
-          </a>
+            text={stopName}
+          />
           <div>
             <div class="departure-stop-code">{stopCode}</div>
             <span class="departure-stop-description">{stopDescription}</span>
