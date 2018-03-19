@@ -45,7 +45,9 @@ const AddressSearch = ({
       <button
         type="button"
         className="address-search-clear"
-        onClick={onClearAddressClick}>
+        onClick={onClearAddressClick}
+        aria-label="Tyhjennä hakusana"
+      >
         <span>x</span>
       </button>
       <button className="address-search-submit" type="submit">Hae</button>
