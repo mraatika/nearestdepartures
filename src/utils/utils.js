@@ -171,3 +171,14 @@ export const prop = propName =>
  * @return {*} The value of given property of the supplied object or the default value
  */
 export const propOr = (prop, otherwise, obj = {}) => obj[prop] == null ? otherwise : obj[prop];
+
+/**
+ * @class NetworkError
+ * @extends Error
+ */
+export function NetworkError(message) {
+  this.name = 'NetworkError';
+  this.message = message;
+}
+
+NetworkError.prototype = new Error();

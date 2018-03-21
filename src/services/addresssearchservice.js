@@ -1,4 +1,6 @@
 /** @module AddressSearchService */
+import { NetworkError } from '../utils/utils';
+
 
 /**
 * Search for address/location coordinates
@@ -15,7 +17,7 @@ export async function searchAddress(searchTerm, maxResults = 1) {
   try {
     response = await fetch(url);
   } catch (e) {
-    throw new Error('Osoitteen haku epäonnistui: Paveluun ei saatu yhteyttä');
+    throw new NetworkError('Osoitteen haku epäonnistui: Palveluun ei saatu yhteyttä.');
   }
 
   if (!response.ok) {

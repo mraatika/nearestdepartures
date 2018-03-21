@@ -20,3 +20,7 @@
   color: inherit;
   font-size: 1.2rem;
 }
+
+.error-message a {
+  color: inherit;
+}
