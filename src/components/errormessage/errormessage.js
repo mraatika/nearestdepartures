@@ -1,5 +1,5 @@
 import './errormessage.css';
-import Component from 'inferno-component';
+import { Component } from 'inferno';
 import { resolveError } from './errormessageresolver';
 /**
  * Component for displaying error messages
