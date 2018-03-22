@@ -1,6 +1,7 @@
-import { renderIntoDocument, scryRenderedVNodesWithType } from 'inferno-test-utils';
+import { scryRenderedVNodesWithType } from 'inferno-test-utils';
 import { renderToString } from 'inferno-server';
 import dom from 'cheerio';
+import { renderIntoDocument } from '../../utils/testutils';
 import DeparturesListSortHeader from './departureslistsortheader';
 
 it('renders a div element', () => {

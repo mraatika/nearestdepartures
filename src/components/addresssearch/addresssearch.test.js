@@ -1,6 +1,7 @@
-import { renderIntoDocument, findRenderedDOMElementWithClass, findRenderedDOMElementWithTag } from 'inferno-test-utils';
+import { findRenderedDOMElementWithClass, findRenderedDOMElementWithTag } from 'inferno-test-utils';
 import { renderToString } from 'inferno-server';
 import dom from 'cheerio';
+import { renderIntoDocument } from '../../utils/testutils';
 import AddressSearch from './addresssearch';
 
 it('renders a form', () => {

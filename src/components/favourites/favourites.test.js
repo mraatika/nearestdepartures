@@ -1,5 +1,6 @@
-import { renderIntoDocument, scryRenderedVNodesWithType } from 'inferno-test-utils';
+import { scryRenderedVNodesWithType } from 'inferno-test-utils';
 import { renderToString } from 'inferno-server';
+import { renderIntoDocument } from '../../utils/testutils';
 import IconButton from '../iconbutton/iconbutton';
 import dom from 'cheerio';
 import Favourites from './favourites';

@@ -1,6 +1,7 @@
-import { renderIntoDocument, findRenderedVNodeWithType } from 'inferno-test-utils';
+import { findRenderedVNodeWithType } from 'inferno-test-utils';
 import { renderToString } from 'inferno-server';
 import dom from 'cheerio';
+import { renderIntoDocument } from '../../utils/testutils';
 import SuggestionsListItem from './suggestionslistitem';
 
 it('should render a list item', () => {

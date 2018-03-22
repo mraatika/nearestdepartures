@@ -1,4 +1,4 @@
-import Component from 'inferno-component';
+import { Component } from 'inferno';
 import DeparturesList from '../departureslist/departureslist';
 import DepartureFilter from '../departurefilter/departurefilter';
 import ErrorMessage from '../errormessage/errormessage';

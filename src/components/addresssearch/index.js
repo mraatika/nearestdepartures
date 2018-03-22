@@ -1,4 +1,4 @@
-import Component from 'inferno-component';
+import { Component } from 'inferno';
 import debounce from 'lodash/debounce';
 import { LOCATION_MAGIC_WORD } from '../../constants/constants';
 import AddressSearch from './addresssearch';

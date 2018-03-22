@@ -1,4 +1,4 @@
-import Component from 'inferno-component';
+import { Component } from 'inferno';
 import DepartureRow from './departurerow';
 import LoadingOverlay from '../loadingoverlay/loadingoverlay';
 import DeparturesListSortHeader from './departureslistsortheader';
