@@ -140,7 +140,7 @@ class App extends Component {
         />
 
         <main>
-          {error && <ErrorMessage message={error.message} onClick={this.hideError.bind(this)} />}
+          {error && <ErrorMessage error={error} onClick={this.hideError.bind(this)} />}
 
           <AddressSearch
             address={address}
