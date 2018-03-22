@@ -1,4 +1,4 @@
-import Component from 'inferno-component';
+import { Component } from 'inferno';
 import FavouritesListItem from './favouriteslistitem';
 import { areLocationsEqual } from './model';
 import './favourites.css';

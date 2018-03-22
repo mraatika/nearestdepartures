@@ -1,6 +1,7 @@
 import { renderToString } from 'inferno-server';
-import { renderIntoDocument, findRenderedDOMElementWithClass, scryRenderedDOMElementsWithTag } from 'inferno-test-utils';
+import { findRenderedDOMElementWithClass, scryRenderedDOMElementsWithTag } from 'inferno-test-utils';
 import dom from 'cheerio';
+import { renderIntoDocument } from '../../utils/testutils';
 import DepartureRow from './departurerow';
 
 it('renders a list item', () => {

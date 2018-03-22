@@ -1,4 +1,5 @@
-import { renderIntoDocument, findRenderedVNodeWithType } from 'inferno-test-utils';
+import { findRenderedVNodeWithType } from 'inferno-test-utils';
+import { renderIntoDocument } from '../../utils/testutils';
 import { renderToString } from 'inferno-server';
 import dom from 'cheerio';
 import ErrorMessage from './errormessage';

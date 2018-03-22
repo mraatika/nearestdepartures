@@ -1,4 +1,4 @@
-import Component from 'inferno-component';
+import { Component } from 'inferno';
 import Favourites from './favourites';
 import * as storage from '../../services/storageservice';
 import { areLocationsEqual, isLocationFavoured } from './model';
