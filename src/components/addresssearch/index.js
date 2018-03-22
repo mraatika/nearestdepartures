@@ -100,7 +100,9 @@ export default class AddressSearchContainer extends Component {
    * @param {Object} suggestion
    */
   selectSuggestion(suggestion, callback) {
-    this.setState({ selectedSuggestion: suggestion, searchTerm: suggestion.label }, callback);
+    if (suggestion) {
+      this.setState({ selectedSuggestion: suggestion, searchTerm: suggestion.label }, callback);
+    }
   }
 
   /**

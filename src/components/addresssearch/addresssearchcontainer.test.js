@@ -279,5 +279,18 @@ describe('suggestions', () => {
 
     expect(model.selectPrevSuggestion).toHaveBeenCalledTimes(1);
   });
-});
 
+  it('does not crash when previous or next suggestion is not available', () => {
+    const component = <AddressSearch />;
+    const rendered = renderIntoDocument(component);
+    const input = findRenderedVNodeWithType(rendered, 'input');
+    const downEvent = new KeyboardEvent('keyup', { bubbles: true, keyCode: 40 });
+    const upEvent = new KeyboardEvent('keyup', { bubbles: true, keyCode: 38 });
+
+    model.selectNextSuggestion.mockReturnValueOnce(undefined);
+    model.selectPrevSuggestion.mockReturnValueOnce(undefined);
+
+    input.dom.dispatchEvent(downEvent);
+    input.dom.dispatchEvent(upEvent);
+  });
+});
