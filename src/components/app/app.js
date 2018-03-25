@@ -9,7 +9,7 @@ import { getFilter, saveFilter } from '../../services/storageservice';
 import Header from '../header/header';
 import Footer from '../footer/footer';
 import AccuracyIndicator from '../accuracyindicator';
-import { delay } from '../../utils/utils';
+import { delay, requestFocus } from '../../utils/utils';
 import './app.css';
 
 /**
@@ -140,7 +140,11 @@ class App extends Component {
         />
 
         <main>
-          {error && <ErrorMessage error={error} onClick={this.hideError.bind(this)} />}
+          {error && <ErrorMessage
+            error={error}
+            onClick={this.hideError.bind(this)}
+            onComponentDidMount={requestFocus}
+          />}
 
           <AddressSearch
             address={address}

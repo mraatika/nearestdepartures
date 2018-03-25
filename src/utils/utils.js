@@ -160,7 +160,7 @@ export const prop = propName =>
    * @param {object}
    * @return {*} object[propName]
    */
-  obj => obj[propName];
+  (obj = {}) => obj[propName];
 
 /**
  * Returns the second argument if object's property {prop} is null or undefined
@@ -182,3 +182,9 @@ export function NetworkError(message) {
 }
 
 NetworkError.prototype = new Error();
+
+/**
+ * Request focus on given element
+ * @param {DOMNode} domNode
+ */
+export const requestFocus = domNode => domNode.focus();

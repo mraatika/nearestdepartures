@@ -60,12 +60,6 @@ it('calls onClick callback when clicked', () => {
   expect(spy).toHaveBeenCalled();
 });
 
-it('gets focus when mounted', () => {
-  const tree = renderIntoDocument(<ErrorMessage error={new Error()} />);
-  const element = findRenderedVNodeWithType(tree, 'div');
-  expect(document.activeElement).toEqual(element.dom);
-});
-
 it('renders a special message if error type is NetworkError', () => {
   const message = 'TestMessage.';
   const $ = dom.load(renderToString(<ErrorMessage error={new NetworkError(message)} />));
