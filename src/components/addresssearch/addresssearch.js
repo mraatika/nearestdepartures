@@ -1,5 +1,6 @@
 import SuggestionsList from './suggestionslist';
 import './addresssearch.css';
+import { prop } from '../../utils/utils';
 
 /**
  * AddressSearch component for address input.
@@ -35,9 +36,12 @@ const AddressSearch = ({
       <input
         ref={getAddressInputRef}
         type="text"
+        role="combobox"
+        aria-controls="suggestions-list"
+        aria-expanded={!!suggestions.length}
+        aria-activedescendant={prop('id')(selectedSuggestion)}
         aria-autocomplete="list"
-        aria-owns="suggestions-list"
-        aria-label="Osoite/sijainti"
+        aria-label="Hae paikannuksella, osoitteella tai paikannimellä"
         placeholder="Hae paikannuksella, osoitteella tai paikannimellä..."
         onInput={onSearchTermChange}
         onBlur={onBlur}

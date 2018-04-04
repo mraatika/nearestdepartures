@@ -53,6 +53,31 @@ it('renders a submit button with X', () => {
   expect(buttonText.toLocaleLowerCase()).toEqual('x');
 });
 
+it('has attribute aria-expanded when suggestions list is not empty', () => {
+  const $ = dom.load(renderToString(<AddressSearch suggestions={[{}]} />));
+  const isExpanded = $('input').attr('aria-expanded');
+  expect(isExpanded).not.toEqual();
+});
+
+it('does not have attribute aria-expanded when suggestions list is empty', () => {
+  const $ = dom.load(renderToString(<AddressSearch suggestions={[]} />));
+  const isExpanded = $('input').attr('aria-expanded');
+  expect(isExpanded).toEqual();
+});
+
+it('has correct aria-activedescendant property', () => {
+  const selectedSuggestion = {id: '123-123-123'};
+  const $ = dom.load(renderToString(<AddressSearch selectedSuggestion={selectedSuggestion} />));
+  const activeDescendant = $('input').attr('aria-activedescendant');
+  expect(activeDescendant).toEqual(selectedSuggestion.id);
+});
+
+it('does not have aria-activedescendant when selectedSuggestion is not available', () => {
+  const $ = dom.load(renderToString(<AddressSearch />));
+  const activeDescendant = $('input').prop('aria-activedescendant');
+  expect(activeDescendant).toEqual();
+});
+
 it('calls onSearchTerm callback when input field\'s value changes', () => {
   const spy = jest.fn();
   const tree = <AddressSearch onSearchTermChange={spy} />;
