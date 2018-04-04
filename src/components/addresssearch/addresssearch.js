@@ -18,7 +18,7 @@ import { prop } from '../../utils/utils';
  */
 const AddressSearch = ({
   searchTerm,
-  suggestions,
+  suggestions = [],
   selectedSuggestion,
   onSubmit,
   onKeyEvent,
@@ -66,4 +66,3 @@ const AddressSearch = ({
   </form>;
 
 export default AddressSearch;
-
