@@ -123,19 +123,30 @@ export const sortBy = (iteratee = val => val) =>
   };
 
 /**
-* Creates a handler for keypress event
+* Create a handler for enter and space keypresses
 * @param {Function} callback
 * @param {...*} params
 * @return {Function}
 */
-export const keyPressHandler = (callback, ...params) =>
+export const okKeyPressHandler = (callback, ...params) =>
+  keyPressHandler([13, 32], callback, ...params);
+
+/**
+ * Create a handler function that will call given calback
+ * only when event's keyCode is one of the given codes
+ * @param {number[]} keyCodes List of keys to handle
+ * @param {Function} callback Callback called when keyCode matches
+ * @param {...*} params 0 to n params passed to the callback
+ * @return {Function}
+ */
+export const keyPressHandler = (keyCodes, callback, ...params) =>
   /**
    * Call the callback function with given parameters
    * when the key pressed was space of enter
    * @param {Event} e
    */
   (e) => {
-    if ([13, 32].indexOf(e.keyCode) > -1) {
+    if (keyCodes.indexOf(e.keyCode) > -1) {
       e.preventDefault();
       callback(...params);
     }

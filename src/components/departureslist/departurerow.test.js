@@ -150,35 +150,59 @@ describe('Togglable additional info section', () => {
     const rendered = renderIntoDocument(<DepartureRow id={id} onRowToggle={spy} />);
     const item = findRenderedDOMElementWithClass(rendered, 'departures-list-row');
 
-    const event = new KeyboardEvent('keypress', { bubbles: true, keyCode: 13 });
+    const event = new KeyboardEvent('keyup', { bubbles: true, keyCode: 13 });
     item.dispatchEvent(event);
 
     expect(spy).toHaveBeenCalledWith(id);
   });
 
-  it('calls the onRowToggle callback when space is pressed', () => {
+  it('calls the onRowToggle callback when space is pressed on the row element', () => {
     const spy = jest.fn();
     const id = 'abc123';
     const rendered = renderIntoDocument(<DepartureRow id={id} onRowToggle={spy} />);
     const item = findRenderedDOMElementWithClass(rendered, 'departures-list-row');
 
-    const event = new KeyboardEvent('keypress', { bubbles: true, keyCode: 32 });
+    const event = new KeyboardEvent('keyup', { bubbles: true, keyCode: 32 });
     item.dispatchEvent(event);
 
     expect(spy).toHaveBeenCalledWith(id);
   });
 
-  it('calls the onRowToggle callback when space is pressed', () => {
+  it('calls the onRowToggle callback when enter is pressed on the row element', () => {
     const spy = jest.fn();
     const id = 'abc123';
     const rendered = renderIntoDocument(<DepartureRow id={id} onRowToggle={spy} />);
     const item = findRenderedDOMElementWithClass(rendered, 'departures-list-row');
 
-    item.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true, keyCode: 13 }));
+    const event = new KeyboardEvent('keyup', { bubbles: true, keyCode: 13 });
+    item.dispatchEvent(event);
+
+    expect(spy).toHaveBeenCalledWith(id);
+  });
+
+  it('does nothing when other keys are pressed on the row element', () => {
+    const spy = jest.fn();
+    const id = 'abc123';
+    const rendered = renderIntoDocument(<DepartureRow id={id} onRowToggle={spy} />);
+    const item = findRenderedDOMElementWithClass(rendered, 'departures-list-row');
+
+    item.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true, keyCode: 27 }));
     item.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true, keyCode: 76 }));
-    item.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true, keyCode: 2 }));
+    item.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true, keyCode: 14 }));
 
     expect(spy).not.toHaveBeenCalled();
+  });
+
+  it('calls the onRowToggle callback when esc is pressed on the additional content element', () => {
+    const spy = jest.fn();
+    const id = 'abc123';
+    const rendered = renderIntoDocument(<DepartureRow id={id} onRowToggle={spy} />);
+    const item = findRenderedDOMElementWithClass(rendered, 'departures-list-row-additional-info');
+
+    const event = new KeyboardEvent('keyup', { bubbles: true, keyCode: 27 });
+    item.dispatchEvent(event);
+
+    expect(spy).toHaveBeenCalledWith(id);
   });
 
   it('contains scheduled departure time', () => {
