@@ -13,9 +13,3 @@ Open front page
         favourite button should be disabled
         address should be    ${EMPTY}
         error should not be visible
-
-*** Keywords ***
-.. User "${username}" logs in with password "${password}"
-    Input username    ${username}
-    Input password    ${password}
-    Submit credentials

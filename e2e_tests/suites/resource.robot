@@ -70,9 +70,6 @@ Front Page Should Be Open
 Loading Is Done
   Wait Until Element Is Not Visible  ${LOADING_OVERLAY}
 
-Submit Credentials
-  Click Button  login_button
-
 Range Should Be
   [Arguments]  ${range}
   Element Text Should Be  css:.range-filter-wrapper>output  ${range}m
