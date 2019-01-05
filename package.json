@@ -10,21 +10,18 @@
   },
   "author": "Miitri Raatikainen (http://github.com/mraatika)",
   "license": "AGPLv3",
-  "bugs": {
-    "url": "https://github.com/mraatika/nearestdepartures/issues"
-  },
   "devDependencies": {
     "cheerio": "^1.0.0-rc.2",
-    "gh-pages": "^1.1.0",
-    "inferno-scripts": "^6.3.0",
-    "inferno-server": "^5.0.1",
-    "inferno-test-utils": "5.0.1",
+    "gh-pages": "^2.0.1",
+    "inferno-scripts": "^7.0.4",
+    "inferno-server": "^7.1.0",
+    "inferno-test-utils": "^7.1.0",
     "jest-fetch-mock": "^1.5.0",
     "mock-geolocation": "^1.0.11"
   },
   "dependencies": {
     "1-liners": "^0.4.0",
-    "inferno": "^5.0.1",
+    "inferno": "^7.1.0",
     "lodash": "^4.17.4"
   },
   "scripts": {
@@ -38,5 +35,11 @@
     "eject": "inferno-scripts eject",
     "predeploy:test": "npm run build",
     "deploy:test": "gh-pages -d build"
-  }
+  },
+  "browserslist": [
+    ">0.5% in FI",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
