@@ -109,22 +109,25 @@ describe('Togglable additional info section', () => {
   });
 
   it('is hidden when content is not toggled', () => {
-    const rendered = renderIntoDocument(<DepartureRow isToggled={false} />);
-    const additionalInfo = findRenderedDOMElementWithClass(rendered, 'departures-list-row-additional-info');
+    const tree = <DepartureRow isToggled={false} />;
+    renderIntoDocument(tree);
+    const additionalInfo = findRenderedDOMElementWithClass(tree, 'departures-list-row-additional-info');
     expect(additionalInfo.getAttribute('aria-hidden')).toEqual('true');
   });
 
   it('is visible when content is toggled', () => {
-    const rendered = renderIntoDocument(<DepartureRow isToggled={true} />);
-    const additionalInfo = findRenderedDOMElementWithClass(rendered, 'departures-list-row-additional-info');
+    const tree = <DepartureRow isToggled={true} />;
+    renderIntoDocument(tree);
+    const additionalInfo = findRenderedDOMElementWithClass(tree, 'departures-list-row-additional-info');
     expect(additionalInfo.getAttribute('aria-hidden')).toEqual('false');
   });
 
   it('calls the onRowToggle callback when clicked', () => {
     const spy = jest.fn();
     const id = 'abc123';
-    const rendered = renderIntoDocument(<DepartureRow id={id} onRowToggle={spy} />);
-    const item = findRenderedDOMElementWithClass(rendered, 'departures-list-row');
+    const tree = <DepartureRow id={id} onRowToggle={spy} />;
+    renderIntoDocument(tree);
+    const item = findRenderedDOMElementWithClass(tree, 'departures-list-row');
 
     const event = new MouseEvent('click', { bubbles: true });
     item.dispatchEvent(event);
@@ -135,8 +138,9 @@ describe('Togglable additional info section', () => {
   it('does not call the onRowToggle callback when route identifier is clicked', () => {
     const spy = jest.fn();
     const id = 'abc123';
-    const rendered = renderIntoDocument(<DepartureRow id={id} onRowToggle={spy} />);
-    const routeIdentifier = scryRenderedDOMElementsWithTag(rendered, 'a')[0];
+    const tree = <DepartureRow id={id} onRowToggle={spy} />;
+    renderIntoDocument(tree);
+    const routeIdentifier = scryRenderedDOMElementsWithTag(tree, 'a')[0];
 
     const event = new MouseEvent('click', { bubbles: true });
     routeIdentifier.dispatchEvent(event);
@@ -147,8 +151,9 @@ describe('Togglable additional info section', () => {
   it('calls the onRowToggle callback when enter is pressed', () => {
     const spy = jest.fn();
     const id = 'abc123';
-    const rendered = renderIntoDocument(<DepartureRow id={id} onRowToggle={spy} />);
-    const item = findRenderedDOMElementWithClass(rendered, 'departures-list-row');
+    const tree = <DepartureRow id={id} onRowToggle={spy} />;
+    renderIntoDocument(tree);
+    const item = findRenderedDOMElementWithClass(tree, 'departures-list-row');
 
     const event = new KeyboardEvent('keyup', { bubbles: true, keyCode: 13 });
     item.dispatchEvent(event);
@@ -159,8 +164,9 @@ describe('Togglable additional info section', () => {
   it('calls the onRowToggle callback when space is pressed on the row element', () => {
     const spy = jest.fn();
     const id = 'abc123';
-    const rendered = renderIntoDocument(<DepartureRow id={id} onRowToggle={spy} />);
-    const item = findRenderedDOMElementWithClass(rendered, 'departures-list-row');
+    const tree = <DepartureRow id={id} onRowToggle={spy} />;
+    renderIntoDocument(tree);
+    const item = findRenderedDOMElementWithClass(tree, 'departures-list-row');
 
     const event = new KeyboardEvent('keyup', { bubbles: true, keyCode: 32 });
     item.dispatchEvent(event);
@@ -171,8 +177,9 @@ describe('Togglable additional info section', () => {
   it('calls the onRowToggle callback when enter is pressed on the row element', () => {
     const spy = jest.fn();
     const id = 'abc123';
-    const rendered = renderIntoDocument(<DepartureRow id={id} onRowToggle={spy} />);
-    const item = findRenderedDOMElementWithClass(rendered, 'departures-list-row');
+    const tree = <DepartureRow id={id} onRowToggle={spy} />;
+    renderIntoDocument(tree);
+    const item = findRenderedDOMElementWithClass(tree, 'departures-list-row');
 
     const event = new KeyboardEvent('keyup', { bubbles: true, keyCode: 13 });
     item.dispatchEvent(event);
@@ -183,8 +190,9 @@ describe('Togglable additional info section', () => {
   it('does nothing when other keys are pressed on the row element', () => {
     const spy = jest.fn();
     const id = 'abc123';
-    const rendered = renderIntoDocument(<DepartureRow id={id} onRowToggle={spy} />);
-    const item = findRenderedDOMElementWithClass(rendered, 'departures-list-row');
+    const tree = <DepartureRow id={id} onRowToggle={spy} />;
+    renderIntoDocument(tree);
+    const item = findRenderedDOMElementWithClass(tree, 'departures-list-row');
 
     item.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true, keyCode: 27 }));
     item.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true, keyCode: 76 }));
@@ -196,8 +204,9 @@ describe('Togglable additional info section', () => {
   it('calls the onRowToggle callback when esc is pressed on the additional content element', () => {
     const spy = jest.fn();
     const id = 'abc123';
-    const rendered = renderIntoDocument(<DepartureRow id={id} onRowToggle={spy} />);
-    const item = findRenderedDOMElementWithClass(rendered, 'departures-list-row-additional-info');
+    const tree = <DepartureRow id={id} onRowToggle={spy} />;
+    renderIntoDocument(tree);
+    const item = findRenderedDOMElementWithClass(tree, 'departures-list-row-additional-info');
 
     const event = new KeyboardEvent('keyup', { bubbles: true, keyCode: 27 });
     item.dispatchEvent(event);

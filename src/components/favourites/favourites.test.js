@@ -1,7 +1,6 @@
-import { scryRenderedVNodesWithType } from 'inferno-test-utils';
+import { scryRenderedDOMElementsWithTag } from 'inferno-test-utils';
 import { renderToString } from 'inferno-server';
 import { renderIntoDocument } from '../../utils/testutils';
-import IconButton from '../iconbutton/iconbutton';
 import dom from 'cheerio';
 import Favourites from './favourites';
 
@@ -57,18 +56,20 @@ it('renders a dialog element', () => {
 
 it('calls toggleFavourite callback when the toggle button is clicked', () => {
   const spy = jest.fn();
-  const rendered = renderIntoDocument(<Favourites address={{}} toggleFavourite={spy} />);
-  const button = scryRenderedVNodesWithType(rendered, IconButton)[0];
+  const tree = <Favourites address={{}} toggleFavourite={spy} />;
+  renderIntoDocument(tree);
+  const button = scryRenderedDOMElementsWithTag(tree, 'button')[0];
   const event = new MouseEvent('click', { bubbles: true });
-  button.dom.dispatchEvent(event);
+  button.dispatchEvent(event);
   expect(spy).toHaveBeenCalled();
 });
 
-it('calls toggleFavourite callback when the toggle button is clicked', () => {
+it('calls toggleDialog callback when the dialog button is clicked', () => {
   const spy = jest.fn();
-  const rendered = renderIntoDocument(<Favourites toggleDialog={spy} />);
-  const button = scryRenderedVNodesWithType(rendered, IconButton)[1];
+  const tree = <Favourites toggleDialog={spy} />;
+  renderIntoDocument(tree);
+  const button = scryRenderedDOMElementsWithTag(tree, 'button')[1];
   const event = new MouseEvent('click', { bubbles: true });
-  button.dom.dispatchEvent(event);
+  button.dispatchEvent(event);
   expect(spy).toHaveBeenCalled();
 });

@@ -81,8 +81,8 @@ it('does not have aria-activedescendant when selectedSuggestion is not available
 it('calls onSearchTerm callback when input field\'s value changes', () => {
   const spy = jest.fn();
   const tree = <AddressSearch onSearchTermChange={spy} />;
-  const rendered = renderIntoDocument(tree);
-  const input = findRenderedDOMElementWithTag(rendered, 'input');
+  renderIntoDocument(tree);
+  const input = findRenderedDOMElementWithTag(tree, 'input');
   const val = 'searchterm';
 
   input.value = val;
@@ -95,16 +95,16 @@ it('calls onSearchTerm callback when input field\'s value changes', () => {
 it('calls getAddressInputRef with the input field', () => {
   const spy = jest.fn();
   const tree = <AddressSearch getAddressInputRef={spy} />;
-  const rendered = renderIntoDocument(tree);
-  const input = findRenderedDOMElementWithTag(rendered, 'input');
+  renderIntoDocument(tree);
+  const input = findRenderedDOMElementWithTag(tree, 'input');
   expect(spy).toHaveBeenCalledWith(input);
 });
 
 it('calls onBlur callback when input field losts focus', () => {
   const spy = jest.fn();
   const tree = <AddressSearch onBlur={spy} />;
-  const rendered = renderIntoDocument(tree);
-  const input = findRenderedDOMElementWithTag(rendered, 'input');
+  renderIntoDocument(tree);
+  const input = findRenderedDOMElementWithTag(tree, 'input');
 
   const event = new Event('blur');
   input.dispatchEvent(event);
@@ -115,8 +115,8 @@ it('calls onBlur callback when input field losts focus', () => {
 it('calls onClearAddressClick callback when the clear address button is clicked', () => {
   const spy = jest.fn();
   const tree = <AddressSearch onClearAddressClick={spy} />;
-  const rendered = renderIntoDocument(tree);
-  const button = findRenderedDOMElementWithClass(rendered, 'address-search-clear');
+  renderIntoDocument(tree);
+  const button = findRenderedDOMElementWithClass(tree, 'address-search-clear');
 
   const event = new MouseEvent('click', { bubbles: true });
   button.dispatchEvent(event);
@@ -124,23 +124,11 @@ it('calls onClearAddressClick callback when the clear address button is clicked'
   expect(spy).toHaveBeenCalled();
 });
 
-it('calls onSubmit callback when the form is submitted', () => {
-  const spy = jest.fn();
-  const tree = <AddressSearch onSubmit={spy} />;
-  const rendered = renderIntoDocument(tree);
-  const form = findRenderedDOMElementWithTag(rendered, 'form');
-
-  const event = new Event('submit', { bubbles: true });
-  form.dispatchEvent(event);
-
-  expect(spy).toHaveBeenCalled();
-});
-
 it('calls onSubmit callback when the submit button is clicked', () => {
   const spy = jest.fn();
   const tree = <AddressSearch onSubmit={spy} />;
-  const rendered = renderIntoDocument(tree);
-  const button = findRenderedDOMElementWithClass(rendered, 'address-search-submit');
+  renderIntoDocument(tree);
+  const button = findRenderedDOMElementWithClass(tree, 'address-search-submit');
 
   const event = new MouseEvent('click');
   button.dispatchEvent(event);

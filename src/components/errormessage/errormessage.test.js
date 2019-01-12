@@ -51,7 +51,8 @@ it('close button text is x', () => {
 
 it('calls onClick callback when clicked', () => {
   const spy = jest.fn();
-  const tree = renderIntoDocument(<ErrorMessage onClick={spy} error={new Error()} />);
+  const tree = <ErrorMessage onClick={spy} error={new Error()} />;
+  renderIntoDocument(tree);
   const element = findRenderedVNodeWithType(tree, 'div');
 
   const event = new MouseEvent('click', { bubbles: true });

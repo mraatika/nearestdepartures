@@ -50,7 +50,8 @@ it('has displays value in an output element', () => {
 
 it('calls onChange when value changes', () => {
   const spy = jest.fn();
-  const tree = renderIntoDocument(<RangeFilter onChange={spy}/>);
+  const tree = <RangeFilter onChange={spy}/>;
+  renderIntoDocument(tree);
   const input = findRenderedVNodeWithType(tree, 'input');
 
   const event = new UIEvent('input');
@@ -62,7 +63,8 @@ it('calls onChange when value changes', () => {
 it('calls onChange with current value', () => {
   const spy = jest.fn();
   const val = '200';
-  const tree = renderIntoDocument(<RangeFilter onChange={spy}/>);
+  const tree = <RangeFilter onChange={spy}/>;
+  renderIntoDocument(tree);
   const input = findRenderedVNodeWithType(tree, 'input');
 
   input.dom.value = val;
