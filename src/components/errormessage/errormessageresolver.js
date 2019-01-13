@@ -1,7 +1,7 @@
 /** @module ErrorMessageResolver */
 
 import ExternalLink from '../externallink';
-import { NetworkError } from '../../utils/utils';
+import { NetworkError } from '../../utils/errors';
 
 /**
  * Link address to printable time tables

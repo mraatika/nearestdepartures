@@ -1,4 +1,5 @@
 import formatError, { POSITION_ERROR } from '../utils/formaterror';
+import { PositionError } from '../utils/errors';
 
 /** @module LocationService */
 
@@ -67,7 +68,7 @@ export function stopLocating() {
 * @returns {Promise}
 */
 export async function findGPSLocation() {
-  if (!navigator.geolocation) throw new Error('Selain ei tue paikannusta');
+  if (!navigator.geolocation) throw new PositionError('Selain ei tue paikannusta');
 
   if (!watcherId) {
     try {
@@ -77,9 +78,9 @@ export async function findGPSLocation() {
       // stop locating when there is an error to clear the current
       // watcher and the watcherId
       stopLocating();
-      throw new Error(formatError(POSITION_ERROR, e));
+      throw new PositionError(formatError(POSITION_ERROR, e));
     }
-  } else {
-    throw new Error('Sijainninhaku on jo käynnissä');
   }
+
+  throw new Error('Sijainninhaku on jo käynnissä');
 }

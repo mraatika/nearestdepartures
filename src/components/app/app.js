@@ -10,6 +10,7 @@ import Header from '../header/header';
 import Footer from '../footer/footer';
 import AccuracyIndicator from '../accuracyindicator';
 import { delay, requestFocus } from '../../utils/utils';
+import { PositionError } from '../../utils/errors';
 import './app.css';
 
 /**
@@ -131,6 +132,8 @@ class App extends Component {
    */
   render() {
     const { filtered, filters, error, address, loading, departureUpdateTime, disruptions } = this.state;
+    const accuracy = address && address.location && address.location.accuracy;
+    const isPositionError = error && error instanceof PositionError;
 
     return (
       <div class="app-content flex-column">
@@ -140,7 +143,7 @@ class App extends Component {
         />
 
         <main>
-          {error && <ErrorMessage
+          {error && !isPositionError && <ErrorMessage
             error={error}
             onClick={this.hideError.bind(this)}
             onComponentDidMount={requestFocus}
@@ -153,7 +156,10 @@ class App extends Component {
             clearAddress={this.clearAddress.bind(this)}
           />
 
-          {address && address.location && <AccuracyIndicator accuracy={address.location.accuracy} />}
+          <div role="status" aria-live="polite">
+            {(accuracy || isPositionError) &&
+              <AccuracyIndicator accuracy={accuracy} error={isPositionError && error} />}
+          </div>
 
           <DepartureFilter
             filters={model.allVehicleTypes}

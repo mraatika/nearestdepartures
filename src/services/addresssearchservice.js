@@ -1,5 +1,5 @@
 /** @module AddressSearchService */
-import { NetworkError } from '../utils/utils';
+import { NetworkError } from '../utils/errors';
 
 
 /**

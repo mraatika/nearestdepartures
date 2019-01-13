@@ -3,7 +3,7 @@ import { renderIntoDocument } from '../../utils/testutils';
 import { renderToString } from 'inferno-server';
 import dom from 'cheerio';
 import ErrorMessage from './errormessage';
-import { NetworkError } from '../../utils/utils';
+import { NetworkError } from '../../utils/errors';
 
 it('renders div', () => {
   const $ = dom.load(renderToString(<ErrorMessage error={new Error()} />));
