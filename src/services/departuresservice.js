@@ -31,11 +31,10 @@ const MAX_RESULTS = 50;
 * @param {Object} props
 * @param {number} props.latitude
 * @param {number} props.longitude
-* @param {number} props.startTime
 * @param {string[]} props.vehicleTypes
 * @returns {Object}
 */
-function formRequestBody({ latitude, longitude, startTime, vehicleTypes } = {}) {
+function formRequestBody({ latitude, longitude, vehicleTypes } = {}) {
   return {
     query: query,
     variables: {

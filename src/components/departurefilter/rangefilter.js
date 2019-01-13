@@ -28,11 +28,10 @@ export default ({
   <div class="range-filter-wrapper">
     <output>{range}m</output>
     <label>
-      <span class="accessibility-hidden">Maksimi etäisyys pysäkille</span>
+      <span class="sr-only">Maksimietäisyys pysäkille</span>
       <input
         type="range"
         name="range"
-        title="Maksimietäisyys pysäkille"
         min={MIN_RANGE}
         max={MAX_RANGE}
         step={RANGE_STEP}

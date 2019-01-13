@@ -50,9 +50,9 @@ const AddressSearch = ({
         type="button"
         className="address-search-clear"
         onClick={onClearAddressClick}
-        aria-label="Tyhjennä hakusana"
       >
-        <span>x</span>
+        <span class="sr-only">Tyhjennä hakusana</span>
+        <span aria-hidden="true">x</span>
       </button>
       <button className="address-search-submit" type="submit">Hae</button>
     </div>

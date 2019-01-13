@@ -121,7 +121,7 @@ class DepartureRowAdditionalContent extends Component {
         id={`departure-${id}`}
         class={`departures-list-row-additional-info${isToggled ? ' visible' : ''}`}
         aria-hidden={!isToggled}
-        tabIndex="0"
+        tabIndex={isToggled ? 0 : -1}
         ref={e => this.additionalContent = e}
         onKeyUp={keyPressHandler([27], onRowToggle, id)}
       >

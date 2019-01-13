@@ -50,7 +50,7 @@ it('renders a clear button', () => {
 it('renders a submit button with X', () => {
   const $ = dom.load(renderToString(<AddressSearch />));
   const buttonText = $('button.address-search-clear').text();
-  expect(buttonText.toLocaleLowerCase()).toEqual('x');
+  expect(buttonText.toLocaleLowerCase()).toEqual('tyhjennä hakusanax');
 });
 
 it('has attribute aria-expanded when suggestions list is not empty', () => {
