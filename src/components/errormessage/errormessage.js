@@ -14,6 +14,7 @@ export default ({ error, onClick }) =>
     onClick={onClick}
     tabIndex="0"
     role="alert"
+    aria-atomic="true"
   >
     <button class="close-button" aria-label="Sulje">x</button>
     {error && resolveError(error)}
