@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /appcache
+Disallow: /icons
+Disallow: /service-worker.js
+Disallow: /asset-manifest.js
