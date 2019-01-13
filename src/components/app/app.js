@@ -156,6 +156,10 @@ class App extends Component {
             clearAddress={this.clearAddress.bind(this)}
           />
 
+          <a class="skip-to-list sr-only sr-only-focusable" href="#departures-list-results">
+            Siirry hakutuloksiin
+          </a>
+
           <div role="status" aria-live="polite">
             {(accuracy || isPositionError) &&
               <AccuracyIndicator accuracy={accuracy} error={isPositionError && error} />}

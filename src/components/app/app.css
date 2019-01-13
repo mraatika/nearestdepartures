@@ -14,3 +14,7 @@ main {
 .app-content {
   min-height: 100%;
 }
+
+.skip-to-list {
+  position: absolute;
+}

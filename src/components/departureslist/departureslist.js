@@ -109,7 +109,7 @@ export default class DeparturesList extends Component {
             />
           )}
         </div>
-        <ul class="departures-list-body">{rows}</ul>
+        <ul id="departures-list-results" class="departures-list-body">{rows}</ul>
       </div>
     );
   }
