@@ -188,3 +188,13 @@ export const propOr = (prop, otherwise, obj = {}) => obj[prop] == null ? otherwi
  * @param {DOMNode} domNode
  */
 export const requestFocus = domNode => domNode.focus();
+
+/**
+ * Get props of given objects and compare them
+ * @param {string} propName
+ * @param {object} o1
+ * @param {object} o2
+ * @return {Boolean}
+ */
+export const isPropChanged = (propName, o1, o2) =>
+  prop(propName)(o1) !== prop(propName)(o2);

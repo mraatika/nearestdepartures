@@ -1,6 +1,7 @@
 import { Component } from 'inferno';
 import debounce from 'lodash/debounce';
 import { LOCATION_MAGIC_WORD } from '../../constants/constants';
+import { isPropChanged } from '../../utils/utils';
 import AddressSearch from './addresssearch';
 import * as model from './model';
 import './addresssearch.css';
@@ -31,6 +32,7 @@ export default class AddressSearchContainer extends Component {
     this.hideSuggestions = this.hideSuggestions.bind(this);
     this.onSuggestionClick = this.onSuggestionClick.bind(this);
     this.getAddressInputRef = this.getAddressInputRef.bind(this);
+    this.onClear = this.onClear.bind(this);
   }
 
   /**
@@ -48,16 +50,11 @@ export default class AddressSearchContainer extends Component {
   componentWillReceiveProps(nextProps) {
     const { address } = nextProps;
 
-    if (address !== this.state.searchTerm) {
+    if (isPropChanged('id', address, this.props.address) && address !== this.state.searchTerm) {
       this.setState({
         searchTerm: address ? address.label : '',
         selectedSuggestion: undefined,
       });
-
-      // if the address was cleared then focus on address input
-      if (!address) {
-        this.addressInput.focus();
-      }
     }
   }
 
@@ -128,6 +125,11 @@ export default class AddressSearchContainer extends Component {
   onSubmit(e) {
     e.preventDefault();
     this.doSubmitAction();
+  }
+
+  onClear() {
+    this.setState({searchTerm: '', selectedSuggestion: undefined});
+    this.addressInput.focus();
   }
 
   /**
@@ -209,7 +211,7 @@ export default class AddressSearchContainer extends Component {
         selectedSuggestion={selectedSuggestion}
         onSubmit={this.onSubmit}
         onKeyEvent={this.onKeyEvent}
-        onClearAddressClick={this.props.clearAddress}
+        onClearAddressClick={this.onClear}
         onSearchTermChange={this.onSearchTermChange}
         onBlur={this.hideSuggestions}
         onSuggestionClick={this.onSuggestionClick}

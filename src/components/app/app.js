@@ -39,6 +39,14 @@ class App extends Component {
   constructor() {
     super();
     this.state = { ...DEFAULT_STATE };
+
+    this.searchForDepartures = this.searchForDepartures.bind(this);
+    this.hideError = this.hideError.bind(this);
+    this.searchForDepartures = this.searchForDepartures.bind(this);
+    this.onError = this.onError.bind(this);
+    this.onFilterToggle = this.onFilterToggle.bind(this);
+    this.onRangeChange = this.onRangeChange.bind(this);
+    this.clearAddress = this.clearAddress.bind(this);
   }
 
   /**
@@ -94,6 +102,7 @@ class App extends Component {
    * Remove address from the state
    */
   clearAddress() {
+    console.log('CLEAR');
     this.setState({ address: undefined });
   }
 
@@ -139,21 +148,21 @@ class App extends Component {
       <div class="app-content flex-column">
         <Header
           address={address}
-          selectLocation={this.searchForDepartures.bind(this)}
+          selectLocation={this.searchForDepartures}
         />
 
         <main>
           {error && !isPositionError && <ErrorMessage
             error={error}
-            onClick={this.hideError.bind(this)}
+            onClick={this.hideError}
             onComponentDidMount={requestFocus}
           />}
 
           <AddressSearch
             address={address}
-            onSearch={this.searchForDepartures.bind(this)}
-            onError={this.onError.bind(this)}
-            clearAddress={this.clearAddress.bind(this)}
+            onSearch={this.searchForDepartures}
+            onError={this.onError}
+            clearAddress={this.clearAddress}
           />
 
           <a class="skip-to-list sr-only sr-only-focusable" href="#departures-list-results">
@@ -169,8 +178,8 @@ class App extends Component {
             filters={model.allVehicleTypes}
             activeFilters={filters.vehicleTypes}
             range={filters.range}
-            onFilterToggle={this.onFilterToggle.bind(this)}
-            onRangeChange={this.onRangeChange.bind(this)} />
+            onFilterToggle={this.onFilterToggle}
+            onRangeChange={this.onRangeChange} />
 
           <DeparturesList
             isLoading={loading}

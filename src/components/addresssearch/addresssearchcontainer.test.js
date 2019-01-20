@@ -14,7 +14,7 @@ beforeEach(() => {
 
 describe('onComponentWillReceiveProps', () => {
   it('should change address in state when address props change', () => {
-    const address = { label: 'Street 1, City' };
+    const address = { label: 'Street 1, City', id: '1' };
     const tree = <AddressSearch address={address} />;
     renderIntoDocument(tree);
 
@@ -22,7 +22,7 @@ describe('onComponentWillReceiveProps', () => {
 
     expect(input.value).toEqual(address.label);
 
-    const newAddress = { label: 'Street 2, City' };
+    const newAddress = { label: 'Street 2, City', id: '2' };
     tree.children.componentWillReceiveProps({ address: newAddress });
 
     return Promise
@@ -31,11 +31,11 @@ describe('onComponentWillReceiveProps', () => {
   });
 
   it('should clear last selected suggestion when address changes', () => {
-    const tree = <AddressSearch address="Street 1, City" />;
+    const tree = <AddressSearch address={{ label: "Street 1, City", id: '1' }} />;
     renderIntoDocument(tree);
 
     tree.children.state.selectedSuggestion = {};
-    tree.children.componentWillReceiveProps({  address: 'Street 2, City' });
+    tree.children.componentWillReceiveProps({  address: 'Street 2, City', id: '2' });
 
     return Promise
       .resolve()
@@ -43,7 +43,7 @@ describe('onComponentWillReceiveProps', () => {
   });
 
   it('should not clear last selected suggestion if address is the same', () => {
-    const value = 'Street 1, City';
+    const value = { label: 'Street 1, City', id: '2' };
     const tree = <AddressSearch address={value} />;
     renderIntoDocument(tree);
 
