@@ -155,6 +155,12 @@ class DepartureRowAdditionalContent extends Component {
           </div>
           {!!disruptions.length && <DisruptionAlert disruptions={disruptions} />}
         </div>
+
+        <button
+          class="departures-list-row-additional-info-close text-only-button sr-only sr-only-focusable"
+          onClick={linkEvent(id, onRowToggle)}>
+            Sulje
+        </button>
       </div>
     );
   }
