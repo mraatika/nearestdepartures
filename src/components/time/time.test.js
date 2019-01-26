@@ -80,10 +80,7 @@ it('displays text "now" if interval is less than 1 minute', () => {
   const nowPlus30secs = now + (30 * 1000);
   const time = nowPlus30secs / 1000;
   const $ = dom.load(renderToString(<Time time={time}/>));
-  const result = $('span').text();
-  expect(result).toBe('Now');
+  const $element = $('span');
+  expect($element.text()).toBe('Now');
+  expect($element.is('.bold')).toBe(true);
 });
-
-
-
-

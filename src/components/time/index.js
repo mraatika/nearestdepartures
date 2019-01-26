@@ -23,5 +23,5 @@ export default ({ time, actualTime }) => {
     ?  timeToString(date)
     : timeLeftInMins < 1 ? 'Now' : `${timeLeftInMins} min`;
 
-  return <span>{timeText}</span>;
+  return <span class={timeText === 'Now' ? 'bold' : ''}>{timeText}</span>;
 };
