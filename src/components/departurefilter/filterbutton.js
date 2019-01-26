@@ -21,17 +21,27 @@ const propagateFilterToggle = ({ vehicleType, onFilterToggle }, e) =>
 * @param {boolean} [props.isToggled] Button's toggle state
 */
 export default ({ vehicleType = '', isToggled,  onFilterToggle }) => {
-  const className = `filter-button bg ${vehicleType.toLocaleLowerCase()}${isToggled ? ' toggled' : ''}`;
+  const classNames = [
+    'filter-button flex-full bottom-heavy-border',
+    isToggled
+      ? `toggled color-white bg-${vehicleType.toLocaleLowerCase()}`
+      : 'bg-white color-gray-light',
+  ];
 
   return (
     <button
-      class={className}
+      class={classNames.join(' ')}
       aria-label={`Suodatin ${VEHICLE_TYPE_TRANSLATIONS[vehicleType]}`}
       aria-pressed={!!isToggled}
       onClick={linkEvent({vehicleType, onFilterToggle}, propagateFilterToggle)}
     >
-      <VehicleIcon aria-hidden={true} iconName={`${vehicleType.toLocaleLowerCase()}-withoutBox`} />
-      <div className="bottom-border" />
+      <div class="space-xs space-clear-rl">
+        <VehicleIcon
+          class="vertical-middle"
+          aria-hidden={true}
+          iconName={`${vehicleType.toLocaleLowerCase()}-withoutBox`}
+        />
+      </div>
     </button>
   );
 };

@@ -57,7 +57,7 @@ User clicks second row
   Click Element  xpath=//ul[@class="departures-list-body"]/li[2]
 
 User presses enter on row
-  Press Key  xpath=//ul[@class="departures-list-body"]/li[1]/div[@class="departures-list-row"]  \\13
+  Press Key  xpath=//ul[@class="departures-list-body"]/li[1]/div[contains(@class, "departures-list-row")]  \\13
 
 User presses esc on additional info section
   Press Key  ${ADDITIONAL_INFO_SECTION}  \\27

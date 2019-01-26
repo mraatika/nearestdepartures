@@ -68,7 +68,7 @@ describe('displaying departure time', () => {
   it('does not add realtime class to cell when realtime is false ', () => {
     const time = new Date(2017, 0, 1, 12, 12).getTime() / 1000;
     const $ = dom.load(renderToString(<DepartureRow realtimeDeparture={time} realtime={false} />));
-    const result = $('.time').is('.realtime');
+    const result = $('.time').is('.color-light-green');
     expect(result).toEqual(false);
   });
 
@@ -79,10 +79,10 @@ describe('displaying departure time', () => {
     expect(output).toEqual('12:12');
   });
 
-  it('adds realtime class to cell when realtime is true', () => {
+  it('adds realtime class to time when realtime is true', () => {
     const time = new Date(2017, 0, 1, 12, 12).getTime() / 1000;
     const $ = dom.load(renderToString(<DepartureRow realtimeDeparture={time} realtime={true} />));
-    const result = $('.time').is('.realtime');
+    const result = $('.time').is('.color-light-green');
     expect(result).toEqual(true);
   });
 });
@@ -212,7 +212,7 @@ describe('Togglable additional info section', () => {
     const time = new Date(2017, 0, 1, 12, 12).getTime() / 1000;
     const $ = dom.load(renderToString(<DepartureRow realtimeDeparture={time} realtime={true} isToggled={true} />));
     const result = $('.departures-list-row-additional-info')
-      .find('.realtime')
+      .find('.color-light-green')
       .text();
     expect(result).toEqual('12:12 (arvioitu)');
   });
@@ -220,7 +220,7 @@ describe('Togglable additional info section', () => {
   it('does not contain realtime departure time if only scheduled time is available', () => {
     const time = new Date(2017, 0, 1, 12, 12).getTime() / 1000;
     const $ = dom.load(renderToString(<DepartureRow scheduledDeparture={time} isToggled={true} />));
-    const result = $('.departures-list-row-additional-info').find('.realtime');
+    const result = $('.departures-list-row-additional-info').find('.color-light-green');
     expect(result.length).toEqual(0);
   });
 

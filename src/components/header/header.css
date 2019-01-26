@@ -1,36 +1,6 @@
-header {
-  background-color: #007ac9;
-  border-bottom: 4px solid #005993;
-  color: #fff;
-  margin-bottom: 36px;
-}
-
-.header-content {
-  display: flex;
-  align-items: center;
-  margin: 0 auto;
-  max-width: 1024px;
-  padding: .6rem 1rem;
-}
-
-.header-title-wrapper {
-  flex: 1;
-}
-
 .app-description {
   display: none;
-}
-
-.app-description {
-  font-size: .8rem;
   line-height: .5;
-  margin-bottom: 1.5em;
-}
-
-.app-name {
-  font-family: 'Patua One', cursive;
-  text-transform: lowercase;
-  margin-left: 6px;
 }
 
 .app-logo {

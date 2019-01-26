@@ -7,9 +7,9 @@ import ExternalLink from '../externallink';
  * @param {object[]} props.disruptions
  */
 export default ({ disruptions }) => (
-  <div class="alert alert-info full-width">
+  <div class="alert-info color-alert align-left full-width bg-light-red space-s space-clear-tb">
     {disruptions.map(disruption => (
-      <p>
+      <p class="space-xs space-clear-rl">
         {disruption.alertHeaderText && <h3>{disruption.alertHeaderText}</h3>}
         <p class="alert-info-body">{disruption.alertDescriptionText}</p>
         {disruption.alertUrl &&

@@ -55,27 +55,27 @@ class FavouritesDialog extends Component {
     const { favourites = [] } = this.props;
     return (
       <div class={`favourites-modal-wrapper fill-parent${this.props.isVisible ? ' visible' : ''}`}>
-        <div class="modal fill-parent" />
+        <div class="modal fill-parent bg-black-opaque" />
         <div
-          class="favouriteslist fill-parent"
+          class="favouriteslist color-gray-dark bg-white text-left corner-rounded flex-column fill-parent centering-margin"
           role="dialog"
           tabIndex="0"
           aria-modal={true}
         >
-          <div className="favouriteslist-header">
-            <h2>Omat suosikit</h2>
-            <button
-              class="favouriteslist-close-button text-only-button"
-              onClick={this.props.onClose}>
-              sulje [x]
-            </button>
+          <div className="favouriteslist-header color-white bg-bus align-center space-xxl space-clear-rl">
+            <div class="space-xl space-clear-tb">
+              <h2 class="font-heading">Omat suosikit</h2>
+              <button class="favouriteslist-close-button text-only-button" onClick={this.props.onClose}>
+                sulje <span aria-hidden="true">[x]</span>
+              </button>
+            </div>
           </div>
           <div class="favouriteslist-header-triangle-container">
-            <div class="favouriteslist-header-triangle" />
-            <div class="favouriteslist-header-triangle-shadow" />
+            <div class="favouriteslist-header-triangle centering-margin" />
+            <div class="favouriteslist-header-triangle-shadow centering-margin" />
           </div>
-          <div class="favouriteslist-content flex-column">
-            <ul>
+          <div class="favouriteslist-content flex-column flex-full space-s space-clear-t">
+            <ul class="flex-full">
               {favourites.map(address =>
                 <FavouritesListItem
                   address={address}
@@ -84,11 +84,13 @@ class FavouritesDialog extends Component {
                   isSelected={areLocationsEqual(this.props.selectedAddress, address)}
                 />
               )}
-              {!favourites.length && <li class="favouriteslist-placeholder">Ei tallennettuja suosikkeja</li>}
+              {!favourites.length && <li class="favouriteslist-placeholder italic">Ei tallennettuja suosikkeja</li>}
             </ul>
-            <div class="info-message">
+            <div class="info-message flex-row flex-align-start flex-no-shrink align-left">
               <span class="badge info">!</span>
-              Suosikit tallentuvat paikallisesti, joten ne ovat hyödynnettävissä vain samalla selaimella ja laitteella, johon ne on tallennettu.
+              <div class="space-xs space-keep-l">
+                Suosikit tallentuvat paikallisesti, joten ne ovat hyödynnettävissä vain samalla selaimella ja laitteella, johon ne on tallennettu.
+              </div>
             </div>
           </div>
         </div>

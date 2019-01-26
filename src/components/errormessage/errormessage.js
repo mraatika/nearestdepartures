@@ -10,12 +10,12 @@ import { resolveError } from './errormessageresolver';
  */
 export default ({ error, onClick }) =>
   <div
-    class={`error-message ${error ? '' : ' hidden'}`}
+    class={`error-message position-relative space-s text-center color-alert bg-light-red ${error ? '' : ' hidden'}`}
     onClick={onClick}
     tabIndex="0"
     role="alert"
     aria-atomic="true"
   >
-    <button class="close-button" aria-label="Sulje">x</button>
     {error && resolveError(error)}
+    <button class="close-button position-absolute bold text-l" aria-label="Sulje">x</button>
   </div>;

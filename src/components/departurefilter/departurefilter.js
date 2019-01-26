@@ -18,9 +18,11 @@ export default ({
   onFilterToggle,
   onRangeChange
 }) => (
-  <div class="departure-filter">
-    <div><RangeFilter range={range} onChange={onRangeChange} /></div>
-    <div class="vehicle-type-filters">
+  <div class="departure-filter align-center space-m space-keep-b">
+    <div class="space-m space-clear-rl">
+      <RangeFilter range={range} onChange={onRangeChange} />
+    </div>
+    <div class="vehicle-type-filters flex-row">
       {filters.map(type =>
         <FilterButton
           vehicleType={type}

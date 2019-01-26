@@ -7,11 +7,11 @@ ${FILTER_BUTTON}=   class:filter-button
 *** Keywords ***
 User Selects vehicle filter
   [Arguments]  ${type}
-  Click Element  css:.filter-button.${type}
+  Click Element  css:.filter-button.bg-${type}
 
 Vehicle Filter Should Be Selected
   [Arguments]  ${type}
-  Element Should Be Visible  css:.filter-button.${type}.toggled
+  Element Should Be Visible  css:.filter-button.bg-${type}.toggled
 
 Vehicle Filter Count Should Be
   [Arguments]  ${count}
