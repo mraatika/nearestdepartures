@@ -102,7 +102,6 @@ class App extends Component {
    * Remove address from the state
    */
   clearAddress() {
-    console.log('CLEAR');
     this.setState({ address: undefined });
   }
 
