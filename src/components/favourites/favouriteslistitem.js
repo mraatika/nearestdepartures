@@ -21,8 +21,8 @@ const FavouritesListItem = ({ address, removeFavourite, selectFavourite, isSelec
       <IconButton
         className="favouriteslist-item-remove"
         text="x"
+        label="Poista Omat suosikit -listalta"
         onClick={linkEvent(address, removeFavourite)}
-        title="Poista Omat suosikit -listalta"
       />
     </div>
   </li>

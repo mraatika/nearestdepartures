@@ -28,6 +28,7 @@ const Favourites = ({ 
       className="favourites-button favourites-toggle"
       text={isCurrentAddressFavoured ? '★' : '☆'}
       title="Lisää suosikkeihin/poista suosikeista"
+      label={isCurrentAddressFavoured ? 'Poista suosikeista' : 'Lisää suosikkeihin'}
       aria-pressed={!!isCurrentAddressFavoured}
       disabled={!address}
       onClick={toggleFavourite}
@@ -37,6 +38,7 @@ const Favourites = ({ 
       className="favourites-button favourites-open"
       text="▼"
       title="Avaa Omat suosikit-lista"
+      label="Avaa Omat suosikit-lista"
       aria-pressed={isDialogVisible}
       onClick={toggleDialog} />
 

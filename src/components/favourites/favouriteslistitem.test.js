@@ -43,7 +43,7 @@ it('calls selectFavourite callback when the label is clicked', () => {
 });
 
 it('renders a close button with text x', () => {
-  const label = 'x';
+  const label = 'xPoista Omat suosikit -listalta';
   const $ = dom.load(renderToString(<FavouritestListItem address={{}} />));
   const element = $('.favouriteslist-item-remove');
   expect(element.text()).toEqual(label);

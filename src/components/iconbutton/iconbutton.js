@@ -7,9 +7,10 @@ import './iconbutton.css';
  * @param {string} props.className
  * @param {...*}
  */
-const IconButton = ({ text, className, ...rest }) => (
+const IconButton = ({ text, className, label, ...rest }) => (
   <button class={`icon-button${className ? ` ${className}` : ''}`} {...rest}>
-    {text}
+    <span aria-hidden={!!label}>{text}</span>
+    {label && <span class="sr-only">{label}</span>}
   </button>
 );
 
