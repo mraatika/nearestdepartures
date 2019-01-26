@@ -10,12 +10,20 @@ it('renders a button', () => {
   expect(button.length).toBe(1);
 });
 
-it('renders a class corresponding to vehicleType', () => {
+it('renders a class corresponding to vehicleType when toggled', () => {
   const vehicleType = 'BUS';
-  const $ = dom.load(renderToString(<FilterButton vehicleType={vehicleType}/>));
+  const $ = dom.load(renderToString(<FilterButton isToggled={true} vehicleType={vehicleType}/>));
   const button = $('button');
-  const result = button.hasClass(vehicleType.toLocaleLowerCase());
+  const result = button.hasClass(`bg-${vehicleType.toLocaleLowerCase()}`);
   expect(result).toBe(true);
+});
+
+it('renders white background when not toggled', () => {
+  const vehicleType = 'BUS';
+  const $ = dom.load(renderToString(<FilterButton isToggled={false} vehicleType={vehicleType}/>));
+  const button = $('button');
+  expect(button.hasClass('bg-white')).toBe(true);
+  expect(button.hasClass(`bg-${vehicleType.toLocaleLowerCase()}`)).toBe(false);
 });
 
 it('contains an icon', () => {

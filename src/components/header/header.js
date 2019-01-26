@@ -10,14 +10,16 @@ import Favourites from '../favourites';
  * @param {function} props.selectLocation
  */
 const Header = ({ address, selectLocation }) => (
-  <header>
-    <div class="header-content">
-      <div className="header-title-wrapper">
-        <h1>
+  <header class="bg-bus color-white space-xs space-clear-rl">
+    <div class="header-content flex-row flex-align-center centering-margin max-content-width space-s space-clear-tb">
+      <div className="flex-full">
+        <h1 class="space-s space-clear-rl">
           <img class="app-logo" src={logo} alt="" />
-          <span class="app-name">julkisilla.info</span>
+          <span class="app-name font-heading lowercase">julkisilla.info</span>
         </h1>
-        <p class="app-description">Löydä lähimmät julkisen liikenteen lähdöt helposti</p>
+        <p class="app-description text-s space-l space-keep-b">
+          Löydä lähimmät julkisen liikenteen lähdöt helposti
+        </p>
       </div>
 
       <Favourites

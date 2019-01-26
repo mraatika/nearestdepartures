@@ -84,7 +84,7 @@ User Has Favoured Address
 User Selects Favourite
   [Arguments]    ${entry}
   Open Favourites
-  Click Element  xpath://li[contains(.//div[@class='favouriteslist-item-label']/button, '${entry}')]
+  Click Element  xpath://li[contains(.//button[contains(@class, 'favouriteslist-item-label')], '${entry}')]
 
 Toggle Favourite
   Click Button    ${FAVOURITE_TOGGLE}

@@ -14,6 +14,7 @@ import './suggestionslist.css';
 export default ({ suggestions = [], selected = {}, onItemClick, onClose }) => (
   <ol
     id="suggestions-list"
+    class="full-width position-absolute space-clear-l"
     role="listbox"
     style={{ display: suggestions.length ? 'block' : 'none' }}>
     {suggestions.map(suggestion => (

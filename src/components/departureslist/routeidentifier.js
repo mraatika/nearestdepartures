@@ -11,6 +11,6 @@ import VehicleIcon from '../vehicleicon/vehicleicon';
 export default ({ routeName = '', vehicleType = '' }) => (
   <span class={vehicleType.toLowerCase()}>
     <VehicleIcon iconName={vehicleType.toLocaleLowerCase()} />
-    <span class="route-identifier">{routeName}</span>
+    <span class={`route-identifier space-xxs space-keep-l color-${vehicleType.toLowerCase()}`}>{routeName}</span>
   </span>
 );

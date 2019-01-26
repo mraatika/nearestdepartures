@@ -1,70 +1,15 @@
-.departure-filter {
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-.range-filter-wrapper {
-  padding: 1em 0;
-  margin: 1em 0;
-}
-
-.range-filter-wrapper label {
-  display: block;
-  margin: 6px 0;
-}
-
 /* FILTER BUTTONS */
-
-.vehicle-type-filters {
-  display: flex;
-}
-
-.departure-filter button {
-  flex: 1;
-  padding: 0;
-
-  border-right: 1px solid #ddd;
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-  border-left: 0;
-  color: #fff;
-
-  cursor: pointer;
-}
-
-.departure-filter button:not(.toggled) {
-  background: #fff !important;
-  color: #ccc;
-}
-
-.departure-filter button:first-child {
-  border-left: 1px solid #ddd;
+.departure-filter button:not(:last-child) {
+  margin-right: 1px;
 }
 
 .departure-filter .icon {
-  width: 24px;
-  height: 24px;
-  margin-top: 6px;
-  margin-bottom: 2px;
-}
-
-.departure-filter button:not(.toggled) .bottom-border {
-  visibility: hidden;
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 /* RANGE FILTER */
-
-.departure-filter output {
-  display: block;
-  text-align: right;
-}
-
 .departure-filter input[type=range] {
-  display: block;
-  width: 100%;
-  padding: 0;
-  margin: 0;
-  border: 0;
   -webkit-appearance: none;
   background: transparent; /* Otherwise white in Chrome */
 }

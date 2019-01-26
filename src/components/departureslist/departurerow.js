@@ -41,37 +41,38 @@ export default ({
   scheduledDeparture,
   disruptions = [],
 }) =>
-  <li class="departures-list-row-container">
+  <li class="departures-list-row-container border-thin-light border-keep-b">
     <div
-      class="departures-list-row"
+      class="departures-list-row flex-row pointer"
       onClick={linkEvent(id, onRowToggle)}
       onKeyUp={okKeyPressHandler(onRowToggle, id)}
       tabIndex={0}
       aria-expanded={!!isToggled}
       aria-controls={`departure-${id}`}
     >
-      <div class={`time${realtime ? ' realtime' : ''}`}>
+      <div class={`time${realtime ? ' color-light-green' : ''}`}>
         <Time time={realtimeDeparture} />
       </div>
-      <div class="routename">
+      <div class="routename bold overflow-hidden">
         <ExternalLink href={routeUrl}>
           <RouteIdentifier vehicleType={vehicleType} routeName={routeName} />
         </ExternalLink>
       </div>
-      <div class="destination">
+      <div class="destination flex-full position-relative vertical-bottom overflow-hidden">
         {!!(disruptions.length) &&
           <span
             title="Linjalla häiriöitä: Klikkaa nähdäksesi lisätietoja"
-            class="alert alert-icon"
-            aria-label="Linjalla häiriöitä"
-            tabIndex="0"
-          >
-            ⚠
+            class="color-alert alert-icon bold space-xs space-keep-r">
+            <span aria-hidden="true">⚠</span>
+            <span class="sr-only">Huomio: Linjalla häiriöitä</span>
           </span>}
         {destination}
       </div>
-      <div class="distance"><Distance distance={distance} /></div>
+      <div class="distance color-gray-dark align-right vertical-bottom space-xs space-keep-l">
+        <Distance distance={distance} />
+      </div>
     </div>
+
     <DepartureRowAdditionalContent {...{
       id,
       realtime,
@@ -119,41 +120,49 @@ class DepartureRowAdditionalContent extends Component {
     return (
       <div
         id={`departure-${id}`}
-        class={`departures-list-row-additional-info${isToggled ? ' visible' : ''}`}
+        class={`departures-list-row-additional-info position-relative overflow-hidden${isToggled ? ' visible' : ''}`}
         aria-hidden={!isToggled}
         tabIndex={isToggled ? 0 : -1}
         ref={e => this.additionalContent = e}
         onKeyUp={keyPressHandler([27], onRowToggle, id)}
       >
-        <div class="departures-list-row-additional-info-content">
-          <div class="departure-additional-info-content-block">
-            <Icon type="clock" />
-            <div>
-              {realtime && <div class="realtime bold " title="Arvioitu reaaliaikainen lähtöaika pysäkiltä">
-                <Time time={realtimeDeparture} actualTime={true} /> (arvioitu)
-              </div>}
-              <div class="scheduled-departure" title="Aikataulun mukainen lähtöaika pysäkiltä">
-                <Time time={scheduledDeparture} actualTime={true} /> (aikataulu)
+        <div class="space-xs space-clear-rl">
+          <div class="space-xs space-clear-tb flex-row flex-wrap">
+            <div class="flex-row flex-align-center space-m space-keep-r">
+              <span class="space-s space-keep-r">
+                <Icon type="clock" />
+              </span>
+              <div class="space-xs space-keep-b no-wrap">
+                {realtime && <div class="color-light-green bold" title="Arvioitu reaaliaikainen lähtöaika pysäkiltä">
+                  <Time time={realtimeDeparture} actualTime={true} /> (arvioitu)
+                </div>}
+                <div class="scheduled-departure" title="Aikataulun mukainen lähtöaika pysäkiltä">
+                  <Time time={scheduledDeparture} actualTime={true} /> (aikataulu)
+                </div>
               </div>
             </div>
-          </div>
-          <div class="departure-additional-info-content-block">
-            <Icon type="bus-stop" />
-            <div>
-              <ExternalLink
-                class="bold departure-stop-name"
-                tabIndex={isToggled ? '0' : '-1'}
-                href={stopUrl}
-                title="Näytä pysäkin tiedot Reittioppaassa"
-                text={stopName}
-              />
-              <div>
-                <div class="departure-stop-code">{stopCode}</div>
-                <span class="departure-stop-description">{stopDescription}</span>
+            <div class="flex-row flex-align-center no-wrap">
+              <span class="space-s space-keep-r">
+                <Icon type="bus-stop" />
+              </span>
+              <div class="space-xs space-keep-b">
+                <ExternalLink
+                  class="bold departure-stop-name"
+                  tabIndex={isToggled ? '0' : '-1'}
+                  href={stopUrl}
+                  title="Näytä pysäkin tiedot Reittioppaassa"
+                  text={stopName}
+                />
+                <div>
+                  <span class="departure-stop-code text-s color-gray-dark space-xxs space-clear-tb corner-rounded border-thin-light">
+                    {stopCode}
+                  </span>
+                  <span class="departure-stop-description space-xs space-keep-l">{stopDescription}</span>
+                </div>
               </div>
             </div>
+            {!!disruptions.length && <DisruptionAlert disruptions={disruptions} />}
           </div>
-          {!!disruptions.length && <DisruptionAlert disruptions={disruptions} />}
         </div>
 
         <button

@@ -72,11 +72,11 @@ Loading Is Done
 
 Range Should Be
   [Arguments]  ${range}
-  Element Text Should Be  css:.range-filter-wrapper>output  ${range}m
+  Element Text Should Be  xpath://div[contains(@class, 'range-filter-wrapper')]//output  ${range}m
 
 Suggestion List Contains
   [Arguments]    ${value}
-  Element Should Be Visible    xpath://li[contains(.//div[@class='suggestion-name'], '${value}')]
+  Element Should Be Visible    xpath://li[contains(.//div[contains(@class, 'suggestion-name')], '${value}')]
 
 Suggestion List Is hidden
   Wait Until Element Is Not Visible  ${SUGGESTION_LIST}
@@ -91,7 +91,7 @@ User Clicks Suggestion
   [Arguments]    ${value}
   Wait For Suggestion List
   Suggestion List Contains    ${value}
-  Click Element    xpath://li[contains(.//div[@class='suggestion-name'], '${value}')]
+  Click Element    xpath://li[contains(.//div[contains(@class, 'suggestion-name')], '${value}')]
 
 User Has Entered Search Value
   [Arguments]  ${address}  ${skipWaitForLoadingDone}= 'false'

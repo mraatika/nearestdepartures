@@ -32,8 +32,9 @@ const AddressSearch = ({
     onSubmit={onSubmit}
     onKeyUp={onKeyEvent}>
 
-    <div class="address-search">
+    <div class="address-search flex-row">
       <input
+        class="flex-full border-thin-light border-clear-right font-alternative space-s space-keep-l"
         ref={getAddressInputRef}
         type="text"
         role="combobox"
@@ -47,17 +48,22 @@ const AddressSearch = ({
         onBlur={onBlur}
         value={searchTerm} />
       <button
+        class="address-search-clear text-xl color-gray color-black-active bold font-alternative border-thin-light border-clear-left"
         type="button"
-        className="address-search-clear"
-        onClick={onClearAddressClick}
-      >
-        <span class="sr-only">Tyhjennä hakusana</span>
-        <span aria-hidden="true">x</span>
+        onClick={onClearAddressClick}>
+        <div class="space-s space-clear-tb">
+          <span class="sr-only">Tyhjennä hakusana</span>
+          <span aria-hidden="true">x</span>
+        </div>
       </button>
-      <button className="address-search-submit" type="submit">Hae</button>
+      <button
+        class="address-search-submit bold bg-bus color-white font-alternative"
+        type="submit">
+        <div class="space-m space-clear-tb">Hae</div>
+      </button>
     </div>
 
-    <div class="suggestions">
+    <div class="suggestions position-relative">
       <SuggestionsList
         suggestions={suggestions}
         selected={selectedSuggestion}

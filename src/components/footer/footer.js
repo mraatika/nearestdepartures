@@ -1,5 +1,4 @@
 import { toTimeString } from '../../utils/utils';
-import './footer.css';
 
 /**
  * App footer component
@@ -8,9 +7,9 @@ import './footer.css';
  * @param {Date} props.departureUpdateTime
  */
 export default ({ departureUpdateTime }) => (
-  <footer>
-    <div class="footer-content">
-      <p class="footer-app-name">{`Julkisilla.info v${process.env.INFERNO_APP_VERSION}`}</p>
+  <footer class="full-width text-s color-white bg-bus-dark space-s">
+    <div class="footer-content max-content-width centering-margin">
+      <p class="footer-app-name font-heading">{`Julkisilla.info v${process.env.INFERNO_APP_VERSION}`}</p>
       <p>
         Lähdöt päivitetty&nbsp;
         <i>{departureUpdateTime ? toTimeString(departureUpdateTime) : 'Ei koskaan'}</i>

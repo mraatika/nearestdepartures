@@ -1,125 +1,45 @@
-.departures-list {
-  position: relative;
-  width: 100%;
-  margin: 0 auto;
-  border-spacing: 0;
-}
-
 .departures-list a {
   color: inherit;
   text-decoration: none;
-}
-
-.departures-list-header {
-  display: flex;
-  margin-bottom: 6px;
-  white-space: nowrap;
 }
 
 .departures-list-header .active {
   border-bottom: 2px solid #007ac9;
 }
 
-.departures-list-header .header {
-  font-weight: 600;
-  color: #333;
-
-  cursor: pointer;
-  user-select: none;
+.departures-list-header .header:last-child {
+  flex: 1;
+  text-align: right;
 }
 
 .departures-list-row-container {
-  border-bottom: 1px solid #ddd;
-  margin: 0;
-
   overflow-y: visible;
-  white-space: nowrap;
-  background: #fff;
-  line-height: 2.5;
+  line-height: 3.25rem;
 }
 
-.departures-list-row {
-  display: flex;
-  align-content: space-between;
-  cursor: pointer;
+.departures-list-row-container:last-child {
+  border-bottom: 0;
 }
 
-.departures-list-header .header,
-.departures-list-row > div {
-  padding: 0 .5rem;
-}
-
-.departures-list-header .header:first-child,
-.departures-list-row > div:first-child {
-  padding-left: 0;
-}
-
-.departures-list-header .header:last-child,
-.departures-list-row > div:last-child {
-  padding-right: 0;
-}
-
-.departures-list-row:last-child {
-  border: 0;
-}
-
-.departures-list-row .time {
-  width: 3rem;
-}
-
+.departures-list .time,
 .departures-list .routename {
-  width: 3.5rem;
-}
-
-.departures-list-row .routename {
-  font-weight: 600;
-  overflow: hidden;
-}
-
-.departures-list .destination {
-  flex: 1;
-  position: relative;
-  vertical-align: bottom;
-}
-
-.departures-list-row .destination {
-  overflow: hidden;
-}
-
-.departures-list .distance {
-  color: #444;
-  text-align: right;
-  vertical-align: bottom;
+  width: 4.25rem;
 }
 
 .departures-list svg.icon {
+  position: relative;
+  bottom: -1px;
   width: 1em;
-  height: 1em;
-  display: inline-block;
-}
-
-.departures-list .route-identifier {
-  padding: 0 5px;
 }
 
 .departures-list-row-additional-info {
-  position: relative;
   max-height: 0;
-  overflow: hidden;
   transition: max-height 250ms linear;
+  line-height: 1.75rem;
 }
 
 .departures-list-row-additional-info a {
   text-decoration: underline;
-}
-
-.departures-list-row-additional-info-content {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  padding: .8rem .4rem;
-  line-height: 1.5;
-  margin-bottom: -.4rem;
 }
 
 .departures-list-row-additional-info.visible {
@@ -129,55 +49,4 @@
 .departures-list-row-additional-info-close {
   top: 1rem;
   right: 0;
-}
-
-.departure-additional-info-content-block {
-  display: flex;
-  margin-right: 1rem;
-  margin-bottom: .4rem;
-}
-
-.departure-additional-info-content-block .icon-image {
-  margin-top: .3rem;
-  margin-right: .4rem;
-}
-
-.departure-stop-code {
-  display: inline-block;
-  border: 1px solid #ddd;
-  border-radius: 3px;
-  font-size: .8rem;
-  color: #56666e;
-  padding: 0 .2rem;
-  margin-right: .4rem;
-}
-
-.departures-list-row.no-results {
-  font-style: italic;
-  text-align: center;
-  padding: 20px 0;
-  white-space: normal;
-}
-
-.alert {
-  color: #a94442;
-}
-
-.alert-icon {
-  display: inline-block;
-  margin-right: .4rem;
-  font-weight: bold;
-}
-
-.alert-info {
-  background-color: #f2dede;
-  white-space: normal;
-  text-align: left;
-  padding: .4rem 1rem;
-}
-
-@media screen and (min-width: 520px) {
-  .departure-additional-info-content-block {
-    margin-right: 2rem;
-  }
 }

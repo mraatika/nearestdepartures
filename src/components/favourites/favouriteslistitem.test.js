@@ -25,7 +25,7 @@ it('does not have a selected class if the item is not selected', () => {
 it('renders label as a button element', () => {
   const label = 'HeaderText';
   const $ = dom.load(renderToString(<FavouritestListItem address={{ label }} />));
-  const element = $('.favouriteslist-item-label button');
+  const element = $('.favouriteslist-item-label');
   expect(element.text()).toEqual(label);
 });
 

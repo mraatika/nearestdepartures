@@ -1,75 +1,8 @@
-.address-search {
-  width: 100%;
-  position: relative;
-}
-
-.address-search input {
-  width: 100%;
-  border: 1px solid #eee;
-  padding-right: 82px;
-  padding-left: .5rem;
-  outline: none;
-}
-
 .address-search input,
-.address-search .address-search-submit {
-  display: inline-block;
-  border-radius: 0;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  -webkit-appearance: none;
-  height: 40px;
-  box-sizing: border-box;
-}
-
 .address-search button {
-  position: absolute;
-  box-sizing: border-box;
-  font-weight: 600;
-  text-align: center;
-  border: 1px solid transparent;
-  cursor: pointer;
-}
-
-button.address-search-submit {
-  right: 0;
-  width: 80px;
-  font-size: 1rem;
-  color: #fff;
-  background: #007ac9;
-  border-bottom: 4px solid #0065a7;
-}
-
-.address-search-submit:focus,
-.address-search-submit:hover
-.address-search-submit:active {
-  background: #0065a7;
+  line-height: 2.5rem;
 }
 
 .address-search-clear {
-  right: 80px;
-  width: 40px;
-  height: 40px;
-  padding: 0;
-  border: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 1.4rem;
-  font-weight: bold;
-  color: #666;
-  background: none;
-}
-
-.address-search-clear span {
-  display: block;
-  background: #fff;
-}
-
-.address-search-clear:focus,
-.address-search-clear:hover
-.address-search-clear:active {
-  color: #000;
-}
-
-.suggestions {
-  position: relative;
+  transition: color .2s linear;
 }

@@ -146,17 +146,21 @@ class App extends Component {
 
     return (
       <div class="app-content flex-column">
-        <Header
-          address={address}
-          selectLocation={this.searchForDepartures}
-        />
+        <div class="space-l space-keep-b">
+          <Header
+            address={address}
+            selectLocation={this.searchForDepartures}
+          />
+        </div>
 
-        <main>
-          {error && !isPositionError && <ErrorMessage
-            error={error}
-            onClick={this.hideError}
-            onComponentDidMount={requestFocus}
-          />}
+        <main class="flex-full full-width centering-margin max-content-width space-s space-clear-t">
+          <div class="space-s space-keep-b">
+            {error && !isPositionError && <ErrorMessage
+              error={error}
+              onClick={this.hideError}
+              onComponentDidMount={requestFocus}
+            />}
+          </div>
 
           <AddressSearch
             address={address}
@@ -165,11 +169,11 @@ class App extends Component {
             clearAddress={this.clearAddress}
           />
 
-          <a class="skip-to-list sr-only sr-only-focusable" href="#departures-list-results">
+          <a class="skip-to-list sr-only sr-only-focusable position-absolute" href="#departures-list-results">
             Siirry hakutuloksiin
           </a>
 
-          <div role="status" aria-live="polite">
+          <div role="status" aria-live="polite" class="space-xs space-keep-t">
             {(accuracy || isPositionError) &&
               <AccuracyIndicator accuracy={accuracy} error={isPositionError && error} />}
           </div>

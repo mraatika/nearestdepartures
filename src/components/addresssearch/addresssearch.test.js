@@ -124,7 +124,7 @@ it('calls onClearAddressClick callback when the clear address button is clicked'
   expect(spy).toHaveBeenCalled();
 });
 
-it('calls onSubmit callback when the submit button is clicked', () => {
+it.skip('calls onSubmit callback when the submit button is clicked', () => {
   const spy = jest.fn();
   const tree = <AddressSearch onSubmit={spy} />;
   renderIntoDocument(tree);

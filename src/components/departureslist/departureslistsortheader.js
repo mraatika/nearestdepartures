@@ -17,11 +17,11 @@ export default ({
   onClick
 }) => (
   <div
+    class={`header bold color-gray-dark bg-white pointer ${propName.toLowerCase()}`}
     tabindex="0"
     role="button"
     aria-pressed={active ? 'true' : 'false'}
     aria-label={`Järjestä lista otsikon ${text.toLocaleLowerCase()} mukaan`}
-    class={`header ${propName.toLowerCase()}`}
     onClick={linkEvent(propName, onClick)}
     onKeyPress={okKeyPressHandler(onClick, propName)}>
     <span class={active ? 'active' : ''}>{text}</span>

@@ -1,3 +1,24 @@
+* {
+  font-family: inherit;
+}
+
+html {
+  font-size: 100%;
+}
+
+body {
+  font-size: 16px;
+  font-family: "Open Sans", arial, verdana, tahoma, sans-serif;
+}
+
+h1 {
+  font: normal 2em Georgia, 'Times New Roman', Times, serif;
+}
+
+input {
+  font-size: inherit;
+}
+
 /* regular text */
 @font-face {
   font-family: 'Open Sans';
@@ -20,4 +41,46 @@
   font-style: normal;
   font-weight: 400;
   src: url(./fonts/Patua_One/PatuaOne-Regular.ttf) format('truetype');
+}
+
+.font-heading {
+  font-family: 'Patua One', cursive;
+}
+
+.font-alternative {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.bold {
+  font-weight: 600;
+}
+
+.text-s {
+  font-size: .9rem;
+}
+
+.text-m {
+  font-size: 1rem;
+}
+
+.text-l {
+  font-size: 1.2rem;
+}
+
+.text-xl {
+  font-size: 1.5rem;
+}
+
+.lowercase {
+  text-transform: lowercase;
+}
+
+.italic {
+  font-style: italic;
+}
+
+@media (min-width: 750px) {
+  body {
+    font-size: 16px;
+  }
 }
