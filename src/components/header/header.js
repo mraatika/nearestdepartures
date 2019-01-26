@@ -12,12 +12,12 @@ import Favourites from '../favourites';
 const Header = ({ address, selectLocation }) => (
   <header class="bg-bus color-white space-xs space-clear-rl">
     <div class="header-content flex-row flex-align-center centering-margin max-content-width space-s space-clear-tb">
-      <div className="flex-full">
+      <div class="flex-full no-wrap">
         <h1 class="space-s space-clear-rl">
           <img class="app-logo" src={logo} alt="" />
           <span class="app-name font-heading lowercase">julkisilla.info</span>
         </h1>
-        <p class="app-description text-s space-l space-keep-b">
+        <p class="app-description text-s line-height-s space-l space-keep-b">
           Löydä lähimmät julkisen liikenteen lähdöt helposti
         </p>
       </div>

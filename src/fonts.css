@@ -71,12 +71,36 @@ input {
   font-size: 1.5rem;
 }
 
+.line-height-s {
+  line-height: .5rem;
+}
+
+.line-height-m {
+  line-height: 1rem;
+}
+
+.line-height-l {
+  line-height: 1.75rem;
+}
+
+.line-height-xl {
+  line-height: 2.5rem;
+}
+
+.line-height-xxl {
+  line-height: 3.25rem;
+}
+
 .lowercase {
   text-transform: lowercase;
 }
 
 .italic {
   font-style: italic;
+}
+
+.underline {
+  text-decoration: underline;
 }
 
 @media (min-width: 750px) {

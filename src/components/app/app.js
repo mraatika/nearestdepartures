@@ -145,21 +145,22 @@ class App extends Component {
 
     return (
       <div class="app-content flex-column">
-        <div class="space-l space-keep-b">
+        <div class="space-m space-keep-b">
           <Header
             address={address}
             selectLocation={this.searchForDepartures}
           />
         </div>
 
-        <main class="flex-full full-width centering-margin max-content-width space-s space-clear-t">
-          <div class="space-s space-keep-b">
-            {error && !isPositionError && <ErrorMessage
-              error={error}
-              onClick={this.hideError}
-              onComponentDidMount={requestFocus}
-            />}
-          </div>
+        <main class="flex-full full-width centering-margin max-content-width space-xs space-clear-t">
+          {error && !isPositionError &&
+            <div class="space-s space-keep-b">
+              <ErrorMessage
+                error={error}
+                onClick={this.hideError}
+                onComponentDidMount={requestFocus}
+              />}
+            </div>}
 
           <AddressSearch
             address={address}

@@ -30,7 +30,6 @@
   position: absolute;
   top: 1rem;
   right: 1rem;
-  text-decoration: underline;
   background: none;
   border: 0;
 }
@@ -68,7 +67,6 @@
 .favouriteslist li {
   position: relative;
   overflow-y: visible;
-  line-height: 1.8;
   letter-spacing: 0;
 }
 

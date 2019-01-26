@@ -32,7 +32,7 @@ const AddressSearch = ({
     onSubmit={onSubmit}
     onKeyUp={onKeyEvent}>
 
-    <div class="address-search flex-row">
+    <div class="address-search flex-row line-height-xl">
       <input
         class="flex-full border-thin-light border-clear-right font-alternative space-s space-keep-l"
         ref={getAddressInputRef}
@@ -59,7 +59,7 @@ const AddressSearch = ({
       <button
         class="address-search-submit bold bg-bus color-white font-alternative"
         type="submit">
-        <div class="space-m space-clear-tb">Hae</div>
+        <div class="space-s space-clear-tb">Hae</div>
       </button>
     </div>
 

@@ -65,7 +65,7 @@ class FavouritesDialog extends Component {
           <div className="favouriteslist-header color-white bg-bus align-center space-xxl space-clear-rl">
             <div class="space-xl space-clear-tb">
               <h2 class="font-heading">Omat suosikit</h2>
-              <button class="favouriteslist-close-button text-only-button" onClick={this.props.onClose}>
+              <button class="favouriteslist-close-button text-only-button underline" onClick={this.props.onClose}>
                 sulje <span aria-hidden="true">[x]</span>
               </button>
             </div>

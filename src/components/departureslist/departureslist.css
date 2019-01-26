@@ -1,8 +1,3 @@
-.departures-list a {
-  color: inherit;
-  text-decoration: none;
-}
-
 .departures-list-header .active {
   border-bottom: 2px solid #007ac9;
 }
@@ -14,7 +9,6 @@
 
 .departures-list-row-container {
   overflow-y: visible;
-  line-height: 3.25rem;
 }
 
 .departures-list-row-container:last-child {
@@ -23,7 +17,7 @@
 
 .departures-list .time,
 .departures-list .routename {
-  width: 4.25rem;
+  width: 4rem;
 }
 
 .departures-list svg.icon {
@@ -35,4 +29,11 @@
 .departures-list-row-additional-info-close {
   top: 1rem;
   right: 0;
+}
+
+@media (min-width: 640px) {
+  .departures-list .time,
+  .departures-list .routename {
+    width: 4.5rem;
+  }
 }

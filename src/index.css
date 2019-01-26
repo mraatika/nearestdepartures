@@ -17,6 +17,7 @@ body {
 
 input {
   border-radius: 0;
+  min-width: 0;
 }
 
 button {
@@ -35,6 +36,10 @@ button {
 ul,
 ol {
   list-style: none;
+}
+
+a {
+  text-decoration: none;
 }
 
 .pointer {
@@ -86,7 +91,7 @@ ol {
   padding: .25em .6em;
   font-family: "Patua One", cursive;
   font-size: 1.2rem;
-  line-height: 1;
+  line-height: 1rem;
   text-align: center;
   white-space: nowrap;
   vertical-align: baseline;

@@ -1,8 +1,15 @@
-.address-search input,
-.address-search button {
-  line-height: 2.5rem;
+.address-search {
+  margin-top: -.5rem;
 }
 
 .address-search-clear {
   transition: color .2s linear;
+}
+
+.address-search-submit {
+  border: 1px solid #007ac9;
+}
+
+.address-search-submit-wrapper {
+  margin-top: .5rem;
 }

@@ -41,7 +41,7 @@ export default ({
   scheduledDeparture,
   disruptions = [],
 }) =>
-  <li class="departures-list-row-container border-thin-light border-keep-b">
+  <li class="departures-list-row-container border-thin-light border-keep-b line-height-xxl">
     <div
       class="departures-list-row flex-row pointer"
       onClick={linkEvent(id, onRowToggle)}
@@ -54,13 +54,13 @@ export default ({
         <Time time={realtimeDeparture} />
       </div>
 
-      <div class="routename bold overflow-hidden">
+      <div class="routename bold overflow-hidden no-wrap">
         <ExternalLink href={routeUrl}>
           <RouteIdentifier vehicleType={vehicleType} routeName={routeName} />
         </ExternalLink>
       </div>
 
-      <div class="destination flex-full position-relative vertical-bottom overflow-hidden">
+      <div class="destination flex-full position-relative vertical-bottom overflow-hidden no-wrap">
         {!!(disruptions.length) &&
           <span
             title="Linjalla häiriöitä: Klikkaa nähdäksesi lisätietoja"
@@ -120,8 +120,7 @@ const DepartureRowAdditionalContent = forwardRef(({
     onKeyUp={keyPressHandler([27], onRowToggle, id)}
   >
     <div class="space-xs space-clear-rl">
-
-      <div class="space-xs space-clear-tb flex-row flex-wrap">
+      <div class="space-xs space-clear-tb flex-row flex-wrap line-height-l">
         <div class="flex-row flex-align-center space-m space-keep-r">
           <span class="space-s space-keep-r">
             <Icon type="clock" />
