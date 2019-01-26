@@ -2,6 +2,7 @@ import { Component } from 'inferno';
 import FavouritesListItem from './favouriteslistitem';
 import { areLocationsEqual } from './model';
 import './favourites.css';
+import { initFocusTrap } from '../../utils/utils';
 
 /**
  * A dialog component for displaying user's saved locations
@@ -22,6 +23,7 @@ class FavouritesDialog extends Component {
   constructor(props) {
     super(props);
     this.onKeyUp = this.onKeyUp.bind(this);
+    this.clearFocus = () => {};
   }
 
   componentDidUpdate(prevProps) {
@@ -31,20 +33,20 @@ class FavouritesDialog extends Component {
     // if the dialog was opened
     if (!wasVisible && isNowVisible) {
       document.body.className = `no-scroll ${document.body.className}`.trim();
-      // start listening to keyup events
       document.body.addEventListener('keyup', this.onKeyUp);
-      // for usability reasons focus on the dialog when toggled visible
-      this.dialog.focus();
+
+      const closeButton = document.querySelector('.favouriteslist-close-button');
+      const removeButtons = document.querySelectorAll('.favouriteslist-item-remove');
+      this.clearFocus = initFocusTrap(closeButton, removeButtons[removeButtons.length - 1], true);
       // if the dialog was closed
     } else if (wasVisible && !isNowVisible) {
       document.body.className = document.body.className.replace('no-scroll', '');
-      // stop listening to keyup events
       document.body.removeEventListener('keyup', this.onKeyUp);
+      this.clearFocus();
     }
   }
 
   onKeyUp(e) {
-    // close the dialog on esc press
     if (e.key === 'Escape') {
       this.props.onClose();
     }
@@ -57,14 +59,15 @@ class FavouritesDialog extends Component {
         <div class="modal fill-parent" />
         <div
           class="favouriteslist fill-parent"
-          ref={r => this.dialog = r}
-          tabIndex="0"
           role="dialog"
-          aria-modal
+          tabIndex="0"
+          aria-modal={true}
         >
           <div className="favouriteslist-header">
             <h2>Omat suosikit</h2>
-            <button class="favouriteslist-close-button text-only-button" onClick={this.props.onClose}>
+            <button
+              class="favouriteslist-close-button text-only-button"
+              onClick={this.props.onClose}>
               sulje [x]
             </button>
           </div>

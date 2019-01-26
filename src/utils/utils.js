@@ -184,12 +184,6 @@ export const prop = propName =>
 export const propOr = (prop, otherwise, obj = {}) => obj[prop] == null ? otherwise : obj[prop];
 
 /**
- * Request focus on given element
- * @param {DOMNode} domNode
- */
-export const requestFocus = domNode => domNode.focus();
-
-/**
  * Get props of given objects and compare them
  * @param {string} propName
  * @param {object} o1
@@ -198,3 +192,47 @@ export const requestFocus = domNode => domNode.focus();
  */
 export const isPropChanged = (propName, o1, o2) =>
   prop(propName)(o1) !== prop(propName)(o2);
+
+/**
+ * Request focus on given element
+ * @param {DOMNode} domNode
+ */
+export const requestFocus = domNode => domNode.focus();
+
+/**
+ * @private
+ * @param {DOMNode} focusOn
+ * @param {Boolean} shiftKey
+ */
+const handleTab = (focusOn, shiftKey) =>
+  e => {
+    if (e.keyCode === 9 && e.shiftKey === shiftKey) {
+      e.preventDefault();
+      e.stopPropagation();
+      focusOn.focus();
+    }
+  };
+
+/**
+ * Init a focus trap to keep focus in a loop
+ * @param {DOMNode} firstElement
+ * @param {DOMNode} lastElement
+ * @param {Boolean} focusFirstElement
+ * @return {Function} Returns a function for clearing the callbacks
+ */
+export const initFocusTrap = (firstElement, lastElement, focusFirstElement) => {
+  const startHandler = handleTab(lastElement, true);
+  const endHandler = handleTab(firstElement, false);
+  const currentActiveElement = document.activeElement;
+
+  firstElement.addEventListener('keydown', startHandler);
+  lastElement.addEventListener('keydown', endHandler);
+
+  focusFirstElement && setTimeout(() => requestFocus(firstElement), 100);
+
+  return () => {
+    firstElement.removeEventListener('keydown', startHandler);
+    lastElement.removeEventListener('keydown', endHandler);
+    currentActiveElement.focus();
+  };
+};
