@@ -104,9 +104,6 @@
 
 .departures-list-row-additional-info {
   position: relative;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 250ms linear;
 }
 
 .departures-list-row-additional-info a {
@@ -120,10 +117,6 @@
   padding: .8rem .4rem;
   line-height: 1.5;
   margin-bottom: -.4rem;
-}
-
-.departures-list-row-additional-info.visible {
-  max-height: 600px;
 }
 
 .departures-list-row-additional-info-close {
