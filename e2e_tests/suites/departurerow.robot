@@ -6,7 +6,7 @@ Test Setup        Browser is opened without location
 Test Teardown     Close Browser
 
 *** Variables ***
-${ADDITIONAL_INFO_SECTION}=  xpath=//ul[@class="departures-list-body"]/li[1]/section[contains(@class, 'departures-list-row-additional-info')]
+${ADDITIONAL_INFO_SECTION}=  xpath=//ul[@class="departures-list-body"]/li[1]//section[contains(@class, 'departures-list-row-additional-info')]
 
 *** Test Cases ***
 User opens an additional info section

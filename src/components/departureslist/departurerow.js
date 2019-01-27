@@ -48,7 +48,7 @@ export default ({
       onKeyUp={okKeyPressHandler(onRowToggle, id)}
       tabIndex={0}
       aria-expanded={!!isToggled}
-      aria-controls={`departure-${id}`}
+      aria-controls={`departure-additional-info-${id}`}
     >
       <div class={`time${realtime ? ' color-light-green' : ''}`}>
         <Time time={realtimeDeparture} />
@@ -76,22 +76,24 @@ export default ({
       </div>
     </div>
 
-    {isToggled &&
-      <DepartureRowAdditionalContent
-        ref={content => content && requestFocus(content)}
-        {...{
-          id,
-          realtime,
-          realtimeDeparture,
-          scheduledDeparture,
-          stopUrl,
-          stopName,
-          stopCode,
-          stopDescription,
-          disruptions,
-          onRowToggle,
-        }}
-      />}
+    <div id={`departure-additional-info-${id}`}>
+      {isToggled &&
+        <DepartureRowAdditionalContent
+          ref={content => content && requestFocus(content)}
+          {...{
+            id,
+            realtime,
+            realtimeDeparture,
+            scheduledDeparture,
+            stopUrl,
+            stopName,
+            stopCode,
+            stopDescription,
+            disruptions,
+            onRowToggle,
+          }}
+        />}
+      </div>
   </li>;
 
 /**
@@ -113,7 +115,6 @@ const DepartureRowAdditionalContent = forwardRef(({
   onRowToggle,
 }, ref) =>
   <section
-    id={`departure-${id}`}
     class="departures-list-row-additional-info position-relative"
     tabIndex="0"
     ref={ref}
@@ -159,7 +160,7 @@ const DepartureRowAdditionalContent = forwardRef(({
     </div>
 
     <button
-      class="departures-list-row-additional-info-close text-only-button sr-only sr-only-focusable"
+      class="departures-list-row-additional-info-close text-only-button underline sr-only sr-only-focusable"
       onClick={linkEvent(id, onRowToggle)}>
         Sulje
     </button>

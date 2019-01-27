@@ -54,7 +54,7 @@ it('has aria-controls prop', () => {
   const id = "123";
   const $ = dom.load(renderToString(<DepartureRow id={id} />));
   const expected = $('.departures-list-row').attr('aria-controls');
-  expect(expected).toEqual(`departure-${id}`);
+  expect(expected).toEqual(`departure-additional-info-${id}`);
 });
 
 describe('displaying departure time', () => {
@@ -97,8 +97,8 @@ describe('Togglable additional info section', () => {
   it('has an id', () => {
     const id = '123';
     const $ = dom.load(renderToString(<DepartureRow id={id} isToggled={true} />));
-    const expected = $('.departures-list-row-additional-info').prop('id');
-    expect(expected).toEqual(`departure-${id}`);
+    const expected = $('.departures-list-row-container').find(`#departure-additional-info-${id}`);
+    expect(expected.length).toEqual(1);
   });
 
   it('is hidden when content is not toggled', () => {
