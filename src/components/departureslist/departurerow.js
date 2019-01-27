@@ -65,10 +65,9 @@ export default ({
           <span
             title="Linjalla häiriöitä: Klikkaa nähdäksesi lisätietoja"
             class="alert alert-icon"
-            aria-label="Linjalla häiriöitä"
-            tabIndex="0"
           >
-            ⚠
+            <span class="sr-only">Huomio: Linjalla häiriöitä</span>
+            <span aria-hidden="true">⚠</span>
           </span>}
         {destination}
       </div>
