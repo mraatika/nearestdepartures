@@ -89,37 +89,22 @@ describe('displaying departure time', () => {
 
 describe('Togglable additional info section', () => {
   it('renders a section for additional info ', () => {
-    const $ = dom.load(renderToString(<DepartureRow />));
+    const $ = dom.load(renderToString(<DepartureRow isToggled={true} />));
     const expected = $('.departures-list-row-additional-info').length;
     expect(expected).toEqual(1);
   });
 
   it('has an id', () => {
     const id = '123';
-    const $ = dom.load(renderToString(<DepartureRow id={id} />));
+    const $ = dom.load(renderToString(<DepartureRow id={id} isToggled={true} />));
     const expected = $('.departures-list-row-additional-info').prop('id');
     expect(expected).toEqual(`departure-${id}`);
   });
 
   it('is hidden when content is not toggled', () => {
-    const $ = dom.load(renderToString(<DepartureRow />));
+    const $ = dom.load(renderToString(<DepartureRow isToggled={false} />));
     const section = $('.departures-list-row-additional-info');
-    expect(section.is('.visible')).toEqual(false);
-    expect(section.prop('aria-hidden')).not.toEqual();
-  });
-
-  it('is hidden when content is not toggled', () => {
-    const tree = <DepartureRow isToggled={false} />;
-    renderIntoDocument(tree);
-    const additionalInfo = findRenderedDOMElementWithClass(tree, 'departures-list-row-additional-info');
-    expect(additionalInfo.getAttribute('aria-hidden')).toEqual('true');
-  });
-
-  it('is visible when content is toggled', () => {
-    const tree = <DepartureRow isToggled={true} />;
-    renderIntoDocument(tree);
-    const additionalInfo = findRenderedDOMElementWithClass(tree, 'departures-list-row-additional-info');
-    expect(additionalInfo.getAttribute('aria-hidden')).toEqual('false');
+    expect(section.length).toEqual(0);
   });
 
   it('calls the onRowToggle callback when clicked', () => {
@@ -204,7 +189,7 @@ describe('Togglable additional info section', () => {
   it('calls the onRowToggle callback when esc is pressed on the additional content element', () => {
     const spy = jest.fn();
     const id = 'abc123';
-    const tree = <DepartureRow id={id} onRowToggle={spy} />;
+    const tree = <DepartureRow id={id} onRowToggle={spy} isToggled={true} />;
     renderIntoDocument(tree);
     const item = findRenderedDOMElementWithClass(tree, 'departures-list-row-additional-info');
 
@@ -216,7 +201,7 @@ describe('Togglable additional info section', () => {
 
   it('contains scheduled departure time', () => {
     const time = new Date(2017, 0, 1, 12, 12).getTime() / 1000;
-    const $ = dom.load(renderToString(<DepartureRow scheduledDeparture={time} realtime={false} />));
+    const $ = dom.load(renderToString(<DepartureRow scheduledDeparture={time} realtime={false} isToggled={true} />));
     const result = $('.departures-list-row-additional-info')
       .find('.scheduled-departure')
       .text();
@@ -225,7 +210,7 @@ describe('Togglable additional info section', () => {
 
   it('contains realtime departure time if available', () => {
     const time = new Date(2017, 0, 1, 12, 12).getTime() / 1000;
-    const $ = dom.load(renderToString(<DepartureRow realtimeDeparture={time} realtime={true} />));
+    const $ = dom.load(renderToString(<DepartureRow realtimeDeparture={time} realtime={true} isToggled={true} />));
     const result = $('.departures-list-row-additional-info')
       .find('.realtime')
       .text();
@@ -234,14 +219,14 @@ describe('Togglable additional info section', () => {
 
   it('does not contain realtime departure time if only scheduled time is available', () => {
     const time = new Date(2017, 0, 1, 12, 12).getTime() / 1000;
-    const $ = dom.load(renderToString(<DepartureRow scheduledDeparture={time} />));
+    const $ = dom.load(renderToString(<DepartureRow scheduledDeparture={time} isToggled={true} />));
     const result = $('.departures-list-row-additional-info').find('.realtime');
     expect(result.length).toEqual(0);
   });
 
   it('contains stop name', () => {
     const stopName = 'Urheilutalo';
-    const $ = dom.load(renderToString(<DepartureRow stopName={stopName} />));
+    const $ = dom.load(renderToString(<DepartureRow stopName={stopName} isToggled={true} />));
     const result = $('.departures-list-row-additional-info')
       .find('.departure-stop-name')
       .text();
@@ -250,7 +235,7 @@ describe('Togglable additional info section', () => {
 
   it('contains stop code', () => {
     const stopCode = '0283';
-    const $ = dom.load(renderToString(<DepartureRow stopCode={stopCode} />));
+    const $ = dom.load(renderToString(<DepartureRow stopCode={stopCode} isToggled={true} />));
     const result = $('.departures-list-row-additional-info')
       .find('.departure-stop-code')
       .text();
@@ -259,7 +244,7 @@ describe('Togglable additional info section', () => {
 
   it('contains stop description', () => {
     const stopDescription = 'Urheilutalo';
-    const $ = dom.load(renderToString(<DepartureRow stopDescription={stopDescription} />));
+    const $ = dom.load(renderToString(<DepartureRow stopDescription={stopDescription} isToggled={true} />));
     const result = $('.departures-list-row-additional-info')
       .find('.departure-stop-description')
       .text();
@@ -278,12 +263,12 @@ describe('Disruption indication and display', () => {
     const $ = dom.load(renderToString(<DepartureRow disruptions={[disruption]} />));
     const $alert = $('.alert-icon');
     expect($alert.length).toEqual(1);
-    expect($alert.text()).toEqual('⚠');
+    expect($alert.text()).toEqual('Huomio: Linjalla häiriöitä⚠');
   });
 
   it('should display alert header if defined', () => {
     const disruption = {alertHeaderText: 'Alert!'};
-    const $ = dom.load(renderToString(<DepartureRow disruptions={[disruption]} />));
+    const $ = dom.load(renderToString(<DepartureRow disruptions={[disruption]} isToggled={true} />));
     const $alertHeader = $('.alert-info h3');
     expect($alertHeader.length).toEqual(1);
     expect($alertHeader.text()).toEqual(disruption.alertHeaderText);
@@ -291,14 +276,14 @@ describe('Disruption indication and display', () => {
 
   it('should not display alert header if it is falsy', () => {
     const disruption = {alertHeaderText: null};
-    const $ = dom.load(renderToString(<DepartureRow disruptions={[disruption]} />));
+    const $ = dom.load(renderToString(<DepartureRow disruptions={[disruption]} isToggled={true} />));
     const $alertHeader = $('.alert-info > h3');
     expect($alertHeader.length).toEqual(0);
   });
 
   it('should render alert header as a link if link url is defined', () => {
     const disruption = {alertHeaderText: 'Alert', alertUrl: 'http://google.com'};
-    const $ = dom.load(renderToString(<DepartureRow disruptions={[disruption]} />));
+    const $ = dom.load(renderToString(<DepartureRow disruptions={[disruption]} isToggled={true} />));
     const $link = $('.alert-info .disruption-alert-additional-info');
     expect($link.length).toEqual(1);
     expect($link.is('a')).toEqual(true);
@@ -307,7 +292,7 @@ describe('Disruption indication and display', () => {
 
   it('should display alert body text', () => {
     const disruption = {alertDescriptionText: 'Alert Body'};
-    const $ = dom.load(renderToString(<DepartureRow disruptions={[disruption]} />));
+    const $ = dom.load(renderToString(<DepartureRow disruptions={[disruption]} isToggled={true} />));
     const $alertBody = $('.alert-info > .alert-info-body');
     expect($alertBody.length).toEqual(1);
     expect($alertBody.text()).toEqual(disruption.alertDescriptionText);
