@@ -1,5 +1,7 @@
 /** @module Utils */
 
+export const noop = () => {};
+
 /**
 * Find polyfill
 * @param {Function} fn Iteratee
@@ -221,18 +223,21 @@ const handleTab = (focusOn, shiftKey) =>
  * @return {Function} Returns a function for clearing the callbacks
  */
 export const initFocusTrap = (firstElement, lastElement, focusFirstElement) => {
-  const startHandler = handleTab(lastElement, true);
+  if (!firstElement) return noop;
+
+  const lastOrFirstElement = lastElement || firstElement;
+  const startHandler = handleTab(lastOrFirstElement, true);
   const endHandler = handleTab(firstElement, false);
   const currentActiveElement = document.activeElement;
 
   firstElement.addEventListener('keydown', startHandler);
-  lastElement.addEventListener('keydown', endHandler);
+  lastOrFirstElement.addEventListener('keydown', endHandler);
 
   focusFirstElement && setTimeout(() => requestFocus(firstElement), 100);
 
   return () => {
     firstElement.removeEventListener('keydown', startHandler);
-    lastElement.removeEventListener('keydown', endHandler);
+    lastOrFirstElement.removeEventListener('keydown', endHandler);
     currentActiveElement.focus();
   };
 };
