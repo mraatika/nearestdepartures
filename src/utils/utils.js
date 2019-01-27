@@ -190,8 +190,8 @@ export const propOr = (prop, otherwise, obj = {}) => obj[prop] == null ? otherwi
  * @param {object} o2
  * @return {Boolean}
  */
-export const isPropChanged = (propName, o1, o2) =>
-  prop(propName)(o1) !== prop(propName)(o2);
+export const propEqual = propName => (o1, o2) =>
+  prop(propName)(o1) === prop(propName)(o2);
 
 /**
  * Request focus on given element
@@ -236,3 +236,11 @@ export const initFocusTrap = (firstElement, lastElement, focusFirstElement) => {
     currentActiveElement.focus();
   };
 };
+
+/**
+ * Check if two addresses have equal ids
+ * @param {object} a
+ * @param {object} b
+ * @return {boolean}
+ */
+export const areLocationsEqual = propEqual('label');

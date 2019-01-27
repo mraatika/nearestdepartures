@@ -1,8 +1,7 @@
 import { Component } from 'inferno';
 import FavouritesListItem from './favouriteslistitem';
-import { areLocationsEqual } from './model';
 import './favourites.css';
-import { initFocusTrap } from '../../utils/utils';
+import { initFocusTrap, areLocationsEqual } from '../../utils/utils';
 
 /**
  * A dialog component for displaying user's saved locations

@@ -1,7 +1,7 @@
 import { Component } from 'inferno';
 import debounce from 'lodash/debounce';
 import { LOCATION_MAGIC_WORD } from '../../constants/constants';
-import { isPropChanged } from '../../utils/utils';
+import { propEqual } from '../../utils/utils';
 import AddressSearch from './addresssearch';
 import * as model from './model';
 import './addresssearch.css';
@@ -50,7 +50,7 @@ export default class AddressSearchContainer extends Component {
   componentWillReceiveProps(nextProps) {
     const { address } = nextProps;
 
-    if (isPropChanged('id', address, this.props.address) && address !== this.state.searchTerm) {
+    if (!propEqual('label')(address, this.props.address) && address !== this.state.searchTerm) {
       this.setState({
         searchTerm: address ? address.label : '',
         selectedSuggestion: undefined,

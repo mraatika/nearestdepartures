@@ -1,7 +1,8 @@
 import { Component } from 'inferno';
+import { areLocationsEqual } from '../../utils/utils';
 import Favourites from './favourites';
 import * as storage from '../../services/storageservice';
-import { areLocationsEqual, isLocationFavoured } from './model';
+import { isLocationFavoured } from './model';
 
 /**
  * Component's initial state
@@ -60,7 +61,7 @@ class FavouritesContainer extends Component {
     if (address) {
       const { label, location } = address;
       // only save data that we care about
-      const favourites = [...this.state.favourites, { label, location }];
+      const favourites = [...this.state.favourites, { label, location }];
       this.saveFavourites(favourites);
     }
   }
