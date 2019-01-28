@@ -1,5 +1,5 @@
 import flatMap from '1-liners/flatMap';
-import { find, uniq } from './utils';
+import { uniq } from './utils';
 import { VEHICLE_TYPE } from '../constants/constants';
 import * as departuresService from '../services/departuresservice';
 import { findFrom } from '../utils/utils';
@@ -69,7 +69,7 @@ export async function fetchDepartures(location, vehicleTypes = [], existing = []
 */
 const mergeBatchData = (existing, batch) =>
   existing.map((d) => {
-    const update = find(b => b.nodeId === d.nodeId && b.id === d.id)(batch);
+    const update = batch.find(b => b.nodeId === d.nodeId && b.id === d.id);
     return { ...d, ...update };
   });
 

@@ -1,4 +1,4 @@
-import { find, areLocationsEqual } from '../../utils/utils';
+import { areLocationsEqual } from '../../utils/utils';
 
 /**
  * Check if an adress is in the list of favoured addresses
@@ -7,4 +7,4 @@ import { find, areLocationsEqual } from '../../utils/utils';
  * @return {boolean}
  */
 export const isLocationFavoured = (address, favourites) =>
-  !!(address && find(it => areLocationsEqual(it, address))(favourites));
+  !!(address && favourites.find(it => areLocationsEqual(it, address)));
