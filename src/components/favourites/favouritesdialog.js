@@ -70,10 +70,12 @@ class FavouritesDialog extends Component {
               </button>
             </div>
           </div>
+
           <div class="favouriteslist-header-triangle-container">
             <div class="favouriteslist-header-triangle centering-margin" />
             <div class="favouriteslist-header-triangle-shadow centering-margin" />
           </div>
+
           <div class="favouriteslist-content flex-column flex-full space-s space-clear-t">
             <ul class="flex-full">
               {favourites.map(address =>
@@ -86,6 +88,7 @@ class FavouritesDialog extends Component {
               )}
               {!favourites.length && <li class="favouriteslist-placeholder italic">Ei tallennettuja suosikkeja</li>}
             </ul>
+
             <div class="info-message flex-row flex-align-start flex-no-shrink align-left">
               <span class="badge info">!</span>
               <div class="space-xs space-keep-l">
