@@ -34,6 +34,7 @@ const AddressSearch = ({
 
     <div class="address-search flex-row line-height-xl">
       <input
+        id="address-search-textbox"
         class="flex-full border-thin-light border-clear-right font-alternative space-s space-keep-l"
         ref={getAddressInputRef}
         type="text"

@@ -9,7 +9,7 @@ import { getFilter, saveFilter } from '../../services/storageservice';
 import Header from '../header/header';
 import Footer from '../footer/footer';
 import AccuracyIndicator from '../accuracyindicator';
-import { delay, requestFocus } from '../../utils/utils';
+import { delay, okKeyPressHandler, requestFocus } from '../../utils/utils';
 import { PositionError } from '../../utils/errors';
 import './app.css';
 
@@ -135,6 +135,22 @@ class App extends Component {
   }
 
   /**
+   * Move focus to the first item in the departures list
+   */
+  scrollToDepartures() {
+    const firstListItem = document.getElementsByClassName('departures-list-row')[0];
+    firstListItem && requestFocus(firstListItem);
+  }
+
+  /**
+   * Move focus to the search box
+   */
+  scrollToSearch() {
+    const searchBox = document.getElementById('address-search-textbox');
+    requestFocus(searchBox);
+  }
+
+  /**
    * Renders App
    * @returns {string} markup
    */
@@ -169,9 +185,11 @@ class App extends Component {
             clearAddress={this.clearAddress}
           />
 
-          <a class="skip-to-list sr-only sr-only-focusable position-absolute" href="#departures-list-results">
+          <button
+            class="skip-to-list sr-only sr-only-focusable"
+            onkeyup={okKeyPressHandler(this.scrollToDepartures)}>
             Siirry hakutuloksiin
-          </a>
+          </button>
 
           <div role="status" aria-live="polite" class="space-xs space-keep-t">
             {(accuracy || isPositionError) &&
@@ -189,6 +207,12 @@ class App extends Component {
             isLoading={loading}
             departures={filtered}
             disruptions={disruptions} />
+
+          <button
+            class="back-to-search sr-only sr-only-focusable"
+            onkeyup={okKeyPressHandler(this.scrollToSearch)}>
+            Takaisin hakuun
+          </button>
         </main>
 
         <Footer departureUpdateTime={departureUpdateTime} />

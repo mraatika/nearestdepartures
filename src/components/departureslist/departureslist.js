@@ -32,7 +32,7 @@ const generateDepartureRows = ({ departures, toggledRowId, onRowToggle, disrupti
  * @returns {Function}
  */
 const generateEmptyRow = () =>
-  <div class="departures-list-row no-results italic align-center space-m space-clear-rl">
+  <div class="departures-list-row no-results italic align-center space-m space-clear-rl" tabindex="0">
     Lähtöjä ei löytynyt annetuilla hakukriteereillä tai suodattimilla.
   </div>;
 
