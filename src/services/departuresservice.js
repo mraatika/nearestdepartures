@@ -69,11 +69,11 @@ export async function fetchDepartures(location = {}, filters = {}) {
       body: JSON.stringify(reqBody),
     });
   } catch (e) {
-    throw new Error('Lähtöjen haku epäonnisui: Palveluun ei saatu yhteyttä');
+    throw new Error('Lähtöjen haku epäonnistui: Palveluun ei saatu yhteyttä');
   }
 
   if (!response.ok) {
-    throw new Error('Lähtöjen haku epäonnisui: Palvelu palautti virheen');
+    throw new Error('Lähtöjen haku epäonnistui: Palvelu palautti virheen');
   }
 
   const data = await response.json();
