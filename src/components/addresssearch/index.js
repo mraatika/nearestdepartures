@@ -130,6 +130,7 @@ export default class AddressSearchContainer extends Component {
   onClear() {
     this.setState({searchTerm: '', selectedSuggestion: undefined});
     this.addressInput.focus();
+    this.props.clearAddress();
   }
 
   /**
