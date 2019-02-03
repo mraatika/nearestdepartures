@@ -1,6 +1,7 @@
-import { renderIntoDocument, findRenderedVNodeWithType } from 'inferno-test-utils';
+import { findRenderedVNodeWithType } from 'inferno-test-utils';
 import { renderToString } from 'inferno-server';
 import dom from 'cheerio';
+import { renderIntoDocument } from '../../utils/testutils';
 import FilterButton from './filterbutton';
 
 it('renders a button', () => {
@@ -9,12 +10,20 @@ it('renders a button', () => {
   expect(button.length).toBe(1);
 });
 
-it('renders a class corresponding to vehicleType', () => {
+it('renders a class corresponding to vehicleType when toggled', () => {
   const vehicleType = 'BUS';
-  const $ = dom.load(renderToString(<FilterButton vehicleType={vehicleType}/>));
+  const $ = dom.load(renderToString(<FilterButton isToggled={true} vehicleType={vehicleType}/>));
   const button = $('button');
-  const result = button.hasClass(vehicleType.toLocaleLowerCase());
+  const result = button.hasClass(`bg-${vehicleType.toLocaleLowerCase()}`);
   expect(result).toBe(true);
+});
+
+it('renders white background when not toggled', () => {
+  const vehicleType = 'BUS';
+  const $ = dom.load(renderToString(<FilterButton isToggled={false} vehicleType={vehicleType}/>));
+  const button = $('button');
+  expect(button.hasClass('bg-white')).toBe(true);
+  expect(button.hasClass(`bg-${vehicleType.toLocaleLowerCase()}`)).toBe(false);
 });
 
 it('contains an icon', () => {
@@ -62,7 +71,8 @@ it('sets aria-pressed status to false when props.isToggled is false', () => {
 
 it('calls given callback on click', () => {
   const spy = jest.fn();
-  const tree = renderIntoDocument(<FilterButton onFilterToggle={spy} />);
+  const tree = <FilterButton onFilterToggle={spy} />;
+  renderIntoDocument(tree);
   const button = findRenderedVNodeWithType(tree, 'button');
 
   button.dom.click();
@@ -73,7 +83,8 @@ it('calls given callback on click', () => {
 it('calls given callback with type and ctrl key pressed status', () => {
   const spy = jest.fn();
   const vehicleType = 'BUS';
-  const tree = renderIntoDocument(<FilterButton vehicleType={vehicleType} onFilterToggle={spy} />);
+  const tree = <FilterButton vehicleType={vehicleType} onFilterToggle={spy} />;
+  renderIntoDocument(tree);
   const button = findRenderedVNodeWithType(tree, 'button');
 
   var event = new MouseEvent('click', {

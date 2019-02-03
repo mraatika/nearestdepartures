@@ -1,4 +1,4 @@
-import Component from 'inferno-component';
+import { Component } from 'inferno';
 import DepartureRow from './departurerow';
 import LoadingOverlay from '../loadingoverlay/loadingoverlay';
 import DeparturesListSortHeader from './departureslistsortheader';
@@ -31,7 +31,10 @@ const generateDepartureRows = ({ departures, toggledRowId, onRowToggle, disrupti
  * @private
  * @returns {Function}
  */
-const generateEmptyRow = () => <div class="departures-list-row no-results">Lähtöjä ei löytynyt annetuilla hakukriteereillä tai suodattimilla.</div>;
+const generateEmptyRow = () =>
+  <div class="departures-list-row no-results italic align-center space-m space-clear-rl" tabindex="0">
+    Lähtöjä ei löytynyt annetuilla hakukriteereillä tai suodattimilla.
+  </div>;
 
 /**
  * List's headers
@@ -95,10 +98,10 @@ export default class DeparturesList extends Component {
       : generateEmptyRow();
 
     return (
-      <div class="departures-list">
+      <div class="departures-list position-relative centering-margin">
         <LoadingOverlay show={isLoading} />
 
-        <div class="departures-list-header">
+        <div class="departures-list-header flex-row no-wrap space-s space-keep-b">
           {sortHeaders.map(({ text, propName }) =>
             <DeparturesListSortHeader
               key={propName}
@@ -109,7 +112,7 @@ export default class DeparturesList extends Component {
             />
           )}
         </div>
-        <ul class="departures-list-body">{rows}</ul>
+        <ul id="departures-list-results" class="departures-list-body">{rows}</ul>
       </div>
     );
   }

@@ -1,6 +1,7 @@
-import { renderIntoDocument, findRenderedVNodeWithType } from 'inferno-test-utils';
+import { findRenderedVNodeWithType } from 'inferno-test-utils';
 import { renderToString } from 'inferno-server';
 import dom from 'cheerio';
+import { renderIntoDocument } from '../../utils/testutils';
 import SuggestionsList from './suggestionslist';
 import SuggestionsListItem from './suggestionslistitem';
 
@@ -38,14 +39,16 @@ it('should render as many list items as there are suggestions', () => {
 
 it('should mark list item selected', () => {
   const suggestions = [{ id: '1abc' }];
-  const tree = renderIntoDocument(<SuggestionsList suggestions={suggestions} selected={suggestions[0]} />);
+  const tree = <SuggestionsList suggestions={suggestions} selected={suggestions[0]} />;
+  renderIntoDocument(tree);
   const listItem = findRenderedVNodeWithType(tree, SuggestionsListItem);
   expect(listItem.props.selected).toEqual(true);
 });
 
 it('should pass item id as key', () => {
   const suggestions = [{ id: '1abc' }];
-  const tree = renderIntoDocument(<SuggestionsList suggestions={suggestions} selected={suggestions[0]} />);
+  const tree = <SuggestionsList suggestions={suggestions} selected={suggestions[0]} />;
+  renderIntoDocument(tree);
   const listItem = findRenderedVNodeWithType(tree, SuggestionsListItem);
   expect(listItem.key).toEqual(suggestions[0].id);
 });

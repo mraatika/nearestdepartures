@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation     Test adding and using favourites feature
+Documentation     Filtering departures by vehicle type
 ...
 Resource          resource.robot
 Resource          filtering_resources.robot
@@ -28,5 +28,5 @@ List Should Only Contain Departures Of type
   [Arguments]  ${type}
   ${list_rows}=  Get Element Count  //li[@class='departures-list-row-container']
   :FOR  ${i}  IN RANGE  1  ${list_rows}+1
-  \  ${class}=  Get Element Attribute  //li[@class='departures-list-row-container'][${i}]/div/div[@class='routename']/a/span  class
-  \  Should Be True  '${class}' == '${type}'
+  \  ${class}=  Get Element Attribute  //li[@class='departures-list-row-container'][${i}]//div[@class='routename']  class
+  \  Should Be True  '${class}' == 'color-${type}'

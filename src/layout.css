@@ -1,3 +1,85 @@
+.space-xxs {
+  padding: 0.25rem;
+}
+
+.space-xs {
+  padding: 0.5rem;
+}
+
+.space-s {
+  padding: 1rem;
+}
+
+.space-m {
+  padding: 1.5rem;
+}
+
+.space-l {
+  padding: 2rem;
+}
+
+.space-xl {
+  padding: 2.5rem;
+}
+
+.space-xxl {
+  padding: 3rem;
+}
+
+.space-xxxl {
+  padding: 4;
+}
+
+.space-clear-t {
+  padding-top: 0;
+}
+
+.space-clear-b {
+  padding-bottom: 0;
+}
+
+.space-clear-l {
+  padding-left: 0;
+}
+
+.space-clear-r {
+  padding-right: 0;
+}
+
+.space-clear-rl {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.space-clear-tb {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.space-keep-t {
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+}
+
+.space-keep-b {
+  padding-top: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.space-keep-l {
+  padding-top: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+}
+
+.space-keep-r {
+  padding-top: 0;
+  padding-left: 0;
+  padding-bottom: 0;
+}
+
 .fill-parent {
   position: absolute;
   top: 0;
@@ -6,7 +88,129 @@
   right: 0;
 }
 
+.max-content-width {
+  max-width: 1024px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.full-height {
+  height: 100%;
+}
+
+.position-relative {
+  position: relative;
+}
+
+.position-absolute {
+  position: absolute;
+}
+
+.align-center {
+  text-align: center;
+}
+
+.align-left {
+  text-align: left;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.vertical-middle {
+  vertical-align: middle;
+}
+
+.vertical-bottom {
+  vertical-align: bottom;
+}
+
+.block {
+  display: block;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.no-wrap {
+  white-space: nowrap;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.centering-margin {
+  margin: 0 auto;
+}
+
+/** FLEX */
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
 .flex-column {
   display: flex;
   flex-direction: column;
+}
+
+.flex-space-between {
+  justify-content: space-between;
+}
+
+.flex-align-center {
+  align-items: center;
+}
+
+.flex-align-start {
+  align-items: flex-start;
+}
+
+.flex-justify-end {
+  justify-content: flex-end;
+}
+
+.flex-no-shrink {
+  flex-shrink: 0;
+}
+
+.flex-full {
+  flex: 1;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+/** Visibility */
+
+.hidden {
+  display: none;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.sr-only-focusable:active,
+.sr-only-focusable:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
 }

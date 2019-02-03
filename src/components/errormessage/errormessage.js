@@ -1,4 +1,5 @@
 import './errormessage.css';
+import { resolveError } from './errormessageresolver';
 
 /**
  * Component for displaying error messages
@@ -7,9 +8,14 @@ import './errormessage.css';
  * @param {string} props.message error message
  * @param {Function} props.onClick callback for element click event
  */
-export default ({ message, onClick }) => (
-  <div class={`error-message ${message ? '' : ' hidden'}`} onClick={onClick}>
-    <button class="close-button" aria-label="Sulje">x</button>
-    { message }
-  </div>
-);
+export default ({ error, onClick }) =>
+  <div
+    class={`error-message position-relative space-s text-center color-alert bg-light-red ${error ? '' : ' hidden'}`}
+    onClick={onClick}
+    tabIndex="0"
+    role="alert"
+    aria-atomic="true"
+  >
+    {error && resolveError(error)}
+    <button class="close-button position-absolute bold text-l" aria-label="Sulje">x</button>
+  </div>;

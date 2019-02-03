@@ -31,11 +31,10 @@ const MAX_RESULTS = 50;
 * @param {Object} props
 * @param {number} props.latitude
 * @param {number} props.longitude
-* @param {number} props.startTime
 * @param {string[]} props.vehicleTypes
 * @returns {Object}
 */
-function formRequestBody({ latitude, longitude, startTime, vehicleTypes } = {}) {
+function formRequestBody({ latitude, longitude, vehicleTypes } = {}) {
   return {
     query: query,
     variables: {
@@ -64,17 +63,17 @@ export async function fetchDepartures(location = {}, filters = {}) {
   let response;
 
   try {
-    response = await fetch('https://api.digitransit.fi/routing/v1/routers/hsl/index/graphql', {
+    response = await fetch(`${process.env.INFERNO_APP_SERVER_URL}/routing/v1/routers/hsl/index/graphql`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(reqBody),
     });
   } catch (e) {
-    throw new Error('Lähtöjen haku epäonnisui: Palveluun ei saatu yhteyttä');
+    throw new Error('Lähtöjen haku epäonnistui: Palveluun ei saatu yhteyttä');
   }
 
   if (!response.ok) {
-    throw new Error('Lähtöjen haku epäonnisui: Palvelu palautti virheen');
+    throw new Error('Lähtöjen haku epäonnistui: Palvelu palautti virheen');
   }
 
   const data = await response.json();
@@ -125,7 +124,7 @@ export async function batchDepartures(departures = []) {
   let response;
 
   try {
-    response = await fetch('https://api.digitransit.fi/routing/v1/routers/hsl/index/graphql/batch', {
+    response = await fetch(`${process.env.INFERNO_APP_SERVER_URL}/routing/v1/routers/hsl/index/graphql/batch`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(query),

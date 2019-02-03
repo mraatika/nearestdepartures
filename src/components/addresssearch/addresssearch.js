@@ -1,5 +1,6 @@
 import SuggestionsList from './suggestionslist';
 import './addresssearch.css';
+import { prop } from '../../utils/utils';
 
 /**
  * AddressSearch component for address input.
@@ -17,7 +18,7 @@ import './addresssearch.css';
  */
 const AddressSearch = ({
   searchTerm,
-  suggestions,
+  suggestions = [],
   selectedSuggestion,
   onSubmit,
   onKeyEvent,
@@ -31,27 +32,43 @@ const AddressSearch = ({
     onSubmit={onSubmit}
     onKeyUp={onKeyEvent}>
 
-    <div class="address-search">
+    <div class="address-search flex-row line-height-xl">
       <input
+        id="address-search-textbox"
+        class="flex-full border-thin-light border-clear-right font-alternative space-s space-keep-l"
         ref={getAddressInputRef}
         type="text"
-        aria-autocomplete="list"
-        aria-owns="suggestions-list"
-        aria-label="Osoite/sijainti"
+        role="combobox"
+        aria-controls="suggestions-list"
+        aria-expanded={!!suggestions.length}
+        aria-activedescendant={prop('id')(selectedSuggestion)}
+        aria-autocomplete="both"
+        aria-haspopup="true"
+        aria-label="Hae paikannuksella, osoitteella tai paikannimellä"
+        autocomplete="off"
+        autocorrect="off"
+        spellcheck="off"
         placeholder="Hae paikannuksella, osoitteella tai paikannimellä..."
         onInput={onSearchTermChange}
         onBlur={onBlur}
         value={searchTerm} />
       <button
+        class="address-search-clear text-xl color-gray color-black-active bold font-alternative border-thin-light border-clear-left"
         type="button"
-        className="address-search-clear"
         onClick={onClearAddressClick}>
-        <span>x</span>
+        <div class="space-s space-clear-tb">
+          <span class="sr-only">Tyhjennä hakusana</span>
+          <span aria-hidden="true">x</span>
+        </div>
       </button>
-      <button className="address-search-submit" type="submit">Hae</button>
+      <button
+        class="address-search-submit bold bg-bus color-white font-alternative"
+        type="submit">
+        <div class="space-s space-clear-tb">Hae</div>
+      </button>
     </div>
 
-    <div class="suggestions">
+    <div class="suggestions position-relative">
       <SuggestionsList
         suggestions={suggestions}
         selected={selectedSuggestion}
@@ -60,4 +77,3 @@ const AddressSearch = ({
   </form>;
 
 export default AddressSearch;
-

@@ -1,6 +1,7 @@
-import { renderIntoDocument, scryRenderedVNodesWithType } from 'inferno-test-utils';
+import { scryRenderedVNodesWithType } from 'inferno-test-utils';
 import { renderToString } from 'inferno-server';
 import dom from 'cheerio';
+import { renderIntoDocument } from '../../utils/testutils';
 import DeparturesListSortHeader from './departureslistsortheader';
 
 it('renders a div element', () => {
@@ -32,8 +33,9 @@ it('is tabbable', () => {
 it('calls onClick callback when clicked', () => {
   const spy = jest.fn();
   const propName = 'time';
-  const rendered = renderIntoDocument(<DeparturesListSortHeader propName={propName} onClick={spy} />);
-  const button = scryRenderedVNodesWithType(rendered, 'span')[0];
+  const tree = <DeparturesListSortHeader propName={propName} onClick={spy} />;
+  renderIntoDocument(tree);
+  const button = scryRenderedVNodesWithType(tree, 'span')[0];
 
   const event = new MouseEvent('click', { bubbles: true });
   button.dom.dispatchEvent(event);
@@ -44,8 +46,9 @@ it('calls onClick callback when clicked', () => {
 it('calls onClick callback on space press', () => {
   const spy = jest.fn();
   const propName = 'time';
-  const rendered = renderIntoDocument(<DeparturesListSortHeader propName={propName} onClick={spy} />);
-  const button = scryRenderedVNodesWithType(rendered, 'span')[0];
+  const tree = <DeparturesListSortHeader propName={propName} onClick={spy} />;
+  renderIntoDocument(tree);
+  const button = scryRenderedVNodesWithType(tree, 'span')[0];
 
   const event = new KeyboardEvent('keypress', { bubbles: true, keyCode: 32 });
   button.dom.dispatchEvent(event);
@@ -56,8 +59,9 @@ it('calls onClick callback on space press', () => {
 it('calls onClick callback on enter press', () => {
   const spy = jest.fn();
   const propName = 'time';
-  const rendered = renderIntoDocument(<DeparturesListSortHeader propName={propName} onClick={spy} />);
-  const button = scryRenderedVNodesWithType(rendered, 'span')[0];
+  const tree = <DeparturesListSortHeader propName={propName} onClick={spy} />;
+  renderIntoDocument(tree);
+  const button = scryRenderedVNodesWithType(tree, 'span')[0];
 
   const event = new KeyboardEvent('keypress', { bubbles: true, keyCode: 13 });
   button.dom.dispatchEvent(event);
@@ -68,8 +72,9 @@ it('calls onClick callback on enter press', () => {
 it('does not call onClick callback on other key press', () => {
   const spy = jest.fn();
   const propName = 'time';
-  const rendered = renderIntoDocument(<DeparturesListSortHeader propName={propName} onClick={spy} />);
-  const button = scryRenderedVNodesWithType(rendered, 'span')[0];
+  const tree = <DeparturesListSortHeader propName={propName} onClick={spy} />;
+  renderIntoDocument(tree);
+  const button = scryRenderedVNodesWithType(tree, 'span')[0];
 
   const event = new KeyboardEvent('keypress', { bubbles: true, keyCode: 2 });
   button.dom.dispatchEvent(event);

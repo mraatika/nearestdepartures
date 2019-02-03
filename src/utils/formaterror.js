@@ -4,7 +4,7 @@
  * @type {Object}
  */
 const POSITION_ERROR_CODES = {
-  1: 'Oikeuksia sijainnin hakuun ei annettu tai sijainnin haku on kytketty pois',
+  1: 'Sijainnin haku on estetty tai kytketty pois',
   2: 'Sijaintipalveluun ei saatu yhteyttä',
   3: 'Sijainnin haku kesti liian kauan',
 };
@@ -21,7 +21,7 @@ export const POSITION_ERROR = 'POSITION_ERROR';
  * @returns {string} Human readable error message
  */
 const formatError = (type, error) => (type === POSITION_ERROR
-  ? `Sijainti ei ole saatavilla: ${POSITION_ERROR_CODES[error.code]}.`
+  ? `Paikannus epäonnistui: ${POSITION_ERROR_CODES[error.code]}.`
   : error.message);
 
 export default formatError;

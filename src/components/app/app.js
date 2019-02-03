@@ -1,4 +1,4 @@
-import Component from 'inferno-component';
+import { Component } from 'inferno';
 import DeparturesList from '../departureslist/departureslist';
 import DepartureFilter from '../departurefilter/departurefilter';
 import ErrorMessage from '../errormessage/errormessage';
@@ -9,7 +9,8 @@ import { getFilter, saveFilter } from '../../services/storageservice';
 import Header from '../header/header';
 import Footer from '../footer/footer';
 import AccuracyIndicator from '../accuracyindicator';
-import { delay } from '../../utils/utils';
+import { delay, okKeyPressHandler, requestFocus } from '../../utils/utils';
+import { PositionError } from '../../utils/errors';
 import './app.css';
 
 /**
@@ -38,6 +39,14 @@ class App extends Component {
   constructor() {
     super();
     this.state = { ...DEFAULT_STATE };
+
+    this.searchForDepartures = this.searchForDepartures.bind(this);
+    this.hideError = this.hideError.bind(this);
+    this.searchForDepartures = this.searchForDepartures.bind(this);
+    this.onError = this.onError.bind(this);
+    this.onFilterToggle = this.onFilterToggle.bind(this);
+    this.onRangeChange = this.onRangeChange.bind(this);
+    this.clearAddress = this.clearAddress.bind(this);
   }
 
   /**
@@ -126,42 +135,84 @@ class App extends Component {
   }
 
   /**
+   * Move focus to the first item in the departures list
+   */
+  scrollToDepartures() {
+    const firstListItem = document.getElementsByClassName('departures-list-row')[0];
+    firstListItem && requestFocus(firstListItem);
+  }
+
+  /**
+   * Move focus to the search box
+   */
+  scrollToSearch() {
+    const searchBox = document.getElementById('address-search-textbox');
+    requestFocus(searchBox);
+  }
+
+  /**
    * Renders App
    * @returns {string} markup
    */
   render() {
     const { filtered, filters, error, address, loading, departureUpdateTime, disruptions } = this.state;
+    const accuracy = address && address.location && address.location.accuracy;
+    const isPositionError = error && error instanceof PositionError;
 
     return (
       <div class="app-content flex-column">
-        <Header
-          address={address}
-          selectLocation={this.searchForDepartures.bind(this)}
-        />
+        <div class="space-m space-keep-b">
+          <Header
+            address={address}
+            selectLocation={this.searchForDepartures}
+          />
+        </div>
 
-        <main>
-          {error && <ErrorMessage message={error.message} onClick={this.hideError.bind(this)} />}
+        <main class="flex-full full-width centering-margin max-content-width space-xs space-clear-t">
+          {error && !isPositionError &&
+            <div class="space-s space-keep-b">
+              <ErrorMessage
+                error={error}
+                onClick={this.hideError}
+                onComponentDidMount={requestFocus}
+              />
+            </div>}
 
           <AddressSearch
             address={address}
-            onSearch={this.searchForDepartures.bind(this)}
-            onError={this.onError.bind(this)}
-            clearAddress={this.clearAddress.bind(this)}
+            onSearch={this.searchForDepartures}
+            onError={this.onError}
+            clearAddress={this.clearAddress}
           />
 
-          {address && address.location && <AccuracyIndicator accuracy={address.location.accuracy} />}
+          <button
+            class="skip-to-list sr-only sr-only-focusable"
+            onkeyup={okKeyPressHandler(this.scrollToDepartures)}>
+            Siirry hakutuloksiin
+          </button>
+
+          <div role="status" aria-live="polite" class="space-xs space-keep-t">
+            {(accuracy || isPositionError) &&
+              <AccuracyIndicator accuracy={accuracy} error={isPositionError && error} />}
+          </div>
 
           <DepartureFilter
             filters={model.allVehicleTypes}
             activeFilters={filters.vehicleTypes}
             range={filters.range}
-            onFilterToggle={this.onFilterToggle.bind(this)}
-            onRangeChange={this.onRangeChange.bind(this)} />
+            onFilterToggle={this.onFilterToggle}
+            onRangeChange={this.onRangeChange} />
 
           <DeparturesList
             isLoading={loading}
             departures={filtered}
             disruptions={disruptions} />
+
+          <button
+            class="back-to-search sr-only sr-only-focusable"
+            onkeyup={okKeyPressHandler(this.scrollToSearch)}>
+            Takaisin hakuun
+          </button>
         </main>
 
         <Footer departureUpdateTime={departureUpdateTime} />

@@ -21,6 +21,13 @@ it('renders distance as meters', () => {
   expect(result).toEqual(`${distance} m`);
 });
 
+it('renders distance when distance is 0', () => {
+  const distance = 0;
+  const $ = dom.load(renderToString(<Distance distance={ distance }/>));
+  const result = $('span').text();
+  expect(result).toEqual(`${distance} m`);
+});
+
 it('renders distance in kilometers when it is 1000', () => {
   const distance = 1000;
   const distanceInKm = distance / 1000;

@@ -21,6 +21,7 @@ Searching with favourite
   ${address}=  Set Variable  Porvoonkatu 1, Helsinki
   Given user has favoured address  ${address}
   When user clicks clear button
+  And user has searched for  Mannerheimintie 9, Helsinki
   And user selects favourite  ${address}
   And loading is done
   Then address should be  ${address}
@@ -45,12 +46,10 @@ Removing a favourite using toggle
 *** Keywords ***
 Favourites Button Should Be Toggled
   ${condition}=    Get Element Attribute    ${FAVOURITE_TOGGLE}    aria-pressed
-  Element Text Should Be    ${FAVOURITE_TOGGLE}    ★
   Should Be Equal    true    ${condition}
 
 Favourites Button Should Not Be Toggled
   ${condition}=    Get Element Attribute    ${FAVOURITE_TOGGLE}    aria-pressed
-  Element Text Should Be    ${FAVOURITE_TOGGLE}    ☆
   Should Be Equal    false    ${condition}
 
 Favourites List Should Be Empty
@@ -84,7 +83,7 @@ User Has Favoured Address
 User Selects Favourite
   [Arguments]    ${entry}
   Open Favourites
-  Click Element  xpath://li[contains(.//div[@class='favouriteslist-item-label']/button, '${entry}')]
+  Click Element  xpath://li[contains(.//button[contains(@class, 'favouriteslist-item-label')], '${entry}')]
 
 Toggle Favourite
   Click Button    ${FAVOURITE_TOGGLE}

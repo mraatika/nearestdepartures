@@ -1,6 +1,7 @@
-import { renderIntoDocument, findRenderedVNodeWithType } from 'inferno-test-utils';
+import { findRenderedVNodeWithType } from 'inferno-test-utils';
 import { renderToString } from 'inferno-server';
 import dom from 'cheerio';
+import { renderIntoDocument } from '../../utils/testutils';
 import SuggestionsListItem from './suggestionslistitem';
 
 it('should render a list item', () => {
@@ -44,8 +45,9 @@ it('should render city name for each suggestion from locality property', () => {
 it('calls onClick when a list item is clicked', () => {
   const spy = jest.fn();
   const suggestion = { name: 'a' };
-  const rendered = renderIntoDocument(<SuggestionsListItem onClick={spy} suggestion={suggestion} />);
-  const listItem = findRenderedVNodeWithType(rendered, 'li');
+  const tree = <SuggestionsListItem onClick={spy} suggestion={suggestion} />;
+  renderIntoDocument(tree);
+  const listItem = findRenderedVNodeWithType(tree, 'li');
 
   const event = new MouseEvent('mousedown', { bubbles: true });
   listItem.dom.dispatchEvent(event);

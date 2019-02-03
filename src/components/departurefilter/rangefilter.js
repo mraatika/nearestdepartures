@@ -26,19 +26,20 @@ export default ({
   onChange,
 }) => (
   <div class="range-filter-wrapper">
-    <output>{range}m</output>
-    <label>
-      <span class="accessibility-hidden">Maksimi etäisyys pysäkille</span>
-      <input
-        type="range"
-        name="range"
-        title="Maksimietäisyys pysäkille"
-        min={MIN_RANGE}
-        max={MAX_RANGE}
-        step={RANGE_STEP}
-        defaultValue={range}
-        onChange={linkEvent(onChange, onInputChange)}
-        onInput={linkEvent(onChange, onInputChange)} />
-    </label>
+    <div class="align-right space-xxs space-keep-b">
+      <output for="departurefilter-range">{range}m</output>
+    </div>
+    <label for="departurefilter-range" class="sr-only">Maksimietäisyys pysäkille</label>
+    <input
+      id="departurefilter-range"
+      class="no-border full-width"
+      type="range"
+      name="range"
+      min={MIN_RANGE}
+      max={MAX_RANGE}
+      step={RANGE_STEP}
+      defaultValue={range}
+      onChange={linkEvent(onChange, onInputChange)}
+      onInput={linkEvent(onChange, onInputChange)} />
   </div>
 );

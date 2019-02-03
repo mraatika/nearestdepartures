@@ -1,6 +1,6 @@
 {
   "name": "nearestdepartures",
-  "version": "1.5.1",
+  "version": "1.6.0",
   "description": "An app for finding nearest public transport departures in Helsinki region using the digitransit api",
   "private": true,
   "homepage": ".",
@@ -10,22 +10,18 @@
   },
   "author": "Miitri Raatikainen (http://github.com/mraatika)",
   "license": "AGPLv3",
-  "bugs": {
-    "url": "https://github.com/mraatika/nearestdepartures/issues"
-  },
   "devDependencies": {
     "cheerio": "^1.0.0-rc.2",
-    "gh-pages": "^1.1.0",
-    "inferno-scripts": "5.0.0",
-    "inferno-server": "^3.10.1",
-    "inferno-test-utils": "^3.10.1",
-    "jest-fetch-mock": "^1.4.0",
+    "gh-pages": "^2.0.1",
+    "inferno-scripts": "^7.0.4",
+    "inferno-server": "^7.1.0",
+    "inferno-test-utils": "^7.1.0",
+    "jest-fetch-mock": "^1.5.0",
     "mock-geolocation": "^1.0.11"
   },
   "dependencies": {
     "1-liners": "^0.4.0",
-    "inferno": "^3.10.1",
-    "inferno-component": "^3.10.1",
+    "inferno": "^7.1.0",
     "lodash": "^4.17.4"
   },
   "scripts": {
@@ -34,10 +30,17 @@
     "build": "INFERNO_APP_VERSION=$npm_package_version inferno-scripts build",
     "build:cordova": "INFERNO_APP_VERSION=$npm_package_version INFERNO_APP_RUN_ENV='cordova' inferno-scripts build",
     "test": "inferno-scripts test --env=jsdom --setupFiles=./config/testsetup",
+    "test:coverage": "inferno-scripts test --env=jsdom --coverage --setupFiles=./config/testsetup",
     "test:e2e": "robot --output NONE --log NONE e2e_tests/suites",
     "lint": "node ./node_modules/eslint/bin/eslint src/**/*.{js,jsx}",
     "eject": "inferno-scripts eject",
     "predeploy:test": "npm run build",
     "deploy:test": "gh-pages -d build"
-  }
+  },
+  "browserslist": [
+    ">0.5% in FI",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

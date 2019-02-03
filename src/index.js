@@ -3,6 +3,7 @@ import App from './components/app/app';
 import './fonts.css';
 import './index.css';
 import './layout.css';
+import './colors.css';
 
 render(<App />, document.getElementById('app'));
 

@@ -1,6 +1,6 @@
-import { renderIntoDocument, scryRenderedVNodesWithType } from 'inferno-test-utils';
+import { scryRenderedDOMElementsWithTag } from 'inferno-test-utils';
 import { renderToString } from 'inferno-server';
-import IconButton from '../iconbutton/iconbutton';
+import { renderIntoDocument } from '../../utils/testutils';
 import dom from 'cheerio';
 import Favourites from './favourites';
 
@@ -15,13 +15,13 @@ it('renders a div element', () => {
 it('renders an empty star icon button when the current address is not added to favourites', () => {
   const $ = dom.load(renderToString(<Favourites />));
   const element = $('.favourites-toggle');
-  expect(element.text()).toEqual('☆');
+  expect(element.text()).toEqual('☆Lisää suosikkeihin');
 });
 
 it('renders a star icon button when the current address is added to favourites', () => {
   const $ = dom.load(renderToString(<Favourites isCurrentAddressFavoured />));
   const element = $('.favourites-toggle');
-  expect(element.text()).toEqual('★');
+  expect(element.text()).toEqual('★Poista suosikeista');
 });
 
 it('disables the toggle button when address is falsy', () => {
@@ -39,7 +39,7 @@ it('marks the toggle button pressed with aria-pressed when the current address i
 it('renders a triangle icon button', () => {
   const $ = dom.load(renderToString(<Favourites />));
   const element = $('.favourites-open');
-  expect(element.text()).toEqual('▼');
+  expect(element.text()).toEqual('▼Avaa Omat suosikit-lista');
 });
 
 it('marks the dialog open button pressed with aria-pressed when the dialog is open', () => {
@@ -56,18 +56,20 @@ it('renders a dialog element', () => {
 
 it('calls toggleFavourite callback when the toggle button is clicked', () => {
   const spy = jest.fn();
-  const rendered = renderIntoDocument(<Favourites address={{}} toggleFavourite={spy} />);
-  const button = scryRenderedVNodesWithType(rendered, IconButton)[0];
+  const tree = <Favourites address={{}} toggleFavourite={spy} />;
+  renderIntoDocument(tree);
+  const button = scryRenderedDOMElementsWithTag(tree, 'button')[0];
   const event = new MouseEvent('click', { bubbles: true });
-  button.dom.dispatchEvent(event);
+  button.dispatchEvent(event);
   expect(spy).toHaveBeenCalled();
 });
 
-it('calls toggleFavourite callback when the toggle button is clicked', () => {
+it('calls toggleDialog callback when the dialog button is clicked', () => {
   const spy = jest.fn();
-  const rendered = renderIntoDocument(<Favourites toggleDialog={spy} />);
-  const button = scryRenderedVNodesWithType(rendered, IconButton)[1];
+  const tree = <Favourites toggleDialog={spy} />;
+  renderIntoDocument(tree);
+  const button = scryRenderedDOMElementsWithTag(tree, 'button')[1];
   const event = new MouseEvent('click', { bubbles: true });
-  button.dom.dispatchEvent(event);
+  button.dispatchEvent(event);
   expect(spy).toHaveBeenCalled();
 });

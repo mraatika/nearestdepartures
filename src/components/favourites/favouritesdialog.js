@@ -1,7 +1,7 @@
-import Component from 'inferno-component';
+import { Component } from 'inferno';
 import FavouritesListItem from './favouriteslistitem';
-import { areLocationsEqual } from './model';
 import './favourites.css';
+import { initFocusTrap, areLocationsEqual } from '../../utils/utils';
 
 /**
  * A dialog component for displaying user's saved locations
@@ -22,6 +22,7 @@ class FavouritesDialog extends Component {
   constructor(props) {
     super(props);
     this.onKeyUp = this.onKeyUp.bind(this);
+    this.clearFocus = () => {};
   }
 
   componentDidUpdate(prevProps) {
@@ -31,20 +32,20 @@ class FavouritesDialog extends Component {
     // if the dialog was opened
     if (!wasVisible && isNowVisible) {
       document.body.className = `no-scroll ${document.body.className}`.trim();
-      // start listening to keyup events
       document.body.addEventListener('keyup', this.onKeyUp);
-      // for usability reasons focus on the dialog when toggled visible
-      this.dialog.focus();
+
+      const closeButton = document.querySelector('.favouriteslist-close-button');
+      const removeButtons = document.querySelectorAll('.favouriteslist-item-remove');
+      this.clearFocus = initFocusTrap(closeButton, removeButtons[removeButtons.length - 1], true);
       // if the dialog was closed
     } else if (wasVisible && !isNowVisible) {
       document.body.className = document.body.className.replace('no-scroll', '');
-      // stop listening to keyup events
       document.body.removeEventListener('keyup', this.onKeyUp);
+      this.clearFocus();
     }
   }
 
   onKeyUp(e) {
-    // close the dialog on esc press
     if (e.key === 'Escape') {
       this.props.onClose();
     }
@@ -54,26 +55,30 @@ class FavouritesDialog extends Component {
     const { favourites = [] } = this.props;
     return (
       <div class={`favourites-modal-wrapper fill-parent${this.props.isVisible ? ' visible' : ''}`}>
-        <div class="modal fill-parent" />
+        <div class="modal fill-parent bg-black-opaque" />
         <div
-          class="favouriteslist fill-parent"
-          ref={r => this.dialog = r}
-          tabIndex="0"
+          class="favouriteslist color-gray-dark bg-white text-left corner-rounded flex-column fill-parent centering-margin"
           role="dialog"
-          aria-modal
+          tabIndex="0"
+          aria-labelledby="favouritesdialog-title"
+          aria-modal={true}
         >
-          <div className="favouriteslist-header">
-            <h2>Omat suosikit</h2>
-            <button class="favouriteslist-close-button text-only-button" onClick={this.props.onClose}>
-              sulje [x]
-            </button>
+          <div className="favouriteslist-header color-white bg-bus align-center space-xxl space-clear-rl">
+            <div class="space-xl space-clear-tb">
+              <h2 id="favouritesdialog-title" class="font-heading">Omat suosikit</h2>
+              <button class="favouriteslist-close-button text-only-button underline" onClick={this.props.onClose}>
+                sulje <span aria-hidden="true">[x]</span>
+              </button>
+            </div>
           </div>
+
           <div class="favouriteslist-header-triangle-container">
-            <div class="favouriteslist-header-triangle" />
-            <div class="favouriteslist-header-triangle-shadow" />
+            <div class="favouriteslist-header-triangle centering-margin" />
+            <div class="favouriteslist-header-triangle-shadow centering-margin" />
           </div>
-          <div class="favouriteslist-content flex-column">
-            <ul>
+
+          <div class="favouriteslist-content flex-column flex-full space-s space-clear-t">
+            <ul class="flex-full">
               {favourites.map(address =>
                 <FavouritesListItem
                   address={address}
@@ -82,11 +87,14 @@ class FavouritesDialog extends Component {
                   isSelected={areLocationsEqual(this.props.selectedAddress, address)}
                 />
               )}
-              {!favourites.length && <li class="favouriteslist-placeholder">Ei tallennettuja suosikkeja</li>}
+              {!favourites.length && <li class="favouriteslist-placeholder italic">Ei tallennettuja suosikkeja</li>}
             </ul>
-            <div class="info-message">
+
+            <div class="info-message flex-row flex-align-start flex-no-shrink align-left">
               <span class="badge info">!</span>
-              Suosikit tallentuvat paikallisesti, joten ne ovat hyödynnettävissä vain samalla selaimella ja laitteella, johon ne on tallennettu.
+              <div class="space-xs space-keep-l">
+                Suosikit tallentuvat paikallisesti, joten ne ovat hyödynnettävissä vain samalla selaimella ja laitteella, johon ne on tallennettu.
+              </div>
             </div>
           </div>
         </div>

@@ -11,7 +11,7 @@ User changes range
   ${range}=  Set Variable  600
   Given user has searched for    Porvoonkatu, Helsinki
   When user changes range to  ${range}
-  Then range output is  ${range}
+  Then range should be  ${range}
 
 User changes range and reloads the page
   ${range}=  Set Variable  600
@@ -39,7 +39,3 @@ User Selects Suggestion With Keyboard
   Wait For Suggestion List
   Press Key    ${ADDRESS_INPUT}    \\40
   Press Key    ${ADDRESS_INPUT}    ${key}
-
-Range Output is
-  [Arguments]  ${range}
-  Element Text Should Be  css:.range-filter-wrapper>output  ${range}m

@@ -22,6 +22,19 @@ it('has class danger if accuracy is greater than 500', () => {
   expect(indicator.is('.danger')).toBe(true);
 });
 
+it('has class danger when given an error', () => {
+  const $ = dom.load(renderToString(<AccuracyIndicator error={new Error()} />));
+  const indicator = $('div.location-accuracy');
+  expect(indicator.is('.danger')).toBe(true);
+});
+
+it('displays the error message when given an error', () => {
+  const errorText = 'Paikannus epäonnistui: Sijainnin haku on estetty tai kytketty pois';
+  const $ = dom.load(renderToString(<AccuracyIndicator error={new Error(errorText)} />));
+  const indicator = $('div.location-accuracy');
+  expect(indicator.text()).toEqual(`! ${errorText}`);
+});
+
 it('has class warning if accuracy is greater than 100', () => {
   const $ = dom.load(renderToString(<AccuracyIndicator accuracy={500} />));
   const indicator = $('div.location-accuracy');
@@ -79,6 +92,12 @@ it('rounds number up to nearest integer', () => {
 });
 
 it('converts string to number', () => {
+  const $ = dom.load(renderToString(<AccuracyIndicator accuracy={'100'}/>));
+  const indicator = $('div.location-accuracy');
+  expect(indicator.text()).toEqual(indicatorText(100));
+});
+
+it('renders an error', () => {
   const $ = dom.load(renderToString(<AccuracyIndicator accuracy={'100'}/>));
   const indicator = $('div.location-accuracy');
   expect(indicator.text()).toEqual(indicatorText(100));

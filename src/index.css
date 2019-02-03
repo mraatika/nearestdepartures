@@ -1,69 +1,82 @@
+* {
+  line-height: inherit;
+  color: inherit;
+  padding: 0;
+  margin: 0;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
 html,
 body {
+  box-sizing: border-box;
   height: 100%;
 }
 
-html {
-  font-size: 100%;
+input {
+  border-radius: 0;
+  min-width: 0;
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  font-size: 16px;
-
-  font-family: "Open Sans", arial, verdana, tahoma, sans-serif;
+button {
+  border-radius: 0;
+  cursor: pointer;
+  font-size: inherit;
+  border: 0;
+  background: none;
 }
 
-h1 {
-  margin: 10px 0;
-  font: normal 2em Georgia, 'Times New Roman', Times, serif;
+input,
+button {
+  -webkit-appearance: none;
+}
+
+ul,
+ol {
+  list-style: none;
 }
 
 a {
-  color: #fff;
+  text-decoration: none;
 }
 
-a:visited {
-  color: inherit;
-}
-
-input {
-  font-size: inherit;
-}
-
-ul {
-  list-style: none;
-  padding: 0;
-}
-
-.full-width {
-  width: 100%;
-}
-
-.bold {
-  font-weight: 600;
-}
-
-.hidden {
-  display: none;
-}
-
-.accessibility-hidden {
-  position: absolute;
-  left: -9999px;
-  top: -9999px;
-}
-
-button.accessibility-util-button {
-  border: 0;
-  background: 0;
-  padding: 0;
+.pointer {
+  cursor: pointer;
 }
 
 .no-scroll {
   overflow: hidden;
 }
+
+.corner-rounded {
+  border-radius: 4px;
+}
+
+.border-thin-light {
+  border: 1px solid #ddd;
+}
+
+.border-clear-left {
+  border-left-width: 0;
+}
+
+.border-clear-right {
+  border-right-width: 0;
+}
+
+.border-keep-b {
+  border-top-width: 0;
+  border-right-width: 0;
+  border-left-width: 0;
+}
+
+.no-border {
+  border: 0;
+}
+
+/** COMPONENTS */
 
 .info-message {
   color: #004085;
@@ -78,7 +91,7 @@ button.accessibility-util-button {
   padding: .25em .6em;
   font-family: "Patua One", cursive;
   font-size: 1.2rem;
-  line-height: 1;
+  line-height: 1rem;
   text-align: center;
   white-space: nowrap;
   vertical-align: baseline;
@@ -90,93 +103,60 @@ button.accessibility-util-button {
   background-color: #007bff;
 }
 
-.realtime {
-  color: #46b32a;
+button.bottom-heavy-border {
+  border-bottom: 4px solid #fff;
 }
 
-.tram {
-  color: #00985f;
-}
-
-.bus {
-  color: #007ac9;
-}
-
-.subway {
-  color: #ff6319;
-}
-
-.rail {
-  color: #8c4799;
-}
-
-.ferry {
-  color: #00b9e4;
-}
-
-.tram.bg {
-  background-color: #00985f;
-}
-
-.bus.bg {
-  background-color: #007ac9;
-}
-
-.subway.bg {
-  background-color: #ff6319;
-}
-
-.rail.bg {
-  background-color: #8c4799;
-}
-
-.ferry.bg {
-  background-color: #00b9e4;
-}
-
-button .bottom-border {
-  height: 4px;
-}
-
-button.bus:focus,
-button.bus:active,
-button.bus .bottom-border {
+button.bg-bus:focus,
+button.bg-bus:active {
   background: #0065a7;
 }
 
-button.tram:focus,
-button.tram:active,
-button.tram .bottom-border {
+button.bg-bus.bottom-heavy-border {
+  border-bottom-color: #0065a7;
+}
+
+button.bg-tram:focus,
+button.bg-tram:active {
   background: #006b42;
 }
 
-button.rail:focus,
-button.rail:active,
-button.rail .bottom-border {
+button.bg-tram.bottom-heavy-border {
+  border-bottom-color: #006b42;
+}
+
+button.bg-rail:focus,
+button.bg-rail:active {
   background: #71397c;
 }
 
-button.subway:focus,
-button.subway:active,
-button.subway .bottom-border {
+button.bg-rail.bottom-heavy-border {
+  border-bottom-color: #71397c;
+}
+
+button.bg-subway:focus,
+button.bg-subway:active {
   background: #d65417;
 }
 
-button.ferry:focus,
-button.ferry:active,
-button.ferry .bottom-border {
+button.bg-subway.bottom-heavy-border {
+  border-bottom-color: #d65417;
+}
+
+button.bg-ferry:focus,
+button.bg-ferry:active {
   background: #0094b6;
+}
+
+button.bg-ferry.bottom-heavy-border {
+  border-bottom-color: #0094b6;
 }
 
 button.text-only-button {
   background: none;
-  border: 0;
   font-size: 1rem;
-  cursor: pointer;
 }
 
-@media (min-width: 750px) {
-  body {
-    font-size: 16px;
-  }
+.icon-button[disabled] {
+  opacity: .5;
 }

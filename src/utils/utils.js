@@ -1,41 +1,6 @@
 /** @module Utils */
 
-/**
-* Find polyfill
-* @param {Function} fn Iteratee
-* @return {Function}
-*/
-const findPolyfill = fn =>
-  /**
-  * @private
-  * @param {Array} list
-  * @returns {*|undefined}
-  */
-  (list) => {
-    for (let i = 0; i < list.length; i++) {
-      if (fn(list[i])) return list[i];
-    }
-
-    return undefined;
-  };
-
-/**
-* Curried native Array.prototype.find
-* @private
-* @param {Function} fn Iteratee
-* @returns {Function}
-*/
-const nativeFind = (fn) =>
-  /**
-  * @param {Array} list
-  * @returns {*|undefined}
-  */
-  (list) => list.find(fn);
-
-/**
-* Find element from array running values through an iteratee function
-*/
-export const find = typeof Array.prototype.find === 'function' ? nativeFind : findPolyfill;
+export const noop = () => {};
 
 /**
 * Get current time in seconds
@@ -63,7 +28,7 @@ export const findFrom = (list = [], prop) => {
   return subject => {
     const subjectValue = getProp(subject);
     const comparator = Array.isArray(subject) ? compareArray : compareProp;
-    return find(comparator(subjectValue))(list);
+    return list.find(comparator(subjectValue));
   };
 };
 
@@ -88,7 +53,7 @@ export const toTimeString = (time = new Date()) => `${padNumber(time.getHours())
  * @param {function} fn
  * @returns {*}
  */
-const findFromUniques = (val, uniques, fn) => find(u => fn(u) === fn(val))(uniques);
+const findFromUniques = (val, uniques, fn) => uniques.find(u => fn(u) === fn(val));
 
 /**
 * Select unique values from an array
@@ -123,19 +88,30 @@ export const sortBy = (iteratee = val => val) =>
   };
 
 /**
-* Creates a handler for keypress event
+* Create a handler for enter and space keypresses
 * @param {Function} callback
 * @param {...*} params
 * @return {Function}
 */
-export const keyPressHandler = (callback, ...params) =>
+export const okKeyPressHandler = (callback, ...params) =>
+  keyPressHandler([13, 32], callback, ...params);
+
+/**
+ * Create a handler function that will call given calback
+ * only when event's keyCode is one of the given codes
+ * @param {number[]} keyCodes List of keys to handle
+ * @param {Function} callback Callback called when keyCode matches
+ * @param {...*} params 0 to n params passed to the callback
+ * @return {Function}
+ */
+export const keyPressHandler = (keyCodes, callback, ...params) =>
   /**
    * Call the callback function with given parameters
    * when the key pressed was space of enter
    * @param {Event} e
    */
   (e) => {
-    if ([13, 32].indexOf(e.keyCode) > -1) {
+    if (keyCodes.indexOf(e.keyCode) > -1) {
       e.preventDefault();
       callback(...params);
     }
@@ -160,7 +136,7 @@ export const prop = propName =>
    * @param {object}
    * @return {*} object[propName]
    */
-  obj => obj[propName];
+  (obj = {}) => obj[propName];
 
 /**
  * Returns the second argument if object's property {prop} is null or undefined
@@ -171,3 +147,68 @@ export const prop = propName =>
  * @return {*} The value of given property of the supplied object or the default value
  */
 export const propOr = (prop, otherwise, obj = {}) => obj[prop] == null ? otherwise : obj[prop];
+
+/**
+ * Get props of given objects and compare them
+ * @param {string} propName
+ * @param {object} o1
+ * @param {object} o2
+ * @return {Boolean}
+ */
+export const propEqual = propName => (o1, o2) =>
+  prop(propName)(o1) === prop(propName)(o2);
+
+/**
+ * Request focus on given element
+ * @param {DOMNode} domNode
+ */
+export const requestFocus = domNode => domNode.focus();
+
+/**
+ * @private
+ * @param {DOMNode} focusOn
+ * @param {Boolean} shiftKey
+ */
+const handleTab = (focusOn, shiftKey) =>
+  e => {
+    if (e.keyCode === 9 && e.shiftKey === shiftKey) {
+      e.preventDefault();
+      e.stopPropagation();
+      focusOn.focus();
+    }
+  };
+
+/**
+ * Init a focus trap to keep focus in a loop
+ * @param {DOMNode} firstElement
+ * @param {DOMNode} lastElement
+ * @param {Boolean} focusFirstElement
+ * @return {Function} Returns a function for clearing the callbacks
+ */
+export const initFocusTrap = (firstElement, lastElement, focusFirstElement) => {
+  if (!firstElement) return noop;
+
+  const lastOrFirstElement = lastElement || firstElement;
+  const startHandler = handleTab(lastOrFirstElement, true);
+  const endHandler = handleTab(firstElement, false);
+  const currentActiveElement = document.activeElement;
+
+  firstElement.addEventListener('keydown', startHandler);
+  lastOrFirstElement.addEventListener('keydown', endHandler);
+
+  focusFirstElement && setTimeout(() => requestFocus(firstElement), 100);
+
+  return () => {
+    firstElement.removeEventListener('keydown', startHandler);
+    lastOrFirstElement.removeEventListener('keydown', endHandler);
+    currentActiveElement.focus();
+  };
+};
+
+/**
+ * Check if two addresses have equal ids
+ * @param {object} a
+ * @param {object} b
+ * @return {boolean}
+ */
+export const areLocationsEqual = propEqual('label');

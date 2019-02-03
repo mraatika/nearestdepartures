@@ -1,4 +1,6 @@
 /** @module AddressSearchService */
+import { NetworkError } from '../utils/errors';
+
 
 /**
 * Search for address/location coordinates
@@ -9,13 +11,13 @@
 */
 export async function searchAddress(searchTerm, maxResults = 1) {
   const encoded = encodeURIComponent(searchTerm);
-  const url = `https://api.digitransit.fi/geocoding/v1/search?text=${encoded}&size=${maxResults}&lang=fi&boundary.rect.min_lat=59.9&boundary.rect.max_lat=60.45&boundary.rect.min_lon=24.3&boundary.rect.max_lon=25.5`;
+  const url = `${process.env.INFERNO_APP_SERVER_URL}/geocoding/v1/search?text=${encoded}&size=${maxResults}&lang=fi&boundary.rect.min_lat=59.9&boundary.rect.max_lat=60.45&boundary.rect.min_lon=24.3&boundary.rect.max_lon=25.5`;
   let response;
 
   try {
     response = await fetch(url);
   } catch (e) {
-    throw new Error('Osoitteen haku epäonnistui: Paveluun ei saatu yhteyttä');
+    throw new NetworkError('Osoitteen haku epäonnistui: Palveluun ei saatu yhteyttä.');
   }
 
   if (!response.ok) {
@@ -49,7 +51,7 @@ export async function lookupAddress({ latitude, longitude }) {
   let response;
 
   try {
-    response = await fetch(`https://api.digitransit.fi/geocoding/v1/reverse?${queryParams}`);
+    response = await fetch(`${process.env.INFERNO_APP_SERVER_URL}/geocoding/v1/reverse?${queryParams}`);
   } catch (e) {
     throw new Error('Osoitteen haku epäonnistui: Palveluun ei saatu yhteyttä');
   }

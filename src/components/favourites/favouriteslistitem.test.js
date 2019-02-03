@@ -1,5 +1,6 @@
-import { renderIntoDocument, scryRenderedVNodesWithType } from 'inferno-test-utils';
+import { scryRenderedVNodesWithType } from 'inferno-test-utils';
 import { renderToString } from 'inferno-server';
+import { renderIntoDocument } from '../../utils/testutils';
 import dom from 'cheerio';
 import FavouritestListItem from './favouriteslistitem';
 
@@ -24,15 +25,16 @@ it('does not have a selected class if the item is not selected', () => {
 it('renders label as a button element', () => {
   const label = 'HeaderText';
   const $ = dom.load(renderToString(<FavouritestListItem address={{ label }} />));
-  const element = $('.favouriteslist-item-label button');
+  const element = $('.favouriteslist-item-label');
   expect(element.text()).toEqual(label);
 });
 
 it('calls selectFavourite callback when the label is clicked', () => {
   const spy = jest.fn();
   const address = { label: 'Address' };
-  const rendered = renderIntoDocument(<FavouritestListItem address={address} selectFavourite={spy} />);
-  const button = scryRenderedVNodesWithType(rendered, 'button')[0];
+  const tree = <FavouritestListItem address={address} selectFavourite={spy} />;
+  renderIntoDocument(tree);
+  const button = scryRenderedVNodesWithType(tree, 'button')[0];
 
   const event = new MouseEvent('click', { bubbles: true });
   button.dom.dispatchEvent(event);
@@ -41,7 +43,7 @@ it('calls selectFavourite callback when the label is clicked', () => {
 });
 
 it('renders a close button with text x', () => {
-  const label = 'x';
+  const label = 'xPoista Omat suosikit -listalta';
   const $ = dom.load(renderToString(<FavouritestListItem address={{}} />));
   const element = $('.favouriteslist-item-remove');
   expect(element.text()).toEqual(label);
@@ -50,8 +52,9 @@ it('renders a close button with text x', () => {
 it('calls removeFavourite callback when the close button is clicked', () => {
   const spy = jest.fn();
   const address = { label: 'Address' };
-  const rendered = renderIntoDocument(<FavouritestListItem address={address} removeFavourite={spy} />);
-  const button = scryRenderedVNodesWithType(rendered, 'button')[1];
+  const tree = <FavouritestListItem address={address} removeFavourite={spy} />;
+  renderIntoDocument(tree);
+  const button = scryRenderedVNodesWithType(tree, 'button')[1];
 
   const event = new MouseEvent('click', { bubbles: true });
   button.dom.dispatchEvent(event);

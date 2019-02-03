@@ -1,5 +1,5 @@
 import { linkEvent } from 'inferno';
-import { keyPressHandler } from '../../utils/utils';
+import { okKeyPressHandler } from '../../utils/utils';
 /**
 * Departures list sorting header component
 * @constructs DepartureListSortHeader
@@ -17,13 +17,13 @@ export default ({
   onClick
 }) => (
   <div
+    class={`header bold color-gray-dark bg-white pointer ${propName.toLowerCase()}`}
     tabindex="0"
     role="button"
     aria-pressed={active ? 'true' : 'false'}
     aria-label={`Järjestä lista otsikon ${text.toLocaleLowerCase()} mukaan`}
-    class={`header ${propName.toLowerCase()}`}
     onClick={linkEvent(propName, onClick)}
-    onKeyPress={keyPressHandler(onClick, propName)}>
+    onKeyPress={okKeyPressHandler(onClick, propName)}>
     <span class={active ? 'active' : ''}>{text}</span>
   </div>
 );

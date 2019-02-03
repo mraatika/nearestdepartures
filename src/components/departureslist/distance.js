@@ -20,7 +20,7 @@ const roundToKm = distance => Math.round((distance / 1000) * 10) / 10;
  * @return {string}
  */
 const getDistanceinHumanReadableForm = distance =>
-  !distance
+  !Number.isFinite(distance)
     ? ''
     : distance >= 1000
     ? `${roundToKm(distance)} km`
