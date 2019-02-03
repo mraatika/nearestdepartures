@@ -35,7 +35,10 @@
     "lint": "node ./node_modules/eslint/bin/eslint src/**/*.{js,jsx}",
     "eject": "inferno-scripts eject",
     "predeploy:test": "npm run build",
-    "deploy:test": "gh-pages -d build"
+    "deploy:test": "gh-pages -d build",
+    "predeploy:prod": "git checkout $(git describe --tags $(git rev-list --tags --max-count=1)) && npm run build",
+    "deploy:prod": "aws s3 sync build/ s3://julkisilla.info --profile s3-deploy-task",
+    "postdeploy:prod": "git checkout -"
   },
   "browserslist": [
     ">0.5% in FI",
