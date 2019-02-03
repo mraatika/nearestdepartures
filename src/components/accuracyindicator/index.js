@@ -14,9 +14,9 @@ export default ({ accuracy, error }) => (
     aria-live="assertive"
     aria-atomic="true"
   >
-    <span class="location-accuracy-attention text-l" aria-hidden="true">!</span>
+    <span class="location-accuracy-attention text-l space-xxs space-keep-r" aria-hidden="true">!</span>
       {error
-        ? ` ${error.message}`
+        ? error.message
         : `Paikannuksen tarkkuus: ${Math.round(+accuracy || 0)}m`}
   </div>
 );
