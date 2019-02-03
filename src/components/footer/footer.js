@@ -7,7 +7,7 @@ import { toTimeString } from '../../utils/utils';
  * @param {Date} props.departureUpdateTime
  */
 export default ({ departureUpdateTime }) => (
-  <footer class="full-width text-s color-white bg-bus-dark space-s">
+  <footer class="full-width text-s color-white bg-bus-dark line-height-l space-s">
     <div class="footer-content max-content-width centering-margin">
       <p class="footer-app-name font-heading">{`Julkisilla.info v${process.env.INFERNO_APP_VERSION}`}</p>
       <p>

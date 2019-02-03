@@ -159,7 +159,7 @@ class App extends Component {
                 error={error}
                 onClick={this.hideError}
                 onComponentDidMount={requestFocus}
-              />}
+              />
             </div>}
 
           <AddressSearch
