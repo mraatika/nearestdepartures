@@ -9,10 +9,14 @@ import './accuracyindicator.css';
  * @param {PositionError} [props.error] An error in location fetching
  */
 export default ({ accuracy, error }) => (
-  <div class={`location-accuracy align-right text-s ${chooseColorClass(accuracy, error)}`}>
-    <span class="location-accuracy-attention text-l align-center" aria-hidden="true">!</span>
+  <div
+    class={`location-accuracy align-right text-s ${chooseColorClass(accuracy, error)}`}
+    aria-live="assertive"
+    aria-atomic="true"
+  >
+    <span class="location-accuracy-attention text-l" aria-hidden="true">!</span>
       {error
-        ? <span class="space-xs space-keep-l">{error.message}</span>
+        ? ` ${error.message}`
         : `Paikannuksen tarkkuus: ${Math.round(+accuracy || 0)}m`}
   </div>
 );

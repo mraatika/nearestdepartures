@@ -32,7 +32,7 @@ it('displays the error message when given an error', () => {
   const errorText = 'Paikannus epäonnistui: Sijainnin haku on estetty tai kytketty pois';
   const $ = dom.load(renderToString(<AccuracyIndicator error={new Error(errorText)} />));
   const indicator = $('div.location-accuracy');
-  expect(indicator.text()).toEqual(`!${errorText}`);
+  expect(indicator.text()).toEqual(`! ${errorText}`);
 });
 
 it('has class warning if accuracy is greater than 100', () => {

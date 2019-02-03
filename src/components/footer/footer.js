@@ -14,7 +14,7 @@ export default ({ departureUpdateTime }) => (
         Lähdöt päivitetty&nbsp;
         <i>{departureUpdateTime ? toTimeString(departureUpdateTime) : 'Ei koskaan'}</i>
         &nbsp;/&nbsp;
-        Lähtöjen tiedot ovat HSL:n tarjoamaa <a href="https://digitransit.fi/">avointa dataa</a>.
+        <a href="https://digitransit.fi/">Lähtöjen tiedot ovat HSL:n tarjoamaa <span class="underline">avointa dataa</span></a>.
       </p>
     </div>
   </footer>

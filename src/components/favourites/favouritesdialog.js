@@ -60,11 +60,12 @@ class FavouritesDialog extends Component {
           class="favouriteslist color-gray-dark bg-white text-left corner-rounded flex-column fill-parent centering-margin"
           role="dialog"
           tabIndex="0"
+          aria-labelledby="favouritesdialog-title"
           aria-modal={true}
         >
           <div className="favouriteslist-header color-white bg-bus align-center space-xxl space-clear-rl">
             <div class="space-xl space-clear-tb">
-              <h2 class="font-heading">Omat suosikit</h2>
+              <h2 id="favouritesdialog-title" class="font-heading">Omat suosikit</h2>
               <button class="favouriteslist-close-button text-only-button underline" onClick={this.props.onClose}>
                 sulje <span aria-hidden="true">[x]</span>
               </button>

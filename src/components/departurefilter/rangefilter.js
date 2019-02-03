@@ -26,7 +26,9 @@ export default ({
   onChange,
 }) => (
   <div class="range-filter-wrapper">
-    <div class="align-right space-xxs space-keep-b"><output>{range}m</output></div>
+    <div class="align-right space-xxs space-keep-b">
+      <output for="departurefilter-range">{range}m</output>
+    </div>
     <label for="departurefilter-range" class="sr-only">Maksimietäisyys pysäkille</label>
     <input
       id="departurefilter-range"

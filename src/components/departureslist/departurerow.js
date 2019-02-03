@@ -127,10 +127,10 @@ const DepartureRowAdditionalContent = forwardRef(({
             <Icon type="clock" />
           </span>
           <div class="space-xs space-keep-b no-wrap">
-            {realtime && <div class="color-light-green bold" title="Arvioitu reaaliaikainen lähtöaika pysäkiltä">
+            {realtime && <div class="color-light-green bold">
               <Time time={realtimeDeparture} actualTime={true} /> (arvioitu)
             </div>}
-            <div class="scheduled-departure" title="Aikataulun mukainen lähtöaika pysäkiltä">
+            <div class="scheduled-departure">
               <Time time={scheduledDeparture} actualTime={true} /> (aikataulu)
             </div>
           </div>
