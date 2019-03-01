@@ -27,7 +27,7 @@
 }
 
 .space-xxxl {
-  padding: 4;
+  padding: 4rem;
 }
 
 .space-clear-t {
@@ -207,7 +207,6 @@
 
 .sr-only-focusable:active,
 .sr-only-focusable:focus {
-  position: static;
   width: auto;
   height: auto;
   margin: 0;
