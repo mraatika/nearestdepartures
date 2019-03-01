@@ -1,5 +1,5 @@
 import { linkEvent } from 'inferno';
-import { okKeyPressHandler } from '../../utils/utils';
+
 /**
 * Departures list sorting header component
 * @constructs DepartureListSortHeader
@@ -16,14 +16,14 @@ export default ({
   text = '',
   onClick
 }) => (
-  <div
-    class={`header bold color-gray-dark bg-white pointer ${propName.toLowerCase()}`}
-    tabindex="0"
-    role="button"
-    aria-pressed={active ? 'true' : 'false'}
-    aria-label={`Järjestä lista otsikon ${text.toLocaleLowerCase()} mukaan`}
-    onClick={linkEvent(propName, onClick)}
-    onKeyPress={okKeyPressHandler(onClick, propName)}>
-    <span class={active ? 'active' : ''}>{text}</span>
+  <div class={`header bg-white ${propName.toLowerCase()}`}>
+    <button
+      onClick={linkEvent(propName, onClick)}
+      class={`bold color-gray-dark pointer ${active ? 'active' : ''}`}
+      aria-pressed={active ? 'true' : 'false'}
+      aria-label={`Järjestä lista otsikon ${text.toLocaleLowerCase()} mukaan`}
+    >
+      {text}
+    </button>
   </div>
 );
