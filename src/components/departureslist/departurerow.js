@@ -76,7 +76,7 @@ export default ({
       </div>
     </div>
 
-    <div id={`departure-additional-info-${id}`}>
+    <section id={`departure-additional-info-${id}`}>
       {isToggled &&
         <DepartureRowAdditionalContent
           ref={content => content && requestFocus(content)}
@@ -93,7 +93,7 @@ export default ({
             onRowToggle,
           }}
         />}
-      </div>
+      </section>
   </li>;
 
 /**
@@ -114,49 +114,48 @@ const DepartureRowAdditionalContent = forwardRef(({
   disruptions,
   onRowToggle,
 }, ref) =>
-  <section
+  <div
     class="departures-list-row-additional-info position-relative"
     tabIndex="0"
     ref={ref}
     onKeyUp={keyPressHandler([27], onRowToggle, id)}
   >
-    <div class="space-xs space-clear-rl">
-      <div class="space-xs space-clear-tb flex-row flex-wrap line-height-l">
-        <div class="flex-row flex-align-center space-m space-keep-r">
-          <span class="space-s space-keep-r">
-            <Icon type="clock" />
-          </span>
-          <div class="space-xs space-keep-b no-wrap">
-            {realtime && <div class="color-light-green bold">
-              <Time time={realtimeDeparture} actualTime={true} /> (arvioitu)
-            </div>}
-            <div class="scheduled-departure">
-              <Time time={scheduledDeparture} actualTime={true} /> (aikataulu)
-            </div>
+    <div class="space-xs flex-row flex-wrap line-height-l">
+      <div class="flex-row flex-align-center space-m space-keep-r">
+        <span class="space-s space-keep-r">
+          <Icon type="clock" />
+        </span>
+        <div class="space-xs space-keep-b no-wrap">
+          {realtime && <div class="color-light-green bold">
+            <Time time={realtimeDeparture} actualTime={true} /> (arvioitu)
+          </div>}
+          <div class="scheduled-departure">
+            <Time time={scheduledDeparture} actualTime={true} /> (aikataulu)
           </div>
         </div>
-
-        <div class="flex-row flex-align-center no-wrap">
-          <span class="space-s space-keep-r">
-            <Icon type="bus-stop" />
-          </span>
-          <div class="space-xs space-keep-b">
-            <ExternalLink
-              class="bold departure-stop-name underline"
-              href={stopUrl}
-              title="Näytä pysäkin tiedot Reittioppaassa"
-              text={stopName}
-            />
-            <div>
-              <span class="departure-stop-code text-s color-gray-dark space-xxs space-clear-tb corner-rounded border-thin-light">
-                {stopCode}
-              </span>
-              <span class="departure-stop-description space-xs space-keep-l">{stopDescription}</span>
-            </div>
-          </div>
-        </div>
-        {!!disruptions.length && <DisruptionAlert disruptions={disruptions} />}
       </div>
+
+      <div class="flex-row flex-align-center no-wrap">
+        <span class="space-s space-keep-r">
+          <Icon type="bus-stop" />
+        </span>
+        <div class="space-xs space-keep-b">
+          <ExternalLink
+            class="bold departure-stop-name underline"
+            href={stopUrl}
+            title="Näytä pysäkin tiedot Reittioppaassa"
+            text={stopName}
+          />
+          <div>
+            <span class="departure-stop-code text-s color-gray-dark space-xxs space-clear-tb corner-rounded border-thin-light">
+              {stopCode}
+            </span>
+            <span class="departure-stop-description space-xs space-keep-l">{stopDescription}</span>
+          </div>
+        </div>
+      </div>
+
+      {!!disruptions.length && <DisruptionAlert disruptions={disruptions} />}
     </div>
 
     <button
@@ -164,5 +163,5 @@ const DepartureRowAdditionalContent = forwardRef(({
       onClick={linkEvent(id, onRowToggle)}>
         Sulje
     </button>
-  </section>
+  </div>
 );
