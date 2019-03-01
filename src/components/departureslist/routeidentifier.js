@@ -1,3 +1,4 @@
+import { VEHICLE_TYPE_TRANSLATIONS } from '../../constants/constants';
 import VehicleIcon from '../vehicleicon/vehicleicon';
 
 /**
@@ -10,7 +11,8 @@ import VehicleIcon from '../vehicleicon/vehicleicon';
  */
 export default ({ routeName = '', vehicleType = '' }) => (
   <span class={vehicleType.toLowerCase()}>
-    <VehicleIcon iconName={vehicleType.toLocaleLowerCase()} />
+    <span class="sr-only">{VEHICLE_TYPE_TRANSLATIONS[vehicleType]}</span>
+    <span aria-hidden="true"><VehicleIcon iconName={vehicleType.toLocaleLowerCase()} /></span>
     <span class={`route-identifier space-xxs space-keep-l color-${vehicleType.toLowerCase()}`}>{routeName}</span>
   </span>
 );
