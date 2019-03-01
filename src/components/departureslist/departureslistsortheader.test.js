@@ -10,7 +10,7 @@ it('renders a div element', () => {
   expect(element.length).toEqual(1);
 });
 
-it('renders span element with text', () => {
+it('has a title text', () => {
   const text = 'HeaderText';
   const $ = dom.load(renderToString(<DeparturesListSortHeader text={text} />));
   const element = $('div.header');
@@ -24,18 +24,12 @@ it('has class related to given propName', () => {
   expect(element.hasClass(`${propName}`)).toEqual(true);
 });
 
-it('is tabbable', () => {
-  const $ = dom.load(renderToString(<DeparturesListSortHeader />));
-  const element = $('div.header');
-  expect(element.attr('tabindex')).toEqual('0');
-});
-
 it('calls onClick callback when clicked', () => {
   const spy = jest.fn();
   const propName = 'time';
   const tree = <DeparturesListSortHeader propName={propName} onClick={spy} />;
   renderIntoDocument(tree);
-  const button = scryRenderedVNodesWithType(tree, 'span')[0];
+  const button = scryRenderedVNodesWithType(tree, 'button')[0];
 
   const event = new MouseEvent('click', { bubbles: true });
   button.dom.dispatchEvent(event);
@@ -43,53 +37,14 @@ it('calls onClick callback when clicked', () => {
   expect(spy).toHaveBeenCalledWith(propName, event);
 });
 
-it('calls onClick callback on space press', () => {
-  const spy = jest.fn();
-  const propName = 'time';
-  const tree = <DeparturesListSortHeader propName={propName} onClick={spy} />;
-  renderIntoDocument(tree);
-  const button = scryRenderedVNodesWithType(tree, 'span')[0];
-
-  const event = new KeyboardEvent('keypress', { bubbles: true, keyCode: 32 });
-  button.dom.dispatchEvent(event);
-
-  expect(spy).toHaveBeenCalled();
-});
-
-it('calls onClick callback on enter press', () => {
-  const spy = jest.fn();
-  const propName = 'time';
-  const tree = <DeparturesListSortHeader propName={propName} onClick={spy} />;
-  renderIntoDocument(tree);
-  const button = scryRenderedVNodesWithType(tree, 'span')[0];
-
-  const event = new KeyboardEvent('keypress', { bubbles: true, keyCode: 13 });
-  button.dom.dispatchEvent(event);
-
-  expect(spy).toHaveBeenCalled();
-});
-
-it('does not call onClick callback on other key press', () => {
-  const spy = jest.fn();
-  const propName = 'time';
-  const tree = <DeparturesListSortHeader propName={propName} onClick={spy} />;
-  renderIntoDocument(tree);
-  const button = scryRenderedVNodesWithType(tree, 'span')[0];
-
-  const event = new KeyboardEvent('keypress', { bubbles: true, keyCode: 2 });
-  button.dom.dispatchEvent(event);
-
-  expect(spy).not.toHaveBeenCalled();
-});
-
 it('text span does not have classname active when props.active is false', () => {
   const $ = dom.load(renderToString(<DeparturesListSortHeader active={false} />));
-  const element = $('div.header > span');
+  const element = $('div.header > button');
   expect(element.hasClass('active')).toEqual(false);
 });
 
 it('text span has classname active when props.active is true', () => {
   const $ = dom.load(renderToString(<DeparturesListSortHeader active={true} />));
-  const element = $('div.header > span');
+  const element = $('div.header > button');
   expect(element.hasClass('active')).toEqual(true);
 });
