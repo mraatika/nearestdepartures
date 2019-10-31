@@ -12,9 +12,9 @@ export default ({ departureUpdateTime }) => (
       <p class="footer-app-name font-heading">{`Julkisilla.info v${process.env.INFERNO_APP_VERSION}`}</p>
       <p>
         Lähdöt päivitetty&nbsp;
-        <i>{departureUpdateTime ? toTimeString(departureUpdateTime) : 'Ei koskaan'}</i>
+        <span class="italic">{departureUpdateTime ? toTimeString(departureUpdateTime) : 'Ei koskaan'}</span>
         &nbsp;/&nbsp;
-        <a href="https://digitransit.fi/">Lähtöjen tiedot ovat HSL:n tarjoamaa <span class="underline">avointa dataa</span></a>.
+        Lähtöjen tiedot ovat HSL:n tarjoamaa <a href="https://digitransit.fi/" class="underline">avointa dataa</a>.
       </p>
     </div>
   </footer>

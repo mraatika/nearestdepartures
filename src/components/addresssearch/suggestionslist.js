@@ -16,6 +16,7 @@ export default ({ suggestions = [], selected = {}, onItemClick, onClose }) => (
     id="suggestions-list"
     class="full-width position-absolute space-clear-l"
     role="listbox"
+    aria-label="Osoite"
     style={{ display: suggestions.length ? 'block' : 'none' }}>
     {suggestions.map(suggestion => (
       <SuggestionsListItem
