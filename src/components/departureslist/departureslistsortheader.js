@@ -15,14 +15,18 @@ export default ({
   propName = '',
   active = false,
   text = '',
+  sortDir = -1,
   label,
   onClick
 }) => (
-  <div class={`header bg-white ${propName.toLowerCase()}`}>
+  <div
+    role="columnheader"
+    aria-sort={sortDir === -1 ? 'descending' : sortDir === 1 ? 'ascending' : 'none'}
+    class={`header bg-white ${propName.toLowerCase()}`}
+  >
     <button
       onClick={linkEvent(propName, onClick)}
       class={`bold color-gray-dark pointer ${active ? 'active' : ''}`}
-      aria-pressed={active ? 'true' : 'false'}
       aria-label={label}
     >
       {text}

@@ -42,15 +42,9 @@ it('renders a header with text Pysäkille', () => {
   expect(headerText).toBe('Pysäkille');
 });
 
-it('renders a list for departure rows', () => {
-  const $ = dom.load(renderToString(<DeparturesList />));
-  const expected = $('ul.departures-list-body').length;
-  expect(expected).toBe(1);
-});
-
 it('renders a placeholder item when departures list is empty', () => {
   const $ = dom.load(renderToString(<DeparturesList departures={[]}/>));
-  const rows = $('.departures-list-body').children();
+  const rows = $('.departures-list-row');
   expect(rows.length).toBe(1);
   expect(rows.eq(0).hasClass('no-results')).toBe(true);
 });
@@ -58,7 +52,7 @@ it('renders a placeholder item when departures list is empty', () => {
 it('renders as many departure rows as there are departures', () => {
   const departures = [{ id: '1' }, { id: '2' }];
   const $ = dom.load(renderToString(<DeparturesList departures={departures}/>));
-  const rows = $('.departures-list-body').children();
+  const rows = $('.departures-list-row');
   expect(rows.length).toBe(departures.length);
 });
 

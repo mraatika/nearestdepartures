@@ -15,13 +15,15 @@ it('renders a div element', () => {
 it('renders an empty star icon button when the current address is not added to favourites', () => {
   const $ = dom.load(renderToString(<Favourites />));
   const element = $('.favourites-toggle');
-  expect(element.text()).toEqual('☆Lisää suosikkeihin');
+  expect(element.text()).toEqual('☆');
+  expect(element.prop('aria-label')).toEqual('Lisää suosikkeihin');
 });
 
 it('renders a star icon button when the current address is added to favourites', () => {
   const $ = dom.load(renderToString(<Favourites isCurrentAddressFavoured />));
   const element = $('.favourites-toggle');
-  expect(element.text()).toEqual('★Poista suosikeista');
+  expect(element.text()).toEqual('★');
+  expect(element.prop('aria-label')).toEqual('Poista suosikeista');
 });
 
 it('disables the toggle button when address is falsy', () => {
@@ -39,7 +41,8 @@ it('marks the toggle button pressed with aria-pressed when the current address i
 it('renders a triangle icon button', () => {
   const $ = dom.load(renderToString(<Favourites />));
   const element = $('.favourites-open');
-  expect(element.text()).toEqual('▼Avaa Omat suosikit-lista');
+  expect(element.text()).toEqual('▼');
+  expect(element.prop('aria-label')).toEqual('Avaa Omat suosikit-lista');
 });
 
 it('marks the dialog open button pressed with aria-pressed when the dialog is open', () => {

@@ -32,8 +32,14 @@ const generateDepartureRows = ({ departures, toggledRowId, onRowToggle, disrupti
  * @returns {Function}
  */
 const generateEmptyRow = () =>
-  <div class="departures-list-row no-results italic align-center space-m space-clear-rl" tabindex="0">
-    Lähtöjä ei löytynyt annetuilla hakukriteereillä tai suodattimilla.
+  <div
+    role="row"
+    class="departures-list-row no-results italic align-center space-m space-clear-rl"
+    tabindex="0"
+  >
+    <div role="cell" aria-colspan="4">
+      Lähtöjä ei löytynyt annetuilla hakukriteereillä tai suodattimilla.
+    </div>
   </div>;
 
 /**
@@ -101,19 +107,24 @@ export default class DeparturesList extends Component {
       <div class="departures-list position-relative centering-margin">
         <LoadingOverlay show={isLoading} />
 
-        <div class="departures-list-header flex-row no-wrap space-s space-keep-b">
-          {sortHeaders.map(({ text, propName, label }) =>
-            <DeparturesListSortHeader
-              key={propName}
-              propName={propName}
-              active={sortProp === propName}
-              onClick={this.updateSortProps}
-              text={text}
-              label={label}
-            />
-          )}
+        <div role="table" aria-label="Lähdöt">
+          <div role="rowgroup">
+            <div role="row" class="departures-list-header flex-row no-wrap space-s space-keep-b">
+              {sortHeaders.map(({ text, propName, label }) =>
+                <DeparturesListSortHeader
+                  key={propName}
+                  propName={propName}
+                  active={sortProp === propName}
+                  onClick={this.updateSortProps}
+                  text={text}
+                  label={label}
+                  sortDir={sortDir}
+                />
+              )}
+            </div>
+          </div>
+          {rows}
         </div>
-        <ul id="departures-list-results" class="departures-list-body">{rows}</ul>
       </div>
     );
   }

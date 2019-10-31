@@ -6,7 +6,7 @@ import DepartureRow from './departurerow';
 
 it('renders a list item', () => {
   const $ = dom.load(renderToString(<DepartureRow />));
-  const tableRow = $('li.departures-list-row-container');
+  const tableRow = $('div.departures-list-row-container');
   expect(tableRow.length).toBe(1);
 });
 
@@ -263,7 +263,8 @@ describe('Disruption indication and display', () => {
     const $ = dom.load(renderToString(<DepartureRow disruptions={[disruption]} />));
     const $alert = $('.alert-icon');
     expect($alert.length).toEqual(1);
-    expect($alert.text()).toEqual('Huomio: Linjalla häiriöitä⚠');
+    expect($alert.text()).toEqual('⚠');
+    expect($alert.prop('aria-label')).toEqual('Linjalla häiriöitä: Avaa lähdön tiedot nähdäksesi lisätietoja');
   });
 
   it('should display alert header if defined', () => {

@@ -27,7 +27,6 @@ const Favourites = ({ 
     <IconButton
       class="favourites-toggle text-white"
       text={isCurrentAddressFavoured ? '★' : '☆'}
-      title="Lisää suosikkeihin/poista suosikeista"
       label={isCurrentAddressFavoured ? 'Poista suosikeista' : 'Lisää suosikkeihin'}
       aria-pressed={!!isCurrentAddressFavoured}
       disabled={!address}
@@ -38,7 +37,6 @@ const Favourites = ({ 
       <IconButton
         class="favourites-open"
         text="▼"
-        title="Avaa Omat suosikit-lista"
         label="Avaa Omat suosikit-lista"
         aria-pressed={isDialogVisible}
         onClick={toggleDialog} />

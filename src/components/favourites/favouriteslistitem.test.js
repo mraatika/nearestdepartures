@@ -43,10 +43,11 @@ it('calls selectFavourite callback when the label is clicked', () => {
 });
 
 it('renders a close button with text x', () => {
-  const label = 'xPoista Omat suosikit -listalta';
+  const label = 'x';
   const $ = dom.load(renderToString(<FavouritestListItem address={{}} />));
   const element = $('.favouriteslist-item-remove');
   expect(element.text()).toEqual(label);
+  expect(element.prop('aria-label')).toEqual('Poista Omat suosikit -listalta');
 });
 
 it('calls removeFavourite callback when the close button is clicked', () => {
