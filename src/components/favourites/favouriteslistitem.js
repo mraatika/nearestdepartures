@@ -19,6 +19,7 @@ const FavouritesListItem = ({ address, removeFavourite, selectFavourite, isSelec
       onClick={linkEvent(address, selectFavourite)}>
       {address.label}
     </button>
+
     <div>
       <IconButton
         class="favouriteslist-item-remove text-l color-alert"

@@ -41,8 +41,12 @@ export default ({
   scheduledDeparture,
   disruptions = [],
 }) =>
-  <li class="departures-list-row-container border-thin-light border-keep-b line-height-xxl">
+  <div
+    role="rowgroup"
+    class="departures-list-row-container border-thin-light border-keep-b line-height-xxl"
+  >
     <div
+      role="row"
       class="departures-list-row flex-row pointer"
       onClick={linkEvent(id, onRowToggle)}
       onKeyUp={okKeyPressHandler(onRowToggle, id)}
@@ -50,11 +54,11 @@ export default ({
       aria-expanded={!!isToggled}
       aria-controls={`departure-additional-info-${id}`}
     >
-      <div class={`time${realtime ? ' color-light-green' : ''}`}>
+      <div role="cell" class={`time${realtime ? ' color-light-green' : ''}`}>
         <Time time={realtimeDeparture} />
       </div>
 
-      <div class="routename bold overflow-hidden no-wrap">
+      <div role="cell" class="routename bold overflow-hidden no-wrap">
         <ExternalLink
           href={routeUrl} title={`Näytä linjan tiedot suuntaan ${destination}`}
           aria-label={`Näytä linjan tiedot suuntaan ${destination}`}
@@ -63,41 +67,42 @@ export default ({
         </ExternalLink>
       </div>
 
-      <div class="destination flex-full position-relative vertical-bottom overflow-hidden no-wrap">
+      <div role="cell" class="destination flex-full position-relative vertical-bottom overflow-hidden no-wrap">
         {!!(disruptions.length) &&
           <span
-            title="Linjalla häiriöitä: Klikkaa nähdäksesi lisätietoja"
+            aria-label="Linjalla häiriöitä: Avaa lähdön tiedot nähdäksesi lisätietoja"
             class="color-alert alert-icon bold space-xs space-keep-r">
-            <span class="sr-only">Huomio: Linjalla häiriöitä</span>
             <span aria-hidden="true">⚠</span>
           </span>}
         {destination}
       </div>
 
-      <div class="distance color-gray-dark align-right vertical-bottom space-xs space-keep-l">
+      <div role="cell" class="distance color-gray-dark align-right vertical-bottom space-xs space-keep-l">
         <Distance distance={distance} />
       </div>
     </div>
 
-    <section id={`departure-additional-info-${id}`}>
-      {isToggled &&
-        <DepartureRowAdditionalContent
-          ref={content => content && requestFocus(content)}
-          {...{
-            id,
-            realtime,
-            realtimeDeparture,
-            scheduledDeparture,
-            stopUrl,
-            stopName,
-            stopCode,
-            stopDescription,
-            disruptions,
-            onRowToggle,
-          }}
-        />}
-      </section>
-  </li>;
+    <div role="row" id={`departure-additional-info-${id}`}>
+      <div role="cell" aria-colspan="4">
+        {isToggled &&
+          <DepartureRowAdditionalContent
+            ref={content => content && requestFocus(content)}
+            {...{
+              id,
+              realtime,
+              realtimeDeparture,
+              scheduledDeparture,
+              stopUrl,
+              stopName,
+              stopCode,
+              stopDescription,
+              disruptions,
+              onRowToggle,
+            }}
+          />}
+      </div>
+    </div>
+  </div>;
 
 /**
  * Additional content component
