@@ -5,6 +5,7 @@ import { linkEvent } from 'inferno';
 * @constructs DepartureListSortHeader
 * @param {Object} props
 * @param {Function} props.onClick
+* @param {string} props.label
 * @param {string} [props.propName=""]
 * @param {boolean} [props.active=false]
 * @param {string} [props.text=""]
@@ -14,6 +15,7 @@ export default ({
   propName = '',
   active = false,
   text = '',
+  label,
   onClick
 }) => (
   <div class={`header bg-white ${propName.toLowerCase()}`}>
@@ -21,7 +23,7 @@ export default ({
       onClick={linkEvent(propName, onClick)}
       class={`bold color-gray-dark pointer ${active ? 'active' : ''}`}
       aria-pressed={active ? 'true' : 'false'}
-      aria-label={`Järjestä lista otsikon ${text.toLocaleLowerCase()} mukaan`}
+      aria-label={label}
     >
       {text}
     </button>

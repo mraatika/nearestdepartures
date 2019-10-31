@@ -55,7 +55,10 @@ export default ({
       </div>
 
       <div class="routename bold overflow-hidden no-wrap">
-        <ExternalLink href={routeUrl}>
+        <ExternalLink
+          href={routeUrl} title={`Näytä linjan tiedot suuntaan ${destination}`}
+          aria-label={`Näytä linjan tiedot suuntaan ${destination}`}
+        >
           <RouteIdentifier vehicleType={vehicleType} routeName={routeName} />
         </ExternalLink>
       </div>

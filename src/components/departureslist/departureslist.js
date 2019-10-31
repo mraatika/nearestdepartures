@@ -41,10 +41,10 @@ const generateEmptyRow = () =>
  * @type {object[]}
  */
 const sortHeaders = [
-  { text: 'Lähtee', propName: 'time' },
-  { text: 'Linja', propName: 'routeName' },
-  { text: 'Määränpää', propName: 'destination' },
-  { text: 'Pysäkille', propName: 'distance' },
+  { text: 'Lähtee', propName: 'time', label: 'Järjestä lista lähtöajan mukaan' },
+  { text: 'Linja', propName: 'routeName', label: 'Järjestä lista linjan mukaan' },
+  { text: 'Määränpää', propName: 'destination', label: 'Järjestä lista määränpään mukaan' },
+  { text: 'Pysäkille', propName: 'distance', label: 'Järjestä lista pysäkin etäisyyden mukaan' },
 ];
 
 /**
@@ -102,13 +102,14 @@ export default class DeparturesList extends Component {
         <LoadingOverlay show={isLoading} />
 
         <div class="departures-list-header flex-row no-wrap space-s space-keep-b">
-          {sortHeaders.map(({ text, propName }) =>
+          {sortHeaders.map(({ text, propName, label }) =>
             <DeparturesListSortHeader
               key={propName}
               propName={propName}
               active={sortProp === propName}
               onClick={this.updateSortProps}
               text={text}
+              label={label}
             />
           )}
         </div>
