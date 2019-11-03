@@ -1,5 +1,5 @@
+import uniqBy from '1-liners/uniqBy';
 import flatMap from '1-liners/flatMap';
-import { uniq } from './utils';
 import { VEHICLE_TYPE } from '../constants/constants';
 import * as departuresService from '../services/departuresservice';
 import { findFrom } from '../utils/utils';
@@ -81,7 +81,7 @@ const mergeBatchData = (existing, batch) =>
 * @returns {Object[]}
 */
 const filterUniqueRealtimeDepartures = departures =>
-  uniq(d => d.nodeId)(departures.filter(d => d.realtime));
+  uniqBy(departures.filter(d => d.realtime), d => d.nodeId);
 
 /**
 * Update given realtime departures by fetching a batch from api

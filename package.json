@@ -20,7 +20,7 @@
     "mock-geolocation": "^1.0.11"
   },
   "dependencies": {
-    "1-liners": "^0.4.0",
+    "1-liners": "^0.4.2",
     "inferno": "^7.1.9",
     "lodash": "^4.17.11"
   },

@@ -1,5 +1,5 @@
 import query from './querydisruptions';
-import { propOr } from '../utils/utils';
+import { prop, propOr } from '../utils/utils';
 
 /**
  * @private
@@ -18,6 +18,7 @@ const addAlert = (acc, alert) => propOr(alert.route.gtfsId, [], acc).concat(aler
  */
 const normalizeDisruptions = ({ data }) =>
   propOr('alerts', [], data)
+    .filter(prop('route'))
     .reduce((acc, i) => ({ ...acc, [i.route.gtfsId]: addAlert(acc, i) }), {});
 
 /**
