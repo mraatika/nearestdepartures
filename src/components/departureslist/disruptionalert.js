@@ -13,9 +13,9 @@ export default ({ disruptions }) => (
         {disruption.alertHeaderText && <h3>{disruption.alertHeaderText}</h3>}
         <p class="alert-info-body">{disruption.alertDescriptionText}</p>
         {disruption.alertUrl &&
-          <p class="alert-info-duration">
+          <p class="alert-info-duration space-xs space-keep-t">
             <ExternalLink
-              class="disruption-alert-additional-info"
+              class="disruption-alert-additional-info underline"
               href={disruption.alertUrl}
               text="Lisätietoja"
             />

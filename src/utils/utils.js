@@ -47,28 +47,6 @@ export const padNumber = num => (('' + num).length < 2 ? '0' + num : num);
 export const toTimeString = (time = new Date()) => `${padNumber(time.getHours())}:${padNumber(time.getMinutes())}:${padNumber(time.getSeconds())}`;
 
 /**
- * @private
- * @param {*} val
- * @param {*[]} uniques
- * @param {function} fn
- * @returns {*}
- */
-const findFromUniques = (val, uniques, fn) => uniques.find(u => fn(u) === fn(val));
-
-/**
-* Select unique values from an array
-* @param {Function} [fn]
-* @returns {Function}
-*/
-export const uniq = (fn = val => val) =>
-/**
-* @param {Array} list
-* @returns {Array} Unique values
-*/
-  (list = []) => list.reduce((uniques, val) =>
-    findFromUniques(val, uniques, fn) ? uniques : [...uniques, val], []);
-
-/**
 * Sort list in ascending order by results of running each value thru iteratee fn
 * @param {Function} iteratee
 * @returns {Function}
@@ -144,7 +122,7 @@ export const prop = propName =>
  * @param {string} prop Property's name
  * @param {*} otherwise Default return value
  * @param {object} obj The object to get the prop from
- * @return {*} The value of given property of the supplied object or the default value
+ * @return {*}
  */
 export const propOr = (prop, otherwise, obj = {}) => obj[prop] == null ? otherwise : obj[prop];
 

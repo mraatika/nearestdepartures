@@ -6,7 +6,7 @@
  */
 export default `
   {
-    alerts {
+    alerts(severityLevel: [WARNING, SEVERE], feeds: ["HSL"]) {
       alertHeaderText
       alertDescriptionText
       alertUrl

@@ -44,4 +44,17 @@ describe('DisruptionsService', () => {
     const data = { data: { alerts: [alert1, alert2] } };
     return expectAlert(data, routeId, data.data.alerts);
   });
+
+  it('should not contain disruptions without route (general)', () => {
+    const alert = { 
+      alertHeaderText: 'Alert!',
+      alertUrl: 'http://google.com',
+      alertDescriptionText: 'Alert body',
+      route: null,
+    };
+    const data = { data: { alerts: [alert] } };
+
+    return doFetch(data)
+      .then(res => expect(res).toEqual({}));
+  });
 });
