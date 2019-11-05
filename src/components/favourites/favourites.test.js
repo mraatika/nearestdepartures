@@ -15,14 +15,12 @@ it('renders a div element', () => {
 it('renders an empty star icon button when the current address is not added to favourites', () => {
   const $ = dom.load(renderToString(<Favourites />));
   const element = $('.favourites-toggle');
-  expect(element.text()).toEqual('☆');
   expect(element.prop('aria-label')).toEqual('Lisää suosikkeihin');
 });
 
 it('renders a star icon button when the current address is added to favourites', () => {
   const $ = dom.load(renderToString(<Favourites isCurrentAddressFavoured />));
   const element = $('.favourites-toggle');
-  expect(element.text()).toEqual('★');
   expect(element.prop('aria-label')).toEqual('Poista suosikeista');
 });
 
@@ -38,11 +36,10 @@ it('marks the toggle button pressed with aria-pressed when the current address i
   expect(element.prop('aria-pressed')).not.toBe(undefined);
 });
 
-it('renders a triangle icon button', () => {
+it('renders a menu icon button', () => {
   const $ = dom.load(renderToString(<Favourites />));
   const element = $('.favourites-open');
-  expect(element.text()).toEqual('▼');
-  expect(element.prop('aria-label')).toEqual('Avaa Omat suosikit-lista');
+  expect(element.prop('aria-label')).toEqual('Omat suosikit');
 });
 
 it('marks the dialog open button pressed with aria-pressed when the dialog is open', () => {
@@ -57,21 +54,11 @@ it('renders a dialog element', () => {
   expect(element.length).toEqual(1);
 });
 
-it('calls toggleFavourite callback when the toggle button is clicked', () => {
-  const spy = jest.fn();
-  const tree = <Favourites address={{}} toggleFavourite={spy} />;
-  renderIntoDocument(tree);
-  const button = scryRenderedDOMElementsWithTag(tree, 'button')[0];
-  const event = new MouseEvent('click', { bubbles: true });
-  button.dispatchEvent(event);
-  expect(spy).toHaveBeenCalled();
-});
-
 it('calls toggleDialog callback when the dialog button is clicked', () => {
   const spy = jest.fn();
   const tree = <Favourites toggleDialog={spy} />;
   renderIntoDocument(tree);
-  const button = scryRenderedDOMElementsWithTag(tree, 'button')[1];
+  const button = scryRenderedDOMElementsWithTag(tree, 'button')[0];
   const event = new MouseEvent('click', { bubbles: true });
   button.dispatchEvent(event);
   expect(spy).toHaveBeenCalled();

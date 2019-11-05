@@ -13,7 +13,7 @@ import './favourites.css';
 const FavouritesListItem = ({ address, removeFavourite, selectFavourite, isSelected }) => (
   <li
     key={address}
-    class={`favouriteslist-item bg-white space-xs space-clear-rl no-wrap flex-row flex-align-center line-height-l${isSelected ? ' selected' : ''}`}>
+    class={`favouriteslist-item bg-white no-wrap flex-row flex-align-center line-height-l${isSelected ? ' selected' : ''}`}>
     <button
       class="favouriteslist-item-label text-only-button full-width align-left flex-full"
       onClick={linkEvent(address, selectFavourite)}>
@@ -23,7 +23,7 @@ const FavouritesListItem = ({ address, removeFavourite, selectFavourite, isSelec
     <div>
       <IconButton
         class="favouriteslist-item-remove text-l color-alert"
-        text="x"
+        name="close"
         label="Poista Omat suosikit -listalta"
         onClick={linkEvent(address, removeFavourite)}
       />

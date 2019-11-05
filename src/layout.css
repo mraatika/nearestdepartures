@@ -120,6 +120,10 @@
   text-align: right;
 }
 
+.vertical-top {
+  vertical-align: top;
+}
+
 .vertical-middle {
   vertical-align: middle;
 }
