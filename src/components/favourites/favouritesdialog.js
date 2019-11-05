@@ -1,7 +1,8 @@
 import { Component } from 'inferno';
+import { initFocusTrap, areLocationsEqual } from '../../utils/utils';
+import IconButton from '../iconbutton/iconbutton';
 import FavouritesListItem from './favouriteslistitem';
 import './favourites.css';
-import { initFocusTrap, areLocationsEqual } from '../../utils/utils';
 
 /**
  * A dialog component for displaying user's saved locations
@@ -34,9 +35,9 @@ class FavouritesDialog extends Component {
       document.body.className = `no-scroll ${document.body.className}`.trim();
       document.body.addEventListener('keyup', this.onKeyUp);
 
-      const closeButton = document.querySelector('.favouriteslist-close-button');
+      const firstButton = document.querySelector('.favourites-toggle');
       const removeButtons = document.querySelectorAll('.favouriteslist-item-remove');
-      this.clearFocus = initFocusTrap(closeButton, removeButtons[removeButtons.length - 1], true);
+      this.clearFocus = initFocusTrap(firstButton, removeButtons[removeButtons.length - 1], true);
       // if the dialog was closed
     } else if (wasVisible && !isNowVisible) {
       document.body.className = document.body.className.replace('no-scroll', '');
@@ -52,24 +53,40 @@ class FavouritesDialog extends Component {
   }
 
   render() {
-    const { favourites = [] } = this.props;
+    const { favourites = [], isCurrentAddressFavoured, address, toggleFavourite } = this.props;
+
     return (
       <div class={`favourites-modal-wrapper fill-parent${this.props.isVisible ? ' visible' : ''}`}>
-        <div class="modal fill-parent bg-black-opaque" />
+        <div class="modal fill-parent bg-black-opaque" onClick={this.props.onClose} />
         <div
-          class="favouriteslist color-gray-dark bg-white text-left corner-rounded flex-column fill-parent centering-margin"
+          class="favouriteslist color-gray-dark bg-white text-left flex-column"
           role="dialog"
           tabIndex="0"
           aria-labelledby="favouritesdialog-title"
           aria-modal={true}
         >
-          <div className="favouriteslist-header color-white bg-bus align-center space-xxl space-clear-rl">
-            <div class="space-xl space-clear-tb">
-              <h2 id="favouritesdialog-title" class="font-heading">Omat suosikit</h2>
-              <button class="favouriteslist-close-button text-only-button underline" onClick={this.props.onClose}>
-                sulje <span aria-hidden="true">[x]</span>
-              </button>
+          <div className="favouriteslist-header color-white bg-bus space-s">
+            <div class="align-right">
+              <span class="space-xs space-keep-r">
+                <IconButton
+                  class="favourites-toggle text-white"
+                  name={isCurrentAddressFavoured ? 'star' : 'star-outline'}
+                  label={isCurrentAddressFavoured ? 'Poista suosikeista' : 'Lisää suosikkeihin'}
+                  aria-pressed={!!isCurrentAddressFavoured}
+                  disabled={!address}
+                  onClick={toggleFavourite}
+                />
+              </span>
+
+              <IconButton
+                class="favouriteslist-close-button"
+                name="close"
+                label="Sulje"
+                onClick={this.props.onClose}
+              />
             </div>
+
+            <h2 id="favouritesdialog-title" class="font-heading align-center space-s space-clear-rl">Omat suosikit</h2>
           </div>
 
           <div class="favouriteslist-header-triangle-container">
@@ -87,15 +104,17 @@ class FavouritesDialog extends Component {
                   isSelected={areLocationsEqual(this.props.selectedAddress, address)}
                 />
               )}
-              {!favourites.length && <li class="favouriteslist-placeholder italic">Ei tallennettuja suosikkeja</li>}
-            </ul>
 
-            <div class="info-message flex-row flex-align-start flex-no-shrink align-left">
-              <span class="badge info">!</span>
-              <div class="space-xs space-keep-l">
-                Suosikit tallentuvat paikallisesti, joten ne ovat hyödynnettävissä vain samalla selaimella ja laitteella, johon ne on tallennettu.
-              </div>
-            </div>
+              {!favourites.length &&
+                <li class="favouriteslist-placeholder">
+                  <div class="flex-row flex-align-start flex-no-shrink align-left space-m space-keep-t">
+                    <span class="badge alternative">!</span>
+                    <div class="space-xs space-keep-l italic">
+                      Suosikit tallentuvat paikallisesti, joten ne ovat hyödynnettävissä vain samalla selaimella ja laitteella, johon ne on tallennettu.
+                    </div>
+                  </div>
+                </li>}
+            </ul>
           </div>
         </div>
       </div>

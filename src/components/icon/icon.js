@@ -1,3 +1,4 @@
+import icons from './icons.svg';
 import './icon.css';
 
 /**
@@ -6,7 +7,9 @@ import './icon.css';
  * @param {object} props
  * @param {string} props.type
  */
-const Icon = ({ type }) =>
-  <span class={`icon-image icon-${type}`} />;
+const Icon = ({ name, class: className }) =>
+  <svg class={['icon', className].join(' ')} focusable="false">
+    <use href={ icons + `#icon-${name}` } style={{ fill: 'currentColor' }}/>
+  </svg>;
 
 export default Icon;

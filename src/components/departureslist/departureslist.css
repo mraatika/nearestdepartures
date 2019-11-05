@@ -20,7 +20,7 @@
   width: 4rem;
 }
 
-.departures-list svg.icon {
+.departures-list .vehicle-icon {
   position: relative;
   bottom: -1px;
   width: 1em;

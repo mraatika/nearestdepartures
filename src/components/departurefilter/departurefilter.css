@@ -3,13 +3,13 @@
   margin-right: 1px;
 }
 
-.departure-filter .icon {
+.departure-filter .vehicle-icon {
   width: 1.5rem;
   height: 1.5rem;
 }
 
 /* RANGE FILTER */
-.departure-filter input[type=range] {
+  .departure-filter input[type=range] {
   -webkit-appearance: none;
   background: transparent; /* Otherwise white in Chrome */
 }
@@ -68,5 +68,3 @@
   cursor: pointer;
   margin-top: 0;
 }
-
-

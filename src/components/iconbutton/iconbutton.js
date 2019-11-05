@@ -1,3 +1,5 @@
+import Icon from '../icon/icon';
+
 /**
  * A button without background
  * @param {object} props
@@ -5,13 +7,13 @@
  * @param {string} props.class
  * @param {...*}
  */
-const IconButton = ({ text, class: classes = '', label, ...rest }) => (
+const IconButton = ({ name, class: classes = '', label, ...rest }) => (
   <button
     aria-label={label}
     class={['icon-button pointer bold text-xl no-border no-bg', classes].join(' ')}
     {...rest}
   >
-    {text}
+    <Icon name={name} />
   </button>
 );
 

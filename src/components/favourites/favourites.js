@@ -25,22 +25,12 @@ const Favourites = ({ 
 }) =>
   <div class="favourites">
     <IconButton
-      class="favourites-toggle text-white"
-      text={isCurrentAddressFavoured ? '★' : '☆'}
-      label={isCurrentAddressFavoured ? 'Poista suosikeista' : 'Lisää suosikkeihin'}
-      aria-pressed={!!isCurrentAddressFavoured}
-      disabled={!address}
-      onClick={toggleFavourite}
+      class={`favourites-open menu-icon pointer text-xxl${isDialogVisible ? ' toggled' : ''}`}
+      label="Omat suosikit"
+      name="menu"
+      onClick={toggleDialog}
+      aria-pressed={isDialogVisible}
     />
-
-    <span class="space-s space-keep-l">
-      <IconButton
-        class="favourites-open"
-        text="▼"
-        label="Avaa Omat suosikit-lista"
-        aria-pressed={isDialogVisible}
-        onClick={toggleDialog} />
-    </span>
 
     <FavouritesDialog
       favourites={favourites}
@@ -49,6 +39,9 @@ const Favourites = ({ 
       selectedAddress={address}
       onClose={toggleDialog}
       removeFavourite={removeFromFavourites}
+      isCurrentAddressFavoured={isCurrentAddressFavoured}
+      address={address}
+      toggleFavourite={toggleFavourite}
     />
   </div>;
 

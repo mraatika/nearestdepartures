@@ -75,12 +75,12 @@ it('rounds remaining time down to closest minute', () => {
   expect(result).toBe('9 min');
 });
 
-it('displays text "now" if interval is less than 1 minute', () => {
+it('displays text "Nyt" if interval is less than 1 minute', () => {
   const now = Date.now();
   const nowPlus30secs = now + (30 * 1000);
   const time = nowPlus30secs / 1000;
   const $ = dom.load(renderToString(<Time time={time}/>));
   const $element = $('span');
-  expect($element.text()).toBe('Now');
+  expect($element.text()).toBe('Nyt');
   expect($element.is('.bold')).toBe(true);
 });

@@ -73,34 +73,6 @@ describe('without favourites', () => {
     const element = $('.favouriteslist-placeholder');
     expect(element).toHaveLength(1);
   });
-
-  it('should not move focus from the close button with tab', () => {
-    const tree = <FavouritesDialog isVisible={true} />;
-    renderIntoDocument(tree);
-
-    const closeButton = findRenderedDOMElementWithClass(tree, 'favouriteslist-close-button');
-    tree.children.componentDidUpdate({isVisible: false});
-
-    const event = new KeyboardEvent('keydown', { bubbles: true, keyCode: 9 });
-    closeButton.dispatchEvent(event);
-
-    tree.children.clearFocus();
-    expect(document.activeElement).toEqual(closeButton);
-  });
-
-  it('should not move focus from the close button with shift+tab', () => {
-    const tree = <FavouritesDialog isVisible={true} />;
-    renderIntoDocument(tree);
-
-    const closeButton = findRenderedDOMElementWithClass(tree, 'favouriteslist-close-button');
-    tree.children.componentDidUpdate({isVisible: false});
-
-    const event = new KeyboardEvent('keydown', { bubbles: true, keyCode: 9, shiftKey: true });
-    closeButton.dispatchEvent(event);
-
-    tree.children.clearFocus();
-    expect(document.activeElement).toEqual(closeButton);
-  });
 });
 
 describe('with favourites', () => {
@@ -118,36 +90,4 @@ describe('with favourites', () => {
     const element = $('.favourites-modal-wrapper li.selected');
     expect(element).toHaveLength(1);
   });
-
-  it('should move focus from the last remove button to close', () => {
-    const favourites = [{label: 'Street 1, City'}];
-    const tree = <FavouritesDialog isVisible={true} favourites={favourites} />;
-    renderIntoDocument(tree);
-
-    tree.children.componentDidUpdate({isVisible: false});
-    const closeButton = findRenderedDOMElementWithClass(tree, 'favouriteslist-close-button');
-    const removeButton = findRenderedDOMElementWithClass(tree, 'favouriteslist-item-remove');
-
-    const event = new KeyboardEvent('keydown', { bubbles: true, keyCode: 9 });
-    removeButton.dispatchEvent(event);
-
-    tree.children.clearFocus();
-    expect(document.activeElement).toEqual(closeButton);
-  });
-
-  it('should move focus from the close button to remove button with shift+tab', () => {
-    const favourites = [{label: 'Street 1, City'}];
-    const tree = <FavouritesDialog isVisible={true} favourites={favourites} />;
-    renderIntoDocument(tree);
-
-    const closeButton = findRenderedDOMElementWithClass(tree, 'favouriteslist-close-button');
-    const removeButton = findRenderedDOMElementWithClass(tree, 'favouriteslist-item-remove');
-    tree.children.componentDidUpdate({isVisible: false});
-
-    const event = new KeyboardEvent('keydown', { bubbles: true, keyCode: 9, shiftKey: true });
-    closeButton.dispatchEvent(event);
-
-    expect(document.activeElement).toEqual(removeButton);
-  });
 });
-

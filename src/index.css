@@ -103,6 +103,12 @@ a {
   background-color: #007bff;
 }
 
+.badge.alternative {
+  background-color: #fff;
+  border: 1px solid #888;
+  color: #333;
+}
+
 button.bottom-heavy-border {
   border-bottom: 4px solid #fff;
 }

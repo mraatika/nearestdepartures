@@ -128,10 +128,10 @@ const DepartureRowAdditionalContent = forwardRef(({
     ref={ref}
     onKeyUp={keyPressHandler([27], onRowToggle, id)}
   >
-    <div class="space-xs flex-row flex-wrap line-height-l">
+    <div class="space-xs flex-row flex-wrap line-height-m">
       <div class="flex-row flex-align-center space-m space-keep-r">
         <span class="space-s space-keep-r">
-          <Icon type="clock" />
+          <Icon name="time" />
         </span>
         <div class="space-xs space-keep-b no-wrap">
           {realtime && <div class="color-light-green bold">
@@ -145,7 +145,7 @@ const DepartureRowAdditionalContent = forwardRef(({
 
       <div class="flex-row flex-align-center no-wrap">
         <span class="space-s space-keep-r">
-          <Icon type="bus-stop" />
+          <Icon name="flag" />
         </span>
         <div class="space-xs space-keep-b">
           <ExternalLink
@@ -155,7 +155,7 @@ const DepartureRowAdditionalContent = forwardRef(({
             text={stopName}
           />
           <div>
-            <span class="departure-stop-code text-s color-gray-dark space-xxs space-clear-tb corner-rounded border-thin-light">
+            <span class="departure-stop-code text-s color-gray-dark space-xxs space-clear-tb corner-rounded border-thin-light vertical-top">
               {stopCode}
             </span>
             <span class="departure-stop-description space-xs space-keep-l">{stopDescription}</span>

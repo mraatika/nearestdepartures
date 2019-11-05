@@ -35,7 +35,7 @@ it('renders an svg icon with class icon', () => {
   const routeName = '9';
   const vehicleType = 'TRAM';
   const $ = dom.load(renderToString(<RouteIdentifier routeName={routeName} vehicleType={vehicleType} />));
-  const result = $('span').find('svg').hasClass('icon');
+  const result = $('span').find('svg').hasClass('vehicle-icon');
   expect(result).toBe(true);
 });
 

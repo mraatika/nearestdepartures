@@ -71,12 +71,16 @@ input {
   font-size: 1.5rem;
 }
 
+.text-xxl {
+  font-size: 2rem;
+}
+
 .line-height-s {
   line-height: .5rem;
 }
 
 .line-height-m {
-  line-height: 1rem;
+  line-height: 1.55rem;
 }
 
 .line-height-l {
