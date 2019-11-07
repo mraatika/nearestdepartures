@@ -21,7 +21,7 @@ export default ({ time, actualTime }) => {
   const timeLeftInMins = Math.floor(((date - now) / 1000) / 60);
   const timeText = (actualTime || date < now || timeLeftInMins >= 10)
     ?  timeToString(date)
-    : timeLeftInMins < 1 ? 'Now' : `${timeLeftInMins} min`;
+    : timeLeftInMins < 1 ? 'Nyt' : `${timeLeftInMins} min`;
 
-  return <span class={timeText === 'Now' ? 'bold' : ''}>{timeText}</span>;
+  return <span class={timeText === 'Nyt' ? 'bold' : ''}>{timeText}</span>;
 };
