@@ -28,16 +28,16 @@ self.__precacheManifest = [
     "url": "./static/media/spinner.0837cec3.svg"
   },
   {
+    "revision": "1029d22c51a5cdd5e6c4016a8e76e24a",
+    "url": "./static/media/PatuaOne-Regular.1029d22c.ttf"
+  },
+  {
     "revision": "d7d5d4588a9f50c99264bc12e4892a7c",
     "url": "./static/media/OpenSans-Regular.d7d5d458.ttf"
   },
   {
     "revision": "e1c83f9474e0cc1d84a13c6d1ddf3ca5",
     "url": "./static/media/OpenSans-SemiBold.e1c83f94.ttf"
-  },
-  {
-    "revision": "1029d22c51a5cdd5e6c4016a8e76e24a",
-    "url": "./static/media/PatuaOne-Regular.1029d22c.ttf"
   },
   {
     "revision": "e7a93ba82fddb552af2a9c8fce95fa3a",
