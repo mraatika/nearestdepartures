@@ -43,7 +43,7 @@
     "postdeploy:prod": "git checkout -"
   },
   "browserslist": [
-    ">0.5% in FI",
+    ">2% in FI",
     "not dead",
     "not ie <= 11",
     "not op_mini all"
