@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "9a83880fe6e86926eea2",
-    "url": "./static/css/main.85970ea1.chunk.css"
+    "revision": "25d165cafcd17fc3b90d",
+    "url": "./static/css/main.321ea3b2.chunk.css"
   },
   {
-    "revision": "9a83880fe6e86926eea2",
-    "url": "./static/js/main.9a83880f.chunk.js"
+    "revision": "25d165cafcd17fc3b90d",
+    "url": "./static/js/main.25d165ca.chunk.js"
   },
   {
     "revision": "cb3136ea9ce35395c98d",
@@ -28,8 +28,8 @@ self.__precacheManifest = [
     "url": "./static/media/spinner.0837cec3.svg"
   },
   {
-    "revision": "33543c5cc5d88f5695dd08c87d280dfd",
-    "url": "./static/media/OpenSans-Regular.33543c5c.woff2"
+    "revision": "819af3d3abdc9f135d49b80a91e2ff4c",
+    "url": "./static/media/OpenSans-SemiBold.819af3d3.woff2"
   },
   {
     "revision": "95e3e75c69bd36dae9650e8047f2f32e",
@@ -40,19 +40,19 @@ self.__precacheManifest = [
     "url": "./static/media/OpenSans-Regular.de0869e3.woff"
   },
   {
-    "revision": "449d681cd6006390e1bee3c3a660430b",
-    "url": "./static/media/OpenSans-SemiBold.449d681c.woff"
+    "revision": "33543c5cc5d88f5695dd08c87d280dfd",
+    "url": "./static/media/OpenSans-Regular.33543c5c.woff2"
   },
   {
     "revision": "52f83ea060e3d2c53c53c51218dfe7e7",
     "url": "./static/media/PatuaOne-Regular.52f83ea0.woff"
   },
   {
-    "revision": "819af3d3abdc9f135d49b80a91e2ff4c",
-    "url": "./static/media/OpenSans-SemiBold.819af3d3.woff2"
+    "revision": "449d681cd6006390e1bee3c3a660430b",
+    "url": "./static/media/OpenSans-SemiBold.449d681c.woff"
   },
   {
-    "revision": "225a424adffb03a04c5761949f42f49a",
+    "revision": "b389c58340f2fc2ad60acb34d5b0d87f",
     "url": "./index.html"
   }
 ];
