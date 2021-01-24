@@ -35,7 +35,7 @@ const AddressSearch = ({
     <div class="address-search flex-row line-height-xl">
       <input
         id="address-search-textbox"
-        class="flex-full border-thin-light border-clear-right font-alternative space-s space-keep-l"
+        class="flex-full border-thin-light border-clear-right space-s space-keep-l"
         ref={getAddressInputRef}
         type="text"
         role="combobox"
@@ -62,7 +62,7 @@ const AddressSearch = ({
         </div>
       </button>
       <button
-        class="address-search-submit bold bg-bus color-white font-alternative"
+        class="address-search-submit bold bg-bus color-white"
         type="submit">
         <div class="space-s space-clear-tb">Hae</div>
       </button>

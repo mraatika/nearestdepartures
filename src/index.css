@@ -5,7 +5,9 @@
   margin: 0;
 }
 
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   box-sizing: inherit;
 }
 
@@ -81,21 +83,21 @@ a {
 .info-message {
   color: #004085;
   background-color: #b8daff;
-  border: 1px solid rgba(0,0,0,.125);
+  border: 1px solid rgba(0, 0, 0, 0.125);
   padding: 1rem;
   border-radius: 2px;
 }
 
 .badge {
   display: inline-block;
-  padding: .25em .6em;
-  font-family: "Patua One", cursive;
+  padding: 0.25em 0.6em;
+  font-family: 'Patua One', sans-serif;
   font-size: 1.2rem;
   line-height: 1rem;
   text-align: center;
   white-space: nowrap;
   vertical-align: baseline;
-  border-radius: .25rem;
+  border-radius: 0.25rem;
 }
 
 .badge.info {
@@ -164,5 +166,5 @@ button.text-only-button {
 }
 
 .icon-button[disabled] {
-  opacity: .5;
+  opacity: 0.5;
 }

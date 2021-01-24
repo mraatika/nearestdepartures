@@ -8,11 +8,11 @@ html {
 
 body {
   font-size: 16px;
-  font-family: "Open Sans", arial, verdana, tahoma, sans-serif;
+  font-family: 'Open Sans', arial, verdana, tahoma, sans-serif;
 }
 
 h1 {
-  font: normal 2em Georgia, 'Times New Roman', Times, serif;
+  font-weight: normal;
 }
 
 input {
@@ -24,7 +24,10 @@ input {
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 400;
-  src: url(./fonts/Open_Sans/OpenSans-Regular.ttf) format('truetype');
+  src: local('Open Sans Regular'), local('OpenSans-Regular'),
+    url('./fonts/Open_Sans/OpenSans-Regular.woff2') format('woff2'),
+    url('./fonts/Open_Sans/OpenSans-Regular.woff') format('woff');
+  font-display: swap;
 }
 
 /* bold text */
@@ -32,7 +35,10 @@ input {
   font-family: 'Open Sans';
   font-style: bold;
   font-weight: 600;
-  src: url(./fonts/Open_Sans/OpenSans-SemiBold.ttf) format('truetype');
+  src: local('Open Sans SemiBold'), local('OpenSans-SemiBold'),
+    url('./fonts/Open_Sans/OpenSans-SemiBold.woff2') format('woff2'),
+    url('./fonts/Open_Sans/OpenSans-SemiBold.woff') format('woff');
+  font-display: swap;
 }
 
 /* header text */
@@ -40,11 +46,14 @@ input {
   font-family: 'Patua One';
   font-style: normal;
   font-weight: 400;
-  src: url(./fonts/Patua_One/PatuaOne-Regular.ttf) format('truetype');
+  src: local('Patua One Regular'), local('PatuaOne-Regular'),
+    url('./fonts/Patua_One/PatuaOne-Regular.woff2') format('woff2'),
+    url('./fonts/Patua_One/PatuaOne-Regular.woff') format('woff');
+  font-display: 'swap';
 }
 
 .font-heading {
-  font-family: 'Patua One', cursive;
+  font-family: 'Patua One', serif;
 }
 
 .font-alternative {
@@ -56,7 +65,7 @@ input {
 }
 
 .text-s {
-  font-size: .9rem;
+  font-size: 0.9rem;
 }
 
 .text-m {
@@ -76,7 +85,7 @@ input {
 }
 
 .line-height-s {
-  line-height: .5rem;
+  line-height: 0.5rem;
 }
 
 .line-height-m {
