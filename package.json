@@ -12,12 +12,14 @@
   "license": "AGPLv3",
   "devDependencies": {
     "cheerio": "^1.0.0-rc.2",
+    "eslint-config-prettier": "^7.2.0",
     "gh-pages": "^2.0.1",
     "inferno-scripts": "^7.0.4",
     "inferno-server": "^7.1.9",
     "inferno-test-utils": "^7.1.9",
     "jest-fetch-mock": "^1.7.5",
-    "mock-geolocation": "^1.0.11"
+    "mock-geolocation": "^1.0.11",
+    "prettier": "^2.2.1"
   },
   "dependencies": {
     "1-liners": "^0.4.2",
