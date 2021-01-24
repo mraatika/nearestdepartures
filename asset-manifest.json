@@ -1,15 +1,16 @@
 {
-  "main.css": "./static/css/main.2d3e23ff.chunk.css",
-  "main.js": "./static/js/main.64532975.chunk.js",
-  "main.js.map": "./static/js/main.64532975.chunk.js.map",
+  "main.css": "./static/css/main.85970ea1.chunk.css",
+  "main.js": "./static/js/main.9a83880f.chunk.js",
+  "main.js.map": "./static/js/main.9a83880f.chunk.js.map",
   "runtime~main.js": "./static/js/runtime~main.cb3136ea.js",
   "runtime~main.js.map": "./static/js/runtime~main.cb3136ea.js.map",
   "static/js/2.313baeaa.chunk.js": "./static/js/2.313baeaa.chunk.js",
   "static/js/2.313baeaa.chunk.js.map": "./static/js/2.313baeaa.chunk.js.map",
   "index.html": "./index.html",
-  "precache-manifest.c180d03ae53e50ee43f7ec44829fe99e.js": "./precache-manifest.c180d03ae53e50ee43f7ec44829fe99e.js",
+  "precache-manifest.7a70a08373413ad09c0c43bbc7e8afde.js": "./precache-manifest.7a70a08373413ad09c0c43bbc7e8afde.js",
   "service-worker.js": "./service-worker.js",
-  "static/css/main.2d3e23ff.chunk.css.map": "./static/css/main.2d3e23ff.chunk.css.map",
+  "static/css/main.85970ea1.chunk.css.map": "./static/css/main.85970ea1.chunk.css.map",
+  "static/media/fonts.css": "./static/media/PatuaOne-Regular.95e3e75c.woff2",
   "static/media/icons.svg": "./static/media/icons.358f5282.svg",
   "static/media/spinner.svg": "./static/media/spinner.0837cec3.svg"
 }
