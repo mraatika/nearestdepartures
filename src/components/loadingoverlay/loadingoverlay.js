@@ -16,6 +16,6 @@ export default ({ show }) => (
     aria-label="Odotetaan"
     aria-busy={show}
   >
-    <img class="spinner" src={spinner} alt="spinner" />
+    <img class="spinner" src={spinner} alt="spinner" width="120" height="120" />
   </div>
 );

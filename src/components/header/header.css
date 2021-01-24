@@ -2,27 +2,34 @@
   display: none;
 }
 
-.app-logo {
+.app-logo-container {
   height: 40px;
+  width: 40px;
+}
+
+.app-logo {
   margin-bottom: -8px;
+  height: auto;
+  width: 100%;
 }
 
 @media (min-width: 750px) {
+  h1 {
+    justify-content: center;
+  }
+
   header {
     text-align: center;
     display: block;
     padding: 0 1rem;
   }
 
-  .app-name {
-    margin-left: -8px;
-  }
-
   .app-description {
     display: block;
   }
 
-  .app-logo {
+  .app-logo-container {
     height: 60px;
+    width: 60px;
   }
 }
