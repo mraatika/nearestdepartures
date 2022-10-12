@@ -1,49 +1,43 @@
 {
-  "name": "nearestdepartures",
-  "version": "1.7.0",
-  "description": "An app for finding nearest public transport departures in Helsinki region using the digitransit api",
+  "name": "nearestdepartures-svelte",
   "private": true,
-  "homepage": ".",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/mraatika/nearestdepartures"
+  "version": "2.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "cross-env VITE_APP_VERSION=$npm_package_version vite",
+    "prebuild": "npx vitest run",
+    "build": "cross-env VITE_APP_VERSION=$npm_package_version vite build",
+    "preview": "cross-env VITE_APP_VERSION=$npm_package_version vite preview",
+    "predeploy:test": "npm run build",
+    "deploy:test": "gh-pages -d dist",
+    "check": "svelte-check --tsconfig ./tsconfig.json",
+    "lint": "eslint ./src/**/*.{ts,svelte}"
   },
-  "author": "Miitri Raatikainen (http://github.com/mraatika)",
-  "license": "AGPLv3",
   "devDependencies": {
-    "cheerio": "^1.0.0-rc.2",
-    "gh-pages": "^2.0.1",
-    "inferno-scripts": "^7.0.4",
-    "inferno-server": "^7.1.9",
-    "inferno-test-utils": "^7.1.9",
-    "jest-fetch-mock": "^1.7.5",
-    "mock-geolocation": "^1.0.11"
+    "@sveltejs/vite-plugin-svelte": "^1.0.2",
+    "@tsconfig/svelte": "^3.0.0",
+    "@types/ramda": "^0.28.15",
+    "@typescript-eslint/eslint-plugin": "^5.40.0",
+    "@typescript-eslint/parser": "^5.40.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.24.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-svelte3": "^4.0.0",
+    "gh-pages": "^4.0.0",
+    "jsdom": "^20.0.1",
+    "lucide-svelte": "^0.91.0",
+    "prettier": "^2.7.1",
+    "prettier-plugin-svelte": "^2.7.1",
+    "svelte": "^3.49.0",
+    "svelte-check": "^2.8.1",
+    "svelte-preprocess": "^4.10.7",
+    "tslib": "^2.4.0",
+    "typescript": "^4.6.4",
+    "vite": "^3.1.0",
+    "vitest": "^0.23.4"
   },
   "dependencies": {
-    "1-liners": "^0.4.2",
-    "inferno": "^7.1.9",
-    "lodash": "^4.17.11"
-  },
-  "scripts": {
-    "start": "INFERNO_APP_VERSION=$npm_package_version inferno-scripts start",
-    "prebuild": "CI=true npm run test && npm run lint",
-    "build": "INFERNO_APP_VERSION=$npm_package_version inferno-scripts build",
-    "build:cordova": "INFERNO_APP_VERSION=$npm_package_version INFERNO_APP_RUN_ENV='cordova' inferno-scripts build",
-    "test": "inferno-scripts test --env=jsdom --setupFiles=./config/testsetup",
-    "test:coverage": "inferno-scripts test --env=jsdom --coverage --setupFiles=./config/testsetup",
-    "test:e2e": "robot --output NONE --log NONE e2e_tests/suites",
-    "lint": "node ./node_modules/eslint/bin/eslint 'src/**/*.{js,jsx}'",
-    "eject": "inferno-scripts eject",
-    "predeploy:test": "npm run build",
-    "deploy:test": "gh-pages -d build",
-    "predeploy:prod": "git checkout $(git describe --tags $(git rev-list --tags --max-count=1)) && npm run build",
-    "deploy:prod": "aws s3 sync build/ s3://julkisilla.info --profile s3-deploy-task",
-    "postdeploy:prod": "git checkout -"
-  },
-  "browserslist": [
-    ">0.5% in FI",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+    "normalize.css": "^8.0.1",
+    "ramda": "^0.28.0"
+  }
 }

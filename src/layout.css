@@ -1,33 +1,46 @@
+:root {
+  --space-xxs: 0.25rem;
+  --space-xs: 0.5rem;
+  --space-s: 1rem;
+  --space-m: 1.5rem;
+  --space-l: 2rem;
+  --space-xl: 2.5rem;
+  --space-xxl: 3rem;
+  --space-xxxl: 4rem;
+
+  --content-max-width: 1024px;
+}
+
 .space-xxs {
-  padding: 0.25rem;
+  padding: var(--space-xxs);
 }
 
 .space-xs {
-  padding: 0.5rem;
+  padding: var(--space-xs);
 }
 
 .space-s {
-  padding: 1rem;
+  padding: var(--space-s);
 }
 
 .space-m {
-  padding: 1.5rem;
+  padding: var(--space-m);
 }
 
 .space-l {
-  padding: 2rem;
+  padding: var(--space-l);
 }
 
 .space-xl {
-  padding: 2.5rem;
+  padding: var(--space-xl);
 }
 
 .space-xxl {
-  padding: 3rem;
+  padding: var(--space-xxl);
 }
 
 .space-xxxl {
-  padding: 4rem;
+  padding: var(--space-xxxl);
 }
 
 .space-clear-t {
@@ -89,7 +102,7 @@
 }
 
 .max-content-width {
-  max-width: 1024px;
+  max-width: var(--content-max-width);
 }
 
 .full-width {

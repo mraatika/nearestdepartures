@@ -1,7 +1,0 @@
-.loading-overlay {
-  position: absolute;
-  background: rgba(255, 255, 255, 0.5);
-  z-index: 88;
-  text-align: center;
-  user-select: none;
-}
