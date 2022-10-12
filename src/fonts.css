@@ -1,54 +1,5 @@
-* {
-  font-family: inherit;
-}
-
-html {
-  font-size: 100%;
-}
-
-body {
-  font-size: 16px;
-  font-family: "Open Sans", arial, verdana, tahoma, sans-serif;
-}
-
-h1 {
-  font: normal 2em Georgia, 'Times New Roman', Times, serif;
-}
-
-input {
-  font-size: inherit;
-}
-
-/* regular text */
-@font-face {
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 400;
-  src: url(./fonts/Open_Sans/OpenSans-Regular.ttf) format('truetype');
-}
-
-/* bold text */
-@font-face {
-  font-family: 'Open Sans';
-  font-style: bold;
-  font-weight: 600;
-  src: url(./fonts/Open_Sans/OpenSans-SemiBold.ttf) format('truetype');
-}
-
-/* header text */
-@font-face {
-  font-family: 'Patua One';
-  font-style: normal;
-  font-weight: 400;
-  src: url(./fonts/Patua_One/PatuaOne-Regular.ttf) format('truetype');
-}
-
 .font-heading {
   font-family: 'Patua One', cursive;
-}
-
-.font-alternative {
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 .bold {
@@ -56,7 +7,7 @@ input {
 }
 
 .text-s {
-  font-size: .9rem;
+  font-size: 0.9rem;
 }
 
 .text-m {
@@ -76,19 +27,19 @@ input {
 }
 
 .line-height-s {
-  line-height: .5rem;
+  line-height: 0.5rem;
 }
 
 .line-height-m {
-  line-height: 1.55rem;
+  line-height: 1rem;
 }
 
 .line-height-l {
-  line-height: 1.75rem;
+  line-height: 1.5rem;
 }
 
 .line-height-xl {
-  line-height: 2.5rem;
+  line-height: 1.75rem;
 }
 
 .line-height-xxl {
@@ -105,10 +56,4 @@ input {
 
 .underline {
   text-decoration: underline;
-}
-
-@media (min-width: 750px) {
-  body {
-    font-size: 16px;
-  }
 }

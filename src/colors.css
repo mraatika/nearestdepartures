@@ -1,99 +1,112 @@
-a {
-  color: inherit;
-}
-
-a:visited {
-  color: inherit;
+:root {
+  --color-tram: #008855;
+  --color-bus: #007ac9;
+  --color-subway: #ff6319;
+  --color-rail: #8c4799;
+  --color-ferry: #00b9e4;
+  --color-warning: #a07903;
+  --color-black: #222;
+  --color-white: #fff;
+  --color-green-light: #358720;
+  --color-blue-light: #089eff;
+  --color-blue-dark: #005993;
+  --color-gray-light: #ccc;
+  --color-gray: #666;
+  --color-gray-dark: #333;
+  --color-alert: #a94442;
+  --color-alert-light: #f2dede;
 }
 
 .color-alert {
-  color: #a94442;
+  color: var(--color-alert);
 }
 
 .color-warning {
-  color: #a07903;
-}
-
-.color-black-active:focus,
-.color-black-active:hover
-.color-black-active:active {
-  color: #000;
+  color: var(--color-warning);
 }
 
 .color-gray-light {
-  color: #ccc;
+  color: var(--color-gray-light);
 }
 
 .color-gray {
-  color: #666;
+  color: var(--color-gray);
 }
 
 .color-gray-dark {
-  color: #333;
+  color: var(--color-gray-dark);
 }
 
 .color-white {
-  color: #fff;
+  color: var(--color-white);
 }
 
 .color-light-green {
-  color: #358720;
+  color: var(--color-green-light);
 }
 
 .color-tram {
-  color: #008855;
+  color: var(--color-tram);
 }
 
 .color-bus {
-  color: #007ac9;
+  color: var(--color-bus);
 }
 
 .color-subway {
-  color: #ff6319;
+  color: var(--color-subway);
 }
 
 .color-rail {
-  color: #8c4799;
+  color: var(--color-rail);
 }
 
 .color-ferry {
-  color: #00b9e4;
+  color: var(--color-ferry);
+}
+
+.color-black {
+  color: var(--color-black);
+}
+
+.color-inherit {
+  color: inherit;
 }
 
 .bg-white {
-  background-color: #fff;
+  background-color: var(--color-white);
 }
 
 .bg-bus-dark {
-  background-color: #005993;
+  background-color: var(--color-blue-dark);
 }
 
 .bg-black-opaque {
-  background: rgba(0, 0, 0, .6);
+  background: rgba(0, 0, 0, 0.6);
 }
 
 .bg-light-red {
-  background-color: #f2dede;
+  background-color: var(--color-alert-light);
 }
 
 .bg-tram {
-  background-color: #00985f;
+  background-color: var(--color-tram);
 }
 
 .bg-bus {
-  background-color: #007ac9;
+  background-color: var(--color-bus);
 }
 
 .bg-subway {
-  background-color: #ff6319;
+  background-color: var(--color-subway);
 }
 
 .bg-rail {
-  background-color: #8c4799;
+  background-color: var(--color-rail);
 }
 
 .bg-ferry {
-  background-color: #00b9e4;
+  background-color: var(--color-ferry);
 }
 
 .no-bg {
