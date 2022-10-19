@@ -7,9 +7,7 @@
   export let alt: string;
 </script>
 
-<span class="{vehicleType.toLowerCase()}">
+<div class="{vehicleType.toLowerCase()} flex flex-row flex-align-center">
   <VehicleIcon icon="{vehicleType.toLowerCase()}" alt="{alt}" />
-  <span class="{`space-xxs space-keep-l color-${vehicleType.toLowerCase()}`}"
-    >{routeName}</span
-  >
-</span>
+  <div class="space-xxs space-keep-l color-black">{routeName}</div>
+</div>

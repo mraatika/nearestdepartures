@@ -13,12 +13,14 @@
   class:toggled="{isToggled}"
   aria-label="{`Suodatin ${VEHICLE_TYPE_TRANSLATIONS[vehicleType]}`}"
   aria-pressed="{!!isToggled}"
+  data-testId="{`filter-${vehicleType.toLocaleLowerCase()}`}"
 >
-  <div class="{`space-xs space-clear-rl text-xl ${vehicleType.toLowerCase()}`}">
+  <div
+    class="{`space-xs space-clear-rl text-xl ${vehicleType.toLowerCase()} flex flex-row flex-align-center flex-justify-center`}"
+  >
     <VehicleIcon
       alt=""
       icon="{`${vehicleType.toLocaleLowerCase()}-withoutBox`}"
-      class="vertical-middle"
       shadow="{isToggled}"
     />
   </div>
