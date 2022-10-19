@@ -1,18 +1,19 @@
 <script lang="ts">
+  import { AlertTriangle } from 'lucide-svelte';
+
   export let accuracy: number;
   $: state = accuracy > 500 ? 'alert' : accuracy > 100 ? 'warning' : '';
 </script>
 
 <div
-  class="location-accuracy align-right text-s"
+  class="text-s flex flex-row flex-justify-end"
   class:color-alert="{state === 'alert'}"
-  class:color-warning="{state === 'warning'}"
 >
-  <span
-    class="location-accuracy-attention text-l space-xxs space-keep-r bold color-alert"
-    class:hidden="{!state.length}"
-    >!
-  </span>
+  {#if state.length}
+    <div class="space-xxs space-keep-r bold">
+      <AlertTriangle size="{16}" />
+    </div>
+  {/if}
 
   Paikannuksen tarkkuus: {Math.round(accuracy ?? 0)}m
 </div>

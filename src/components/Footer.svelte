@@ -4,14 +4,12 @@
   import { toTimeStringWithSeconds } from '@/util';
 </script>
 
-<footer
-  class="full-width text-s color-white bg-bus-dark line-height-xl space-s"
->
+<footer class="full-width text-s color-white bg-bus-dark space-s">
   <div class="footer-content max-content-width centering-margin">
-    <p class="footer-app-name font-heading">
+    <p class="footer-app-name font-heading space-xs space-keep-b">
       {`Julkisilla.info v${import.meta.env.VITE_APP_VERSION}`}
     </p>
-    <p>
+    <p class="line-height-m">
       {`Lähdöt päivitetty `}
       <span class="italic"
         >{$lastUpdatedStore
