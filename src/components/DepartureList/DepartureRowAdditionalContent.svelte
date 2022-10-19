@@ -1,11 +1,12 @@
 <script lang="ts">
-  import { Clock, Flag } from 'lucide-svelte';
+  import { XCircle, Clock, Flag } from 'lucide-svelte';
   import { onMount } from 'svelte';
   import ExternalLink from '@/components/ExternalLink.svelte';
   import type { Departure, Disruption } from '@/types';
   import { requestFocus } from '@/util/dom.utils';
   import DisruptionInfo from './DisruptionInfo.svelte';
   import Time from './Time.svelte';
+  import { toTimeString } from '@/util';
 
   export let departure: Departure;
   export let disruptions: Disruption[] = [];
@@ -24,7 +25,9 @@
 </script>
 
 <div bind:this="{container}" tabIndex="0">
-  <div class="space-xs space-clear-r flex-row flex-wrap line-height-l">
+  <div
+    class="space-xs space-clear-r flex-row flex-wrap line-height-l position-relative"
+  >
     <div class="flex-row flex-align-center space-m space-keep-r">
       <span class="space-s space-keep-r">
         <Clock />
@@ -32,15 +35,18 @@
 
       <div class="space-xs space-keep-b no-wrap">
         {#if departure.realtime}
-          <div>
-            <Time
-              time="{departure.realtimeDeparture}"
-              class="bold"
-              isRealtime="{true}"
-            /> (arvioitu)
+          <div class="bold color-light-green">
+            {`${toTimeString(
+              new Date(departure.realtimeDeparture * 1000),
+            )} (arvioitu)`}
           </div>
         {/if}
-        <Time time="{departure.scheduledDeparture}" /> (aikataulu)
+
+        <div>
+          {`${toTimeString(
+            new Date(departure.scheduledDeparture * 1000),
+          )} (arvioitu)`}
+        </div>
       </div>
     </div>
 
@@ -64,17 +70,24 @@
       </div>
     </div>
 
-    <div class="flex-full align-right">
-      <button
-        on:click="{() => onRowToggle(departure.id)}"
-        class="flex-full align-right"
-      >
-        <span class="underline">Sulje</span>
-      </button>
-    </div>
+    <button
+      on:click="{() => onRowToggle(departure.id)}"
+      class="close-button"
+      aria-label="Sulje"
+    >
+      <XCircle />
+    </button>
 
     {#if disruptions.length}
       <DisruptionInfo disruptions="{disruptions}" />
     {/if}
   </div>
 </div>
+
+<style>
+  .close-button {
+    position: absolute;
+    top: 8px;
+    right: 0;
+  }
+</style>
