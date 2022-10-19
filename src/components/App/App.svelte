@@ -120,7 +120,9 @@
 
     <div role="alert" class="align-right">
       {#if error && error instanceof PositionError}
-        <PositionErrorView error="{error}" />
+        <div class="space-xs space-keep-t ">
+          <PositionErrorView error="{error}" />
+        </div>
       {/if}
     </div>
 

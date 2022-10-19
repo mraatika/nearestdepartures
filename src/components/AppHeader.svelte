@@ -3,7 +3,7 @@
   import DrawerMenu from '@/components/DrawerMenu.svelte';
 </script>
 
-<header class="bg-bus color-white">
+<header class="bg-bus color-white space-s">
   <div
     class="header-content flex-row flex-align-center centering-margin max-content-width space-s space-clear-tb"
   >
@@ -44,10 +44,6 @@
   }
 
   @media (min-width: 750px) {
-    header {
-      padding: 1rem;
-    }
-
     .app-description {
       display: block;
     }
