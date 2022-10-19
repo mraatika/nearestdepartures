@@ -193,6 +193,10 @@
   justify-content: flex-end;
 }
 
+.flex-justify-center {
+  justify-content: center;
+}
+
 .flex-no-shrink {
   flex-shrink: 0;
 }

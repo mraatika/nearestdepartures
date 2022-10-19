@@ -5,12 +5,7 @@
   export let shadow = false;
 </script>
 
-<svg
-  class="vehicle-icon {$$restProps.class}"
-  class:shadow
-  viewBox="0 0 100 100"
-  focusable="false"
->
+<svg class="vehicle-icon" class:shadow viewBox="0 0 100 100" focusable="false">
   <title>{alt}</title>
   <use href="{`${icons}#icon-icon_${icon}`}" style:fill="currentColor"></use>
 </svg>
