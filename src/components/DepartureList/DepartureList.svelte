@@ -87,7 +87,7 @@
     {`Lähtöjä yhteensä ${filtered.length} kappaletta`}
   </div>
 
-  <div role="table" aria-label="Lähdöt">
+  <div role="treegrid" aria-label="Lähdöt">
     <div role="rowgroup">
       <div
         role="row"
