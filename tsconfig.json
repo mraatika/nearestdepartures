@@ -21,8 +21,7 @@
     }
   },
   "include": [
-    "svelte.config.js",
-    "cypress.config.ts",
+    "*.config.{js,ts}",
     "src/**/*.d.ts",
     "src/**/*.ts",
     "src/**/*.js",
