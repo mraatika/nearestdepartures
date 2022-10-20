@@ -41,7 +41,7 @@
       class="routeName bold overflow-hidden no-wrap"
       data-testId="departure-route"
     >
-      <ExternalLink href="{departure.routeUrl}">
+      <ExternalLink href="{departure.routeUrl}" style="outline-offset: -2px;">
         <RouteIdentifier
           vehicleType="{departure.vehicleType}"
           routeName="{departure.routeName}"
