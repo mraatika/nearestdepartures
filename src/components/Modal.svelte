@@ -2,7 +2,12 @@
   export let isVisible = false;
 </script>
 
-<div class="modal" class:visible="{isVisible}" on:click></div>
+<div
+  class="modal"
+  class:visible="{isVisible}"
+  on:click
+  data-testId="modal-backdrop"
+></div>
 
 <style>
   .modal {

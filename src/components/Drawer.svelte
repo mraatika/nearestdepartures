@@ -16,7 +16,7 @@
 
 <svelte:body on:keyup="{isVisible ? onKeys(['Escape'], close) : undefined}" />
 
-<div class="drawer" class:visible="{isVisible}">
+<div class="drawer" class:visible="{isVisible}" data-testId="drawer">
   <Modal isVisible="{isVisible}" on:click="{close}" />
 
   <div

@@ -64,7 +64,11 @@
       </button>
     </span>
 
-    <button on:click="{close}" aria-label="Sulje">
+    <button
+      on:click="{close}"
+      aria-label="Sulje"
+      data-testId="modal-close-button"
+    >
       <X size="{32}" />
     </button>
   </div>

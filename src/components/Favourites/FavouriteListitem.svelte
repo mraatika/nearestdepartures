@@ -19,7 +19,7 @@
     {favourite.label}
   </button>
 
-  <button on:click="{removeFavourite}" aria-label="Poista suosikeista">
+  <button on:click="{removeFavourite}" data-testId="favorite-remove-button">
     <Trash class="vertical-bottom" size="{24}" strokeWidth="{1.5}" />
   </button>
 </li>

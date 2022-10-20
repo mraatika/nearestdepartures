@@ -11,7 +11,11 @@
 </script>
 
 <div>
-  <button on:click="{toggleDrawer}" aria-label="Omat suosikit">
+  <button
+    on:click="{toggleDrawer}"
+    aria-label="Omat suosikit"
+    data-testId="menu-button"
+  >
     <div class="menu-icon" class:pressed="{isDrawerVisible}">
       <Menu size="{36}" strokeWidth="{2.5}" />
     </div>

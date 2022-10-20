@@ -1,0 +1,54 @@
+{
+  "geocoding": {
+    "version": "0.2",
+    "attribution": "http://pelias-api:8080/attribution",
+    "query": {
+      "size": 1,
+      "private": false,
+      "point.lat": 60.17096,
+      "point.lon": 24.942566,
+      "boundary.circle.lat": 60.17096,
+      "boundary.circle.lon": 24.942566,
+      "lang": "fi",
+      "querySize": 9
+    },
+    "engine": {
+      "name": "Pelias",
+      "author": "Mapzen",
+      "version": "1.0"
+    },
+    "timestamp": 1666009136297
+  },
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [25.101368, 60.240764]
+      },
+      "properties": {
+        "id": "GTFS:HSL:1000003",
+        "gid": "gtfshsl:station:GTFS:HSL:1000003",
+        "layer": "station",
+        "source": "gtfshsl",
+        "source_id": "GTFS:HSL:1000003",
+        "name": "Rautatientori",
+        "postalcode": "00100",
+        "postalcode_gid": "whosonfirst:postalcode:421479569",
+        "confidence": 0.9,
+        "accuracy": "centroid",
+        "region": "Uusimaa",
+        "region_gid": "whosonfirst:region:85683067",
+        "localadmin": "Helsinki",
+        "localadmin_gid": "whosonfirst:localadmin:907199715",
+        "locality": "Helsinki",
+        "locality_gid": "whosonfirst:locality:101748417",
+        "neighbourhood": "Kluuvi",
+        "neighbourhood_gid": "whosonfirst:neighbourhood:85898847",
+        "label": "Rautatientori, Kluuvi, Helsinki"
+      }
+    }
+  ],
+  "bbox": [25.101368, 60.240764, 25.101368, 60.240764]
+}

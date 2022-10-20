@@ -103,7 +103,8 @@
 
     <div class="relative">
       <button
-        class=" sr-only sr-only-focusable"
+        class="sr-only sr-only-focusable"
+        data-testId="skip-to-departures-button"
         on:click="{scrollToDepartures}"
       >
         Siirry hakutuloksiin

@@ -8,6 +8,7 @@
 <div
   class="text-s flex flex-row flex-justify-end"
   class:color-alert="{state === 'alert'}"
+  data-testId="accuracy-indicator"
 >
   {#if state.length}
     <div class="space-xxs space-keep-r bold">
