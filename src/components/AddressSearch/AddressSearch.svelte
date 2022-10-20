@@ -85,6 +85,7 @@
       // if esc was pressed
       case 'Escape':
         hideSuggestions();
+        searchTerm = '';
         break;
       default:
         break;
