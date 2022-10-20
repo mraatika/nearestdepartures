@@ -1,5 +1,4 @@
 {
-
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": 2020,
@@ -19,11 +18,11 @@
       "processor": "svelte3/svelte3"
     }
   ],
-  "ignorePatterns": ["node_modules", "**/*.test.*"],
+  "ignorePatterns": ["node_modules", "**/*.test.*", "*.config.{js,ts}"],
   "env": {
-      "browser": true,
-      "es2021": true,
-      "node": true
+    "browser": true,
+    "es2021": true,
+    "node": true
   },
   "settings": {
     "svelte3/typescript": true
