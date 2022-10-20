@@ -10,7 +10,7 @@
   id="suggestions-list"
   class="full-width position-absolute space-clear-l"
   role="listbox"
-  aria-label="Osoite"
+  aria-label="Hakutulokset"
   class:hidden="{!suggestions.length}"
 >
   {#each suggestions as suggestion (suggestion.id)}
