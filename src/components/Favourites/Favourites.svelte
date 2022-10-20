@@ -15,6 +15,8 @@
     $addressStore,
   );
 
+  $: isDisabled = !$addressStore;
+
   /**
    * Add current address to/remove from the list of favourites
    */
@@ -50,12 +52,13 @@
   <div class="flex-row flex-justify-end flex-align-center text-xxl">
     <span class="space-xs space-keep-r">
       <button
-        on:click="{toggleFavourite}"
+        on:click="{isDisabled ? () => undefined : toggleFavourite}"
         aria-label="{isCurrentAddressFavoured
           ? 'Poista tämän hetkinen osoite suosikeista'
           : 'Lisää tämän hetkinen osoite suosikkeihin'}"
         aria-pressed="{!!isCurrentAddressFavoured}"
-        disabled="{!$addressStore}"
+        aria-disabled="{isDisabled}"
+        data-testId="favourite-button"
       >
         <Star size="{32}" fill="{isCurrentAddressFavoured ? '#fff' : 'none'}" />
       </button>
