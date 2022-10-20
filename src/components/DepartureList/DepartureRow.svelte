@@ -36,7 +36,11 @@
       />
     </div>
 
-    <div role="cell" class="routeName bold overflow-hidden no-wrap">
+    <div
+      role="cell"
+      class="routeName bold overflow-hidden no-wrap"
+      data-testId="departure-route"
+    >
       <ExternalLink href="{departure.routeUrl}">
         <RouteIdentifier
           vehicleType="{departure.vehicleType}"

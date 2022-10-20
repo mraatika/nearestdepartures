@@ -1,0 +1,88 @@
+{
+  "geocoding": {
+    "version": "0.2",
+    "attribution": "http://pelias-api:8080/attribution",
+    "query": {
+      "text": "rautatien",
+      "size": 10,
+      "lang": "fi",
+      "private": false,
+      "boundary.rect.min_lat": 59.9548,
+      "boundary.rect.max_lat": 60.6217,
+      "boundary.rect.min_lon": 23.997,
+      "boundary.rect.max_lon": 25.6605,
+      "querySize": 90,
+      "parsed_text": {
+        "name": "rautatien"
+      }
+    },
+    "engine": {
+      "name": "Pelias",
+      "author": "Mapzen",
+      "version": "1.0"
+    },
+    "timestamp": 1665827572126
+  },
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [4, 3]
+      },
+      "properties": {
+        "id": "node:418089207",
+        "gid": "openstreetmap:station:node:418089207",
+        "layer": "station",
+        "source": "openstreetmap",
+        "source_id": "node:418089207",
+        "name": "Ratakatu",
+        "housenumber": "5",
+        "street": "Ratakatu",
+        "postalcode": "00510",
+        "postalcode_gid": "whosonfirst:postalcode:421479569",
+        "confidence": 0.7,
+        "accuracy": "centroid",
+        "region": "Uusimaa",
+        "region_gid": "whosonfirst:region:85683067",
+        "localadmin": "Helsinki",
+        "localadmin_gid": "whosonfirst:localadmin:907199715",
+        "locality": "Helsinki",
+        "locality_gid": "whosonfirst:locality:101748417",
+        "neighbourhood": "Kluuvi",
+        "neighbourhood_gid": "whosonfirst:neighbourhood:85898847",
+        "label": "Rautatientori, Asemanaukio 2, Helsinki"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2, 1]
+      },
+      "properties": {
+        "id": "GTFS:MATKA:318915",
+        "gid": "gtfsmatka:station:GTFS:MATKA:318915",
+        "layer": "station",
+        "source": "gtfsmatka",
+        "source_id": "GTFS:MATKA:318915",
+        "name": "Tikkurilan rautakauppa",
+        "postalcode": "10100",
+        "postalcode_gid": "whosonfirst:postalcode:421479569",
+        "confidence": 0.3,
+        "accuracy": "centroid",
+        "region": "Uusimaa",
+        "region_gid": "whosonfirst:region:85683067",
+        "localadmin": "Vantaa",
+        "localadmin_gid": "whosonfirst:localadmin:907199715",
+        "locality": "Vantaa",
+        "locality_gid": "whosonfirst:locality:101748417",
+        "neighbourhood": "Tikkurila",
+        "neighbourhood_gid": "whosonfirst:neighbourhood:85898847",
+        "label": "Tikkurilan rautakauppa, Vantaa"
+      }
+    }
+  ],
+  "bbox": [24.066017, 60.170384, 24.944355, 60.25666]
+}

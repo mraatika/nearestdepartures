@@ -7,6 +7,7 @@
   class="{`loading-overlay fill-parent ${$$restProps.class}`}"
   style:display="{show ? 'block' : 'none'}"
   aria-busy="{show}"
+  data-testId="spinner"
 >
   <img class="spinner" src="{spinner}" alt="Haetaan lähtöjä" />
 </div>

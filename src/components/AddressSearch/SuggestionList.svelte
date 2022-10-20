@@ -12,6 +12,7 @@
   role="listbox"
   aria-label="Hakutulokset"
   class:hidden="{!suggestions.length}"
+  data-testId="suggestion-list"
 >
   {#each suggestions as suggestion (suggestion.id)}
     <SuggestionListitem

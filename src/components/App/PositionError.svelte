@@ -5,7 +5,10 @@
   export let error: PositionError;
 </script>
 
-<div class="text-s flex flex-row flex-justify-end color-alert">
+<div
+  class="text-s flex flex-row flex-justify-end color-alert"
+  data-testId="location-error"
+>
   <AlertTriangle size="{16}" />
   {` ${formatError(error)}`}
 </div>

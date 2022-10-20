@@ -9,7 +9,7 @@
   export let selectFavourite: (adress: Address) => void;
 </script>
 
-<ul class="color-black">
+<ul class="color-black" data-testId="favourites-list">
   {#each favourites as favourite (favourite.id)}
     <FavouriteListitem
       on:click="{() => selectFavourite(favourite)}"
