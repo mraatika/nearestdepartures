@@ -10,5 +10,7 @@ export const filtersStore = writable<Filters>({
   ...defaultFilters(),
   ...getFilters(),
 });
-export const departuresStore = writable<Departure[]>([]);
-export const lastUpdatedStore = derived(departuresStore, () => new Date());
+export const departuresStore = writable<Departure[]>();
+export const lastUpdatedStore = derived(departuresStore, (v) =>
+  v === undefined ? v : new Date(),
+);
