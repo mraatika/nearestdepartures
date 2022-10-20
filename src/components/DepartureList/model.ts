@@ -22,5 +22,7 @@ const filterMatcher = curry(
     filters.vehicleTypes.includes(departure.vehicleType),
 );
 
-export const filterDepartures = (filters: Filters, departures: Departure[]) =>
-  departures.filter(filterMatcher(filters));
+export const filterDepartures = (
+  filters: Filters,
+  departures: Departure[] = [],
+) => departures.filter(filterMatcher(filters));

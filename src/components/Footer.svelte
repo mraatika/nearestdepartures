@@ -10,13 +10,14 @@
       {`Julkisilla.info v${import.meta.env.VITE_APP_VERSION}`}
     </p>
     <p class="line-height-m">
-      {`Lähdöt päivitetty `}
-      <span class="italic"
-        >{$lastUpdatedStore
-          ? toTimeStringWithSeconds($lastUpdatedStore)
-          : 'Ei koskaan'}
-      </span>
-      {` / Lähtöjen tiedot ovat HSL:n tarjoamaa`}
+      {#if $lastUpdatedStore}
+        Lähdöt päivitetty
+        <span class="italic">
+          {`${toTimeStringWithSeconds($lastUpdatedStore)} / `}
+        </span>
+      {/if}
+
+      Lähtöjen tiedot ovat HSL:n tarjoamaa
       <ExternalLink href="https://digitransit.fi/" class="underline">
         avointa dataa
       </ExternalLink>.
