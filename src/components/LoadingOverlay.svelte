@@ -6,10 +6,9 @@
 <div
   class="{`loading-overlay fill-parent ${$$restProps.class}`}"
   style:display="{show ? 'block' : 'none'}"
-  role="dialog"
   aria-busy="{show}"
 >
-  <img class="spinner" src="{spinner}" alt="spinner" />
+  <img class="spinner" src="{spinner}" alt="Haetaan lähtöjä" />
 </div>
 
 <style>
