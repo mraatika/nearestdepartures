@@ -7,8 +7,8 @@
   export let isSelected: boolean;
 </script>
 
-<li on:click class="no-wrap flex-row flex-align-center space-s space-clear-rl">
-  <button class="align-left flex-full">
+<li class="flex-row flex-align-center space-s space-clear-rl">
+  <button on:click class="align-left flex-full">
     {#if isSelected}
       <span class="text-l bold">
         <span aria-hidden="true">&#9656</span>
@@ -19,7 +19,12 @@
     {favourite.label}
   </button>
 
-  <button on:click="{removeFavourite}" data-testId="favorite-remove-button">
+  <button
+    on:click="{removeFavourite}"
+    aria-label="Poista suosikeista"
+    class="space-xs space-keep-l"
+    data-testId="favorite-remove-button"
+  >
     <Trash class="vertical-bottom" size="{24}" strokeWidth="{1.5}" />
   </button>
 </li>
