@@ -133,8 +133,9 @@
       aria-activedescendant="{selectedSuggestion?.id}"
       aria-autocomplete="list"
       aria-haspopup="listbox"
-      aria-label="Hae paikannuksella, osoitteella tai paikannimellä"
-      placeholder="Hae paikannuksella, osoitteella tai paikannimellä..."
+      name="address"
+      aria-label="Hae osoitteella tai paikannimellä"
+      placeholder="Hae osoitteella tai paikannimellä"
       autocomplete="off"
     />
 
