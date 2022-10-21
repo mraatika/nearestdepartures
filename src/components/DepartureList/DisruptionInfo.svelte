@@ -7,7 +7,7 @@
 </script>
 
 <div
-  class="alert-info color-alert align-left full-width bg-light-red space-s space-clear-tb"
+  class="alert-info color-alert align-left full-width bg-light-red space-s space-clear-tb corner-rounded"
 >
   {#each sortBy(prop('effectiveStartDate'), disruptions) as disruption}
     <div class="space-s space-clear-rl">

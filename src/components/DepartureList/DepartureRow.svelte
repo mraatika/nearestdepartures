@@ -1,4 +1,5 @@
 <script lang="ts">
+  import AlertTriangle from '~icons/lucide/alert-triangle';
   import type { Departure, Disruption } from '@/types';
   import { okKeyPressHandler } from '@/util/dom.utils';
   import ExternalLink from '../ExternalLink.svelte';
@@ -55,11 +56,11 @@
       class="destination flex-full position-relative vertical-bottom overflow-hidden no-wrap"
     >
       {#if disruptions?.length}
-        <span
-          aria-label="Linjalla häiriöitä: Avaa lähdön tiedot nähdäksesi lisätietoja"
-          class="color-alert alert-icon bold space-xs space-keep-r"
-        >
-          ⚠
+        <span class="color-alert">
+          <AlertTriangle
+            style="font-size: 12px;"
+            aria-label="Linjalla häiriöitä: Avaa lähdön tiedot nähdäksesi lisätietoja"
+          />
         </span>
       {/if}
       {departure.destination}
