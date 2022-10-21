@@ -2,6 +2,17 @@ import { VEHICLE_TYPE } from '@/enums';
 import type { Filters } from '@/types';
 import * as R from 'ramda';
 
+export const debounce = <T extends unknown[]>(
+  func: (...args: T) => unknown,
+  timeout: number,
+) => {
+  let timer: ReturnType<typeof setTimeout>;
+  return (...args: T) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => func.apply(this, args), timeout);
+  };
+};
+
 /**
  * Pad number with leading zero if necessary
  */

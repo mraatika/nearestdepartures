@@ -2,6 +2,7 @@
   import { onMount } from 'svelte';
   import { addressStore, locationStore } from '@/stores';
   import type { Address } from '@/types';
+  import { debounce } from '@/util';
   import * as model from './model';
   import SuggestionList from './SuggestionList.svelte';
 
@@ -124,7 +125,7 @@
       bind:value="{searchTerm}"
       on:focus="{() => addressInput.select()}"
       on:blur="{onBlur}"
-      on:input="{onInput}"
+      on:input="{debounce(onInput, 300)}"
       class="flex-full border-thin-light border-clear-right space-s space-clear-r"
       type="text"
       role="combobox"
