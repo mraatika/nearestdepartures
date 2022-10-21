@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { AlertTriangle } from 'lucide-svelte';
+  import AlertTriangle from '~icons/lucide/alert-triangle';
 
   export let accuracy: number;
   $: state = accuracy > 500 ? 'alert' : accuracy > 100 ? 'warning' : '';
@@ -12,7 +12,7 @@
 >
   {#if state.length}
     <div class="space-xxs space-keep-r bold">
-      <AlertTriangle size="{16}" />
+      <AlertTriangle class="alert-triangle" />
     </div>
   {/if}
 

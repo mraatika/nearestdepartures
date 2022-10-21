@@ -5,7 +5,7 @@
 
 <header class="bg-bus color-white space-s">
   <div
-    class="header-content flex-row flex-align-center centering-margin max-content-width space-s space-clear-tb"
+    class="header-content flex-row flex-align-center centering-margin max-content-width"
   >
     <div class="heading-container flex-column flex-full no-wrap">
       <h1 class="flex-full no-wrap flex-row flex-align-center">
