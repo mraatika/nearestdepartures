@@ -2,7 +2,11 @@ import * as R from 'ramda';
 import { getJSON } from '@/api';
 import { findGPSLocation } from '@/services/locationService';
 import type { Address, AddressResponse, Location } from '@/types';
-import { MAX_ADDRESS_SUGGESTIONS } from '@/constants';
+import {
+  ADDRESS_BOUNDARIES,
+  DEFAULT_FOCUS_POINT,
+  MAX_ADDRESS_SUGGESTIONS,
+} from '@/constants';
 
 const parseAddressResponse = R.pipe(
   R.pathOr<AddressResponse['features']>([], ['features']),
@@ -24,14 +28,12 @@ export async function searchAddress(
     text: encoded,
     size: `${MAX_ADDRESS_SUGGESTIONS}`,
     lang: 'fi',
-    'boundary.rect.min_lat': '59.9548',
-    'boundary.rect.max_lat': '60.6217',
-    'boundary.rect.min_lon': '23.9970',
-    'boundary.rect.max_lon': '25.6605',
-    ...(coordinates && {
-      'focus.point.lat': `${coordinates.latitude}`,
-      'focus.point.lon': `${coordinates.longitude}`,
-    }),
+    'boundary.rect.min_lat': `${ADDRESS_BOUNDARIES[0][0]}`,
+    'boundary.rect.max_lat': `${ADDRESS_BOUNDARIES[1][0]}`,
+    'boundary.rect.min_lon': `${ADDRESS_BOUNDARIES[0][1]}`,
+    'boundary.rect.max_lon': `${ADDRESS_BOUNDARIES[1][1]}`,
+    'focus.point.lat': `${coordinates?.latitude ?? DEFAULT_FOCUS_POINT[0]}`,
+    'focus.point.lon': `${coordinates?.longitude ?? DEFAULT_FOCUS_POINT[1]}`,
   });
 
   try {
