@@ -3,6 +3,8 @@
   import Clock from '~icons/lucide/clock';
   import Flag from '~icons/lucide/flag';
   import { onMount } from 'svelte';
+  import { slide } from 'svelte/transition';
+  import { quartOut } from 'svelte/easing';
   import ExternalLink from '@/components/ExternalLink.svelte';
   import type { Departure, Disruption } from '@/types';
   import { requestFocus } from '@/util/dom.utils';
@@ -27,6 +29,7 @@
 
 <div
   bind:this="{container}"
+  transition:slide="{{ easing: quartOut }}"
   tabIndex="0"
   class="space-xs space-clear-r flex-row flex-wrap line-height-l position-relative"
   data-testId="departure-additional-content"
