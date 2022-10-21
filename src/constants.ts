@@ -59,6 +59,18 @@ export const PREFERRED_MUNICIPALITIES = [
   'Kirkkonummi',
 ];
 
+type CoordinateArray = [lat: number, lon: number];
+export const ADDRESS_BOUNDARIES: CoordinateArray[] = [
+  [59.9548, 23.997],
+  [60.6217, 25.6605],
+];
+
+/**
+ * This is the focus point if user's own location is not available
+ * The point is Rautatientori, Helsinki
+ */
+export const DEFAULT_FOCUS_POINT: CoordinateArray = [60.171419, 24.942541];
+
 /**
  * Max departure time from now (in seconds)
  */

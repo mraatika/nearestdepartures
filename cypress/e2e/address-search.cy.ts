@@ -1,7 +1,8 @@
 /// <reference types="cypress" />
 import { PositionError } from '../../src/util/error.utils';
+import { DEFAULT_FOCUS_POINT } from '../../src/constants';
 
-describe('searching address with a search term', () => {
+describe('address search', () => {
   beforeEach(() => {
     cy.intercept('GET', '**/geocoding/v1/reverse*', {
       statusCode: 200,
@@ -23,22 +24,25 @@ describe('searching address with a search term', () => {
       statusCode: 200,
       body: [],
     }).as('postGraphQL');
-
-    cy.visitWithLocation(new PositionError('Position blocked', 1));
   });
 
-  it('search input and suggestions', () => {
+  it('suggests addresses when typing', () => {
+    cy.visitWithLocation(new PositionError('Position blocked', 1));
     cy.get('input[name=address]').as('addressInput').type('ra');
-    cy.wait(250);
+    cy.wait(350);
     cy.testId('suggestion-list').as('suggestionList').should('not.be.visible');
 
     cy.get('@addressInput').type('u');
-    cy.wait('@getSuggestions')
-      .its('request.url')
-      .then((url) => {
-        const params = new URLSearchParams(url.substring(url.indexOf('?') + 1));
-        expect(params.get('text')).to.eql('rau');
-      });
+    cy.wait('@getSuggestions').then((req) => {
+      const params = new URLSearchParams(
+        req.request.url.substring(req.request.url.indexOf('?') + 1),
+      );
+
+      expect(params.get('text')).to.eql('rau');
+      // default focus point is used when there's no location
+      expect(+params.get('focus.point.lat')).to.equal(DEFAULT_FOCUS_POINT[0]);
+      expect(+params.get('focus.point.lon')).to.equal(DEFAULT_FOCUS_POINT[1]);
+    });
 
     cy.get('@suggestionList')
       .should('be.visible')
@@ -71,7 +75,9 @@ describe('searching address with a search term', () => {
   });
 
   it('suggestions work with keyboard', () => {
+    cy.visitWithLocation(new PositionError('Position blocked', 1));
     cy.get('input[name=address]').as('addressInput').type('rau');
+    cy.wait('@getSuggestions');
     cy.testId('suggestion-list').as('suggestionList').should('be.visible');
 
     [0, 1, 0].forEach((i) => {
@@ -100,6 +106,7 @@ describe('searching address with a search term', () => {
     cy.get('@suggestionList').should('not.be.visible');
 
     cy.get('@addressInput').type('rau');
+    cy.wait('@getSuggestions');
     cy.get('@suggestionList').should('be.visible');
     cy.get('@addressInput').type('{upArrow}').type('{enter}');
     cy.get('@postGraphQL')
@@ -113,5 +120,18 @@ describe('searching address with a search term', () => {
       'have.value',
       'Tikkurilan rautakauppa, Vantaa',
     );
+  });
+
+  it("fetches suggestions with user's location as the location point", () => {
+    cy.visitWithLocation({ latitude: 1, longitude: 2 });
+    cy.wait('@getLocation');
+    cy.get('[name=address]').type('rau');
+    cy.wait('@getSuggestions').then((req) => {
+      const params = new URLSearchParams(
+        req.request.url.substring(req.request.url.indexOf('?') + 1),
+      );
+      expect(+params.get('focus.point.lat')).to.equal(1);
+      expect(+params.get('focus.point.lon')).to.equal(2);
+    });
   });
 });
