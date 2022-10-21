@@ -13,7 +13,7 @@
   {error.message}
 
   <button on:click class="close-button space-xs" aria-label="Sulje">
-    <XCircle />
+    <XCircle style="font-size: 20px;" />
   </button>
 </div>
 
