@@ -8,6 +8,7 @@
 
 <div
   class="alert-info color-alert align-left full-width bg-light-red space-s space-clear-tb corner-rounded"
+  data-testId="disruption-info"
 >
   {#each sortBy(prop('effectiveStartDate'), disruptions) as disruption}
     <div class="space-s space-clear-rl">

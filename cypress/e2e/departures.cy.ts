@@ -1,5 +1,6 @@
 /// <reference types="cypress" />
-import * as departures from '../fixtures/departures.json';
+import departures from '../fixtures/departures.json';
+import disruptions from '../fixtures/disruptions.json';
 import { DateTime } from 'luxon';
 import { PositionError } from '../../src/util/error.utils';
 
@@ -18,22 +19,33 @@ describe('Searching and filtering departures', () => {
 
     cy.intercept('POST', '**/routing/v1/routers/hsl/index/graphql', (req) => {
       if (req.body.query.indexOf('alerts(') > -1) {
-        return {
+        const now = Date.now();
+        const body = disruptions;
+
+        body.data.alerts[0].effectiveStartDate = `${now / 1000}`;
+        body.data.alerts[0].effectiveEndDate = `${now / 1000 + 24 * 60 * 60}`;
+
+        body.data.alerts[1].effectiveStartDate = `${(now - 360) / 1000}`;
+        body.data.alerts[1].effectiveEndDate = `${now / 1000 + 24 * 60 * 60}`;
+
+        req.reply({
           statusCode: 200,
-          body: [],
-        };
+          body,
+        });
+      } else {
+        const str = JSON.stringify(departures)
+          .replace(/"__MOCK_DAY__"/gm, `${day.valueOf() / 1000}`)
+          .replace(/"__MOCK_TIME__"/gm, `${time}`)
+          .replace(/"__MOCK_REAL_TIME__"/gm, `${realtime}`);
+        const body = JSON.parse(str);
+
+        console.log(body);
+
+        req.reply({
+          statusCode: 200,
+          body,
+        });
       }
-
-      const str = JSON.stringify(departures)
-        .replace(/"__MOCK_DAY__"/gm, `${day.valueOf() / 1000}`)
-        .replace(/"__MOCK_TIME__"/gm, `${time}`)
-        .replace(/"__MOCK_REAL_TIME__"/gm, `${realtime}`);
-      const body = JSON.parse(str);
-
-      req.reply({
-        statusCode: 200,
-        body,
-      });
     }).as('postGraphQL');
   });
 
@@ -76,6 +88,7 @@ describe('Searching and filtering departures', () => {
         .find('.lucide-alert-triangle')
         .should('not.exist');
 
+      // filters should have default values
       cy.get('output[for="departurefilter-range"]').should('have.text', '400m');
       cy.get('[name="range"]').should('have.value', 400);
       ['bus', 'tram', 'subway', 'rail', 'ferry'].forEach((mode) => {
@@ -94,6 +107,13 @@ describe('Searching and filtering departures', () => {
         .should('have.length', 7);
 
       cy.get('@departureRows')
+        .eq(1)
+        .find('[role="cell"]')
+        .eq(2)
+        .testId('disruption-icon')
+        .should('exist');
+
+      cy.get('@departureRows')
         .eq(2)
         .as('departureRow')
         .find('[role="cell"]')
@@ -103,7 +123,6 @@ describe('Searching and filtering departures', () => {
         );
 
       cy.get('@departureRows').eq(1).click();
-      cy.checkA11y();
       cy.testId('departure-additional-content').should('be.visible');
       cy.testId('departure-realtime').should('not.exist');
       cy.testId('departure-scheduledtime').should(
@@ -114,6 +133,19 @@ describe('Searching and filtering departures', () => {
         'have.text',
         'Rautatientori Avautuu uuteen välilehteen H2043 Rautatientori',
       );
+
+      // should be sorted by start date
+      cy.testId('disruption-info')
+        .find('h3')
+        .eq(0)
+        .should('contain.text', 'Pysäkki Kurtinmäki räjäytetään');
+
+      cy.testId('disruption-info')
+        .find('h3')
+        .eq(1)
+        .should('contain.text', 'Porvoo siirtyy');
+
+      cy.checkA11y();
 
       cy.get('@departureRow').focus().type('{enter}');
       cy.checkA11y();

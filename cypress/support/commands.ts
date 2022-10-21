@@ -33,7 +33,11 @@ Cypress.Commands.add('visitWithLocation', (location) => {
 
 Cypress.Commands.add(
   'testId',
-  (cyId) => cy.get(`[data-testId="${cyId}"]`) as any,
+  { prevSubject: 'optional' },
+  (prevSubject: any, cyId) => {
+    const selector = `[data-testId="${cyId}"]`;
+    return prevSubject ? prevSubject.find(selector) : cy.get(selector);
+  },
 );
 //
 //
