@@ -81,7 +81,7 @@
     class="close-button"
     aria-label="Sulje"
   >
-    <XCircle />
+    <XCircle style="font-size: 20px;" />
   </button>
 
   {#if disruptions.length}
