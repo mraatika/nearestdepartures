@@ -60,6 +60,7 @@
           <AlertTriangle
             style="font-size: 12px;"
             aria-label="Linjalla häiriöitä: Avaa lähdön tiedot nähdäksesi lisätietoja"
+            data-testId="disruption-icon"
           />
         </span>
       {/if}

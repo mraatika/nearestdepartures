@@ -1,0 +1,28 @@
+{
+  "data": {
+    "alerts": [
+      {
+        "alertHeaderText": "Porvoo siirtyy 24.10.",
+        "alertDescriptionText": "Porvoo siirtyy Pohjois-Pohjanmaalle maanantaina 24.10. klo 9.",
+        "alertUrl": "https://www.hsl.fi/hsl/uutiset/liikennetiedote/2022/05/kurtinmaen-pysakkipari-kurttilantiella-siirtyy-24.5",
+        "effectiveStartDate": "__TIME_START__",
+        "effectiveEndDate": "TIME__END__",
+        "route": {
+          "gtfsId": "HSL:9788",
+          "shortName": "788"
+        }
+      },
+      {
+        "alertHeaderText": "Pysäkki Kurtinmäki räjäytetään 24.10.",
+        "alertDescriptionText": "Pysäkki Kurtinmäki (E5203) linjalla 788 Porvooseen siirtyy maanantaina 24.10. klo 10.",
+        "alertUrl": "https://www.hsl.fi/hsl/uutiset/liikennetiedote/2022/05/kurtinmaen-pysakkipari-kurttilantiella-siirtyy-24.5",
+        "effectiveStartDate": "__TIME_START__",
+        "effectiveEndDate": "TIME__END__",
+        "route": {
+          "gtfsId": "HSL:9788",
+          "shortName": "788"
+        }
+      }
+    ]
+  }
+}
