@@ -1,6 +1,8 @@
 <script lang="ts">
   import { reject } from 'ramda';
-  import { X, Star } from 'lucide-svelte';
+  import X from '~icons/lucide/x';
+  import Star from '~icons/lucide/star';
+  import StarOff from '~icons/lucide/star-off';
   import * as storage from '@/services/storageService';
   import { addressStore, favouritesStore } from '@/stores';
   import type { Address } from '@/types';
@@ -60,7 +62,11 @@
         aria-disabled="{isDisabled}"
         data-testId="favourite-button"
       >
-        <Star size="{32}" fill="{isCurrentAddressFavoured ? '#fff' : 'none'}" />
+        {#if isCurrentAddressFavoured}
+          <StarOff style="font-size: 24px;" />
+        {:else}
+          <Star style="font-size: 24px;" />
+        {/if}
       </button>
     </span>
 
@@ -69,7 +75,7 @@
       aria-label="Sulje"
       data-testId="modal-close-button"
     >
-      <X size="{32}" />
+      <X style="font-size: 24px;" />
     </button>
   </div>
 

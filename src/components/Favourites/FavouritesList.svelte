@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { AlertTriangle } from 'lucide-svelte';
+  import AlertTriangle from '~icons/lucide/alert-triangle';
   import { addressStore } from '@/stores';
   import type { Address } from '@/types';
   import FavouriteListitem from './FavouriteListitem.svelte';
@@ -24,7 +24,7 @@
       <div class="space-xs space-keep-b">Et ole vielä lisännyt suosikkeja!</div>
       <div class="text-s">
         <span class="space-xxs space-keep-r">
-          <AlertTriangle size="{16}" />
+          <AlertTriangle />
         </span>
         Huomioithan, että suosikit tallentuvat paikallisesti, joten ne ovat hyödynnettävissä
         vain samalla selaimella ja laitteella, johon ne on tallennettu.
