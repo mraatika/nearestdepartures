@@ -213,7 +213,7 @@ describe('Searching and filtering departures', () => {
       cy.testId('accuracy-indicator')
         .should('contain.text', 'Paikannuksen tarkkuus: 101m')
         .and('not.have.class', 'color-alert')
-        .find('.lucide-alert-triangle')
+        .find('.alert-triangle')
         .should('exist');
 
       cy.checkA11y();
@@ -229,7 +229,7 @@ describe('Searching and filtering departures', () => {
       cy.testId('accuracy-indicator')
         .should('contain.text', 'Paikannuksen tarkkuus: 501m')
         .and('have.class', 'color-alert')
-        .find('.lucide-alert-triangle')
+        .find('.alert-triangle')
         .should('exist');
 
       cy.checkA11y();
@@ -283,13 +283,13 @@ describe('Searching and filtering departures', () => {
     });
 
     it('displays an error when location fetch fails', () => {
-      cy.testId('location-error')
+      cy.testId('position-error')
         .should('exist')
         .and(
           'contain.text',
           'Paikannus epäonnistui: Sijainnin haku on estetty tai kytketty pois.',
         )
-        .find('.lucide-alert-triangle')
+        .find('.alert-triangle')
         .should('exist');
 
       cy.testId('accuray-indicator').should('not.exist');
@@ -313,7 +313,7 @@ describe('Searching and filtering departures', () => {
           expect(vars.latitude).to.eql(3);
           expect(vars.longitude).to.eql(4);
         });
-      cy.testId('location-error').should('not.exist');
+      cy.testId('position-error').should('not.exist');
       cy.testId('departure-list')
         .find('[role=row]:visible')
         .should('have.length', 7);
@@ -329,7 +329,7 @@ describe('Searching and filtering departures', () => {
           expect(vars.latitude).to.eql(1);
           expect(vars.longitude).to.eql(2);
         });
-      cy.testId('location-error').should('not.exist');
+      cy.testId('position-error').should('not.exist');
       cy.testId('departure-list')
         .find('[role=row]:visible')
         .should('have.length', 7);
@@ -345,7 +345,7 @@ describe('Searching and filtering departures', () => {
           expect(vars.latitude).to.eql(5);
           expect(vars.longitude).to.eql(6);
         });
-      cy.testId('location-error').should('not.exist');
+      cy.testId('position-error').should('not.exist');
       cy.testId('departure-list')
         .find('[role=row]')
         .should('not.contain', 'Lähtöjä ei löytynyt');
@@ -354,7 +354,7 @@ describe('Searching and filtering departures', () => {
     function assertDefaultState() {
       cy.wait('@postGraphQL');
       cy.get('[name=address]').should('have.value', '');
-      cy.testId('location-error').should('be.visible');
+      cy.testId('position-error').should('be.visible');
       cy.testId('departure-list')
         .find('[role=row]')
         .should('contain', 'Lähtöjä ei löytynyt');

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Trash2 as Trash } from 'lucide-svelte';
+  import Trash from '~icons/lucide/trash-2';
   import type { Favourite } from '@/types';
 
   export let favourite: Favourite;
@@ -25,7 +25,7 @@
     class="space-xs space-keep-l"
     data-testId="favorite-remove-button"
   >
-    <Trash class="vertical-bottom" size="{24}" strokeWidth="{1.5}" />
+    <Trash />
   </button>
 </li>
 

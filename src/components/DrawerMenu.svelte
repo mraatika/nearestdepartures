@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Menu } from 'lucide-svelte';
+  import Menu from '~icons/lucide/menu';
   import Drawer from '@/components/Drawer.svelte';
   import Favourites from '@/components/Favourites';
 
@@ -17,7 +17,7 @@
     data-testId="menu-button"
   >
     <div class="menu-icon" class:pressed="{isDrawerVisible}">
-      <Menu size="{36}" strokeWidth="{2.5}" />
+      <Menu style="font-size: 32px;" />
     </div>
   </button>
 

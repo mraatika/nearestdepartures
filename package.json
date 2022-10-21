@@ -13,7 +13,8 @@
     "lint": "eslint ./src/**/*.{ts,svelte}"
   },
   "devDependencies": {
-    "@sveltejs/vite-plugin-svelte": "^1.0.2",
+    "@iconify-json/lucide": "^1.1.46",
+    "@sveltejs/vite-plugin-svelte": "^1.0.9",
     "@tsconfig/svelte": "^3.0.0",
     "@types/luxon": "^3.0.2",
     "@types/ramda": "^0.28.15",
@@ -30,11 +31,13 @@
     "luxon": "^3.0.4",
     "prettier": "^2.7.1",
     "prettier-plugin-svelte": "^2.7.1",
+    "rollup-plugin-visualizer": "^5.8.3",
     "svelte": "^3.49.0",
     "svelte-check": "^2.8.1",
     "svelte-preprocess": "^4.10.7",
     "tslib": "^2.4.0",
     "typescript": "^4.6.4",
+    "unplugin-icons": "^0.14.12",
     "vite": "^3.1.0",
     "vitest": "^0.23.4"
   },

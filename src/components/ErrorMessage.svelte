@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { XCircle } from 'lucide-svelte';
+  import XCircle from '~icons/lucide/x-circle';
   import { requestFocus } from '@/util/dom.utils';
   export let error: Error;
 </script>

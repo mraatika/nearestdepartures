@@ -1,5 +1,7 @@
 <script lang="ts">
-  import { XCircle, Clock, Flag } from 'lucide-svelte';
+  import XCircle from '~icons/lucide/x-circle';
+  import Clock from '~icons/lucide/clock';
+  import Flag from '~icons/lucide/flag';
   import { onMount } from 'svelte';
   import ExternalLink from '@/components/ExternalLink.svelte';
   import type { Departure, Disruption } from '@/types';
