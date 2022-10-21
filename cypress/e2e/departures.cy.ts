@@ -39,8 +39,6 @@ describe('Searching and filtering departures', () => {
           .replace(/"__MOCK_REAL_TIME__"/gm, `${realtime}`);
         const body = JSON.parse(str);
 
-        console.log(body);
-
         req.reply({
           statusCode: 200,
           body,
