@@ -239,25 +239,6 @@ describe('Searching and filtering departures', () => {
       cy.visitWithLocation({ latitude: 1, longitude: 2 });
       cy.testId('accuracy-indicator').should('not.exist');
     });
-
-    it('navigation should work with keyboard', () => {
-      cy.visitWithLocation({ latitude: 1, longitude: 2 });
-      cy.wait('@postGraphQL');
-      cy.wait('@postGraphQL');
-      cy.testId('skip-to-departures-button').focus().type('{enter}');
-      cy.testId('departure-list')
-        .find('[role=row]')
-        .eq(1)
-        .should('have.focus')
-        .type('{enter}');
-
-      cy.testId('departure-additional-content')
-        .find('button.close-button')
-        .click();
-
-      cy.testId('departure-additional-content').should('not.exist');
-      cy.testId('departure-list').find('[role=row]').eq(1).should('have.focus');
-    });
   });
 
   describe('without location', () => {
