@@ -1,4 +1,5 @@
 <script lang="ts">
+  import * as R from 'ramda';
   import { onMount } from 'svelte';
   import { addressStore, locationStore } from '@/stores';
   import type { Address } from '@/types';
@@ -30,6 +31,7 @@
 
   async function onInput() {
     selectedSuggestion = undefined;
+    addressStore.set(undefined);
 
     if (searchTerm.length > 2) {
       suggestions = await model.fetchSuggestions(searchTerm, $locationStore);
@@ -103,6 +105,13 @@
     // if a suggestion was selected then we can use it to search for departures
     if (selectedSuggestion) {
       addressStore.set(selectedSuggestion);
+      return;
+    }
+
+    // if address is defined, update the store by copying existing value
+    // update will then trigger a new fetch
+    if ($addressStore) {
+      addressStore.update(R.clone);
       return;
     }
 
