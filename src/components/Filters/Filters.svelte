@@ -1,23 +1,17 @@
 <script lang="ts">
-  import RangeFilter from './RangeFilter.svelte';
-  import { filtersStore } from '@/stores';
   import * as R from 'ramda';
-  import VehicleFilterButton from './VehicleFilterButton.svelte';
   import { VEHICLE_TYPE } from '@/enums';
+  import { filtersStore, rangeStore, vechicleFilterStore } from '@/stores';
+  import RangeFilter from './RangeFilter.svelte';
+  import VehicleFilterButton from './VehicleFilterButton.svelte';
 
   function onRangeChange(e: Event) {
     const value = +(e.currentTarget as HTMLInputElement).value;
-    filtersStore.update(R.assoc('range', value));
+    rangeStore.set(value);
   }
 
   function onVehicleFilterChange(type: VEHICLE_TYPE) {
-    filtersStore.update((values) => {
-      return R.assoc(
-        'vehicleTypes',
-        R.symmetricDifference(values.vehicleTypes, [type]),
-        values,
-      );
-    });
+    vechicleFilterStore.update(R.symmetricDifference([type]));
   }
 </script>
 

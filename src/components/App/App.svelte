@@ -8,10 +8,15 @@
   import ErrorMessage from '@/components/ErrorMessage.svelte';
   import Filters from '@/components/Filters';
   import Footer from '@/components/Footer.svelte';
-  import { BATCH_INTERVAL } from '@/constants';
+  import { BATCH_INTERVAL, DEFAULT_RANGE } from '@/constants';
   import { fetchDisruptions } from '@/services/disruptionsService';
-  import { addressStore, departuresStore, filtersStore } from '@/stores';
-  import type { Address, Disruption } from '@/types';
+  import {
+    addressStore,
+    departuresStore,
+    filtersStore,
+    rangeStore,
+  } from '@/stores';
+  import type { Address, Disruption, Filters as TFilters } from '@/types';
   import { requestFocus } from '@/util/dom.utils';
   import { PositionError } from '@/util/error.utils';
   import logger from '@/util/logger';
@@ -55,6 +60,15 @@
     }
   }
 
+  function fetchDepartures(address: Address, filters: TFilters) {
+    error = undefined;
+    isLoading = true;
+    model
+      .fetchDeparturesByAddress(address, filters)
+      .catch(setError)
+      .finally(stopLoading);
+  }
+
   onMount(() => {
     isLoading = true;
     model.getAddressByLocation().catch(setError).finally(stopLoading);
@@ -69,18 +83,25 @@
       BATCH_INTERVAL,
     );
 
+    const unsubscribeFromRangeFiltersStore = rangeStore.subscribe(
+      ([prev = DEFAULT_RANGE, next]) => {
+        // fetch more departures when address is set and
+        // filter range is increased
+        if (next > prev && $addressStore) {
+          // because filtersStore is derived it's state is not yet
+          // updated so we use the current value from the range store
+          fetchDepartures($addressStore, { ...$filtersStore, range: next });
+        }
+      },
+    );
+
     // search departures every time the address changes
     const unsubscribeFromAddressStore = addressStore.subscribe(
       (address: Address | undefined) => {
         error = undefined;
-
         if (address) {
           logger.debug('Address changed', address?.label);
-          isLoading = true;
-          model
-            .fetchDeparturesByAddress(address, $filtersStore)
-            .catch(setError)
-            .finally(stopLoading);
+          fetchDepartures(address, $filtersStore);
         }
       },
     );
@@ -88,6 +109,7 @@
     return () => {
       clearInterval(interval);
       unsubscribeFromAddressStore();
+      unsubscribeFromRangeFiltersStore();
     };
   });
 </script>
