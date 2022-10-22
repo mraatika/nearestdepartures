@@ -1,6 +1,9 @@
 <script lang="ts">
   import logo from '@/assets/logo_v3.svg';
   import DrawerMenu from '@/components/DrawerMenu.svelte';
+
+  export let isDrawerVisible: boolean;
+  export let toggleDrawer: () => void;
 </script>
 
 <header class="bg-bus color-white space-s">
@@ -26,7 +29,10 @@
       </p>
     </div>
 
-    <DrawerMenu />
+    <DrawerMenu
+      isDrawerVisible="{isDrawerVisible}"
+      toggleDrawer="{toggleDrawer}"
+    />
   </div>
 </header>
 
