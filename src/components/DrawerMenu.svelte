@@ -1,18 +1,18 @@
 <script lang="ts">
+  import * as R from 'ramda';
   import Menu from '~icons/lucide/menu';
   import Drawer from '@/components/Drawer.svelte';
   import Favourites from '@/components/Favourites';
 
-  let isDrawerVisible = false;
+  export let isDrawerVisible: boolean;
+  export let toggleDrawer: () => void;
 
-  function toggleDrawer() {
-    isDrawerVisible = !isDrawerVisible;
-  }
+  let toggle = R.nAry(0, toggleDrawer);
 </script>
 
 <div>
   <button
-    on:click="{toggleDrawer}"
+    on:click="{toggle}"
     aria-label="Omat suosikit"
     data-testId="menu-button"
   >
@@ -21,12 +21,8 @@
     </div>
   </button>
 
-  <Drawer
-    isVisible="{isDrawerVisible}"
-    close="{toggleDrawer}"
-    label="Omat suosikit"
-  >
-    <Favourites close="{toggleDrawer}" />
+  <Drawer isVisible="{isDrawerVisible}" close="{toggle}" label="Omat suosikit">
+    <Favourites close="{toggle}" />
   </Drawer>
 </div>
 

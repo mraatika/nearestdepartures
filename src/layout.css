@@ -113,6 +113,10 @@
   height: 100%;
 }
 
+.viewport-height {
+  min-height: 100vh;
+}
+
 .position-relative {
   position: relative;
 }

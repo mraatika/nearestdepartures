@@ -1,23 +1,25 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import { swipe } from 'svelte-gestures';
   import AccuracyIndicator from '@/components/AccuracyIndicator.svelte';
   import AddressSearch from '@/components/AddressSearch/AddressSearch.svelte';
   import Appheader from '@/components/AppHeader.svelte';
   import DepartureList from '@/components/DepartureList';
   import ErrorMessage from '@/components/ErrorMessage.svelte';
+  import Filters from '@/components/Filters';
   import Footer from '@/components/Footer.svelte';
   import { BATCH_INTERVAL } from '@/constants';
+  import { fetchDisruptions } from '@/services/disruptionsService';
   import { addressStore, departuresStore, filtersStore } from '@/stores';
   import type { Address, Disruption } from '@/types';
+  import { requestFocus } from '@/util/dom.utils';
   import { PositionError } from '@/util/error.utils';
+  import logger from '@/util/logger';
   import * as model from './model';
   import PositionErrorView from './PositionError.svelte';
-  import { fetchDisruptions } from '@/services/disruptionsService';
-  import logger from '@/util/logger';
-  import Filters from '@/components/Filters';
-  import { requestFocus } from '@/util/dom.utils';
 
   let isLoading = false;
+  let isDrawerVisible = false;
   let error: Error | undefined = undefined;
   let disruptions: Disruption[] = [];
 
@@ -41,6 +43,16 @@
     requestFocus(
       document.querySelector('.departure-row-button') as HTMLElement,
     );
+  }
+
+  function toggleDrawer(state?: boolean) {
+    isDrawerVisible = state ?? !isDrawerVisible;
+  }
+
+  function onSwipe(event: CustomEvent<{ direction: string }>) {
+    if (['left', 'right'].includes(event.detail.direction)) {
+      toggleDrawer(event.detail.direction === 'left');
+    }
   }
 
   onMount(() => {
@@ -80,9 +92,17 @@
   });
 </script>
 
-<div class="app-content flex-column">
+<div
+  use:swipe="{{ timeframe: 300, minSwipeDistance: 60, touchAction: 'pan-y' }}"
+  on:swipe="{onSwipe}"
+  class="flex-column viewport-height"
+  data-testId="app-content"
+>
   <div class="space-m space-keep-b">
-    <Appheader />
+    <Appheader
+      isDrawerVisible="{isDrawerVisible}"
+      toggleDrawer="{toggleDrawer}"
+    />
   </div>
 
   <main
@@ -138,10 +158,3 @@
 
   <Footer />
 </div>
-
-<style>
-  .app-content {
-    box-sizing: border-box;
-    min-height: 100vh;
-  }
-</style>

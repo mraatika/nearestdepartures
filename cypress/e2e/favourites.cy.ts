@@ -25,7 +25,6 @@ describe('Favourites', () => {
       cy.wait('@getLocation');
       cy.testId('menu-button').focus().type(' ');
 
-      cy.testId('modal-backdrop').should('be.visible');
       cy.testId('drawer').should('be.visible');
       assertEmptyList();
 
@@ -63,9 +62,19 @@ describe('Favourites', () => {
     });
 
     it('works with keyboard', () => {
-      cy.visitWithLocation({ latitude: 1, longitude: 2 });
+      cy.visitWithLocation(new PositionError('Disabled', 1));
       cy.testId('menu-button').focus().type('{enter}');
+      cy.testId('drawer').should('be.visible');
       cy.get('body').type('{esc}');
+      cy.testId('drawer').should('not.be.visible');
+    });
+
+    it('works with swipe', () => {
+      cy.visitWithLocation(new PositionError('Disabled', 1));
+      cy.testId('app-content').realSwipe('toLeft', { length: 80 });
+      cy.testId('drawer').should('be.visible');
+
+      cy.testId('drawer').realSwipe('toRight', { length: 80 });
       cy.testId('drawer').should('not.be.visible');
     });
 
