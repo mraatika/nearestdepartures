@@ -14,21 +14,29 @@ describe('StorageService', () => {
   });
 
   describe('Storing filters', () => {
-    it('should return filters object', () => {
-      expect(storage.saveFilter('range', 1)).toEqual({ range: 1 });
+    it('should save filters', () => {
+      storage.saveFilters({ range: 1, vehicleTypes: [] });
+      expect(setItemMock).toHaveBeenCalledWith(
+        'filters',
+        JSON.stringify({ range: 1, vehicleTypes: [] }),
+      );
     });
 
-    it('should add given value to filters object', () => {
-      getItemMock.mockReturnValueOnce(JSON.stringify({ range: 1 }));
-      expect(storage.saveFilter('vehicleTypes', [VEHICLE_TYPE.BUS])).toEqual({
+    it('should return filters', () => {
+      expect(storage.saveFilters({ range: 1, vehicleTypes: [] })).toEqual({
         range: 1,
-        vehicleTypes: [VEHICLE_TYPE.BUS],
+        vehicleTypes: [],
       });
     });
   });
 
   describe('Getting filters', () => {
     const filters = { range: 1 };
+
+    it('should get value from storage', () => {
+      storage.getFilter('range');
+      expect(getItemMock).toHaveBeenCalledWith('filters');
+    });
 
     it('should find filter value from storage', () => {
       getItemMock.mockReturnValueOnce(JSON.stringify(filters));

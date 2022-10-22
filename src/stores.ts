@@ -1,5 +1,5 @@
 import { derived, writable } from 'svelte/store';
-import { getFavourites } from '@/services/storageService';
+import { getFavourites, getFilter } from '@/services/storageService';
 import type { Address, Departure } from '@/types';
 import { DEFAULT_RANGE } from './constants';
 import { VEHICLE_TYPE } from './enums';
@@ -23,8 +23,12 @@ function scanTwoStore<T>(initial: T) {
 export const locationStore = writable<GeolocationCoordinates>();
 export const addressStore = writable<Address | undefined>();
 export const favouritesStore = writable<Address[]>(getFavourites() ?? []);
-export const rangeStore = scanTwoStore(DEFAULT_RANGE);
-export const vechicleFilterStore = writable(Object.values(VEHICLE_TYPE));
+export const rangeStore = scanTwoStore(
+  <number>getFilter('range') ?? DEFAULT_RANGE,
+);
+export const vechicleFilterStore = writable(
+  <VEHICLE_TYPE[]>getFilter('vehicleTypes') ?? Object.values(VEHICLE_TYPE),
+);
 export const filtersStore = derived(
   [rangeStore, vechicleFilterStore],
   ([range, vehicleTypes]) => ({ range: range[1], vehicleTypes }),

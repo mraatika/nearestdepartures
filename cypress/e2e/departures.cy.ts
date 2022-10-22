@@ -3,6 +3,7 @@ import departures from '../fixtures/departures.json';
 import disruptions from '../fixtures/disruptions.json';
 import { DateTime } from 'luxon';
 import { PositionError } from '../../src/util/error.utils';
+import { toUpper } from 'ramda';
 
 describe('Searching and filtering departures', () => {
   const now = DateTime.now();
@@ -171,23 +172,30 @@ describe('Searching and filtering departures', () => {
       cy.get('output[for="departurefilter-range"]').should('have.text', '400m');
       cy.get('[name="range"]').should('have.value', 400);
 
-      ['bus', 'tram', 'rail', 'subway', 'ferry'].forEach((mode) => {
+      const modes = ['bus', 'tram', 'rail', 'subway', 'ferry'];
+
+      modes.forEach((mode, i) => {
         // vehicle filters should be toggled by default
         cy.testId(`filter-${mode}`)
           .as('filterButton')
           .should('have.attr', 'aria-pressed', 'true');
 
-        cy.get('@filterButton').focus().type(' ');
+        cy.get('@filterButton')
+          .focus()
+          .type(' ')
+          .then(() => {
+            const filters = JSON.parse(localStorage.getItem('filters'));
+            expect(filters).to.eql({
+              range: 400,
+              vehicleTypes: modes.slice(i + 1).map(toUpper),
+            });
+          });
+
         cy.get('@filterButton').should('have.attr', 'aria-pressed', 'false');
-        cy.testId('departure-route').find(`.${mode}`).should('not.exist');
 
-        cy.get('@filterButton').focus().type('{enter}');
-        cy.get('@filterButton').should('have.attr', 'aria-pressed', 'true');
-        cy.testId('departure-route').find(`.${mode}`).should('exist');
-      });
-
-      ['bus', 'tram', 'rail', 'subway', 'ferry'].forEach((mode) => {
-        cy.testId(`filter-${mode}`).click();
+        if (i < modes.length - 1) {
+          cy.testId('departure-route').find(`.${mode}`).should('not.exist');
+        }
       });
 
       cy.testId('departure-list')
@@ -196,11 +204,23 @@ describe('Searching and filtering departures', () => {
         .should('have.length', 1)
         .and('contain.text', 'Lähtöjä ei löytynyt');
 
-      ['bus', 'tram', 'rail', 'subway', 'ferry'].forEach((mode) => {
-        cy.testId(`filter-${mode}`).click();
+      modes.forEach((mode) => {
+        cy.testId(`filter-${mode}`)
+          .click()
+          .should('have.attr', 'aria-pressed', 'true')
+          .then(() => {
+            const filters = JSON.parse(localStorage.getItem('filters'));
+            expect(filters.vehicleTypes).to.include(mode.toUpperCase());
+          });
+
+        cy.testId('departure-route').find(`.${mode}`).should('exist');
       });
 
-      setSliderValue(200);
+      setSliderValue(200).then(() => {
+        const filters = JSON.parse(localStorage.getItem('filters'));
+        expect(filters.range).to.eql(200);
+      });
+
       cy.get('output[for="departurefilter-range"]').should('have.text', '200m');
       cy.get('@departureList')
         .find('[role="row"]:visible')
@@ -210,6 +230,28 @@ describe('Searching and filtering departures', () => {
       cy.get('@departureList')
         .find('[role="row"]:visible')
         .should('have.length', 4);
+    });
+
+    it('loads the saved filters on startup', () => {
+      localStorage.setItem(
+        'filters',
+        JSON.stringify({
+          range: 1600,
+          vehicleTypes: ['FERRY'],
+        }),
+      );
+
+      cy.visitWithLocation(new PositionError('', 1));
+      cy.get('[name="range"]').should('have.value', 1600);
+
+      cy.testId('filter-ferry').should('have.attr', 'aria-pressed', 'true');
+      ['bus', 'tram', 'rail', 'subway'].forEach((mode) => {
+        cy.testId(`filter-${mode}`).should(
+          'have.attr',
+          'aria-pressed',
+          'false',
+        );
+      });
     });
 
     it('searching with changed range', () => {

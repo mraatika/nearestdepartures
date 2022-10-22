@@ -22,6 +22,7 @@
   import logger from '@/util/logger';
   import * as model from './model';
   import PositionErrorView from './PositionError.svelte';
+  import { saveFilters } from '@/services/storageService';
 
   let isLoading = false;
   let isDrawerVisible = false;
@@ -106,10 +107,14 @@
       },
     );
 
+    // save filters when they're saved
+    const unsubsribeFromFilters = filtersStore.subscribe(saveFilters);
+
     return () => {
       clearInterval(interval);
       unsubscribeFromAddressStore();
       unsubscribeFromRangeFiltersStore();
+      unsubsribeFromFilters();
     };
   });
 </script>
