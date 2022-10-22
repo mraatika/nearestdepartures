@@ -86,13 +86,6 @@ describe('Searching and filtering departures', () => {
         .find('.lucide-alert-triangle')
         .should('not.exist');
 
-      // filters should have default values
-      cy.get('output[for="departurefilter-range"]').should('have.text', '400m');
-      cy.get('[name="range"]').should('have.value', 400);
-      ['bus', 'tram', 'subway', 'rail', 'ferry'].forEach((mode) => {
-        cy.testId(`filter-${mode}`).should('have.attr', 'aria-pressed', 'true');
-      });
-
       cy.wait('@postGraphQL');
 
       cy.get('footer').should('contain.text', 'Lähdöt päivitetty');
@@ -168,17 +161,18 @@ describe('Searching and filtering departures', () => {
     });
 
     it('filtering departures', () => {
-      cy.visitWithLocation({
+      visitAndWaitForDepartures({
         latitude: 1,
         longitude: 2,
         accuracy: 15,
       });
 
-      cy.wait('@postGraphQL');
-      cy.testId('spinner').should('not.be.visible');
-      cy.testId('departure-list').as('departureList');
+      // range filter should have default value
+      cy.get('output[for="departurefilter-range"]').should('have.text', '400m');
+      cy.get('[name="range"]').should('have.value', 400);
 
       ['bus', 'tram', 'rail', 'subway', 'ferry'].forEach((mode) => {
+        // vehicle filters should be toggled by default
         cy.testId(`filter-${mode}`)
           .as('filterButton')
           .should('have.attr', 'aria-pressed', 'true');
@@ -196,7 +190,8 @@ describe('Searching and filtering departures', () => {
         cy.testId(`filter-${mode}`).click();
       });
 
-      cy.get('@departureList')
+      cy.testId('departure-list')
+        .as('departureList')
         .find('[role="cell"]')
         .should('have.length', 1)
         .and('contain.text', 'Lähtöjä ei löytynyt');
@@ -217,21 +212,23 @@ describe('Searching and filtering departures', () => {
         .should('have.length', 4);
     });
 
-    it('searching with changed range', () => {
-      cy.visitWithLocation({ latitude: 1, longitude: 2 });
+    it.only('searching with changed range', () => {
+      visitAndWaitForDepartures({ latitude: 1, longitude: 2 });
 
-      // alerts
-      cy.wait('@postGraphQL');
-      // departures by location
-      cy.wait('@postGraphQL');
-      cy.testId('spinner').should('not.be.visible');
-
-      setSliderValue(1400);
-      cy.get('[type=submit]').click();
-      // departures by set address
+      setSliderValue(200);
+      // no fetch here
+      setSliderValue(600);
+      // it fetches more departures when the range is increased
+      // without clicking the submit button
       cy.wait('@postGraphQL')
         .its('request.body.variables.maxDistance')
-        .should('eql', 1400);
+        .should('eql', 600);
+
+      cy.get('[type=submit]').click();
+      // it uses the changed range in further fetches
+      cy.wait('@postGraphQL')
+        .its('request.body.variables.maxDistance')
+        .should('eql', 600);
     });
 
     it('displays a warning when location accuracy is low', () => {
@@ -371,6 +368,18 @@ describe('Searching and filtering departures', () => {
         .should('contain', 'Lähtöjä ei löytynyt');
     }
   });
+
+  function visitAndWaitForDepartures(
+    location: Partial<GeolocationCoordinates>,
+  ) {
+    cy.visitWithLocation(location);
+    // alerts
+    cy.wait('@postGraphQL');
+    cy.wait('@getLocation');
+    // departures
+    cy.wait('@postGraphQL');
+    cy.testId('spinner').should('not.be.visible');
+  }
 
   function setSliderValue(value: number) {
     return cy
