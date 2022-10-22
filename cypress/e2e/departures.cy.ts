@@ -212,7 +212,7 @@ describe('Searching and filtering departures', () => {
         .should('have.length', 4);
     });
 
-    it.only('searching with changed range', () => {
+    it('searching with changed range', () => {
       visitAndWaitForDepartures({ latitude: 1, longitude: 2 });
 
       setSliderValue(200);
