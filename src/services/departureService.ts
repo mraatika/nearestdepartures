@@ -29,6 +29,7 @@ function formBatchRequestBody({ nodeId }: Departure) {
       id: nodeId,
       startTime,
       departuresCount: NUMBER_OF_DEPARTURES_PER_ROUTE,
+      timeRange: TIME_RANGE,
     },
   };
 }
