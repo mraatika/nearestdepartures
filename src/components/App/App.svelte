@@ -135,7 +135,7 @@
   <main
     class="flex-column flex-full full-width centering-margin max-content-width space-xs space-clear-t"
   >
-    <div role="alert">
+    <div role="alert" aria-atomic="true">
       {#if error && !(error instanceof PositionError)}
         <div class="space-s space-keep-b">
           <ErrorMessage
@@ -166,7 +166,7 @@
       {/if}
     </div>
 
-    <div role="alert" class="align-right">
+    <div role="alert" aria-atomic="true" class="align-right">
       {#if error && error instanceof PositionError}
         <div class="space-xs space-keep-t ">
           <PositionErrorView error="{error}" />
