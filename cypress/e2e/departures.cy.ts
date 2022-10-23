@@ -121,10 +121,10 @@ describe('Searching and filtering departures', () => {
         'have.text',
         `${departureHours}:00 (arvioitu)`,
       );
-      cy.testId('departure-stop').should(
-        'have.text',
-        'Rautatientori Avautuu uuteen välilehteen H2043 Rautatientori',
-      );
+      // use contain so that we don't run into problems with whitespace characters
+      cy.testId('departure-stop')
+        .should('contain.text', 'Rautatientori')
+        .and('contain.text', 'H2043');
 
       // should be sorted by start date
       cy.testId('disruption-info')
