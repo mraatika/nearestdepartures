@@ -1,33 +1,42 @@
 <script lang="ts">
+  import AlertTriangle from '~icons/lucide/alert-triangle';
+  import * as R from 'ramda';
   import ExternalLink from '@/components/ExternalLink.svelte';
   import type { Disruption } from '@/types';
-  import { prop, sortBy } from 'ramda';
 
   export let disruptions: Disruption[] = [];
 </script>
 
 <div
-  class="alert-info color-alert align-left full-width bg-light-red space-s space-clear-tb corner-rounded"
+  class="disruption-info color-alert space-s corner-rounded text-s flex-row"
   data-testId="disruption-info"
 >
-  {#each sortBy(prop('effectiveStartDate'), disruptions) as disruption}
-    <div class="space-s space-clear-rl">
-      {#if disruption.alertHeaderText}
-        <h3 class="space-xs space-keep-b">{disruption.alertHeaderText}</h3>
-      {/if}
+  <div class="space-xs space-keep-r">
+    <AlertTriangle />
+  </div>
 
-      <p class="alert-info-body">
-        {disruption.alertDescriptionText}
-
-        {#if disruption.alertUrl}
-          <ExternalLink
-            class="disruption-alert-additional-info underline"
-            href="{disruption.alertUrl}"
-          >
-            Lisätietoja
-          </ExternalLink>
+  <div class="flex-grow">
+    {#each R.sortBy(R.prop('effectiveStartDate'), disruptions) as disruption}
+      <div>
+        {#if disruption.alertHeaderText}
+          <h3 class="space-xs space-keep-b">{disruption.alertHeaderText}</h3>
         {/if}
-      </p>
-    </div>
-  {/each}
+        <p>
+          {disruption.alertDescriptionText}
+          {#if disruption.alertUrl}
+            <ExternalLink class="underline" href="{disruption.alertUrl}">
+              Lisätietoja
+            </ExternalLink>.
+          {/if}
+        </p>
+      </div>
+    {/each}
+  </div>
 </div>
+
+<style>
+  .disruption-info {
+    border: 2px solid var(--color-alert);
+    margin-top: var(--space-s);
+  }
+</style>
