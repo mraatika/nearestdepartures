@@ -1,23 +1,32 @@
 <script lang="ts">
-  import Modal from './Modal.svelte';
+  import { onMount } from 'svelte';
+  import { sineInOut } from 'svelte/easing';
   import { onKeys } from '@/util/dom.utils';
-  export let isVisible = false;
+  import Modal from './Modal.svelte';
+
   export let close: VoidFunction;
   export let label: string;
 
-  $: {
-    if (isVisible) {
-      document.body.classList.add('no-scroll');
-    } else {
-      document.body.classList.remove('no-scroll');
-    }
+  function slideRight(_node: HTMLElement) {
+    return {
+      duration: 350,
+      easing: sineInOut,
+      css: (t: number, u: number) => `transform: translateX(${u * 100}%)`,
+    };
   }
+
+  onMount(() => {
+    document.body.classList.add('no-scroll');
+    return () => {
+      document.body.classList.remove('no-scroll');
+    };
+  });
 </script>
 
-<svelte:body on:keyup="{isVisible ? onKeys(['Escape'], close) : undefined}" />
+<svelte:body on:keyup="{onKeys(['Escape'], close)}" />
 
-<div class="drawer" class:visible="{isVisible}" data-testId="drawer">
-  <Modal isVisible="{isVisible}" on:click="{close}" />
+<div class="drawer" data-testId="drawer">
+  <Modal on:click="{close}" />
 
   <div
     class="panel"
@@ -25,6 +34,7 @@
     tabIndex="0"
     aria-label="{label}"
     aria-modal="{true}"
+    transition:slideRight
   >
     <div class="bg-white full-height">
       <slot />
@@ -39,17 +49,7 @@
     right: 0;
     height: 100%;
     width: 100%;
-    z-index: -1;
-    transition: z-index 350ms step-end;
-  }
-
-  .drawer.visible {
     z-index: 99;
-    transition: z-index 350ms step-start;
-  }
-
-  .drawer.visible .panel {
-    transform: translate(0, 0);
   }
 
   .panel {
@@ -58,10 +58,8 @@
     height: 100%;
     right: 0;
     background: white;
-    z-index: 3;
-    transition: transform 350ms ease;
+    z-index: 2;
     overflow: auto;
-    transform: translate(100%, 0);
   }
 
   @media (min-width: 750px) {
