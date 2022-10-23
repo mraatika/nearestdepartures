@@ -8,7 +8,7 @@
 </script>
 
 <div
-  class="disruption-info color-alert space-s corner-rounded text-s flex-row"
+  class="color-alert space-s corner-rounded text-s flex-row line-height-l"
   data-testId="disruption-info"
 >
   <div class="space-xs space-keep-r">
@@ -17,7 +17,7 @@
 
   <div class="flex-grow">
     {#each R.sortBy(R.prop('effectiveStartDate'), disruptions) as disruption}
-      <div>
+      <div class="disruption">
         {#if disruption.alertHeaderText}
           <h3 class="space-xs space-keep-b">{disruption.alertHeaderText}</h3>
         {/if}
@@ -35,8 +35,7 @@
 </div>
 
 <style>
-  .disruption-info {
-    border: 2px solid var(--color-alert);
-    margin-top: var(--space-s);
+  .disruption + .disruption {
+    margin-top: var(--space-m);
   }
 </style>
