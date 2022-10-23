@@ -31,7 +31,7 @@
   bind:this="{container}"
   transition:slide="{{ easing: quartOut }}"
   tabIndex="0"
-  class="space-xs flex-row flex-wrap line-height-l position-relative"
+  class="space-xs flex-row flex-wrap line-height-xl position-relative"
   data-testId="departure-additional-content"
 >
   <div class="flex-row flex-align-center space-m space-keep-r">
