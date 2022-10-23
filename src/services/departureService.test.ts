@@ -4,6 +4,7 @@ import { fetchDepartureBatch, fetchDepartures } from './departureService';
 import type { Filters, Location } from '@/types';
 import type { VEHICLE_TYPE } from '@/enums';
 import * as util from '@/util';
+import { TIME_RANGE } from '@/constants';
 
 const fetchMock = vi.spyOn(api, 'fetchJSON');
 
@@ -490,6 +491,7 @@ describe('fetchDepartures', () => {
             id: '1',
             startTime: 123,
             departuresCount: expect.any(Number),
+            timeRange: TIME_RANGE,
           },
         },
       ]);
