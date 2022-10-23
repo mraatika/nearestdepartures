@@ -21,9 +21,11 @@
     </div>
   </button>
 
-  <Drawer isVisible="{isDrawerVisible}" close="{toggle}" label="Omat suosikit">
-    <Favourites close="{toggle}" />
-  </Drawer>
+  {#if isDrawerVisible}
+    <Drawer close="{toggle}" label="Omat suosikit">
+      <Favourites close="{toggle}" />
+    </Drawer>
+  {/if}
 </div>
 
 <style>

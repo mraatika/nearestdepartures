@@ -1,11 +1,12 @@
 <script lang="ts">
-  export let isVisible = false;
+  import { sineInOut } from 'svelte/easing';
+  import { fade } from 'svelte/transition';
 </script>
 
 <div
-  class="modal"
-  class:visible="{isVisible}"
   on:click
+  transition:fade="{{ duration: 250, easing: sineInOut }}"
+  class="modal"
   data-testId="modal-backdrop"
 ></div>
 
@@ -17,12 +18,6 @@
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.6);
-    opacity: 0;
-    z-index: 2;
-    transition: opacity 250ms ease;
-  }
-
-  .visible {
-    opacity: 1;
+    z-index: 1;
   }
 </style>
