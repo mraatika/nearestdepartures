@@ -18,6 +18,7 @@
 <div
   role="rowgroup"
   class="departure-row border-thin-light border-keep-b line-height-xxl"
+  class:isToggled
 >
   <div
     on:click="{() => onRowToggle(departure.id)}"
@@ -95,5 +96,10 @@
 <style>
   .departure-row:last-child {
     border: 0;
+  }
+
+  .isToggled {
+    border-left: 8px solid #ddd;
+    padding-left: var(--space-xs);
   }
 </style>

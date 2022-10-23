@@ -13,12 +13,13 @@
   --color-gray-light: #ccc;
   --color-gray: #666;
   --color-gray-dark: #333;
-  --color-alert: #7b3130;
+  --color-alert: #a94442;
+  --color-alert-dark: #7b3130;
   --color-alert-light: #f2dede;
 }
 
 .color-alert {
-  color: var(--color-alert);
+  color: var(--color-alert-dark);
 }
 
 .color-warning {
