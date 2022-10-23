@@ -16,7 +16,7 @@
           <img
             class="app-logo drop-shadow"
             src="{logo}"
-            alt=""
+            alt="Julkisilla.info logo"
             width="40"
             height="40"
           />
