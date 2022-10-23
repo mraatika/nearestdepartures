@@ -19,7 +19,9 @@
     {#each R.sortBy(R.prop('effectiveStartDate'), disruptions) as disruption}
       <div class="disruption">
         {#if disruption.alertHeaderText}
-          <h3 class="space-xs space-keep-b">{disruption.alertHeaderText}</h3>
+          <h2 class="space-xs space-keep-b text-m">
+            {disruption.alertHeaderText}
+          </h2>
         {/if}
         <p>
           {disruption.alertDescriptionText}

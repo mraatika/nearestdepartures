@@ -58,7 +58,7 @@ describe('Favourites', () => {
       cy.testId('modal-backdrop')
         .click({ force: true })
         .should('not.be.visible');
-      cy.testId('drawer').should('not.be.visible');
+      cy.testId('drawer').should('not.exist');
     });
 
     it('works with keyboard', () => {
@@ -66,7 +66,7 @@ describe('Favourites', () => {
       cy.testId('menu-button').focus().type('{enter}');
       cy.testId('drawer').should('be.visible');
       cy.get('body').type('{esc}');
-      cy.testId('drawer').should('not.be.visible');
+      cy.testId('drawer').should('not.exist');
     });
 
     it('works with swipe', () => {
@@ -75,7 +75,7 @@ describe('Favourites', () => {
       cy.testId('drawer').should('be.visible');
 
       cy.testId('drawer').realSwipe('toRight', { length: 80 });
-      cy.testId('drawer').should('not.be.visible');
+      cy.testId('drawer').should('not.exist');
     });
 
     it('does not allow saving a favourite when there is no location to save', () => {

@@ -128,12 +128,12 @@ describe('Searching and filtering departures', () => {
 
       // should be sorted by start date
       cy.testId('disruption-info')
-        .find('h3')
+        .find('h2')
         .eq(0)
         .should('contain.text', 'Pysäkki Kurtinmäki räjäytetään');
 
       cy.testId('disruption-info')
-        .find('h3')
+        .find('h2')
         .eq(1)
         .should('contain.text', 'Porvoo siirtyy');
 
