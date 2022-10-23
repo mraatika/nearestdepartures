@@ -135,6 +135,7 @@
       on:focus="{() => addressInput.select()}"
       on:blur="{onBlur}"
       on:input="{debounce(onInput, 300)}"
+      on:pointerdown|stopPropagation
       class="flex-full border-thin-light border-clear-right space-s space-clear-r"
       type="text"
       role="combobox"
