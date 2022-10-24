@@ -10,6 +10,9 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  VITE_SERVER_URL: http://localhost:3000
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -20,33 +23,20 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '16'
-          cache: ${{ steps.detect-package-manager.outputs.manager }}
+          cache: npm
       - name: Install dependencies
         run: npm ci
       - name: Run tests
         run: npx --no-install vitest run
-      - name: Build
-        run: npm run build
-      - name: Save built folders
-        uses: actions/upload-artifact@v2
-        with:
-          name: dist
-          path: |
-            dist
 
   cypress:
     runs-on: ubuntu-20.04
     needs: build
     steps:
-      - uses: actions/checkout@v2
-      - name: Download built folders
-        uses: actions/download-artifact@v2
-        with:
-          name: dist
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Cypress run
         uses: cypress-io/github-action@v4
-        env:
-          CYPRESS_APP_URL: http://localhost:3000
         with:
           browser: chrome
           start: npm run dev
