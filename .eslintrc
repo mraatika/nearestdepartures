@@ -18,7 +18,12 @@
       "processor": "svelte3/svelte3"
     }
   ],
-  "ignorePatterns": ["node_modules", "**/*.test.*", "*.config.{js,ts}"],
+  "ignorePatterns": [
+    "node_modules",
+    "**/*.test.*",
+    "*.config.ts",
+    "*.config.js"
+  ],
   "env": {
     "browser": true,
     "es2021": true,
