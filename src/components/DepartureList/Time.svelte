@@ -6,7 +6,7 @@
   export let isRealtime = false;
   export let relative = false;
 
-  const departureDateTime = new Date(time * 1000);
+  $: departureDateTime = new Date(time * 1000);
   $: timeLeftInMins = Math.floor(
     (departureDateTime.getTime() - now) / 1000 / 60,
   );

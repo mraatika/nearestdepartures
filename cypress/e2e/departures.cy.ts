@@ -1,9 +1,11 @@
 /// <reference types="cypress" />
 import departures from '../fixtures/departures.json';
+import departureBatch from '../fixtures/departure_batch.json';
 import disruptions from '../fixtures/disruptions.json';
 import { DateTime } from 'luxon';
 import { PositionError } from '../../src/util/error.utils';
 import { toUpper } from 'ramda';
+import { BATCH_INTERVAL } from '../../src/constants';
 
 describe('Searching and filtering departures', () => {
   const now = DateTime.now();
@@ -172,6 +174,38 @@ describe('Searching and filtering departures', () => {
       cy.testId('departure-additional-content').should('not.exist');
 
       cy.checkA11y();
+    });
+
+    it('batches departures, updating real times', () => {
+      cy.intercept('POST', '**/graphql/batch', (req) => {
+        const str = JSON.stringify(departureBatch)
+          .replace(/"__MOCK_DAY__"/gm, `${day.valueOf() / 1000}`)
+          .replace(/"__MOCK_TIME__"/gm, `${time + 15 * 60}`)
+          .replace(/"__MOCK_REAL_TIME__"/gm, `${realtime + 15 * 60}`);
+
+        const body = JSON.parse(str);
+
+        req.reply({
+          statusCode: 200,
+          body,
+        });
+      }).as('batchDepartures');
+
+      cy.clock();
+
+      visitAndWaitForDepartures({
+        latitude: 1,
+        longitude: 2,
+      });
+
+      cy.tick(BATCH_INTERVAL);
+      cy.wait('@batchDepartures');
+
+      cy.testId('departure-list')
+        .find('[role=row]:visible')
+        .last()
+        .should('contain.text', 'Porvoo via Mikkeli')
+        .and('contain.text', '22:20');
     });
 
     it('filtering departures', () => {

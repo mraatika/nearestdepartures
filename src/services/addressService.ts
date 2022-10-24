@@ -83,13 +83,12 @@ export async function lookupAddress({ latitude, longitude }: Location) {
 export async function findAddressByCurrentLocation() {
   const location = await findGPSLocation();
   const address = await lookupAddress(location);
-  return { ...address, location };
+  return R.assoc('location', location, address);
 }
 
 /**
  * Search address by a search term
  */
 export async function getAddressBySearchTerm(searchTerm: string) {
-  const result = await searchAddress(searchTerm);
-  return result[0];
+  return (await searchAddress(searchTerm))[0];
 }

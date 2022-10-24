@@ -1,4 +1,4 @@
-import { filter, pipe, prop, uniqBy } from 'ramda';
+import * as R from 'ramda';
 import { LOCATION_MAGIC_WORD } from '@/constants';
 import {
   findAddressByCurrentLocation,
@@ -11,19 +11,21 @@ import { addressStore, departuresStore, locationStore } from '@/stores';
 import type { Address, Departure, Filters } from '@/types';
 import logger from '@/util/logger';
 
-const filterUniqueRealtimeDepartures: (list: Departure[]) => Departure[] = pipe(
-  filter<Departure>(prop('realtime')),
-  uniqBy<Departure, string>(prop('nodeId')),
-);
+const filterUniqueRealtimeDepartures: (list: Departure[]) => Departure[] =
+  R.pipe(
+    R.filter<Departure>(R.prop('realtime')),
+    R.uniqBy<Departure, string>(R.prop('nodeId')),
+  );
 
 /**
  * Merge batch data with existing departures
  */
-const mergeBatchData = (existing: Departure[], batch: Partial<Departure>[]) =>
-  existing.map((d) => {
+function mergeBatchData(existing: Departure[], batch: Partial<Departure>[]) {
+  return existing.map((d) => {
     const update = batch.find((b) => b.nodeId === d.nodeId && b.id === d.id);
     return { ...d, ...update };
   });
+}
 
 /**
  * Update given realtime departures by fetching a batch from api
