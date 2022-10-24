@@ -14,7 +14,7 @@ env:
   VITE_SERVER_URL: http://localhost:3000
 
 jobs:
-  build:
+  unit:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -31,7 +31,6 @@ jobs:
 
   cypress:
     runs-on: ubuntu-20.04
-    needs: build
     steps:
       - name: Checkout
         uses: actions/checkout@v2
