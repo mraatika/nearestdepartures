@@ -4,10 +4,10 @@
       "edges": [
         {
           "node": {
-            "id": "cGxhY2VBdERpc3RhbmNlOjEwO1JHVndZWEowZFhKbFVtOTNPa2hUVERzeE1ESXdOakF5TzBoVFREb3pNVTB4T2pFNk1EST0=",
+            "id": "1",
             "distance": 10,
             "place": {
-              "id": "RGVwYXJ0dXJlUm93OkhTTDsxMDIwNjAyO0hTTDozMU0xOjE6MDI=",
+              "id": "11",
               "stop": {
                 "gtfsId": "HSL:1020602",
                 "code": "H0018",
@@ -23,7 +23,7 @@
                   "realtime": true,
                   "headsign": "Matinkylä via Tapiola",
                   "trip": {
-                    "id": "VHJpcDpIU0w6MzFNMV8yMDIyMTAxNF9NYV8yXzE0MDA="
+                    "id": "111"
                   }
                 },
                 {
@@ -34,7 +34,7 @@
                   "realtime": true,
                   "headsign": "Matinkylä via Tapiola",
                   "trip": {
-                    "id": "VHJpcDpIU0w6MzFNMV8yMDIyMTAxNF9NYV8yXzE0MDc="
+                    "id": "112"
                   }
                 }
               ],
@@ -79,10 +79,10 @@
         },
         {
           "node": {
-            "id": "cGxhY2VBdERpc3RhbmNlOjI1NztSR1Z3WVhKMGRYSmxVbTkzT2toVFREc3hNREl3TVRFMU8waFRURG81TnpnNE9qQTZNREU9",
+            "id": "2",
             "distance": 257,
             "place": {
-              "id": "RGVwYXJ0dXJlUm93OkhTTDsxMDIwMTE1O0hTTDo5Nzg4OjA6MDE=",
+              "id": "22",
               "stop": {
                 "gtfsId": "HSL:1020115",
                 "code": "H2043",
@@ -98,7 +98,7 @@
                   "realtime": false,
                   "headsign": "Porvoo via Nikkilä",
                   "trip": {
-                    "id": "VHJpcDpIU0w6OTc4OF8yMDIyMTAxNF9NYV8xXzE0MzA="
+                    "id": "222"
                   }
                 }
               ],

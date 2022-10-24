@@ -1,0 +1,46 @@
+[
+  {
+    "payload": {
+      "data": {
+        "node": {
+          "id": "11",
+          "stoptimes": [
+            {
+              "serviceDay": "__MOCK_DAY__",
+              "scheduledDeparture": "__MOCK_TIME__",
+              "realtimeDeparture": "__MOCK_REAL_TIME__",
+              "realtimeState": "UPDATED",
+              "realtime": true,
+              "headsign": "Matinkylä via Tapiola",
+              "trip": {
+                "id": "111"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "payload": {
+      "data": {
+        "node": {
+          "id": "22",
+          "stoptimes": [
+            {
+              "serviceDay": "__MOCK_DAY__",
+              "scheduledDeparture": "__MOCK_TIME__",
+              "realtimeDeparture": "__MOCK_REAL_TIME__",
+              "realtimeState": "UPDATED",
+              "realtime": true,
+              "headsign": "Porvoo via Mikkeli",
+              "trip": {
+                "id": "222"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+]

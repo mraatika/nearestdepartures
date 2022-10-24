@@ -118,17 +118,16 @@ const findRoutesFromData = R.pipe(
 const combineRouteInfoWithStoptimes = (
   route: ReturnType<typeof getRouteInfo>,
 ) =>
-  route.stoptimes.map((stoptime) => ({
-    ...route,
-    ...formStoptimeData(stoptime),
-  }));
+  R.pipe(
+    R.propOr([], 'stoptimes'),
+    R.map(R.pipe(formStoptimeData, R.mergeDeepRight(route))),
+  )(route);
 
 function normalizeDepartures(response: DepartureFetchResponse) {
-  const { data } = response;
-  return data
+  return response.data
     ? R.chain(
         combineRouteInfoWithStoptimes,
-        findRoutesFromData(data.nearest.edges),
+        findRoutesFromData(response.data.nearest.edges),
       )
     : [];
 }

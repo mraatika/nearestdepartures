@@ -1,4 +1,4 @@
-import { always, includes, partial, propSatisfies, when } from 'ramda';
+import * as R from 'ramda';
 import logger from './logger';
 
 export const stopPropagation = (e: Event) => {
@@ -15,15 +15,15 @@ export const requestFocus = (domNode: HTMLElement) => {
 };
 
 export const onKeys = (codes: string[], callback: VoidFunction) =>
-  when<KeyboardEvent, void>(
-    propSatisfies((x) => includes(x, codes), 'code'),
+  R.when<KeyboardEvent, void>(
+    R.propSatisfies(R.includes(R.__, codes), 'code'),
     callback,
   );
 
 /**
  * Create a handler for enter and space keypresses
  */
-export const okKeyPressHandler = partial(onKeys, [['Enter', 'Space']]);
+export const okKeyPressHandler = R.partial(onKeys, [['Enter', 'Space']]);
 
 const handleTab =
   (focusOn: HTMLElement, shiftKey: boolean) => (e: KeyboardEvent) => {
@@ -43,7 +43,7 @@ export const initFocusTrap = (
   focusFirstElement: boolean,
 ) => {
   if (!firstElement) {
-    return always(undefined);
+    return R.always(undefined);
   }
 
   const lastOrFirstElement = lastElement || firstElement;
