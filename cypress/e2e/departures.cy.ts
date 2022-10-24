@@ -13,6 +13,17 @@ describe('Searching and filtering departures', () => {
   const realtime = time + 5 * 60;
 
   beforeEach(() => {
+    cy.intercept('GET', '**/geocoding/v1/reverse*', {
+      statusCode: 200,
+      fixture: 'geocoding_reverse.json',
+      delay: 500,
+    }).as('getLocation');
+
+    cy.intercept('GET', '**/geocoding/v1/search*', {
+      statusCode: 200,
+      fixture: 'address-search-rauta.json',
+    }).as('getSuggestions');
+
     cy.intercept('POST', '**/graphql/batch', {
       statusCode: 200,
       body: [],
@@ -314,11 +325,6 @@ describe('Searching and filtering departures', () => {
 
   describe('without location', () => {
     beforeEach(() => {
-      cy.intercept('GET', '**/geocoding/v1/search*', {
-        statusCode: 200,
-        fixture: 'address-search-rauta.json',
-      });
-
       localStorage.setItem(
         'favourites',
         JSON.stringify([
@@ -330,11 +336,10 @@ describe('Searching and filtering departures', () => {
           },
         ]),
       );
-
-      cy.visitWithLocation(new PositionError('Position blocked', 1));
     });
 
     it('displays an error when location fetch fails', () => {
+      cy.visitWithLocation(new PositionError('Position blocked', 1));
       cy.testId('position-error')
         .should('exist')
         .and(
@@ -356,6 +361,7 @@ describe('Searching and filtering departures', () => {
     });
 
     it('searching with a search term', () => {
+      cy.visitWithLocation(new PositionError('Position blocked', 1));
       assertDefaultState();
       cy.get('input[name=address]').type('rauta');
       cy.get('[type=submit]').click();
@@ -372,6 +378,7 @@ describe('Searching and filtering departures', () => {
     });
 
     it('searching with an address from suggestion', () => {
+      cy.visitWithLocation(new PositionError('Position blocked', 1));
       assertDefaultState();
       cy.get('input[name=address]').type('rauta');
       cy.testId('suggestion-list').find('li').eq(1).click();
@@ -388,6 +395,7 @@ describe('Searching and filtering departures', () => {
     });
 
     it('searching with an address from favourites', () => {
+      cy.visitWithLocation(new PositionError('Position blocked', 1));
       assertDefaultState();
       cy.testId('menu-button').click();
       cy.testId('favourites-list').find('li').eq(0).click();
