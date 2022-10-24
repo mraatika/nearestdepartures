@@ -111,7 +111,9 @@ describe('Searching and filtering departures', () => {
         .find('[role="cell"]')
         .should(
           'have.text',
-          `${departureHours}:05Näytä linjan tiedot suuntaan Matinkylä via Tapiola M1 Avautuu uuteen välilehteen Matinkylä via Tapiola10 m`,
+          `${padNumber(
+            departureHours,
+          )}:05Näytä linjan tiedot suuntaan Matinkylä via Tapiola M1 Avautuu uuteen välilehteen Matinkylä via Tapiola10 m`,
         );
 
       cy.get('@departureRows').eq(1).click();
@@ -119,7 +121,7 @@ describe('Searching and filtering departures', () => {
       cy.testId('departure-realtime').should('not.exist');
       cy.testId('departure-scheduledtime').should(
         'have.text',
-        `${departureHours}:00 (arvioitu)`,
+        `${padNumber(departureHours)}:00 (arvioitu)`,
       );
       // use contain so that we don't run into problems with whitespace characters
       cy.testId('departure-stop')
@@ -145,11 +147,11 @@ describe('Searching and filtering departures', () => {
       cy.testId('departure-additional-content').should('have.length', 1);
       cy.testId('departure-realtime').should(
         'have.text',
-        `${departureHours}:05 (arvioitu)`,
+        `${padNumber(departureHours)}:05 (arvioitu)`,
       );
       cy.testId('departure-scheduledtime').should(
         'have.text',
-        `${departureHours}:00 (arvioitu)`,
+        `${padNumber(departureHours)}:00 (arvioitu)`,
       );
       cy.testId('departure-additional-content')
         .find('button')
@@ -429,5 +431,9 @@ describe('Searching and filtering departures', () => {
       .invoke('val', value)
       .trigger('input')
       .click({ force: true });
+  }
+
+  function padNumber(num: number) {
+    return `${num}`.length < 2 ? `0${num}` : `${num}`;
   }
 });
