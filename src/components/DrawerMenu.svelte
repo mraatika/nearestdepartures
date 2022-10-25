@@ -22,8 +22,8 @@
   </button>
 
   {#if isDrawerVisible}
-    <Drawer close="{toggle}" label="Omat suosikit">
-      <Favourites close="{toggle}" />
+    <Drawer close="{toggle}" label="Omat suosikit" let:onUpdate>
+      <Favourites close="{toggle}" onUpdate="{onUpdate}" />
     </Drawer>
   {/if}
 </div>
