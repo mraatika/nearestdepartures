@@ -1,8 +1,9 @@
 <script lang="ts">
   import { reject } from 'ramda';
-  import X from '~icons/lucide/x';
+  import { afterUpdate } from 'svelte';
   import Star from '~icons/lucide/star';
   import StarOff from '~icons/lucide/star-off';
+  import X from '~icons/lucide/x';
   import * as storage from '@/services/storageService';
   import { addressStore, favouritesStore } from '@/stores';
   import type { Address } from '@/types';
@@ -11,6 +12,7 @@
   import * as model from './model';
 
   export let close: VoidFunction;
+  export let onUpdate: VoidFunction;
 
   $: isCurrentAddressFavoured = model.isLocationFavoured(
     $favouritesStore,
@@ -48,6 +50,8 @@
     addressStore.set(favourite);
     close();
   }
+
+  afterUpdate(onUpdate);
 </script>
 
 <div class="drawer-header color-white bg-bus space-s">

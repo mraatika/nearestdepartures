@@ -38,10 +38,12 @@ const handleTab =
  * Init a focus trap to keep focus in a loop
  */
 export const initFocusTrap = (
-  firstElement: HTMLElement,
-  lastElement: HTMLElement,
-  focusFirstElement: boolean,
+  elements: HTMLElement[],
+  focusFirstElement?: boolean,
 ) => {
+  const firstElement = elements[0];
+  const lastElement = R.last(elements);
+
   if (!firstElement) {
     return R.always(undefined);
   }

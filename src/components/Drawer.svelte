@@ -1,11 +1,20 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { sineInOut } from 'svelte/easing';
-  import { onKeys } from '@/util/dom.utils';
+  import { initFocusTrap, onKeys } from '@/util/dom.utils';
   import Modal from './Modal.svelte';
 
   export let close: VoidFunction;
   export let label: string;
+
+  let drawer: HTMLDivElement;
+  let destroyTabTrap: () => void;
+
+  function onChildUpdate() {
+    destroyTabTrap?.();
+    const buttons = [...(drawer.querySelectorAll('button') ?? [])];
+    destroyTabTrap = initFocusTrap(buttons, false);
+  }
 
   function slideRight(_node: HTMLElement) {
     return {
@@ -19,13 +28,14 @@
     document.body.classList.add('no-scroll');
     return () => {
       document.body.classList.remove('no-scroll');
+      destroyTabTrap?.();
     };
   });
 </script>
 
 <svelte:body on:keyup="{onKeys(['Escape'], close)}" />
 
-<div class="drawer" data-testId="drawer">
+<div bind:this="{drawer}" class="drawer" data-testId="drawer">
   <Modal on:click="{close}" />
 
   <div
@@ -37,7 +47,7 @@
     transition:slideRight
   >
     <div class="bg-white full-height">
-      <slot />
+      <slot onUpdate="{onChildUpdate}" />
     </div>
   </div>
 </div>
