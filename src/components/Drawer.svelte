@@ -8,6 +8,7 @@
   export let label: string;
 
   let drawer: HTMLDivElement;
+  let panel: HTMLDivElement;
   let destroyTabTrap: () => void;
 
   function onChildUpdate() {
@@ -26,6 +27,7 @@
 
   onMount(() => {
     document.body.classList.add('no-scroll');
+    panel.focus();
     return () => {
       document.body.classList.remove('no-scroll');
       destroyTabTrap?.();
@@ -39,6 +41,7 @@
   <Modal on:click="{close}" />
 
   <div
+    bind:this="{panel}"
     class="panel"
     role="dialog"
     tabIndex="0"
