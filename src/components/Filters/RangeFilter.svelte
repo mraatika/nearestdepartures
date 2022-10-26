@@ -6,7 +6,9 @@
 
 <div class="range-filter-wrapper">
   <div class="align-right space-xxs space-keep-b">
-    <output for="departurefilter-range">{range}m</output>
+    <output for="departurefilter-range" aria-atomic="true" aria-live="polite">
+      {range}m
+    </output>
   </div>
 
   <label for="departurefilter-range" class="sr-only"
