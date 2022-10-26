@@ -26,7 +26,7 @@
         </ExternalLink>.
       </p>
     </div>
-    <div>
+    <div class="space-s space-keep-l">
       <ExternalLink
         href="https://github.com/mraatika/nearestdepartures"
         showIcon="{false}"
