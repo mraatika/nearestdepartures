@@ -27,7 +27,6 @@
     class="departure-row-button flex-row pointer"
     tabIndex="{0}"
     aria-expanded="{isToggled}"
-    aria-controls="{`departure-additional-info-${departure.id}`}"
   >
     <div role="cell" class="realtimeDeparture">
       <Time
@@ -80,17 +79,17 @@
     </div>
   </div>
 
-  <div role="row" id="{`departure-additional-info-${departure.id}`}">
-    <div role="cell" aria-colspan="{4}">
-      {#if isToggled}
+  {#if isToggled}
+    <div role="row">
+      <div role="cell" aria-colspan="{4}">
         <DepartureRowAdditionalContent
           departure="{departure}"
           disruptions="{disruptions}"
           onRowToggle="{onRowToggle}"
         />
-      {/if}
+      </div>
     </div>
-  </div>
+  {/if}
 </div>
 
 <style>
