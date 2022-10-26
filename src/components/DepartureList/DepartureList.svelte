@@ -14,22 +14,18 @@
     {
       text: 'Lähtee',
       propName: 'realtimeDeparture',
-      label: 'Järjestä lista lähtöajan mukaan',
     },
     {
       text: 'Linja',
       propName: 'routeName',
-      label: 'Järjestä lista linjan mukaan',
     },
     {
       text: 'Määränpää',
       propName: 'destination',
-      label: 'Järjestä lista määränpään mukaan',
     },
     {
       text: 'Pysäkille',
       propName: 'distance',
-      label: 'Järjestä lista pysäkin etäisyyden mukaan',
     },
   ];
 
@@ -83,7 +79,7 @@
 <div class="position-relative">
   <LoadingOverlay class="space-xxl space-keep-t" show="{isLoading}" />
 
-  <div role="status" class="sr-only">
+  <div role="status" class="sr-only" aria-atomic="true">
     {`Lähtöjä yhteensä ${filtered.length} kappaletta`}
   </div>
 
@@ -99,7 +95,6 @@
             active="{sort.propName === header.propName}"
             onClick="{updateSortProps}"
             text="{header.text}"
-            label="{header.label}"
             sortDir="{sort.sortDir}"
           />
         {/each}

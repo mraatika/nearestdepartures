@@ -7,7 +7,6 @@ export type SortPropName =
 export interface SortHeader {
   text: string;
   propName: SortPropName;
-  label: string;
 }
 
 export interface Sort {

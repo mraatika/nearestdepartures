@@ -5,7 +5,6 @@
   export let active = false;
   export let text = '';
   export let sortDir = -1;
-  export let label: string;
   export let onClick: (propName: SortPropName) => void;
 </script>
 
@@ -17,7 +16,6 @@
 >
   <button
     on:click="{() => onClick(propName)}"
-    aria-label="{label}"
     class="space-xxs space-keep-b bold"
   >
     {text}
