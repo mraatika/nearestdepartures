@@ -134,7 +134,7 @@ describe('Searching and filtering departures', () => {
       cy.testId('departure-realtime').should('not.exist');
       cy.testId('departure-scheduledtime').should(
         'have.text',
-        `${padNumber(departureHours)}:00 (arvioitu)`,
+        `${padNumber(departureHours)}:00 (aikataulu)`,
       );
       // use contain so that we don't run into problems with whitespace characters
       cy.testId('departure-stop')
@@ -164,7 +164,7 @@ describe('Searching and filtering departures', () => {
       );
       cy.testId('departure-scheduledtime').should(
         'have.text',
-        `${padNumber(departureHours)}:00 (arvioitu)`,
+        `${padNumber(departureHours)}:00 (aikataulu)`,
       );
       cy.testId('departure-additional-content')
         .find('button')
@@ -188,6 +188,7 @@ describe('Searching and filtering departures', () => {
         req.reply({
           statusCode: 200,
           body,
+          delay: 400,
         });
       }).as('batchDepartures');
 
@@ -205,7 +206,7 @@ describe('Searching and filtering departures', () => {
         .find('[role=row]:visible')
         .last()
         .should('contain.text', 'Porvoo via Mikkeli')
-        .and('contain.text', '22:20');
+        .and('contain.text', `${padNumber(departureHours)}:20`);
     });
 
     it('filtering departures', () => {

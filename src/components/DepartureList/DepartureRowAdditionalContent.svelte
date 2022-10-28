@@ -51,7 +51,7 @@
       <div data-testId="departure-scheduledtime">
         {`${toTimeString(
           new Date(departure.scheduledDeparture * 1000),
-        )} (arvioitu)`}
+        )} (aikataulu)`}
       </div>
     </div>
   </div>
