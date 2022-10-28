@@ -94,6 +94,10 @@
   background-color: var(--color-alert-light);
 }
 
+.bg-gray-light {
+  background-color: var(--color-gray-light);
+}
+
 .bg-tram {
   background-color: var(--color-tram);
 }

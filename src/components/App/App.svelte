@@ -23,6 +23,7 @@
   import * as model from './model';
   import PositionErrorView from './PositionError.svelte';
   import { saveFilters } from '@/services/storageService';
+  import Swipeable from '../Swipeable.svelte';
 
   let isLoading = false;
   let isDrawerVisible = false;
@@ -55,9 +56,11 @@
     isDrawerVisible = state ?? !isDrawerVisible;
   }
 
-  function onSwipe(event: CustomEvent<{ direction: string }>) {
-    if (['left', 'right'].includes(event.detail.direction)) {
-      toggleDrawer(event.detail.direction === 'left');
+  function onSwipe(event: Event) {
+    const direction = (event as CustomEvent<{ direction: string }>).detail
+      .direction;
+    if (['left', 'right'].includes(direction)) {
+      toggleDrawer(direction === 'left');
     }
   }
 
@@ -119,64 +122,61 @@
   });
 </script>
 
-<div
-  use:swipe="{{ timeframe: 300, minSwipeDistance: 60, touchAction: 'pan-y' }}"
-  on:swipe="{onSwipe}"
-  class="flex-column viewport-height"
-  data-testId="app-content"
->
-  <div class="space-m space-keep-b">
+<div class="flex-column viewport-height" data-testId="app-content">
+  <Swipeable class="space-m space-keep-b" on:swipe="{onSwipe}">
     <Appheader
       isDrawerVisible="{isDrawerVisible}"
       toggleDrawer="{toggleDrawer}"
     />
-  </div>
+  </Swipeable>
 
   <main
     class="flex-column flex-full full-width centering-margin max-content-width space-xs space-clear-t"
   >
-    <div role="alert" aria-atomic="true">
-      {#if error && !(error instanceof PositionError)}
-        <div class="space-s space-keep-b">
-          <ErrorMessage
-            error="{error}"
-            on:click="{() => (error = undefined)}"
-          />
-        </div>
-      {/if}
-    </div>
+    <Swipeable on:swipe="{onSwipe}">
+      <div role="alert" aria-atomic="true">
+        {#if error && !(error instanceof PositionError)}
+          <div class="space-s space-keep-b">
+            <ErrorMessage
+              error="{error}"
+              on:click="{() => (error = undefined)}"
+            />
+          </div>
+        {/if}
+      </div>
 
-    <AddressSearch onSearch="{searchAddress}" />
+      <AddressSearch onSearch="{searchAddress}" />
 
-    <div class="relative">
-      <button
-        class="sr-only sr-only-focusable"
-        data-testId="skip-to-departures-button"
-        on:click="{scrollToDepartures}"
-      >
-        Siirry hakutuloksiin
-      </button>
-    </div>
+      <div class="relative">
+        <button
+          class="sr-only sr-only-focusable"
+          data-testId="skip-to-departures-button"
+          on:click="{scrollToDepartures}"
+        >
+          Siirry hakutuloksiin
+        </button>
+      </div>
 
-    <div role="status" class="align-right">
-      {#if $addressStore?.location?.accuracy}
-        <div class="space-xs space-keep-t ">
-          <AccuracyIndicator accuracy="{$addressStore.location.accuracy}" />
-        </div>
-      {/if}
-    </div>
+      <div role="status" class="align-right">
+        {#if $addressStore?.location?.accuracy}
+          <div class="space-xs space-keep-t ">
+            <AccuracyIndicator accuracy="{$addressStore.location.accuracy}" />
+          </div>
+        {/if}
+      </div>
 
-    <div role="alert" aria-atomic="true" class="align-right">
-      {#if error && error instanceof PositionError}
-        <div class="space-xs space-keep-t ">
-          <PositionErrorView error="{error}" />
-        </div>
-      {/if}
-    </div>
+      <div role="alert" aria-atomic="true" class="align-right">
+        {#if error && error instanceof PositionError}
+          <div class="space-xs space-keep-t ">
+            <PositionErrorView error="{error}" />
+          </div>
+        {/if}
+      </div>
 
-    <div class="space-m space-keep-b">
-      <Filters />
-    </div>
+      <div class="space-m space-keep-b">
+        <Filters />
+      </div>
+    </Swipeable>
 
     <div class="flex-column flex-full">
       <DepartureList isLoading="{isLoading}" disruptions="{disruptions}" />

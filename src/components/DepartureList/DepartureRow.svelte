@@ -7,6 +7,7 @@
   import RouteIdentifier from './RouteIdentifier.svelte';
   import DepartureRowAdditionalContent from './DepartureRowAdditionalContent.svelte';
   import Time from './Time.svelte';
+  import { fly } from 'svelte/transition';
 
   export let departure: Departure;
   export let isToggled: boolean;
@@ -16,6 +17,7 @@
 </script>
 
 <div
+  in:fly="{{ y: -10, duration: 500 }}"
   role="rowgroup"
   class="departure-row border-thin-light border-keep-b line-height-xxl"
   class:isToggled
