@@ -22,7 +22,13 @@
     prevFocus = document.activeElement;
     requestFocus(container);
     return () => {
-      requestFocus(prevFocus as HTMLElement);
+      // when this row is removed from dom the focus is transferred to body
+      // and we want to focus the element that was previously focused
+      // if a new row is toggeled we don't want the focus to jump to the
+      // previous row's toggle element
+      if (document.activeElement === document.body) {
+        requestFocus(prevFocus as HTMLElement);
+      }
     };
   });
 </script>
