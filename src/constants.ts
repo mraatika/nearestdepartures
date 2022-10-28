@@ -79,9 +79,14 @@ export const TIME_RANGE = 1 * 60 * 60; // 1h;
 /**
  * Number of stoptimes per route to fetch
  */
-export const NUMBER_OF_DEPARTURES_PER_ROUTE = 5;
+export const NUMBER_OF_DEPARTURES_PER_ROUTE = 4;
 
 /**
  * Max number of departures to fetch
  */
-export const MAX_RESULTS = 100;
+export const MAX_RESULTS = 1000;
+
+/**
+ * How many departures are shown on one page
+ */
+export const PAGE_SIZE = 25;
