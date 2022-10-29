@@ -1,0 +1,505 @@
+{
+  "data": {
+    "nearest": {
+      "edges": [
+        {
+          "node": {
+            "id": "cGxhY2VBdERpc3RhbmNlOjI5O1JHVndZWEowZFhKbFVtOTNPa2hUVERzeE5UUXhNVFl5TzBoVFREbzBOVFl3T2pFNk1ERT0=",
+            "distance": 29,
+            "place": {
+              "id": "RGVwYXJ0dXJlUm93OkhTTDsxNTQxMTYyO0hTTDo0NTYwOjE6MDE=",
+              "stop": {
+                "gtfsId": "HSL:1541162",
+                "code": "H4574",
+                "name": "Vuosaari (M)",
+                "desc": "Valkopaadentie"
+              },
+              "stoptimes": [
+                {
+                  "serviceDay": "__MOCK_DAY__",
+                  "scheduledDeparture": "__MOCK_TIME__",
+                  "realtimeDeparture": "__MOCK_REAL_TIME__",
+                  "realtimeState": "UPDATED",
+                  "realtime": true,
+                  "headsign": "Rastila (M)",
+                  "trip": {
+                    "id": "VHJpcDpIU0w6NDU2MF8yMDIyMTAyOF9MYV8yXzExNDU="
+                  }
+                },
+                {
+                  "serviceDay": "__MOCK_DAY__",
+                  "scheduledDeparture": "__MOCK_TIME__",
+                  "realtimeDeparture": "__MOCK_REAL_TIME__",
+                  "realtimeState": "UPDATED",
+                  "realtime": true,
+                  "headsign": "Rastila (M)",
+                  "trip": {
+                    "id": "VHJpcDpIU0w6NDU2MF8yMDIyMTAyOF9MYV8yXzExNTU="
+                  }
+                },
+                {
+                  "serviceDay": "__MOCK_DAY__",
+                  "scheduledDeparture": "__MOCK_TIME__",
+                  "realtimeDeparture": "__MOCK_REAL_TIME__",
+                  "realtimeState": "UPDATED",
+                  "realtime": true,
+                  "headsign": "Rastila (M)",
+                  "trip": {
+                    "id": "VHJpcDpIU0w6NDU2MF8yMDIyMTAyOF9MYV8yXzEyMDU="
+                  }
+                },
+                {
+                  "serviceDay": "__MOCK_DAY__",
+                  "scheduledDeparture": "__MOCK_TIME__",
+                  "realtimeDeparture": "__MOCK_REAL_TIME__",
+                  "realtimeState": "UPDATED",
+                  "realtime": true,
+                  "headsign": "Rastila (M)",
+                  "trip": {
+                    "id": "VHJpcDpIU0w6NDU2MF8yMDIyMTAyOF9MYV8yXzEyMTU="
+                  }
+                }
+              ],
+              "pattern": {
+                "route": {
+                  "gtfsId": "HSL:4560",
+                  "shortName": "560",
+                  "longName": "Rastila (M)-Vuosaari (M)-Kontula (M)-Malmi-Myyrmäki",
+                  "mode": "BUS"
+                },
+                "code": "HSL:4560:1:01",
+                "headsign": "Rastila (M)"
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "id": "cGxhY2VBdERpc3RhbmNlOjQyO1JHVndZWEowZFhKbFVtOTNPa2hUVERzeE5UTXhNVEUxTzBoVFREbzBOVFl3T2pBNk1ERT0=",
+            "distance": 42,
+            "place": {
+              "id": "RGVwYXJ0dXJlUm93OkhTTDsxNTMxMTE1O0hTTDo0NTYwOjA6MDE=",
+              "stop": {
+                "gtfsId": "HSL:1531115",
+                "code": "H4571",
+                "name": "Vuosaari (M)",
+                "desc": "Valkopaadentie"
+              },
+              "stoptimes": [
+                {
+                  "serviceDay": "__MOCK_DAY__",
+                  "scheduledDeparture": "__MOCK_TIME__",
+                  "realtimeDeparture": "__MOCK_REAL_TIME__",
+                  "realtimeState": "UPDATED",
+                  "realtime": true,
+                  "headsign": "Myyrmäki via Mellunmäki(M)",
+                  "trip": {
+                    "id": "VHJpcDpIU0w6NDU2MF8yMDIyMTAyOF9MYV8xXzEyMjY="
+                  }
+                },
+                {
+                  "serviceDay": "__MOCK_DAY__",
+                  "scheduledDeparture": "__MOCK_TIME__",
+                  "realtimeDeparture": "__MOCK_REAL_TIME__",
+                  "realtimeState": "UPDATED",
+                  "realtime": true,
+                  "headsign": "Myyrmäki via Mellunmäki(M)",
+                  "trip": {
+                    "id": "VHJpcDpIU0w6NDU2MF8yMDIyMTAyOF9MYV8xXzEyMzY="
+                  }
+                },
+                {
+                  "serviceDay": "__MOCK_DAY__",
+                  "scheduledDeparture": "__MOCK_TIME__",
+                  "realtimeDeparture": "__MOCK_REAL_TIME__",
+                  "realtimeState": "SCHEDULED",
+                  "realtime": false,
+                  "headsign": "Myyrmäki via Mellunmäki(M)",
+                  "trip": {
+                    "id": "VHJpcDpIU0w6NDU2MF8yMDIyMTAyOF9MYV8xXzEyNDY="
+                  }
+                },
+                {
+                  "serviceDay": "__MOCK_DAY__",
+                  "scheduledDeparture": "__MOCK_TIME__",
+                  "realtimeDeparture": "__MOCK_REAL_TIME__",
+                  "realtimeState": "SCHEDULED",
+                  "realtime": false,
+                  "headsign": "Myyrmäki via Mellunmäki(M)",
+                  "trip": {
+                    "id": "VHJpcDpIU0w6NDU2MF8yMDIyMTAyOF9MYV8xXzEyNTY="
+                  }
+                }
+              ],
+              "pattern": {
+                "route": {
+                  "gtfsId": "HSL:4560",
+                  "shortName": "560",
+                  "longName": "Rastila (M)-Vuosaari (M)-Kontula (M)-Malmi-Myyrmäki",
+                  "mode": "BUS"
+                },
+                "code": "HSL:4560:0:01",
+                "headsign": "Myyrmäki"
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "id": "cGxhY2VBdERpc3RhbmNlOjU3O1JHVndZWEowZFhKbFVtOTNPa2hUVERzeE5UTXhNVEUyTzBoVFREb3hNRGt3T2pBNk1ERT0=",
+            "distance": 57,
+            "place": {
+              "id": "RGVwYXJ0dXJlUm93OkhTTDsxNTMxMTE2O0hTTDoxMDkwOjA6MDE=",
+              "stop": {
+                "gtfsId": "HSL:1531116",
+                "code": "H4572",
+                "name": "Vuosaari (M)",
+                "desc": "Vuotie"
+              },
+              "stoptimes": [
+                {
+                  "serviceDay": "__MOCK_DAY__",
+                  "scheduledDeparture": "__MOCK_TIME__",
+                  "realtimeDeparture": "__MOCK_REAL_TIME__",
+                  "realtimeState": "SCHEDULED",
+                  "realtime": false,
+                  "headsign": "Vuosaaren satama via Aurinkolahti",
+                  "trip": {
+                    "id": "VHJpcDpIU0w6MTA5MF8yMDIyMTAyOF9MYV8xXzEyNDU="
+                  }
+                },
+                {
+                  "serviceDay": "__MOCK_DAY__",
+                  "scheduledDeparture": "__MOCK_TIME__",
+                  "realtimeDeparture": "__MOCK_REAL_TIME__",
+                  "realtimeState": "SCHEDULED",
+                  "realtime": false,
+                  "headsign": "Vuosaaren satama via Aurinkolahti",
+                  "trip": {
+                    "id": "VHJpcDpIU0w6MTA5MF8yMDIyMTAyOF9MYV8xXzEzMDA="
+                  }
+                },
+                {
+                  "serviceDay": "__MOCK_DAY__",
+                  "scheduledDeparture": "__MOCK_TIME__",
+                  "realtimeDeparture": "__MOCK_REAL_TIME__",
+                  "realtimeState": "SCHEDULED",
+                  "realtime": false,
+                  "headsign": "Vuosaaren satama via Aurinkolahti",
+                  "trip": {
+                    "id": "VHJpcDpIU0w6MTA5MF8yMDIyMTAyOF9MYV8xXzEzMTU="
+                  }
+                },
+                {
+                  "serviceDay": "__MOCK_DAY__",
+                  "scheduledDeparture": "__MOCK_TIME__",
+                  "realtimeDeparture": "__MOCK_REAL_TIME__",
+                  "realtimeState": "SCHEDULED",
+                  "realtime": false,
+                  "headsign": "Vuosaaren satama via Aurinkolahti",
+                  "trip": {
+                    "id": "VHJpcDpIU0w6MTA5MF8yMDIyMTAyOF9MYV8xXzEzMzA="
+                  }
+                }
+              ],
+              "pattern": {
+                "route": {
+                  "gtfsId": "HSL:1090",
+                  "shortName": "90",
+                  "longName": "Vuosaari (M)-Aurinkolahti-Vuosaaren satama",
+                  "mode": "BUS"
+                },
+                "code": "HSL:1090:0:01",
+                "headsign": "Vuosaaren satama"
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "id": "cGxhY2VBdERpc3RhbmNlOjY4O1JHVndZWEowZFhKbFVtOTNPa2hUVERzeE5UUXhNVFl4TzBoVFREb3hNRGsyT2pBNk1ERT0=",
+            "distance": 68,
+            "place": {
+              "id": "RGVwYXJ0dXJlUm93OkhTTDsxNTQxMTYxO0hTTDoxMDk2OjA6MDE=",
+              "stop": {
+                "gtfsId": "HSL:1541161",
+                "code": "H4569",
+                "name": "Vuosaari (M)",
+                "desc": "Valkopaadentie"
+              },
+              "stoptimes": [
+                {
+                  "serviceDay": "__MOCK_DAY__",
+                  "scheduledDeparture": "__MOCK_TIME__",
+                  "realtimeDeparture": "__MOCK_REAL_TIME__",
+                  "realtimeState": "SCHEDULED",
+                  "realtime": false,
+                  "headsign": "Porslahdentie",
+                  "trip": {
+                    "id": "VHJpcDpIU0w6MTA5Nl8yMDIyMTAyOF9MYV8xXzEyMzc="
+                  }
+                },
+                {
+                  "serviceDay": "__MOCK_DAY__",
+                  "scheduledDeparture": "__MOCK_TIME__",
+                  "realtimeDeparture": "__MOCK_REAL_TIME__",
+                  "realtimeState": "SCHEDULED",
+                  "realtime": false,
+                  "headsign": "Porslahdentie",
+                  "trip": {
+                    "id": "VHJpcDpIU0w6MTA5Nl8yMDIyMTAyOF9MYV8xXzEyNTI="
+                  }
+                },
+                {
+                  "serviceDay": "__MOCK_DAY__",
+                  "scheduledDeparture": "__MOCK_TIME__",
+                  "realtimeDeparture": "__MOCK_REAL_TIME__",
+                  "realtimeState": "SCHEDULED",
+                  "realtime": false,
+                  "headsign": "Porslahdentie",
+                  "trip": {
+                    "id": "VHJpcDpIU0w6MTA5Nl8yMDIyMTAyOF9MYV8xXzEzMDc="
+                  }
+                },
+                {
+                  "serviceDay": "__MOCK_DAY__",
+                  "scheduledDeparture": "__MOCK_TIME__",
+                  "realtimeDeparture": "__MOCK_REAL_TIME__",
+                  "realtimeState": "SCHEDULED",
+                  "realtime": false,
+                  "headsign": "Porslahdentie",
+                  "trip": {
+                    "id": "VHJpcDpIU0w6MTA5Nl8yMDIyMTAyOF9MYV8xXzEzMjI="
+                  }
+                }
+              ],
+              "pattern": {
+                "route": {
+                  "gtfsId": "HSL:1096",
+                  "shortName": "96",
+                  "longName": "Vuosaari(M)-Porslahdentie",
+                  "mode": "BUS"
+                },
+                "code": "HSL:1096:0:01",
+                "headsign": "Porslahdentie"
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "id": "cGxhY2VBdERpc3RhbmNlOjk0O1JHVndZWEowZFhKbFVtOTNPa2hUVERzeE5UUXhOakEwTzBoVFREb3pNVTB4T2pFNk1EUT0=",
+            "distance": 94,
+            "place": {
+              "id": "RGVwYXJ0dXJlUm93OkhTTDsxNTQxNjA0O0hTTDozMU0xOjE6MDQ=",
+              "stop": {
+                "gtfsId": "HSL:1541604",
+                "code": "H0040",
+                "name": "Vuosaari",
+                "desc": "Valkopaadentie 2a"
+              },
+              "stoptimes": [
+                {
+                  "serviceDay": "__MOCK_DAY__",
+                  "scheduledDeparture": "__MOCK_TIME__",
+                  "realtimeDeparture": "__MOCK_REAL_TIME__",
+                  "realtimeState": "UPDATED",
+                  "realtime": true,
+                  "headsign": "Matinkylä via Rautatientori",
+                  "trip": {
+                    "id": "VHJpcDpIU0w6MzFNMV8yMDIyMTAyOF9MYV8yXzEyMzc="
+                  }
+                },
+                {
+                  "serviceDay": "__MOCK_DAY__",
+                  "scheduledDeparture": "__MOCK_TIME__",
+                  "realtimeDeparture": "__MOCK_REAL_TIME__",
+                  "realtimeState": "UPDATED",
+                  "realtime": true,
+                  "headsign": "Matinkylä via Rautatientori",
+                  "trip": {
+                    "id": "VHJpcDpIU0w6MzFNMV8yMDIyMTAyOF9MYV8yXzEyNDU="
+                  }
+                },
+                {
+                  "serviceDay": "__MOCK_DAY__",
+                  "scheduledDeparture": "__MOCK_TIME__",
+                  "realtimeDeparture": "__MOCK_REAL_TIME__",
+                  "realtimeState": "UPDATED",
+                  "realtime": true,
+                  "headsign": "Matinkylä via Rautatientori",
+                  "trip": {
+                    "id": "VHJpcDpIU0w6MzFNMV8yMDIyMTAyOF9MYV8yXzEyNTI="
+                  }
+                },
+                {
+                  "serviceDay": "__MOCK_DAY__",
+                  "scheduledDeparture": "__MOCK_TIME__",
+                  "realtimeDeparture": "__MOCK_REAL_TIME__",
+                  "realtimeState": "UPDATED",
+                  "realtime": true,
+                  "headsign": "Matinkylä via Rautatientori",
+                  "trip": {
+                    "id": "VHJpcDpIU0w6MzFNMV8yMDIyMTAyOF9MYV8yXzEzMDA="
+                  }
+                }
+              ],
+              "pattern": {
+                "route": {
+                  "gtfsId": "HSL:31M1",
+                  "shortName": "M1",
+                  "longName": "Matinkylä - Vuosaari",
+                  "mode": "SUBWAY"
+                },
+                "code": "HSL:31M1:1:04",
+                "headsign": "Matinkylä"
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "id": "cGxhY2VBdERpc3RhbmNlOjI0NTtSR1Z3WVhKMGRYSmxVbTkzT2toVFREc3hOVFF4TVRZME8waFRURG94TURrMk9qRTZNREU9",
+            "distance": 245,
+            "place": {
+              "id": "RGVwYXJ0dXJlUm93OkhTTDsxNTQxMTY0O0hTTDoxMDk2OjE6MDE=",
+              "stop": {
+                "gtfsId": "HSL:1541164",
+                "code": "H4576",
+                "name": "Mosaiikkitori",
+                "desc": "Valkopaadentie"
+              },
+              "stoptimes": [
+                {
+                  "serviceDay": "__MOCK_DAY__",
+                  "scheduledDeparture": "__MOCK_TIME__",
+                  "realtimeDeparture": "__MOCK_REAL_TIME__",
+                  "realtimeState": "UPDATED",
+                  "realtime": true,
+                  "headsign": "Vuosaari(M)",
+                  "trip": {
+                    "id": "VHJpcDpIU0w6MTA5Nl8yMDIyMTAyOF9MYV8yXzEyMzQ="
+                  }
+                },
+                {
+                  "serviceDay": "__MOCK_DAY__",
+                  "scheduledDeparture": "__MOCK_TIME__",
+                  "realtimeDeparture": "__MOCK_REAL_TIME__",
+                  "realtimeState": "SCHEDULED",
+                  "realtime": false,
+                  "headsign": "Vuosaari(M)",
+                  "trip": {
+                    "id": "VHJpcDpIU0w6MTA5Nl8yMDIyMTAyOF9MYV8yXzEyNDk="
+                  }
+                },
+                {
+                  "serviceDay": "__MOCK_DAY__",
+                  "scheduledDeparture": "__MOCK_TIME__",
+                  "realtimeDeparture": "__MOCK_REAL_TIME__",
+                  "realtimeState": "SCHEDULED",
+                  "realtime": false,
+                  "headsign": "Vuosaari(M)",
+                  "trip": {
+                    "id": "VHJpcDpIU0w6MTA5Nl8yMDIyMTAyOF9MYV8yXzEzMDQ="
+                  }
+                },
+                {
+                  "serviceDay": "__MOCK_DAY__",
+                  "scheduledDeparture": "__MOCK_TIME__",
+                  "realtimeDeparture": "__MOCK_REAL_TIME__",
+                  "realtimeState": "SCHEDULED",
+                  "realtime": false,
+                  "headsign": "Vuosaari(M)",
+                  "trip": {
+                    "id": "VHJpcDpIU0w6MTA5Nl8yMDIyMTAyOF9MYV8yXzEzMTk="
+                  }
+                }
+              ],
+              "pattern": {
+                "route": {
+                  "gtfsId": "HSL:1096",
+                  "shortName": "96",
+                  "longName": "Vuosaari(M)-Porslahdentie",
+                  "mode": "BUS"
+                },
+                "code": "HSL:1096:1:01",
+                "headsign": "Vuosaari(M)"
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "id": "cGxhY2VBdERpc3RhbmNlOjQxMztSR1Z3WVhKMGRYSmxVbTkzT2toVFREc3hOVE14TVRVNU8waFRURG94TURrd09qRTZNREU9",
+            "distance": 313,
+            "place": {
+              "id": "RGVwYXJ0dXJlUm93OkhTTDsxNTMxMTU5O0hTTDoxMDkwOjE6MDE=",
+              "stop": {
+                "gtfsId": "HSL:1531159",
+                "code": "H4648",
+                "name": "Aurinkol. puistotie",
+                "desc": "Leikosaarentie"
+              },
+              "stoptimes": [
+                {
+                  "serviceDay": "__MOCK_DAY__",
+                  "scheduledDeparture": "__MOCK_TIME__",
+                  "realtimeDeparture": "__MOCK_REAL_TIME__",
+                  "realtimeState": "UPDATED",
+                  "realtime": true,
+                  "headsign": "Vuosaari (M)",
+                  "trip": {
+                    "id": "VHJpcDpIU0w6MTA5MF8yMDIyMTAyOF9MYV8yXzEyMjk="
+                  }
+                },
+                {
+                  "serviceDay": "__MOCK_DAY__",
+                  "scheduledDeparture": "__MOCK_TIME__",
+                  "realtimeDeparture": "__MOCK_REAL_TIME__",
+                  "realtimeState": "SCHEDULED",
+                  "realtime": false,
+                  "headsign": "Vuosaari (M)",
+                  "trip": {
+                    "id": "VHJpcDpIU0w6MTA5MF8yMDIyMTAyOF9MYV8yXzEyNDQ="
+                  }
+                },
+                {
+                  "serviceDay": "__MOCK_DAY__",
+                  "scheduledDeparture": "__MOCK_TIME__",
+                  "realtimeDeparture": "__MOCK_REAL_TIME__",
+                  "realtimeState": "SCHEDULED",
+                  "realtime": false,
+                  "headsign": "Vuosaari (M)",
+                  "trip": {
+                    "id": "VHJpcDpIU0w6MTA5MF8yMDIyMTAyOF9MYV8yXzEyNTk="
+                  }
+                },
+                {
+                  "serviceDay": "__MOCK_DAY__",
+                  "scheduledDeparture": "__MOCK_TIME__",
+                  "realtimeDeparture": "__MOCK_REAL_TIME__",
+                  "realtimeState": "SCHEDULED",
+                  "realtime": false,
+                  "headsign": "Vuosaari (M)",
+                  "trip": {
+                    "id": "VHJpcDpIU0w6MTA5MF8yMDIyMTAyOF9MYV8yXzEzMTQ="
+                  }
+                }
+              ],
+              "pattern": {
+                "route": {
+                  "gtfsId": "HSL:1090",
+                  "shortName": "90",
+                  "longName": "Vuosaari (M)-Aurinkolahti-Vuosaaren satama",
+                  "mode": "BUS"
+                },
+                "code": "HSL:1090:1:01",
+                "headsign": "Vuosaari (M)"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

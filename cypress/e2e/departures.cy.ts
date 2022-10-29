@@ -1,11 +1,12 @@
 /// <reference types="cypress" />
 import departures from '../fixtures/departures.json';
+import departuresTwoPages from '../fixtures/departures_two_pages.json';
 import departureBatch from '../fixtures/departure_batch.json';
 import disruptions from '../fixtures/disruptions.json';
 import { DateTime } from 'luxon';
 import { PositionError } from '../../src/util/error.utils';
 import { toUpper } from 'ramda';
-import { BATCH_INTERVAL } from '../../src/constants';
+import { BATCH_INTERVAL, PAGE_SIZE } from '../../src/constants';
 
 describe('Searching and filtering departures', () => {
   const now = DateTime.now();
@@ -47,15 +48,9 @@ describe('Searching and filtering departures', () => {
           body,
         });
       } else {
-        const str = JSON.stringify(departures)
-          .replace(/"__MOCK_DAY__"/gm, `${day.valueOf() / 1000}`)
-          .replace(/"__MOCK_TIME__"/gm, `${time}`)
-          .replace(/"__MOCK_REAL_TIME__"/gm, `${realtime}`);
-        const body = JSON.parse(str);
-
         req.reply({
           statusCode: 200,
-          body,
+          body: setDepartureTimes(departures),
         });
       }
     }).as('postGraphQL');
@@ -84,7 +79,7 @@ describe('Searching and filtering departures', () => {
       cy.testId('departure-list')
         .as('departureList')
         .find('[role="row"]')
-        .should('have.length', 2);
+        .should('have.length', 2); // heading row, placeholder row
 
       cy.get('@departureList')
         .find('[role="cell"]')
@@ -104,23 +99,17 @@ describe('Searching and filtering departures', () => {
 
       cy.get('footer').should('contain.text', 'Lähdöt päivitetty');
       cy.testId('spinner').should('not.be.visible');
+      cy.testId('departure-row').should('have.length', 6);
 
-      cy.get('@departureList')
-        .find('[role="row"]:visible')
-        .as('departureRows')
-        // 6 routes, one without stoptimes, one with 2 departures
-        .should('have.length', 7);
-
-      cy.get('@departureRows')
-        .eq(1)
+      cy.testId('departure-row')
+        .eq(0)
         .find('[role="cell"]')
         .eq(2)
         .testId('disruption-icon')
         .should('exist');
 
-      cy.get('@departureRows')
-        .eq(2)
-        .as('departureRow')
+      cy.testId('departure-row')
+        .eq(1)
         .find('[role="cell"]')
         .should(
           'have.text',
@@ -129,7 +118,7 @@ describe('Searching and filtering departures', () => {
           )}:05Näytä linjan tiedot suuntaan Matinkylä via Tapiola M1 Avautuu uuteen välilehteen Matinkylä via Tapiola10 m`,
         );
 
-      cy.get('@departureRows').eq(1).click();
+      cy.testId('departure-row').eq(0).click();
       cy.testId('departure-additional-content').should('be.visible');
       cy.testId('departure-realtime').should('not.exist');
       cy.testId('departure-scheduledtime').should(
@@ -152,9 +141,11 @@ describe('Searching and filtering departures', () => {
         .eq(1)
         .should('contain.text', 'Porvoo siirtyy');
 
+      // wait for fade
+      cy.wait(250);
       cy.checkA11y();
 
-      cy.get('@departureRow').focus().type('{enter}');
+      cy.testId('departure-row').eq(1).focus().type('{enter}');
       cy.checkA11y();
       // should hide the other
       cy.testId('departure-additional-content').should('have.length', 1);
@@ -248,7 +239,6 @@ describe('Searching and filtering departures', () => {
       });
 
       cy.testId('departure-list')
-        .as('departureList')
         .find('[role="cell"]')
         .should('have.length', 1)
         .and('contain.text', 'Lähtöjä ei löytynyt');
@@ -271,14 +261,10 @@ describe('Searching and filtering departures', () => {
       });
 
       cy.get('output[for="departurefilter-range"]').should('have.text', '200m');
-      cy.get('@departureList')
-        .find('[role="row"]:visible')
-        .should('have.length', 5);
+      cy.testId('departure-row').should('have.length', 4);
 
       setSliderValue(100);
-      cy.get('@departureList')
-        .find('[role="row"]:visible')
-        .should('have.length', 4);
+      cy.testId('departure-row').should('have.length', 3);
     });
 
     it('loads the saved filters on startup', () => {
@@ -457,6 +443,67 @@ describe('Searching and filtering departures', () => {
     }
   });
 
+  describe('paging', () => {
+    function setup(manyPages: boolean) {
+      cy.intercept('POST', '**/routing/v1/routers/hsl/index/graphql', (req) => {
+        if (req.body.query.indexOf('alerts(') > -1) {
+          req.reply({
+            statusCode: 200,
+            body: [],
+          });
+        } else {
+          console.log(setDepartureTimes(departuresTwoPages));
+          req.reply({
+            statusCode: 200,
+            body: setDepartureTimes(
+              manyPages ? departuresTwoPages : departures,
+            ),
+          });
+        }
+      }).as('postGraphQL');
+
+      cy.visitWithLocation({ latitude: 1, longitude: 2 });
+      cy.wait('@postGraphQL');
+      cy.wait('@postGraphQL');
+    }
+
+    it('has no pagination when departure count is lt PAGE_SIZE', () => {
+      setup(false);
+      cy.testId('departure-row').should('exist');
+      cy.testId('pagination').should('not.exist');
+    });
+
+    it('has pagination when departure count is gt PAGE_SIZE', () => {
+      setup(true);
+      cy.testId('pagination').as('pagination').should('exist');
+      cy.get('@pagination').find('button').eq(0).should('have.class', 'active');
+      cy.testId('departure-row').should('have.length', PAGE_SIZE);
+
+      cy.checkA11y();
+
+      cy.testId('departure-list').realSwipe('toLeft', { length: 100 });
+      assertActivePage(2);
+      assertActivePage(1, false);
+
+      cy.testId('departure-row').should('have.length.lessThan', PAGE_SIZE);
+
+      // nothing happens when swiped left on the last page
+      cy.testId('departure-list').realSwipe('toLeft', { length: 100 });
+      assertActivePage(2);
+
+      cy.testId('departure-list').realSwipe('toRight', { length: 100 });
+      assertActivePage(1);
+
+      cy.get('@pagination').find('button').eq(1).click();
+      assertActivePage(2);
+
+      // wait until fade is done
+      cy.wait(250);
+
+      cy.checkA11y();
+    });
+  });
+
   function visitAndWaitForDepartures(
     location: Partial<GeolocationCoordinates>,
   ) {
@@ -469,6 +516,14 @@ describe('Searching and filtering departures', () => {
     cy.testId('spinner').should('not.be.visible');
   }
 
+  function assertActivePage(page: number, state = true) {
+    return cy
+      .get('@pagination')
+      .find('button')
+      .eq(page - 1)
+      .should(state ? 'have.class' : 'not.have.class', 'active');
+  }
+
   function setSliderValue(value: number) {
     return cy
       .get('[type=range]')
@@ -479,5 +534,13 @@ describe('Searching and filtering departures', () => {
 
   function padNumber(num: number) {
     return `${num}`.length < 2 ? `0${num}` : `${num}`;
+  }
+
+  function setDepartureTimes(json: { [key: string]: unknown }) {
+    const str = JSON.stringify(json)
+      .replace(/"__MOCK_DAY__"/gm, `${day.valueOf() / 1000}`)
+      .replace(/"__MOCK_TIME__"/gm, `${time}`)
+      .replace(/"__MOCK_REAL_TIME__"/gm, `${realtime}`);
+    return JSON.parse(str);
   }
 });
