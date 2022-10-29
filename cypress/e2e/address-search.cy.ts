@@ -32,6 +32,8 @@ describe('address search', () => {
     cy.wait(350);
     cy.testId('suggestion-list').as('suggestionList').should('not.be.visible');
 
+    cy.checkA11y();
+
     cy.get('@addressInput').type('u');
     cy.wait('@getSuggestions').then((req) => {
       const params = new URLSearchParams(
@@ -48,6 +50,8 @@ describe('address search', () => {
       .should('be.visible')
       .find('li')
       .should('have.length', 2);
+
+    cy.checkA11y();
 
     cy.get('@addressInput').type('{backspace}');
     cy.testId('suggestion-list').as('suggestionList').should('not.be.visible');
