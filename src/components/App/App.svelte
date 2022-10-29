@@ -1,6 +1,5 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { swipe } from 'svelte-gestures';
   import AccuracyIndicator from '@/components/AccuracyIndicator.svelte';
   import AddressSearch from '@/components/AddressSearch/AddressSearch.svelte';
   import Appheader from '@/components/AppHeader.svelte';

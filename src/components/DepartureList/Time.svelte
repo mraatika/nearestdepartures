@@ -6,6 +6,8 @@
   export let isRealtime = false;
   export let relative = false;
 
+  // explicitly type the reactive statement or eslint will think this is any
+  let departureDateTime: Date;
   $: departureDateTime = new Date(time * 1000);
   $: timeLeftInMins = Math.floor(
     (departureDateTime.getTime() - now) / 1000 / 60,
