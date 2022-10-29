@@ -42,7 +42,7 @@ export const MAX_ADDRESS_SUGGESTIONS = 10;
 /**
  * Interval between departure update in ms
  */
-export const BATCH_INTERVAL = 30 * 1000;
+export const BATCH_INTERVAL = 60 * 1000; // 60 sec
 
 /**
  * Municipalities that will appear in the address search suggestions
