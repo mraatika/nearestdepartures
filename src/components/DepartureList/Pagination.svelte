@@ -9,6 +9,7 @@
 <nav
   class="full-width flex-column flex-align-center space-s"
   aria-label="Sivutus"
+  data-testId="pagination"
 >
   <ul class="flex-row flex-wrap flex-justify-center">
     {#each R.range(0, total) as _page, i}

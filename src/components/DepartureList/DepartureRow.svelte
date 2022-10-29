@@ -29,6 +29,7 @@
     class="departure-row-button flex-row pointer"
     tabIndex="{0}"
     aria-expanded="{isToggled}"
+    data-testId="departure-row"
   >
     <div role="cell" class="realtimeDeparture">
       <Time
@@ -75,7 +76,7 @@
 
     <div
       role="cell"
-      class="distance color-gray-dark align-right vertical-bottom space-xs space-keep-l"
+      class="distance align-right vertical-bottom space-xs space-keep-l"
     >
       {model.getDistanceinHumanReadableForm(departure.distance)}
     </div>
