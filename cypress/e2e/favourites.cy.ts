@@ -71,7 +71,7 @@ describe('Favourites', () => {
 
     it('works with swipe', () => {
       cy.visitWithLocation(new PositionError('Disabled', 1));
-      cy.testId('app-content').realSwipe('toLeft', { length: 80 });
+      cy.get('header').realSwipe('toLeft', { length: 80 });
       cy.testId('drawer').should('be.visible');
 
       cy.testId('drawer').realSwipe('toRight', { length: 80 });
