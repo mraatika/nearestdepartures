@@ -31,6 +31,8 @@ jobs:
           path: ./dist
       - name: Cypress run
         uses: cypress-io/github-action@v4
+        env:
+          CYPRESS_BASE_URL: http://localhost:3001
         with:
           browser: chrome
           start: npm run preview

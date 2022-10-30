@@ -13,7 +13,7 @@
 //
 // -- This is a parent command --
 Cypress.Commands.add('visitWithLocation', (location) => {
-  cy.visit(Cypress.env('APP_URL'), {
+  cy.visit('/', {
     onBeforeLoad: (win) => {
       cy.stub(win.navigator.geolocation, 'watchPosition').callsFake(
         (onSuccess, onError) =>
