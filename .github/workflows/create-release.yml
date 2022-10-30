@@ -10,14 +10,8 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  build-production:
-    uses: ./.github/workflows/build.yml
-    with:
-      mode: 'production'
-
   create-release:
     runs-on: ubuntu-latest
-    needs: build-production
     steps:
       - uses: actions/checkout@v3
       - name: Conventional Changelog Action
@@ -36,7 +30,14 @@ jobs:
           tag_name: ${{ steps.changelog.outputs.tag }}
           release_name: ${{ steps.changelog.outputs.tag }}
           body: ${{ steps.changelog.outputs.clean_changelog }}
-  deploy:
+
+  build-production:
+    needs: ['create-release']
+    uses: ./.github/workflows/build.yml
+    with:
+      mode: 'production'
+
+  deploy-to-s3:
     name: 'Sync to S3'
     runs-on: ubuntu-20.04
     needs: ['build-production', 'create-release']
@@ -55,11 +56,6 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: 'eu-west-1'
           SOURCE_DIR: './dist'
-  invalidate-cache:
-    name: 'Invalidate Cloudfront cache'
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v3
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
