@@ -13,17 +13,24 @@
 //
 // -- This is a parent command --
 Cypress.Commands.add('visitWithLocation', (location) => {
+  let t: ReturnType<typeof setTimeout>;
+
   cy.visit('/', {
     onBeforeLoad: (win) => {
       cy.stub(win.navigator.geolocation, 'watchPosition').callsFake(
-        (onSuccess, onError) =>
-          setTimeout(() => {
+        (onSuccess, onError) => {
+          if (t !== undefined) {
+            clearTimeout(t);
+          }
+
+          t = setTimeout(() => {
             if (location instanceof Error) {
               onError(location);
             } else {
               onSuccess({ coords: location });
             }
-          }, 200),
+          }, 200);
+        },
       );
     },
   });
