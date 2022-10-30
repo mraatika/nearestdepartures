@@ -36,6 +36,7 @@ jobs:
     uses: ./.github/workflows/build.yml
     with:
       mode: 'production'
+      branch: 'main'
 
   deploy-to-s3:
     name: 'Sync to S3'
