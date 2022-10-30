@@ -10,8 +10,8 @@ import { BATCH_INTERVAL, PAGE_SIZE } from '../../src/constants';
 
 describe('Searching and filtering departures', () => {
   const now = DateTime.now();
-  const day = now.startOf('day');
-  const departureHours = now.get('hour') + 2;
+  const day = now.startOf('day').plus({ days: 1 });
+  const departureHours = now.get('hour');
   const time = departureHours * 60 * 60;
   const realtime = time + 5 * 60;
 
@@ -345,6 +345,67 @@ describe('Searching and filtering departures', () => {
     });
   });
 
+  describe('paging', () => {
+    function setup(manyPages: boolean) {
+      cy.intercept('POST', '**/routing/v1/routers/hsl/index/graphql', (req) => {
+        if (req.body.query.indexOf('alerts(') > -1) {
+          req.reply({
+            statusCode: 200,
+            body: [],
+          });
+        } else {
+          console.log(setDepartureTimes(departuresTwoPages));
+          req.reply({
+            statusCode: 200,
+            body: setDepartureTimes(
+              manyPages ? departuresTwoPages : departures,
+            ),
+          });
+        }
+      }).as('postGraphQL');
+
+      cy.visitWithLocation({ latitude: 1, longitude: 2 });
+      cy.wait('@postGraphQL');
+      cy.wait('@postGraphQL');
+    }
+
+    it('has no pagination when departure count is lt PAGE_SIZE', () => {
+      setup(false);
+      cy.testId('departure-row').should('exist');
+      cy.testId('pagination').should('not.exist');
+    });
+
+    it('has pagination when departure count is gt PAGE_SIZE', () => {
+      setup(true);
+      cy.testId('pagination').as('pagination').should('exist');
+      cy.get('@pagination').find('button').eq(0).should('have.class', 'active');
+      cy.testId('departure-row').should('have.length', PAGE_SIZE);
+
+      cy.checkA11y();
+
+      cy.testId('departure-list').realSwipe('toLeft', { length: 100 });
+      assertActivePage(2);
+      assertActivePage(1, false);
+
+      cy.testId('departure-row').should('have.length.lessThan', PAGE_SIZE);
+
+      // nothing happens when swiped left on the last page
+      cy.testId('departure-list').realSwipe('toLeft', { length: 100 });
+      assertActivePage(2);
+
+      cy.testId('departure-list').realSwipe('toRight', { length: 100 });
+      assertActivePage(1);
+
+      cy.get('@pagination').find('button').eq(1).click();
+      assertActivePage(2);
+
+      // wait until fade is done
+      cy.wait(250);
+
+      cy.checkA11y();
+    });
+  });
+
   describe('without location', () => {
     beforeEach(() => {
       localStorage.setItem(
@@ -441,67 +502,6 @@ describe('Searching and filtering departures', () => {
         .find('[role=row]')
         .should('contain', 'Lähtöjä ei löytynyt');
     }
-  });
-
-  describe('paging', () => {
-    function setup(manyPages: boolean) {
-      cy.intercept('POST', '**/routing/v1/routers/hsl/index/graphql', (req) => {
-        if (req.body.query.indexOf('alerts(') > -1) {
-          req.reply({
-            statusCode: 200,
-            body: [],
-          });
-        } else {
-          console.log(setDepartureTimes(departuresTwoPages));
-          req.reply({
-            statusCode: 200,
-            body: setDepartureTimes(
-              manyPages ? departuresTwoPages : departures,
-            ),
-          });
-        }
-      }).as('postGraphQL');
-
-      cy.visitWithLocation({ latitude: 1, longitude: 2 });
-      cy.wait('@postGraphQL');
-      cy.wait('@postGraphQL');
-    }
-
-    it('has no pagination when departure count is lt PAGE_SIZE', () => {
-      setup(false);
-      cy.testId('departure-row').should('exist');
-      cy.testId('pagination').should('not.exist');
-    });
-
-    it('has pagination when departure count is gt PAGE_SIZE', () => {
-      setup(true);
-      cy.testId('pagination').as('pagination').should('exist');
-      cy.get('@pagination').find('button').eq(0).should('have.class', 'active');
-      cy.testId('departure-row').should('have.length', PAGE_SIZE);
-
-      cy.checkA11y();
-
-      cy.testId('departure-list').realSwipe('toLeft', { length: 100 });
-      assertActivePage(2);
-      assertActivePage(1, false);
-
-      cy.testId('departure-row').should('have.length.lessThan', PAGE_SIZE);
-
-      // nothing happens when swiped left on the last page
-      cy.testId('departure-list').realSwipe('toLeft', { length: 100 });
-      assertActivePage(2);
-
-      cy.testId('departure-list').realSwipe('toRight', { length: 100 });
-      assertActivePage(1);
-
-      cy.get('@pagination').find('button').eq(1).click();
-      assertActivePage(2);
-
-      // wait until fade is done
-      cy.wait(250);
-
-      cy.checkA11y();
-    });
   });
 
   function visitAndWaitForDepartures(
