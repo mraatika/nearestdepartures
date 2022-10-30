@@ -39,10 +39,10 @@ jobs:
   deploy:
     name: 'Sync to S3'
     runs-on: ubuntu-20.04
-    needs: ['build-production']
+    needs: ['build-production', 'create-release']
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/download-artifact@v2
+      - uses: actions/checkout@v3
+      - uses: actions/download-artifact@v3
         with:
           name: dist
           path: ./dist
@@ -59,7 +59,7 @@ jobs:
     name: 'Invalidate Cloudfront cache'
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
