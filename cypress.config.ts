@@ -5,9 +5,7 @@ export default defineConfig({
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },
-    env: {
-      APP_URL: 'http://localhost:3000',
-    },
+    baseUrl: 'http://localhost:3000',
     viewportWidth: 375,
     viewportHeight: 812,
     video: false,
