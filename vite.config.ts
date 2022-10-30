@@ -7,7 +7,7 @@ import { VitePWA } from 'vite-plugin-pwa';
 
 // https://vitejs.dev/config/
 /** @type {import('vite').UserConfig} */
-export default defineConfig(({ command }) => {
+export default defineConfig(({ command, mode }) => {
   let plugins: PluginOption[] = [
     svelte({
       hot: !process.env.VITEST,
@@ -30,7 +30,12 @@ export default defineConfig(({ command }) => {
     ]);
   }
 
+  console.log(
+    `Mode: ${mode}, base: ${mode === 'staging' ? '/nearestdepartures/' : '/'}`,
+  );
+
   return {
+    base: mode === 'staging' ? '/nearestdepartures/' : '/',
     server: {
       port: 3000,
     },
