@@ -40,7 +40,7 @@
   class="space-xs flex-row flex-wrap line-height-xl position-relative"
   data-testId="departure-additional-content"
 >
-  <div class="flex-row flex-align-center space-m space-keep-r">
+  <section class="flex-row flex-align-center space-m space-keep-r">
     <span class="space-s space-keep-r">
       <Clock />
     </span>
@@ -60,9 +60,9 @@
         )} (aikataulu)`}
       </div>
     </div>
-  </div>
+  </section>
 
-  <div class="flex-row flex-align-center no-wrap">
+  <section class="flex-row flex-align-center no-wrap">
     <span class="space-s space-keep-r">
       <Flag />
     </span>
@@ -80,7 +80,7 @@
 
       <span class="space-xs space-keep-l">{departure.stopDescription}</span>
     </div>
-  </div>
+  </section>
 
   <button
     on:click="{() => onRowToggle(departure.id)}"
