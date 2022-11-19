@@ -209,8 +209,10 @@ describe('Searching and filtering departures', () => {
       });
 
       // range filter should have default value
-      cy.get('output[for="departurefilter-range"]').should('have.text', '400m');
-      cy.get('[name="range"]').should('have.value', 400);
+      cy.testId('departurefilter-range-output').should('have.text', '400m');
+      cy.get('[name="range"]')
+        .should('have.value', 400)
+        .and('have.attr', 'aria-valuetext', '400 metriä');
 
       const modes = ['bus', 'tram', 'rail', 'subway', 'ferry'];
 
@@ -260,7 +262,7 @@ describe('Searching and filtering departures', () => {
         expect(filters.range).to.eql(200);
       });
 
-      cy.get('output[for="departurefilter-range"]').should('have.text', '200m');
+      cy.testId('departurefilter-range-output').should('have.text', '200m');
       cy.testId('departure-row').should('have.length', 4);
 
       setSliderValue(100);

@@ -5,15 +5,17 @@
 </script>
 
 <div class="range-filter-wrapper">
-  <div class="align-right space-xxs space-keep-b">
-    <output for="departurefilter-range" aria-atomic="true" aria-live="polite">
-      {range}m
-    </output>
-  </div>
-
   <label for="departurefilter-range" class="sr-only"
     >Maksimietäisyys pysäkille
   </label>
+
+  <div
+    class="align-right space-xxs space-keep-b"
+    aria-hidden="true"
+    data-testId="departurefilter-range-output"
+  >
+    {range}m
+  </div>
 
   <input
     on:input
@@ -25,6 +27,7 @@
     min="{MIN_RANGE}"
     max="{MAX_RANGE}"
     step="{RANGE_STEP}"
+    aria-valuetext="{`${range} metriä`}"
   />
 </div>
 
