@@ -21,7 +21,8 @@ describe('Favourites', () => {
 
   describe('without existing favourites', () => {
     it('adds an address to favourites when address is defined', () => {
-      cy.visitWithLocation({ latitude: 1, longitude: 2 });
+      const location = { latitude: 1, longitude: 2, accuracy: 12 };
+      cy.visitWithLocation(location);
       cy.wait('@getLocation');
       cy.testId('menu-button').focus().type(' ');
 
@@ -38,6 +39,13 @@ describe('Favourites', () => {
       cy.testId('favourite-button')
         .click()
         .should('have.attr', 'aria-pressed', 'true');
+
+      cy.window()
+        .its('localStorage')
+        .invoke('getItem', 'favourites')
+        .then((favourites) => {
+          expect(JSON.parse(favourites)[0].location).to.eql(location);
+        });
 
       cy.testId('favourites-list')
         .find('li')

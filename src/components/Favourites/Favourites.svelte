@@ -33,7 +33,14 @@
   }
 
   function addToFavourites(address: Address) {
-    saveFavourites([...$favouritesStore, address]);
+    // when saving an address fetched with current location, the location object is
+    // an instance of GeolocationCoordinates and must be converted to a serializable object
+    const serializableAddress =
+      address.location instanceof GeolocationCoordinates
+        ? { ...address, location: model.toLocationObject(address.location) }
+        : address;
+
+    saveFavourites([...$favouritesStore, serializableAddress]);
   }
 
   function removeFromFavourites(address: Address) {
