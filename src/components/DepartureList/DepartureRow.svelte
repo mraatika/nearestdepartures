@@ -53,7 +53,6 @@
         <RouteIdentifier
           vehicleType="{departure.vehicleType}"
           routeName="{departure.routeName}"
-          alt="{`Näytä linjan tiedot suuntaan ${departure.destination}`}"
         />
       </ExternalLink>
     </div>
@@ -63,11 +62,10 @@
       class="destination flex-full position-relative vertical-bottom overflow-hidden no-wrap"
     >
       {#if disruptions?.length}
-        <span class="color-alert">
+        <span class="color-alert" data-testId="disruption-icon">
           <AlertTriangle
             style="font-size: 12px;"
             aria-label="Linjalla häiriöitä: Avaa lähdön tiedot nähdäksesi lisätietoja"
-            data-testId="disruption-icon"
           />
         </span>
       {/if}
