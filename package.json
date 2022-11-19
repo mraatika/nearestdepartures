@@ -1,7 +1,7 @@
 {
   "name": "nearestdepartures-svelte",
   "private": true,
-  "version": "2.0.0",
+  "version": "2.0.1",
   "type": "module",
   "scripts": {
     "dev": "cross-env VITE_APP_VERSION=$npm_package_version vite",
