@@ -115,7 +115,7 @@ describe('Searching and filtering departures', () => {
           'have.text',
           `${padNumber(
             departureHours,
-          )}:05Näytä linjan tiedot suuntaan Matinkylä via Tapiola M1 Avautuu uuteen välilehteen Matinkylä via Tapiola10 m`,
+          )}:05 Metro M1 Avautuu uuteen välilehteen Matinkylä via Tapiola10 m`,
         );
 
       cy.testId('departure-row').eq(0).click();
