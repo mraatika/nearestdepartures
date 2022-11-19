@@ -10,5 +10,5 @@
   data-testId="position-error"
 >
   <AlertTriangle class="alert-triangle" />
-  {` ${formatError(error)}`}
+  <span class="space-xxs space-keep-l">{`${formatError(error)}`}</span>
 </div>
