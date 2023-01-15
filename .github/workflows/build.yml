@@ -29,6 +29,8 @@ jobs:
       - name: Run unit tests
         run: npx --no-install vitest run
       - name: Build
+        env:
+          VITE_DIGITRANSIT_API_KEY: ${{ secrets.VITE_DIGITRANSIT_API_KEY }}
         run: npm run build -- --mode=${{ inputs.mode }}
       - name: Upload build directory
         uses: actions/upload-artifact@v3
