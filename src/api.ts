@@ -1,12 +1,15 @@
 async function doFetch<R>(path: string, requestInit: RequestInit) {
   try {
-    const response = await fetch(
-      `${<string>import.meta.env.VITE_SERVER_URL}/${path}`,
-      {
-        ...requestInit,
-        headers: { ...requestInit.headers, 'Content-Type': 'application/json' },
+    const apiUrl = <string>import.meta.env.VITE_SERVER_URL;
+    const apiKey = <string>import.meta.env.VITE_DIGITRANSIT_API_KEY;
+    const response = await fetch(`${apiUrl}/${path}`, {
+      ...requestInit,
+      headers: {
+        ...requestInit.headers,
+        'Content-Type': 'application/json',
+        'digitransit-subscription-key': apiKey,
       },
-    );
+    });
 
     if (!response.ok) {
       throw new Error('Palvelu palautti virheen');
