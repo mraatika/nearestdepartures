@@ -34,6 +34,7 @@ jobs:
   build-production:
     needs: ['create-release']
     uses: ./.github/workflows/build.yml
+    secrets: inherit
     with:
       mode: 'production'
       branch: 'main'
