@@ -23,6 +23,10 @@ jobs:
     runs-on: ubuntu-20.04
     needs: build-staging
     steps:
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
       - name: Checkout
         uses: actions/checkout@v3
       - uses: actions/download-artifact@v3
