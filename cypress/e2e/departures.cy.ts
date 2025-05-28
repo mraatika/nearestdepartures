@@ -27,12 +27,7 @@ describe('Searching and filtering departures', () => {
       fixture: 'address-search-rauta.json',
     }).as('getSuggestions');
 
-    cy.intercept('POST', '**/graphql/batch', {
-      statusCode: 200,
-      body: [],
-    });
-
-    cy.intercept('POST', '**/routing/v1/routers/hsl/index/graphql', (req) => {
+    cy.intercept('POST', Cypress.env('ROUTING_API_PATH'), (req) => {
       if (req.body.query.indexOf('alerts(') > -1) {
         const now = Date.now();
         const body = disruptions;
@@ -349,7 +344,7 @@ describe('Searching and filtering departures', () => {
 
   describe('paging', () => {
     function setup(manyPages: boolean) {
-      cy.intercept('POST', '**/routing/v1/routers/hsl/index/graphql', (req) => {
+      cy.intercept('POST', Cypress.env('ROUTING_API_PATH'), (req) => {
         if (req.body.query.indexOf('alerts(') > -1) {
           req.reply({
             statusCode: 200,

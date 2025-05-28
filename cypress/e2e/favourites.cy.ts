@@ -8,12 +8,7 @@ describe('Favourites', () => {
       delay: 500,
     }).as('getLocation');
 
-    cy.intercept('POST', '**/graphql/batch', {
-      statusCode: 200,
-      body: [],
-    });
-
-    cy.intercept('POST', '**/routing/v1/routers/hsl/index/graphql', {
+    cy.intercept('POST', Cypress.env('ROUTING_API_PATH'), {
       statusCode: 200,
       body: [],
     }).as('postGraphQL');
