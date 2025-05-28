@@ -9,12 +9,13 @@ const normalizeDisruptions = R.pipe(
   R.reject<Disruption>(R.pipe(R.prop('route'), R.isNil)),
 );
 
+const ROUTING_API_URL = <string>import.meta.env.VITE_ROUTING_API_PATH;
+
 export async function fetchDisruptions() {
   try {
-    const result = await fetchJSON<DisruptionQueryResponse>(
-      '/routing/v1/routers/hsl/index/graphql',
-      { query: disruptionsQuery },
-    );
+    const result = await fetchJSON<DisruptionQueryResponse>(ROUTING_API_URL, {
+      query: disruptionsQuery,
+    });
     return normalizeDisruptions(result);
   } catch (e) {
     logger.error(`Häiriötiedotteiden haku epäonnistui: ${e}`);
