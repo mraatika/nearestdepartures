@@ -20,6 +20,8 @@ import type {
 import { getNowInSeconds } from '@/util';
 import * as R from 'ramda';
 
+const ROUTING_API_URL = <string>import.meta.env.VITE_ROUTING_API_PATH;
+
 function formBatchRequestBody({ nodeId }: Departure) {
   const startTime = getNowInSeconds();
 
@@ -58,7 +60,7 @@ const parseBatchResponse = R.chain((data: DepartureBatchResponse) => {
 export async function fetchDepartureBatch(departures: Departure[]) {
   try {
     const response = await fetchJSON<DepartureBatchResponse[]>(
-      'routing/v1/routers/hsl/index/graphql/batch',
+      ROUTING_API_URL,
       departures.map(formBatchRequestBody),
     );
 
@@ -70,6 +72,7 @@ export async function fetchDepartureBatch(departures: Departure[]) {
 
 function formDepartureFetchRequestBody(location: Location, filters: Filters) {
   return {
+    oprationName: 'BatchNearest',
     query: departureFetchQuery,
     variables: {
       latitude: location.latitude,
@@ -138,7 +141,7 @@ function normalizeDepartures(response: DepartureFetchResponse) {
 export async function fetchDepartures(location: Location, filters: Filters) {
   try {
     const response = await fetchJSON<DepartureFetchResponse>(
-      'routing/v1/routers/hsl/index/graphql',
+      ROUTING_API_URL,
       formDepartureFetchRequestBody(location, filters),
     );
 

@@ -8,6 +8,8 @@ import {
   MAX_ADDRESS_SUGGESTIONS,
 } from '@/constants';
 
+const GEOCODING_API_URL = <string>import.meta.env.VITE_GEOCODING_API_PATH;
+
 const parseAddressResponse = R.pipe(
   R.pathOr<AddressResponse['features']>([], ['features']),
   R.map(({ geometry: { coordinates }, properties }) => ({
@@ -38,7 +40,7 @@ export async function searchAddress(
 
   try {
     const response = await getJSON<AddressResponse>(
-      `geocoding/v1/search?${searchParams.toString()}`,
+      `${GEOCODING_API_URL}/search?${searchParams.toString()}`,
     );
 
     if (!response.features?.length) {
@@ -64,7 +66,7 @@ export async function lookupAddress({ latitude, longitude }: Location) {
 
   try {
     const response = await getJSON<AddressResponse>(
-      `/geocoding/v1/reverse?${searchParams.toString()}`,
+      `${GEOCODING_API_URL}/reverse?${searchParams.toString()}`,
     );
 
     if (!response.features?.length) {

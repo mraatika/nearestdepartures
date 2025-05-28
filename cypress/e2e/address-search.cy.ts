@@ -15,12 +15,7 @@ describe('address search', () => {
       fixture: 'address-search-rauta.json',
     }).as('getSuggestions');
 
-    cy.intercept('POST', '**/graphql/batch', {
-      statusCode: 200,
-      body: [],
-    });
-
-    cy.intercept('POST', '**/routing/v1/routers/hsl/index/graphql', {
+    cy.intercept('POST', '**/routing/v2/hsl/gtfs/v1', {
       statusCode: 200,
       body: [],
     }).as('postGraphQL');
