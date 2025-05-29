@@ -33,7 +33,7 @@ jobs:
           VITE_DIGITRANSIT_API_KEY: ${{ secrets.VITE_DIGITRANSIT_API_KEY }}
         run: npm run build -- --mode=${{ inputs.mode }}
       - name: Upload build directory
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: dist
           path: ./dist
