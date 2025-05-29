@@ -21,7 +21,7 @@
     return {
       duration: 350,
       easing: sineInOut,
-      css: (t: number, u: number) => `transform: translateX(${u * 100}%)`,
+      css: (_t: number, u: number) => `transform: translateX(${u * 100}%)`,
     };
   }
 
@@ -46,7 +46,7 @@
     role="dialog"
     tabIndex="0"
     aria-label="{label}"
-    aria-modal="{true}"
+    aria-modal="true"
     transition:slideRight
   >
     <div class="bg-white full-height">

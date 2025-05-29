@@ -1,4 +1,3 @@
-import { VEHICLE_TYPE } from '@/enums';
 import { beforeEach, describe, expect, it, vi, type Mock } from 'vitest';
 import * as storage from './storageService';
 
