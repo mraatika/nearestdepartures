@@ -75,23 +75,27 @@
         data-testId="favourite-button"
       >
         {#if isCurrentAddressFavoured}
-          <StarOff style="font-size: 24px;" />
+          <StarOff style="font-size: 24px;" aria-hidden="true" />
         {:else}
-          <Star style="font-size: 24px;" />
+          <Star style="font-size: 24px;" aria-hidden="true" />
         {/if}
       </button>
     </span>
 
     <button
       on:click="{close}"
+      class="focusable"
       aria-label="Sulje"
       data-testId="modal-close-button"
     >
-      <X style="font-size: 24px;" />
+      <X style="font-size: 24px;" aria-hidden="true" />
     </button>
   </div>
 
-  <h2 class="font-heading align-center space-s space-clear-rl">
+  <h2
+    id="favourites-header"
+    class="font-heading align-center space-s space-clear-rl"
+  >
     Omat suosikit
   </h2>
 </div>

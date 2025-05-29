@@ -9,7 +9,11 @@
   export let selectFavourite: (adress: Address) => void;
 </script>
 
-<ul class="color-black" data-testId="favourites-list">
+<ul
+  class="color-black"
+  data-testId="favourites-list"
+  aria-labelledby="favourites-header"
+>
   {#each favourites as favourite (favourite.id)}
     <FavouriteListitem
       on:click="{() => selectFavourite(favourite)}"
@@ -24,7 +28,7 @@
       <div class="space-xs space-keep-b">Et ole vielä lisännyt suosikkeja!</div>
       <div class="text-s">
         <span class="space-xxs space-keep-r">
-          <AlertTriangle />
+          <AlertTriangle aria-hidden="true" />
         </span>
         Huomioithan, että suosikit tallentuvat paikallisesti, joten ne ovat hyödynnettävissä
         vain samalla selaimella ja laitteella, johon ne on tallennettu.

@@ -11,8 +11,7 @@
   <button on:click class="align-left flex-full">
     {#if isSelected}
       <span class="text-l bold">
-        <span aria-hidden="true">&#9656</span>
-        <span class="sr-only">Valittu</span>
+        <span role="img" aria-label="Valittu">&#9679</span>
       </span>
     {/if}
 
@@ -20,14 +19,13 @@
   </button>
 
   <div class="space-xs space-keep-l">
-  <button
-    on:click="{removeFavourite}"
-    aria-label="Poista suosikeista"
-    class="space-xs space-keep-l"
-    data-testId="favorite-remove-button"
-  >
-    <Trash />
-  </button>
+    <button
+      on:click="{removeFavourite}"
+      aria-label="Poista suosikeista"
+      data-testId="favorite-remove-button"
+    >
+      <Trash aria-hidden="true" />
+    </button>
   </div>
 </li>
 
