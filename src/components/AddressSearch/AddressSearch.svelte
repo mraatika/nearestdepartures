@@ -150,7 +150,10 @@
       autocomplete="off"
     />
 
-    <button type="submit" class="color-white bg-bus no-border bold">
+    <button
+      type="submit"
+      class="color-white bg-bus no-border bold focusable focusable--inline"
+    >
       <span class="">Hae</span>
     </button>
   </div>
@@ -171,5 +174,6 @@
   }
   input {
     flex: 5;
+    outline-offset: -2px;
   }
 </style>

@@ -66,6 +66,7 @@
     <span class="space-xs space-keep-r">
       <button
         on:click="{isDisabled ? () => undefined : toggleFavourite}"
+        class="focusable"
         aria-label="{isCurrentAddressFavoured
           ? 'Poista tämän hetkinen osoite suosikeista'
           : 'Lisää tämän hetkinen osoite suosikkeihin'}"
