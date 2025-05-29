@@ -29,10 +29,26 @@
 <style>
   button {
     flex: 1;
-    color: var(--color-white);
+    color: var(--color-gray-medium-light);
     border-bottom: 4px solid var(--color-white);
     background-color: var(--color-white);
-    color: var(--color-gray-light);
+  }
+
+  button:not(.toggled) {
+    border-color: var(--color-gray-light);
+    transition: color 0.25s linear;
+  }
+
+  button:not(.toggled):hover {
+    color: var(--color-gray-dark);
+  }
+
+  button:not(.toggled):focus-visible {
+    outline-width: 2px;
+    outline-style: solid;
+    outline-color: var(--color-gray-dark);
+    outline-offset: -2px;
+    color: var(--color-gray-dark);
   }
 
   .toggled {
@@ -62,5 +78,35 @@
   .toggled.ferry {
     background-color: var(--color-ferry);
     border-bottom-color: #0094b6;
+  }
+
+  .toggled:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: -4px;
+  }
+
+  .bus.toggled:hover,
+  .bus.toggled:focus-visible {
+    background-color: var(--color-bus-dark);
+  }
+
+  .tram.toggled:hover,
+  .tram.toggled:focus-visible {
+    background-color: var(--color-tram-dark);
+  }
+
+  .rail.toggled:hover,
+  .rail.toggled:focus-visible {
+    background-color: var(--color-rail-dark);
+  }
+
+  .subway.toggled:hover,
+  .subway.toggled:focus-visible {
+    background-color: var(--color-subway-dark);
+  }
+
+  .ferry.toggled:hover,
+  .ferry.toggled:focus-visible {
+    background-color: var(--color-ferry-dark);
   }
 </style>

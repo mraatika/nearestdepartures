@@ -2,6 +2,12 @@
   box-sizing: border-box;
 }
 
+*:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--color-black);
+  outline-offset: 2px;
+}
+
 html,
 body {
   height: 100%;
@@ -97,4 +103,13 @@ button[aria-disabled='true'] {
 
 .no-border {
   border: 0;
+}
+
+.focusable:focus-visible {
+  outline: 2px solid var(--color-white);
+  outline-offset: 0;
+}
+
+.focusable--inline:focus-visible {
+  outline-offset: -4px;
 }

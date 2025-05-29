@@ -13,6 +13,7 @@
 <div>
   <button
     on:click="{toggle}"
+    class="focusable"
     aria-label="Omat suosikit"
     data-testId="menu-button"
   >
