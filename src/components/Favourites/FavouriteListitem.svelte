@@ -19,6 +19,7 @@
     {favourite.label}
   </button>
 
+  <div class="space-xs space-keep-l">
   <button
     on:click="{removeFavourite}"
     aria-label="Poista suosikeista"
@@ -27,6 +28,7 @@
   >
     <Trash />
   </button>
+  </div>
 </li>
 
 <style>
