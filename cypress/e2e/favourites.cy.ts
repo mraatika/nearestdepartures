@@ -45,8 +45,11 @@ describe('Favourites', () => {
       cy.testId('favourites-list')
         .find('li')
         .should('have.length', 1)
-        .and('contain', 'Rautatientori')
-        .and('contain', 'Valittu');
+        .and('contain', 'Rautatientori');
+
+      cy.testId('favourites-list')
+        .find('li [aria-label="Valittu"]')
+        .should('to.exist');
 
       cy.testId('favorite-remove-button').click();
       cy.testId('favourite-button').should(
@@ -122,18 +125,25 @@ describe('Favourites', () => {
       cy.testId('favourites-list')
         .find('li')
         .as('favourites')
-        .should('have.length', 2)
-        .and('not.contain', 'Valittu');
+        .should('have.length', 2);
+
+      cy.testId('favourites-list')
+        .find('li [aria-label="Valittu"]')
+        .should('not.exist');
 
       cy.get('@favourites').eq(1).click();
       cy.get('[name=address]').should('have.value', 'Kontulan ostari');
       cy.testId('menu-button').click();
 
-      cy.get('@favourites').eq(1).should('contain.text', 'Valittu');
+      cy.get('@favourites')
+        .eq(1)
+        .find('[aria-label="Valittu"]')
+        .should('exist');
+
       cy.testId('favorite-remove-button').eq(1).click();
       // address should still be set
       cy.get('[name=address]').should('have.value', 'Kontulan ostari');
-      cy.get('@favourites').should('not.contain.text', 'Valittu');
+      cy.get('@favourites').find('[aria-label="Valittu"]').should('not.exist');
       cy.testId('favorite-remove-button').eq(0).click();
       cy.testId('modal-close-button').click();
       cy.testId('menu-button').click();
