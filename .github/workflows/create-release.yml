@@ -45,7 +45,7 @@ jobs:
     needs: ['build-production', 'create-release']
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: dist
           path: ./dist
