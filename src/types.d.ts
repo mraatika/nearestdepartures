@@ -84,16 +84,19 @@ export interface AddressResponse {
   features: Feature<Address>[];
 }
 
-export interface DepartureBatchResponse {
-  payload: {
-    data: {
-      node: {
-        id: string;
-        stoptimes: Stoptime[];
-      };
-    };
-  };
+export interface DepartureBatchNode {
+  id: string;
+  stoptimes: Stoptime[];
 }
+
+export interface DepartureBatchData {
+  node: DepartureBatchNode;
+}
+
+export interface DepartureBatchPayload {
+  data: DepartureBatchData;
+}
+
 export interface DepartureFetchResponse {
   data: {
     nearest: {

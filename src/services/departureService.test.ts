@@ -480,26 +480,25 @@ describe('fetchDepartures', () => {
       const departures: any = [{ nodeId: '1', realtime: true }];
 
       vi.spyOn(util, 'getNowInSeconds').mockReturnValue(123);
-      fetchMock.mockResolvedValueOnce({});
+      fetchMock.mockResolvedValueOnce({ data: { node: {} } });
       await fetchDepartureBatch(departures);
 
       expect(fetchMock).toHaveBeenCalledTimes(1);
-      expect(fetchMock).toHaveBeenCalledWith(expect.any(String), [
-        {
-          query: expect.any(String),
-          variables: {
-            id: '1',
-            startTime: 123,
-            departuresCount: expect.any(Number),
-            timeRange: TIME_RANGE,
-          },
+      expect(fetchMock).toHaveBeenCalledWith(expect.any(String), {
+        query: expect.any(String),
+        variables: {
+          id: '1',
+          startTime: 123,
+          departuresCount: expect.any(Number),
+          timeRange: TIME_RANGE,
         },
-      ]);
+      });
     });
 
     it('rejects with an error message if fetch fails', async () => {
+      const departures: any = [{ nodeId: '1', realtime: true }];
       fetchMock.mockRejectedValueOnce(new Error('BOOM!'));
-      await expect(fetchDepartureBatch([])).rejects.toEqual(
+      await expect(fetchDepartureBatch(departures)).rejects.toEqual(
         new Error('Lähtöjen päivitys epäonnistui: BOOM!'),
       );
     });
