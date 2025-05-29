@@ -8,7 +8,6 @@ import {
 import departureBatchQuery from '@/queries/batchNearest';
 import departureFetchQuery from '@/queries/nearest';
 import type {
-  DepartureBatchResponse,
   Location,
   Departure,
   Stoptime,
@@ -16,6 +15,7 @@ import type {
   DepartureAtDistanceEdge,
   DepartureAtDistance,
   Filters,
+  DepartureBatchPayload,
 } from '@/types';
 import { getNowInSeconds } from '@/util';
 import * as R from 'ramda';
@@ -49,22 +49,29 @@ const formStoptimeData = (stoptime: Stoptime) => {
   return stoptime.headsign ? props : R.omit(['destination'], props);
 };
 
-const parseBatchResponse = R.chain((data: DepartureBatchResponse) => {
-  const { id: nodeId, stoptimes = [] } = data.payload.data.node;
+const parseBatchResponse = (
+  response: DepartureBatchPayload,
+): Partial<Stoptime>[] => {
+  const { id: nodeId, stoptimes = [] } = response.data.node;
   return stoptimes.map((stoptime) => ({
     nodeId,
     ...formStoptimeData(stoptime),
   }));
-});
+};
 
 export async function fetchDepartureBatch(departures: Departure[]) {
+  // keep this here so that fetchJSON can be mocked in tests
+  const createBatchQueries = R.pipe(
+    R.map(formBatchRequestBody),
+    R.map(R.partial(fetchJSON, [ROUTING_API_URL])),
+  ) as (d: Departure[]) => Promise<DepartureBatchPayload>[];
+
   try {
-    const response = await fetchJSON<DepartureBatchResponse[]>(
-      ROUTING_API_URL,
-      departures.map(formBatchRequestBody),
+    const response = await Promise.all<DepartureBatchPayload>(
+      createBatchQueries(departures),
     );
 
-    return parseBatchResponse(response);
+    return R.chain(parseBatchResponse, response);
   } catch (e) {
     throw new Error(`Lähtöjen päivitys epäonnistui: ${(e as Error).message}`);
   }
@@ -72,7 +79,6 @@ export async function fetchDepartureBatch(departures: Departure[]) {
 
 function formDepartureFetchRequestBody(location: Location, filters: Filters) {
   return {
-    oprationName: 'BatchNearest',
     query: departureFetchQuery,
     variables: {
       latitude: location.latitude,
